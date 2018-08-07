@@ -1,11 +1,12 @@
 import Reflux from 'reflux'
 
 const lightActions = Reflux.createActions([
-    'apply',
+
     'setColor',
     'setLevel',
     'switch',
-    'visible'
+    'visible',
+    'message',
 ]);
 
 export default lightActions

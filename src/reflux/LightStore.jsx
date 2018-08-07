@@ -1,7 +1,8 @@
 // import HTTP from '../services/httpservices.jsx'
 import Reflux from 'reflux'
 import lightActions from './lightActions'
-
+import WebSocketStore from "../services/WebSocketStore";
+import wsActions from "../services/wsActions";
 
 //  Create unique Store for each Component
 function LightStoreFactory(id, startLocation) {
@@ -37,36 +38,19 @@ function LightStoreFactory(id, startLocation) {
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
-            this.onOpen = this.onOpen.bind(this);
-            this.getStatus = this.getStatus.bind(this);
             this.sendMessage = this.sendMessage.bind(this);
-            this.onApply = this.onApply.bind(this);
             this.onSetColor = this.onSetColor.bind(this);
             this.onSetLevel = this.onSetLevel.bind(this);
             this.onSwitch = this.onSwitch.bind(this);
             this.onVisible = this.onVisible.bind(this);
 
-            // WebSocket
-            this.socket = new WebSocket("ws://localhost:8000/websocket");
-            this.socket.onmessage = this.onMessage;
-            this.socket.onopen = this.onOpen;
-        }
+         }
 
-        // Get initial component state on WebSocket open
-        onOpen () {
-           this.getStatus();
-        }
-
-        //
-        getStatus () {
-            this.sendMessage(getMessage);
-        }
-
-        postStatus ()  {
+          postStatus ()  {
             postMessage['light_status'] = {
-                                               level:this.state.level,
-                                               color:this.state.color,
-                                               switchOn:this.state.switchOn
+                                           level:this.state.level,
+                                           color:this.state.color,
+                                           switchOn:this.state.switchOn
                                           };
             this.sendMessage(postMessage);
         };
@@ -74,14 +58,16 @@ function LightStoreFactory(id, startLocation) {
         // WebSocket messenger
         sendMessage(data) {
             this.setState({'loading':true});
-            this.socket.send(JSON.stringify(data));
+            wsActions.sendMessage(data);
         }
 
        // WebSocket listener
-        onMessage (evt) {
-            const data = JSON.parse(evt.data);
-            this.setState(data);
-            this.setState({'loading':false})
+        onMessage (data) {
+            console.log(data);
+            if (data.id === id) {
+                this.setState(data);
+                this.setState({'loading':false})
+            }
         }
 
         // getComponentStateByHTTP () {
@@ -93,21 +79,18 @@ function LightStoreFactory(id, startLocation) {
 
 
         // Actions
-        onApply (location) {
-            if ( location === id) {
-                this.postStatus();
-            }
-        }
 
         onSetColor (location, color) {
             if ( location === id) {
                 this.setState({color:color});
+                this.postStatus();
             }
         }
 
         onSetLevel (location, level) {
             if ( location === id) {
                 this.setState({level:level});
+                this.postStatus();
             }
         }
 

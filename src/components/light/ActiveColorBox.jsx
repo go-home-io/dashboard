@@ -3,6 +3,7 @@ import Reflux from 'reflux'
 import lightActions from '../../reflux/lightActions'
 import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/es/styles/withStyles";
+import Grid from "@material-ui/core/Grid/Grid";
 
 const styles = theme => ({
     smallbox: {
@@ -14,7 +15,7 @@ const styles = theme => ({
         cursor:'pointer',
         border:'solid 1px #000',
         float:'left',
-        // borderBottom:'solid 4px #999'
+
     },
     border: {
         height: 2,
@@ -24,7 +25,7 @@ const styles = theme => ({
     }
 });
 
-class SmallColorBox extends Reflux.Component {
+class ActiveColorBox extends Reflux.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -38,12 +39,11 @@ class SmallColorBox extends Reflux.Component {
     render () {
 
         const {classes} = this.props;
-
         return (
 
-                <div   onClick={this.handleClick}
-                       className={classes.smallbox}
-                       style={{backgroundColor:this.props.colorName}}>
+                <div  style={{backgroundColor:this.props.colorName}}
+                      onClick={this.handleClick}
+                      className={classes.smallbox}>
 
                 </div>
 
@@ -51,8 +51,8 @@ class SmallColorBox extends Reflux.Component {
     }
  }
 
- SmallColorBox.PropTypes = {
+ ActiveColorBox.propTypes = {
     classes: PropTypes.object.isRequired
  };
 
- export default withStyles(styles)(SmallColorBox)
+ export default withStyles(styles)(ActiveColorBox)

@@ -6,7 +6,7 @@ import withStyles from "@material-ui/core/es/styles/withStyles";
 import lightActions from "../../reflux/lightActions"
 import Grid from "@material-ui/core/es/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
-import LevelSlider from "../../views/Slider";
+import LevelSlider from "./LevelSlider";
 
 const style = theme => ({
     root : {

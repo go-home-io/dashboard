@@ -4,11 +4,16 @@ import location from '../components/locations';
 
 import Grid from '@material-ui/core/Grid';
 import LightManager from "../components/light/LightManager";
-import NavBar from "../components/NavBar";
+import NavBar from "./NavBar";
 import LeftSide from "../components/SideBar/LeftSideNav";
+import WebSocketStore from "../services/WebSocketStore";
 
 
 class HomePage extends Reflux.Component {
+    constructor(){
+        super();
+        this.store = WebSocketStore;
+    }
 
     renderLightControl = (item, index) => {
 

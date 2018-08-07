@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import colors from './colors'
+import presetColors from './presetColors'
 import withStyles from "@material-ui/core/es/styles/withStyles";
 
 const styles = theme => ({
@@ -12,23 +12,22 @@ const styles = theme => ({
             border:'solid 1px #000' }
 });
 
-class BigColorBox extends Component {
+class ColorBox extends Component {
 
    render () {
         const {classes} = this.props;
-        const bkgColor = colors[this.props.color];
+        const bkgColor = presetColors[this.props.color];
 
         return (
             <div  className={classes.box}
-                  style={{backgroundColor:bkgColor}}
-              >
-            </div>
+                  style={{backgroundColor:bkgColor}}/>
+
         )
     }
 }
 
-BigColorBox.PropTypes = {
+ColorBox.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BigColorBox)
+export default withStyles(styles)(ColorBox)

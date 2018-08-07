@@ -5,9 +5,24 @@ import Switch from '@material-ui/core/Switch';
 // import LightStoreFactory from "./reflux/LightStore";
 import Icon from "@material-ui/core/es/Icon/Icon";
 import Typography from "@material-ui/core/es/Typography/Typography";
-import Grid from "@material-ui/core/Grid/Grid";
-import BigColorBox from "./BigColorBox";
+import withStyles from "@material-ui/core/es/styles/withStyles";
+import PropTypes from 'prop-types'
 
+const styles = theme => ({
+    root: {
+        cursor:'pointer',
+        marginLeft: 10,
+        marginTop:10,
+        marginBottom:30,
+    },
+    icon: {
+        float:'left'
+    },
+    typography: {
+        float:'left',
+        marginLeft:10,
+    },
+});
 
 
 class LightHeader extends Reflux.Component {
@@ -23,33 +38,32 @@ class LightHeader extends Reflux.Component {
 
     render () {
         // Styles
-        const cursor = 'pointer';
+        const {classes} = this.props;
         const color = (this.props.switchOn) ? 'secondary' : 'primary';
-        const margins = {marginTop:5, marginLeft:15};
-      //  alert(this.props.switchOn);
+
         return (
-                <Grid container>
-                    <Grid item sm={11}
-                          style={{cursor:cursor}}
-                          onClick={this.handleClick} >
+                <div className={classes.root}
+                     onClick={this.handleClick} >
 
-                        <Icon color={color} style={{float:'left'}}> wb_sunny </Icon>
+                     <Icon color={color}
+                           className={classes.icon} >
+                         wb_sunny
+                     </Icon>
 
-                        <Typography variant="subheading"
-                                    style={{float:'left', marginLeft:10}}>
-                            {this.props.location}
-                        </Typography>
+                     <Typography variant="subheading"
+                                 className={classes.typography} >
 
-                    </Grid>
-                    <Grid item sm={1}>
+                        {this.props.location}
+                     </Typography>
 
-                   </Grid>
-                </Grid>
+                </div>
 
         )
     }
 }
 
+LightHeader.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
-
-export default LightHeader
+export default withStyles(styles)(LightHeader)
