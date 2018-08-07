@@ -63,9 +63,12 @@ function LightStoreFactory(id, startLocation) {
 
        // WebSocket listener
         onMessage (data) {
-            console.log(data);
+
             if (data.id === id) {
-                this.setState(data);
+                console.log(data);
+                this.setState({level:data.level,
+                               color:data.color,
+                               switchOn:data.switchOn});
                 this.setState({'loading':false})
             }
         }
