@@ -65,11 +65,12 @@ function LightStoreFactory(id, startLocation) {
         onMessage (data) {
 
             if (data.id === id) {
-                console.log(data);
+
                 this.setState({level:data.level,
                                color:data.color,
                                switchOn:data.switchOn});
-                this.setState({'loading':false})
+                this.setState({'loading':false});
+                console.log(this.state);
             }
         }
 

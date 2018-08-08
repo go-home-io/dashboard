@@ -20,7 +20,9 @@ class ColorBox extends Component {
 
         return (
             <div  className={classes.box}
-                  style={{backgroundColor:bkgColor}}/>
+                  style={{backgroundColor:bkgColor}}>
+                  &nbsp;
+            </div>
 
         )
     }

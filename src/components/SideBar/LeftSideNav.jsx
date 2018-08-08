@@ -72,7 +72,8 @@ class LeftSideNav extends React.Component {
                                     return (
                                         <ListItemActionWrapper classes={classes.nested}
                                                                location={item.room}
-                                                               icon={item.icon} >
+                                                               icon={item.icon}
+                                                               key={'liAW'+Math.floor(Math.random()*10000)}>
                                         </ListItemActionWrapper>
                                     )
                               })
