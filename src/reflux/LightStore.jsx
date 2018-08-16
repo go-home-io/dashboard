@@ -1,35 +1,38 @@
-// import HTTP from '../services/httpservices.jsx'
 import Reflux from 'reflux'
 import lightActions from './lightActions'
-import WebSocketStore from "../services/WebSocketStore";
-import wsActions from "../services/wsActions";
+import wsActions from "./wsActions";
 
 //  Create unique Store for each Component
-function LightStoreFactory(id, startLocation) {
+function LightStoreFactory(id,  device_info){
 
-    let postMessage = {
-        'method': 'POST',
-        'category' : 'light',
-        'location': id,
-        'light_status':{}
-    };
+    // let postMessage = {
+    //     'method': 'POST',
+    //     'category' : 'light',
+    //     'location': id,
+    //     'light_status':{}
+    // };
+    //
+    // const getMessage = {
+    //     'method': 'GET',
+    //     'category': 'light',
+    //     'location': id
+    // };
 
-    const getMessage = {
-        'method': 'GET',
-        'category': 'light',
-        'location': id
-    };
-
-    const visible = (id === startLocation);
+    const visible = true;
 
     class LightStore extends Reflux.Store {
 
         constructor() {
             super();
 
-            this.state = { switchOn: false,
-                           level: 70,
-                           color: 0,
+            this.state = { id:id,
+                           name: device_info.name,
+                           worker: device_info.worker,
+                           device_state: device_info.state,
+                           last_seen: device_info.last_seen,
+                           commands: device_info.commands,
+                           group_id: '',
+                           location: 'default',
                            loading:false,
                            visible: visible,
             };
@@ -38,39 +41,27 @@ function LightStoreFactory(id, startLocation) {
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
-            this.sendMessage = this.sendMessage.bind(this);
+            this.doCommand = this.doCommand.bind(this);
             this.onSetColor = this.onSetColor.bind(this);
-            this.onSetLevel = this.onSetLevel.bind(this);
-            this.onSwitch = this.onSwitch.bind(this);
             this.onVisible = this.onVisible.bind(this);
-
-         }
-
-          postStatus ()  {
-            postMessage['light_status'] = {
-                                           level:this.state.level,
-                                           color:this.state.color,
-                                           switchOn:this.state.switchOn
-                                          };
-            this.sendMessage(postMessage);
-        };
+        }
 
         // WebSocket messenger
-        sendMessage(data) {
+        doCommand(command, value) {
+            const mess = {id:id, cmd:command,value: value};
+
             this.setState({'loading':true});
-            wsActions.sendMessage(data);
+            wsActions.doCommand(mess);
         }
 
        // WebSocket listener
         onMessage (data) {
-
             if (data.id === id) {
-
-                this.setState({level:data.level,
-                               color:data.color,
-                               switchOn:data.switchOn});
+                let state = this.state.device_state;
+                state.device_state = data.state;
+                this.setState({device_state: state});
                 this.setState({'loading':false});
-                console.log(this.state);
+                console.log(this.state.device_state);
             }
         }
 
@@ -83,28 +74,34 @@ function LightStoreFactory(id, startLocation) {
 
 
         // Actions
+        onSetColor (dev_id, color) {
+            if ( dev_id === id) {
 
-        onSetColor (location, color) {
-            if ( location === id) {
-                this.setState({color:color});
-                this.postStatus();
+                this.doCommand('set-color', color);
+                this.setState({'loading':true});
             }
         }
 
-        onSetLevel (location, level) {
-            if ( location === id) {
+        onSetBrightness (dev_id, level) {
+            if ( dev_id === id ) {
                 this.setState({level:level});
-                this.postStatus();
+                this.doCommand();
             }
         }
 
-        onSwitch (location) {
-            if ( location === id) {
-                this.setState({switchOn:! this.state.switchOn});
-                this.postStatus();
+        onToggle (dev_id) {
+            if ( dev_id === id) {
+                // let dev_state = this.state.device_state;
+                // dev_state.color = color;
+                // const command = {id:dev_id,cmd:"set-color",value: color};
+                // this.doCommand(command);
+                // this.setState({'loading':true});
             }
         }
 
+        onOn () {
+
+        }
         onVisible(location) {
             this.setState({visible: false});
             if ( location === id) {

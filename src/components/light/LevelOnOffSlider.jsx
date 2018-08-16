@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
 import Grid from "@material-ui/core/Grid/Grid";
 
-const styles = theme => ( {
+const styles = {
     root: {
         width: '100%',
         marginTop: 0,
@@ -18,32 +18,33 @@ const styles = theme => ( {
         letterSpacing:1,
         fontColor:'lightgray',
     }
-});
+};
 
-class LevelSlider extends Reflux.Component {
+class LevelOnOffSliderSlider extends Reflux.Component {
 
     handleChange = (event, value) => {
-        const level = Math.round(value/5)*5;
-        lightActions.setLevel(this.props.location, level);
+        const level = Math.round(value/100)*100;
+        // lightActions.setLevel(this.props.location, level);
+
     };
 
     render() {
         const { classes } = this.props;
-        const display = this.props.level ? 'block' : 'none';
+
         return (
             this.props.loading ? null :
-            <Grid container className={classes.root} style={{display:display}}>
+            <Grid container className={classes.root}>
                 <div id="label" className={classes.text}>
                     Brightness: {this.props.level}%
                 </div>
-                <Slider value={this.props.level}  onChange={this.handleChange} />
+                <Slider value={this.props.level}  onChange={this.handleChange} disabled/>
             </Grid>
         );
     }
 }
 
-LevelSlider.propTypes = {
+LevelOnOffSliderSlider.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LevelSlider);
+export default withStyles(styles)(LevelOnOffSliderSlider);

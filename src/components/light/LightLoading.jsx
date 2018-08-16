@@ -16,14 +16,16 @@ class LightLoading extends React.Component {
        const {classes} = this.props;
 
        return (
-           <Grid
-               container
-               justify={'center'}
-               alignItems={'center'}>
+           this.props.loading ?
+               <Grid
+                   container
+                   justify={'center'}
+                   alignItems={'center'}>
 
-               <CircularProgress className={classes.progress} size={58}/>
+                   <CircularProgress className={classes.progress} size={58}/>
 
-           </Grid>
+               </Grid>
+             : null
        )
    }
 }

@@ -1,38 +1,28 @@
 import React, {Component} from 'react'
 import Reflux from 'reflux'
-import location from '../components/locations';
-
 import Grid from '@material-ui/core/Grid';
-import LightManager from "../components/light/LightManager";
 import NavBar from "./NavBar";
 import LeftSide from "../components/SideBar/LeftSideNav";
-import WebSocketStore from "../services/WebSocketStore";
+import WebSocketStore from "../reflux/WebSocketStore";
+import HomePageContent from "./HomePageContent";
+import Location from "../components/Location";
 
 
 class HomePage extends Reflux.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.store = WebSocketStore;
     }
 
-    renderLightControl = (item, index) => {
-
-        let start = '';
-        if (index === 0) {
-            start = item.room;
-        }
-
-        return (
-                <LightManager
-                    location = {item.room}
-                    key = {item.room+index}
-                    start = {start}
-                />
-        )
-    };
+    // componentWillMount () {
+    //     this.setState({generalState: this.props.generalState});
+    //     alert('Mount');
+    //     console.log(this.state.generalState);
+    // }
 
     render () {
-
+        const generalState = this.props.generalState;
+        // console.log(generalState);
         return (
             <Grid container spacing={16}>
 
@@ -40,12 +30,20 @@ class HomePage extends Reflux.Component {
                     <NavBar/>
                 </Grid>
 
-                <Grid item sm={4}  lg={3}>
+                <Grid item xs={12} sm={4} md={3} lg={2}>
                     <LeftSide/>
                 </Grid>
 
-                <Grid item sm={4}  lg={3}>
-                    {location.map(this.renderLightControl)}
+                <Grid item xs={12} sm={8} md={9} lg={10}>
+
+                    {this.props.generalState.locations.map(function (location) {
+                        return (
+                             <Location  key = {location.name}
+                                        location = {location}
+                                        generalState = {generalState}/>
+                        )
+                    })}
+
                 </Grid>
 
             </Grid>

@@ -10,63 +10,75 @@ import LightLoading from "./LightLoading";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import CardHeader from "@material-ui/core/es/CardHeader/CardHeader";
-import Level from "./Level";
-import lightActions from "../../reflux/lightActions";
 import Grid from "@material-ui/core/Grid/Grid";
 import LevelSlider from "./LevelSlider";
+import renderIfExist from "../../services/renderIfExist"
+import LevelOnOffSlider from "./LevelOnOffSlider";
 
-const show_if_loaded = (Comp, selector) => {
-    return !selector ? Comp : undefined;
-};
+const styles = theme => ({
+        root: {
+            minWidth:300,
+            maxWidth:330,
+            marginRight:7,
+            marginTop:5,
+            marginBottom:5,
+            marginLeft:5,
+    },
+
+});
+
+
 
 
 class LightManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        this.store = LightStoreFactory(props.location, props.start);
-
+        this.store = LightStoreFactory(props.id, props.device_state);
     }
 
     render () {
-         const display = this.state.visible ? 'block' : 'none';
-         return (
-                 <Card style={{minWidth:280, maxWidth:320, display:display}}>
-                     <LightHeader key={ 'buttonOn-' + Math.floor(Math.random()*1000) }
-                                  location = {this.props.location}
-                                  switchOn = {this.state.switchOn}
-                                  color = {this.state.color}
+        const {classes} = this.props;
+        const display = this.state.visible ? 'block' : 'none';
+        const lightType = this.props.device_state.type === 'light';
+        const normalSlider = this.state.device_state.brightness != null;
+        console.log('device:'+this.state.name+' normal:' + normalSlider);
+        return (
+                !lightType ? null :
+                 <Card style={{display:display}} className={classes.root}>
+
+                     <LightHeader scenes={this.state.device_state.scenes}
+                                  name = {this.state.name}
+                                  on = {this.state.device_state.on}
                      />
 
-                    <CardContent>
+                     <CardContent>
+                         <Grid container>
+                             {normalSlider ?
 
-                        <Grid container>
-                           { show_if_loaded(
-                               <Grid item sm={6}>
-                                        <LevelSlider location={this.props.location}
-                                               level={this.state.level} />
-                               </Grid>,
-                                        this.state.loading
+                                 <LevelSlider dev_id={this.props.id}
+                                              level={this.state.device_state.brightness}
+                                              loading={this.state.loading}
+                                 />:
 
-                            )}
+                                 <LevelOnOffSlider dev_id={this.props.id}
+                                              level={0}
+                                              loading={this.state.loading}
+                                 />
 
-                           { show_if_loaded(
-                               <Grid item sm={6}>
-                                    <LightColorPicker location={this.props.location}
-                                                      selectedColor={this.state.color}/>
-                               </Grid>,
-                                                  this.state.loading
+                                 }
 
-                           )}
+                             { renderIfExist(this.state.device_state.color,
+                                 <LightColorPicker dev_id={this.props.id}
+                                                   color={this.state.device_state.color}
+                                                   loading={this.state.loading}
+                                 />
+                             )}
 
-                            { show_if_loaded(
-                                <LightLoading/>,
-                                ! this.state.loading
-                            )}
+
+                              <LightLoading loading = {this.state.loading}
+                              />
+
                         </Grid>
                     </CardContent>
 
@@ -77,8 +89,8 @@ class LightManager extends Reflux.Component{
 }
 
 
-// LightManager.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
+LightManager.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
-export default (LightManager);
+export default withStyles(styles)(LightManager);

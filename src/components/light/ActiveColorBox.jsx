@@ -3,7 +3,6 @@ import Reflux from 'reflux'
 import lightActions from '../../reflux/lightActions'
 import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/es/styles/withStyles";
-import Grid from "@material-ui/core/Grid/Grid";
 
 const styles = theme => ({
     smallbox: {
@@ -21,7 +20,7 @@ const styles = theme => ({
         height: 2,
         width: 10,
         marginTop: 2,
-        backgroundColor: 'blue',
+        backgroundColor: 'b',
     }
 });
 
