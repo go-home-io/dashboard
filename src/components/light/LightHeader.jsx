@@ -2,8 +2,8 @@ import React from 'react'
 import Reflux from 'reflux'
 import lightActions from "../../reflux/lightActions"
 import Icon from "@material-ui/core/Icon/Icon";
-import Typography from "@material-ui/core/es/Typography/Typography";
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import Typography from "@material-ui/core/Typography/Typography";
+import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
 import Scenes from "./Scenes";
 import Grid from "@material-ui/core/Grid/Grid";

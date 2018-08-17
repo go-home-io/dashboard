@@ -4,7 +4,7 @@ import LightManager from "../light/LightManager";
 import getDeviceState from "../getDeviceState";
 import GroupHeader from "./GroupHeader";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
      root: {

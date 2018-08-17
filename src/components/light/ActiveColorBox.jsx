@@ -2,7 +2,7 @@ import React from 'react'
 import Reflux from 'reflux'
 import lightActions from '../../reflux/lightActions'
 import PropTypes from 'prop-types'
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
     smallbox: {
