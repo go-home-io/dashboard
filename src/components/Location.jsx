@@ -13,25 +13,30 @@ class Location extends React.Component {
         const location = this.props.location.name;
         const devices = this.props.location.devices;
         const generalState = this.props.generalState;
+        function deviceType(dev_id)  {
+            return getDeviceState(dev_id, generalState.devices).type
+        }
 
         return (
-                 <Grid container>
+                 <Grid container alignContent='center'>
                      {   devices.map(function (device) {
                          return(
-                             <div>
-                                 <GroupManager
-                                         location = {location}
-                                         device = {device}
-                                         generalState = {generalState}
-                                         key = {device}
-                                    />
-                                    <LightManager
-                                         location = {location}
-                                         id = {device}
-                                         key = {device}
-                                         device_state = {getDeviceState(device, generalState.devices)}
-                                    />
-                             </div>
+                             deviceType(device) === 'hub' ? null :
+                                 deviceType(device) === 'group' ?
+                                     <GroupManager
+                                             location = {location}
+                                             device = {device}
+                                             generalState = {generalState}
+                                             key = {'gm'+device+Math.floor(Math.random()*1000)}
+
+                                        /> :
+                                        <LightManager
+                                             location = {location}
+                                             id = {device}
+                                             key = {'lm'+device+Math.floor(Math.random()*1000)}
+                                             device_state = {getDeviceState(device, generalState.devices)}
+                                        />
+
                          )
                          })
                      }

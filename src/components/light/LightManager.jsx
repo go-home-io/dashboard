@@ -14,7 +14,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from "@material-ui/core/Grid/Grid";
 import LevelSlider from "./LevelSlider";
 import renderIfExist from "../../services/renderIfExist"
-import LevelOnOffSlider from "./LevelOnOffSlider";
 
 const styles = theme => ({
         root: {
@@ -42,9 +41,9 @@ class LightManager extends Reflux.Component{
         const display = this.state.visible ? 'block' : 'none';
         const lightType = this.props.device_state.type === 'light';
         const normalSlider = this.state.device_state.brightness != null;
-        console.log('device:'+this.state.name+' normal:' + normalSlider);
+
         return (
-                !lightType ? null :
+                ! (lightType) ? null :
                  <Card style={{display:display}} className={classes.root}>
 
                      <LightHeader scenes={this.state.device_state.scenes}
@@ -59,14 +58,10 @@ class LightManager extends Reflux.Component{
                                  <LevelSlider dev_id={this.props.id}
                                               level={this.state.device_state.brightness}
                                               loading={this.state.loading}
-                                 />:
+                                 />: null
 
-                                 <LevelOnOffSlider dev_id={this.props.id}
-                                              level={0}
-                                              loading={this.state.loading}
-                                 />
 
-                                 }
+                             }
 
                              { renderIfExist(this.state.device_state.color,
                                  <LightColorPicker dev_id={this.props.id}

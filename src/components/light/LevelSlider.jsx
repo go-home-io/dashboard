@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import lightActions from '../../reflux/lightActions'
 
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
 import Grid from "@material-ui/core/Grid/Grid";
 

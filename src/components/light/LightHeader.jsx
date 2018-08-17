@@ -51,6 +51,9 @@ class LightHeader extends Reflux.Component {
         // Styles
         const {classes} = this.props;
         const color = (this.props.on) ? 'secondary' : 'primary';
+        // console.log('device:'+this.props.id);
+        // console.log(this.props.scenes);
+        // alert('Device: '+this.props.id);
 
         return (
             <Paper className={classes.paper} elevation={0}>

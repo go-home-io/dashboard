@@ -34,7 +34,7 @@ class HomePage extends Reflux.Component {
                     <LeftSide/>
                 </Grid>
 
-                <Grid item xs={12} sm={8} md={9} lg={10}>
+                <Grid item xs={12} sm={8} md={7} lg={8}>
 
                     {this.props.generalState.locations.map(function (location) {
                         return (
@@ -43,6 +43,9 @@ class HomePage extends Reflux.Component {
                                         generalState = {generalState}/>
                         )
                     })}
+                    <Grid item xs={12} sm={4} md={2} lg={2}>
+
+                    </Grid>
 
                 </Grid>
 

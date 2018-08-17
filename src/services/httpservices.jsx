@@ -4,10 +4,12 @@ const baseUrl = 'http://localhost:8000';
 
 const service = {
     get:(url, user, password) => {
+        console.log(user+':'+password);
         const credentials = 'Basic ' + base64.encode(user + ":" + password);
+        // alert(credentials);
         return fetch(baseUrl+url, {
             headers: {
-                // 'Authorization': credentials,
+                // 'Authorization': 'Basic dGVzdC11c2VyOnRlc3Q='
             },
             method: 'get',
         })

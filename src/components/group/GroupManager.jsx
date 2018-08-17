@@ -28,7 +28,7 @@ class GroupManager  extends React.Component {
                            title = {getDeviceState(this.props.device, devStates).name}
                        />
 
-                       <Grid container>
+                       <Grid container alignContent='center'>
                         {this_group_members.map(function (dev_id) {
                             return (
                                 <LightManager

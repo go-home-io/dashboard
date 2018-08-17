@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import RGBSlider from "./RGBSlider";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import lightActions from "../../reflux/lightActions";
 
 const styles = theme => ({
     root : {
