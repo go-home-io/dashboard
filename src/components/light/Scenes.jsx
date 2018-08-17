@@ -18,7 +18,9 @@ class Scenes extends React.Component {
     };
 
     handleClose = (option) => {
-        lightActions.setScene(this.state.dev_id, option);
+        if (typeof(option) === 'string') {
+            lightActions.setScene(this.state.dev_id, option);
+        }
         this.setState({ anchorEl: null });
     };
 

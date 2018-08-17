@@ -49,11 +49,10 @@ function LightStoreFactory(id,  device_info, location, group){
        // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
-                console.log(data);
+                // console.log(data);
                 let state = this.state.device_state;
                 state = data.state;
                 this.setState({device_state: state,'loading':false});
-                // console.log(this.state.device_state);
             }
         }
 

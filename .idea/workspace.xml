@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73d80a5f-025f-4534-8c10-526ca257a143" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/group/GroupManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/group/GroupManager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightManager.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/light/Scenes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/Scenes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/location/Location.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/location/Location.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reflux/LightStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/LightStore.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reflux/lightActions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/lightActions.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -84,14 +77,14 @@
           <entry key="gitignore" value="2" />
           <entry key="js" value="26" />
           <entry key="json" value="2" />
-          <entry key="jsx" value="21072" />
+          <entry key="jsx" value="21138" />
           <entry key="md" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="2" />
-          <entry key="JSX Harmony" value="21072" />
+          <entry key="JSX Harmony" value="21138" />
           <entry key="JavaScript" value="26" />
           <entry key="Markdown" value="21" />
           <entry key="PLAIN_TEXT" value="26" />
@@ -134,8 +127,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="257">
+              <caret line="55" column="2" selection-start-line="55" selection-start-column="2" selection-end-line="55" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -155,8 +148,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/light/Scenes.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+            <state relative-caret-position="264">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -257,7 +250,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-5" />
     <option name="width" value="1939" />
     <option name="height" value="1050" />
@@ -413,12 +406,12 @@
       <workItem from="1533976962214" duration="58455000" />
       <workItem from="1534095555849" duration="9676000" />
       <workItem from="1534140270490" duration="84008000" />
-      <workItem from="1534481945618" duration="31057000" />
+      <workItem from="1534481945618" duration="32086000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="314555000" />
+    <option name="totallyTimeSpent" value="315584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -780,8 +773,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/light/Scenes.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+        <state relative-caret-position="264">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -790,8 +783,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        <state relative-caret-position="257">
+          <caret line="55" column="2" selection-start-line="55" selection-start-column="2" selection-end-line="55" selection-end-column="2" />
         </state>
       </provider>
     </entry>
