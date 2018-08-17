@@ -22,16 +22,16 @@ const styles = theme => ( {
 class LevelSlider extends Reflux.Component {
 
     handleChange = (event, value) => {
-        const level = Math.round(value/5)*5;
-        lightActions.setLevel(this.props.location, level);
+        const level = Math.round(value);
+        lightActions.setBrightness(this.props.dev_id, level);
     };
 
     render() {
         const { classes } = this.props;
-        const display = this.props.level ? 'block' : 'none';
+        // const display = this.props.level ? 'block' : 'none';
         return (
             this.props.loading ? null :
-            <Grid container className={classes.root} style={{display:display}}>
+            <Grid container className={classes.root} >
                 <div id="label" className={classes.text}>
                     Brightness: {this.props.level}%
                 </div>

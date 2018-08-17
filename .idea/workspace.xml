@@ -3,15 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="73d80a5f-025f-4534-8c10-526ca257a143" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Location.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Location.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/group/GroupManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/group/GroupManager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/ColorSliders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/ColorSliders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Location.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/location/Location.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/light/LevelSlider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LevelSlider.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/light/LightHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightHeader.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/light/LightLoading.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/light/LightManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightManager.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/locations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/location/locations.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reflux/LightStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/LightStore.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/httpservices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/httpservices.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/renderIfExist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/renderIfExist.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HomePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HomePageContent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HomePageContent.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -85,14 +89,14 @@
           <entry key="gitignore" value="2" />
           <entry key="js" value="26" />
           <entry key="json" value="2" />
-          <entry key="jsx" value="19563" />
+          <entry key="jsx" value="20048" />
           <entry key="md" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="2" />
-          <entry key="JSX Harmony" value="19563" />
+          <entry key="JSX Harmony" value="20048" />
           <entry key="JavaScript" value="26" />
           <entry key="Markdown" value="21" />
           <entry key="PLAIN_TEXT" value="26" />
@@ -103,14 +107,14 @@
           <entry key="gitignore" value="1" />
           <entry key="js" value="2" />
           <entry key="json" value="1" />
-          <entry key="jsx" value="86" />
+          <entry key="jsx" value="89" />
           <entry key="md" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="1" />
-          <entry key="JSX Harmony" value="86" />
+          <entry key="JSX Harmony" value="89" />
           <entry key="JavaScript" value="2" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -123,8 +127,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/light/LightManager.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+            <state relative-caret-position="144">
+              <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -132,13 +136,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Location.jsx">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/light/IconLoading.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+            <state relative-caret-position="480">
+              <caret line="24" column="74" selection-start-line="24" selection-start-column="74" selection-end-line="24" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/location/Location.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
               <folding>
-                <element signature="e#0#60#0" expanded="true" />
+                <element signature="e#0#49#0" expanded="true" />
+                <element signature="e#116#163#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,8 +170,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/group/GroupHeader.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+            <state relative-caret-position="240">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -166,40 +180,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/HomePage.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="2112">
+              <caret line="90" column="7" selection-start-line="90" selection-start-column="7" selection-end-line="90" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/light/LightHeader.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+            <state relative-caret-position="192">
+              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -210,8 +203,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/light/LevelSlider.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+            <state relative-caret-position="192">
+              <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -220,13 +213,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/light/ColorSliders.jsx">
+        <entry file="file://$PROJECT_DIR$/src/reflux/lightActions.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="168">
+              <caret line="7" column="11" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -239,8 +229,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/reflux/homePageActions.jsx" />
-        <option value="$PROJECT_DIR$/src/components/SideBar/ListItemWrapper.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/HomePageStore.jsx" />
         <option value="$PROJECT_DIR$/src/components/SideBar/ListItemActionWrapper.jsx" />
         <option value="$PROJECT_DIR$/src/components/locations.jsx" />
@@ -278,18 +266,20 @@
         <option value="$PROJECT_DIR$/src/components/light/LightColorPicker.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/LevelOnOffSlider.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/lightActions.jsx" />
-        <option value="$PROJECT_DIR$/src/reflux/LightStore.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/components/light/LightHeader.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/ColorSliders.jsx" />
-        <option value="$PROJECT_DIR$/src/components/light/LightManager.jsx" />
-        <option value="$PROJECT_DIR$/src/components/light/LevelSlider.jsx" />
-        <option value="$PROJECT_DIR$/src/views/HomePage.jsx" />
-        <option value="$PROJECT_DIR$/src/services/httpservices.jsx" />
-        <option value="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" />
         <option value="$PROJECT_DIR$/src/components/group/GroupManager.jsx" />
         <option value="$PROJECT_DIR$/src/components/Location.jsx" />
+        <option value="$PROJECT_DIR$/src/services/httpservices.jsx" />
+        <option value="$PROJECT_DIR$/src/components/location/Location.jsx" />
+        <option value="$PROJECT_DIR$/src/views/HomePage.jsx" />
+        <option value="$PROJECT_DIR$/src/components/light/LevelSlider.jsx" />
+        <option value="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" />
+        <option value="$PROJECT_DIR$/src/components/light/LightManager.jsx" />
+        <option value="$PROJECT_DIR$/src/reflux/LightStore.jsx" />
+        <option value="$PROJECT_DIR$/src/components/light/IconLoading.jsx" />
+        <option value="$PROJECT_DIR$/src/components/light/LightHeader.jsx" />
       </list>
     </option>
   </component>
@@ -315,7 +305,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-5" />
     <option name="width" value="1939" />
     <option name="height" value="1050" />
@@ -389,20 +379,13 @@
               <item name="react-material" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="group" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-material" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="light" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-material" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="reflux" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
@@ -427,17 +410,17 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GO-HOME\react-material\src\components\location" />
+      <recent name="D:\GO-HOME\react-material\src\components" />
+      <recent name="D:\GO-HOME\react-material\src\components\group" />
+      <recent name="D:\GO-HOME\react-material\src\reflux" />
+      <recent name="D:\GO-HOME\react-material\src\views" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\React\MyProjects\gohome-react-material\src\views" />
       <recent name="D:\React\MyProjects\gohome-react-material\src" />
       <recent name="D:\React\MyProjects\gohome-react-material\src\components\light" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\GO-HOME\react-material\src\components\group" />
-      <recent name="D:\GO-HOME\react-material\src\reflux" />
-      <recent name="D:\GO-HOME\react-material\src\views" />
-      <recent name="D:\GO-HOME\react-material\src\components\light" />
-      <recent name="D:\GO-HOME\react-material\src\components" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -471,12 +454,12 @@
       <workItem from="1533976962214" duration="58455000" />
       <workItem from="1534095555849" duration="9676000" />
       <workItem from="1534140270490" duration="84008000" />
-      <workItem from="1534481945618" duration="12315000" />
+      <workItem from="1534481945618" duration="18700000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="295813000" />
+    <option name="totallyTimeSpent" value="302198000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -496,7 +479,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" weight="0.27864215" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" visible="true" weight="0.27864215" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" weight="0.27864215" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -516,7 +499,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" weight="0.27864215" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" weight="0.27864215" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" visible="true" weight="0.27864215" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -560,7 +543,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/locations.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/location/locations.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
@@ -619,7 +602,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/light/presetColors.jsx" />
     <entry file="file://$PROJECT_DIR$/src/components/light/PresetColorsSelect.jsx" />
     <entry file="file://$PROJECT_DIR$/src/components/light/SceneSelector.jsx" />
-    <entry file="file://$PROJECT_DIR$/src/services/renderIfExist.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/renderIfExist.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="2" column="2" lean-forward="true" selection-end-line="2" selection-end-column="2" />
@@ -647,6 +630,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -700,13 +686,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/light/LightLoading.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/light/LightColorPicker.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1608">
@@ -721,13 +700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reflux/lightActions.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -755,74 +727,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/light/LightHeader.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/light/ColorSliders.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/light/LightManager.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/light/LevelSlider.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/HomePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/group/GroupHeader.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -836,12 +744,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Location.jsx">
+    <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+        <state relative-caret-position="240">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/location/Location.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#0#60#0" expanded="true" />
+            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#116#163#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/HomePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/light/LevelSlider.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="29" column="39" lean-forward="true" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reflux/lightActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/group/GroupHeader.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/light/LightManager.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2112">
+          <caret line="90" column="7" selection-start-line="90" selection-start-column="7" selection-end-line="90" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/light/IconLoading.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" column="74" selection-start-line="24" selection-start-column="74" selection-end-line="24" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/light/LightHeader.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

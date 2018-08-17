@@ -1,6 +1,6 @@
 import LightManager from "../components/light/LightManager";
 import React from "react";
-import location from "../components/locations";
+import location from "../components/location/locations";
 import Grid from "@material-ui/core/Grid/Grid";
 
 

@@ -5,19 +5,6 @@ import wsActions from "./wsActions";
 //  Create unique Store for each Component
 function LightStoreFactory(id,  device_info){
 
-    // let postMessage = {
-    //     'method': 'POST',
-    //     'category' : 'light',
-    //     'location': id,
-    //     'light_status':{}
-    // };
-    //
-    // const getMessage = {
-    //     'method': 'GET',
-    //     'category': 'light',
-    //     'location': id
-    // };
-
     const visible = true;
 
     class LightStore extends Reflux.Store {
@@ -44,6 +31,10 @@ function LightStoreFactory(id,  device_info){
             this.doCommand = this.doCommand.bind(this);
             this.onSetColor = this.onSetColor.bind(this);
             this.onVisible = this.onVisible.bind(this);
+            this.onSetBrightness = this.onSetBrightness.bind(this);
+            this.onToggle = this.onToggle.bind(this);
+            this.onOn = this.onOn.bind(this);
+            this.onOff = this.onOff.bind(this);
         }
 
         // WebSocket messenger
@@ -57,26 +48,17 @@ function LightStoreFactory(id,  device_info){
        // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
+                console.log(data);
                 let state = this.state.device_state;
-                state.device_state = data.state;
-                this.setState({device_state: state});
-                this.setState({'loading':false});
-                console.log(this.state.device_state);
+                state = data.state;
+                this.setState({device_state: state,'loading':false});
+                // console.log(this.state.device_state);
             }
         }
-
-        // getComponentStateByHTTP () {
-        //     HTTP.get('/ingredients?location=' + id)
-        //         .then((data) => {
-        //             this.setState({ingredients: data});
-        //         });
-        // }
-
 
         // Actions
         onSetColor (dev_id, color) {
             if ( dev_id === id) {
-
                 this.doCommand('set-color', color);
                 this.setState({'loading':true});
             }
@@ -84,24 +66,33 @@ function LightStoreFactory(id,  device_info){
 
         onSetBrightness (dev_id, level) {
             if ( dev_id === id ) {
-                this.setState({level:level});
-                this.doCommand();
+                this.doCommand('set-brightness', level);
+                this.setState({'loading':true});
             }
         }
+
+        onOn (dev_id) {
+            if ( dev_id === id ) {
+                this.doCommand('on', "");
+                this.setState({'loading':true});
+            }
+        }
+
+        onOff (dev_id) {
+            if ( dev_id === id ) {
+                this.doCommand('off', "");
+                this.setState({'loading':true});
+            }
+        }
+
 
         onToggle (dev_id) {
-            if ( dev_id === id) {
-                // let dev_state = this.state.device_state;
-                // dev_state.color = color;
-                // const command = {id:dev_id,cmd:"set-color",value: color};
-                // this.doCommand(command);
-                // this.setState({'loading':true});
+            if ( dev_id === id ) {
+                this.doCommand('toggle', "");
+                this.setState({'loading':true});
             }
         }
 
-        onOn () {
-
-        }
         onVisible(location) {
             this.setState({visible: false});
             if ( location === id) {

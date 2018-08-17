@@ -5,7 +5,6 @@ import Icon from "@material-ui/core/es/Icon/Icon";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import PropTypes from 'prop-types'
-import renderIfExist from "../../services/renderIfExist"
 import Scenes from "./Scenes";
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
@@ -44,16 +43,14 @@ class LightHeader extends Reflux.Component {
      }
 
     handleClick () {
-        lightActions.toggle(this.props.id);
+         lightActions.toggle(this.props.dev_id);
     }
 
     render () {
         // Styles
         const {classes} = this.props;
         const color = (this.props.on) ? 'secondary' : 'primary';
-        // console.log('device:'+this.props.id);
-        // console.log(this.props.scenes);
-        // alert('Device: '+this.props.id);
+        const scenesExist = (this.props.scenes != null);
 
         return (
             <Paper className={classes.paper} elevation={0}>
@@ -73,11 +70,11 @@ class LightHeader extends Reflux.Component {
                          </Typography>
                       </Grid>
                       <Grid item sm={2}>
-                        { renderIfExist(this.props.scenes,
+                        { scenesExist ?
                             <Scenes  dev_id={this.props.id}
                                      scenes={this.props.scenes}
-                            />
-                        )}
+                            /> : null
+                        }
                       </Grid>
 
                  </Grid>

@@ -10,7 +10,7 @@ const styles = theme => ({
     },
 });
 
-class LightLoading extends React.Component {
+class IconLoading extends React.Component {
 
    render () {
        const {classes} = this.props;
@@ -22,7 +22,7 @@ class LightLoading extends React.Component {
                    justify={'center'}
                    alignItems={'center'}>
 
-                   <CircularProgress className={classes.progress} size={58}/>
+                   <CircularProgress className={classes.progress} size={65}/>
 
                </Grid>
              : null
@@ -30,8 +30,8 @@ class LightLoading extends React.Component {
    }
 }
 
-LightLoading.propTypes = {
+IconLoading.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LightLoading);
+export default withStyles(styles)(IconLoading);

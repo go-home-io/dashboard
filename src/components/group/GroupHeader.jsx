@@ -28,6 +28,7 @@ class GroupHeader extends React.Component{
 
     handleClick() {
         alert('click');
+
     }
 
     render () {

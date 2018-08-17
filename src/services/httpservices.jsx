@@ -4,17 +4,17 @@ const baseUrl = 'http://localhost:8000';
 
 const service = {
     get:(url, user, password) => {
-        console.log(user+':'+password);
+        // console.log(user+':'+password);
         const credentials = 'Basic ' + base64.encode(user + ":" + password);
         // alert(credentials);
         return fetch(baseUrl+url, {
             headers: {
-                // 'Authorization': 'Basic dGVzdC11c2VyOnRlc3Q='
+                // 'Authorization': credentials
             },
             method: 'get',
         })
             .then((response) => {
-                console.log(response.status + ' -> ' +response.ok);
+                // console.log(response.status + ' -> ' +response.ok);
                 if (response.ok) {
                     return response.json();
                 } else {

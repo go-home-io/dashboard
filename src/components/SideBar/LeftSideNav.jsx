@@ -14,7 +14,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import ListItemActionWrapper from "./ListItemActionWrapper";
-import location from '../locations'
+import location from '../location/locations'
 
 const styles = theme => ({
     root: {

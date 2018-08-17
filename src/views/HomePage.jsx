@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Reflux from 'reflux'
 import Grid from '@material-ui/core/Grid';
 import NavBar from "./NavBar";
 import LeftSide from "../components/SideBar/LeftSideNav";
 import WebSocketStore from "../reflux/WebSocketStore";
-import HomePageContent from "./HomePageContent";
-import Location from "../components/Location";
+import Location from "../components/location/Location";
 
 
 class HomePage extends Reflux.Component {
@@ -13,12 +12,6 @@ class HomePage extends Reflux.Component {
         super(props);
         this.store = WebSocketStore;
     }
-
-    // componentWillMount () {
-    //     this.setState({generalState: this.props.generalState});
-    //     alert('Mount');
-    //     console.log(this.state.generalState);
-    // }
 
     render () {
         const generalState = this.props.generalState;
