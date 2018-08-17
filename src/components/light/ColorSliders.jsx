@@ -1,5 +1,4 @@
 import React from 'react'
-import Grid from "@material-ui/core/Grid/Grid";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import RGBSlider from "./RGBSlider";
@@ -8,8 +7,9 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 const styles = theme => ({
     root : {
         marginTop:0,
-        width:'100%',
+        width:'90%',
         cursor: 'default',
+        marginRight: 0,
     },
     button: {
         width: 15,
@@ -54,46 +54,33 @@ class ColorSliders extends React.Component {
         alert('SetColor');
     }
     onCloseClick() {
-        // let state = this.state;
-        // state.r = this.props.color.r;
-        // state.g = this.props.color.g;
-        // state.b = this.props.color.b;
-        // console.log(state);
-        // this.setState({state});
         this.props.close();
     }
 
     render () {
         const {classes} = this.props;
 
-        // const close = this.props.close;
-
-
         return (
-            <Grid container className={classes.root}>
+            <div className={classes.root}>
 
                 {RGBSlider(this.state.r, '#f50057','#e46363', this.handleChangeRed.bind(this))}
                 {RGBSlider(this.state.g, 'green','lightgreen', this.handleChangeGreen.bind(this))}
                 {RGBSlider(this.state.b, 'blue','lightblue', this.handleChangeBlue.bind(this))}
-                <Grid item sm={2}>
                     <IconButton onClick={this.onCloseClick.bind(this)}
-                                style={{width:25, height:25}}>
+                                style={{width:25, height:25, float:'left', marginTop:10}}>
                         <i className="material-icons">
                             clear
                         </i>
                     </IconButton>
-                </Grid>
-                <Grid item sm={8}>
-                </Grid>
-                <Grid item sm={2}>
+
                     <IconButton onClick={this.props.setColor}
-                                style={{width:25, height:25}}>
+                                style={{width:25, height:25, float:'right', marginTop:10}}>
                         <i className="material-icons">
                             done
                         </i>
                     </IconButton>
-                </Grid>
-            </Grid>
+
+            </div>
         )
     }
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import base64 from 'base-64';
 import HomePage from "./HomePage";
 import HTTP from "../services/httpservices";
 import Login from "../components/Login";

@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import Grid from "@material-ui/core/Grid/Grid";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Collapse from "@material-ui/core/Collapse/Collapse";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import ColorSliders from "./ColorSliders";
 import lightActions from "../../reflux/lightActions";
 
@@ -23,7 +21,6 @@ const styles = theme => ({
         position:'relative',
         top:5,
         cursor: 'pointer',
-
     },
     text: {
         fontSize:12,

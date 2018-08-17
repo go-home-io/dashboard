@@ -1,19 +1,15 @@
 import React from 'react'
 import Reflux from 'reflux'
 import LightHeader from "./LightHeader";
-
 import LightStoreFactory from "../../reflux/LightStore";
-
 import LightColorPicker from "./LightColorPicker";
 import IconLoading from "./IconLoading";
-
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from "@material-ui/core/Grid/Grid";
 import LevelSlider from "./LevelSlider";
-import renderIfExist from "../renderIfExist"
 
 const styles = theme => ({
         root: {

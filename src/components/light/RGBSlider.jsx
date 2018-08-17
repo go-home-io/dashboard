@@ -1,9 +1,6 @@
 import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Slider from "@material-ui/lab/Slider/Slider";
-
-
 
 function RGBSlider(value, colorThumb, colorTrack, handleChange) {
       // Overrides the slider CSS
@@ -13,7 +10,9 @@ function RGBSlider(value, colorThumb, colorTrack, handleChange) {
             MuiSlider: {
                 // Name of the rule
                 root: {
-                    width:'100%'
+                    width:'100%',
+                    padding:'3px 10px',
+                    marginTop:8,
                 },
                 thumb : {
                     backgroundColor: colorThumb,
