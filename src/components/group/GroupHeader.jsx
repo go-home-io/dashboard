@@ -21,6 +21,7 @@ const styles = theme => ({
     },
     typography: {
         marginLeft: 10,
+        cursor: 'pointer',
     }
 });
 
@@ -37,23 +38,27 @@ class GroupHeader extends React.Component{
         const color = 'primary';
 
         return (
-            <Paper className={classes.root} elevation={3}>
-                <Grid container
-                      className={classes.grid}
-                      onClick = {this.handleClick}
-                >
+
+               <Paper className={classes.root} elevation={3}>
+                   <Grid container
+                         className={classes.grid}
+                         onClick = {this.handleClick}
+                   >
                     <Icon color={color}
-                          className={classes.icon} >
+                          className={classes.icon}
+                    >
                         wb_sunny
                     </Icon>
 
                     <Typography variant="subheading"
-                                className={classes.typography} >
-
-                        {this.props.title}
+                                className={classes.typography}
+                    >
+                          {this.props.title}
                     </Typography>
-                </Grid>
-            </Paper>
+
+
+                  </Grid>
+               </Paper>
         )
     }
 }

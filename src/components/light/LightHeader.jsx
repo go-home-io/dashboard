@@ -19,17 +19,19 @@ const styles = theme => ({
 
     },
     root: {
-        cursor:'pointer',
+
         marginLeft: 10,
         marginTop:-7,
         marginBottom:0,
     },
     icon: {
-        float:'left'
+        float:'left',
+        cursor:'pointer',
     },
     typography: {
         float:'left',
         marginLeft:10,
+        cursor:'pointer',
     },
 
 });
@@ -54,24 +56,27 @@ class LightHeader extends Reflux.Component {
 
         return (
             <Paper className={classes.paper} elevation={0}>
-                <Grid container className={classes.root}
-                     onClick={this.handleClick} >
+                <Grid container className={classes.root} >
 
                       <Grid item sm={10}>
                          <Icon color={color}
-                               className={classes.icon} >
+                               className={classes.icon}
+                               onClick={this.handleClick}
+                         >
                              wb_sunny
                          </Icon>
 
                          <Typography variant="subheading"
-                                     className={classes.typography} >
+                                     className={classes.typography}
+                                     onClick={this.handleClick}
+                         >
 
                             {this.props.name}
                          </Typography>
                       </Grid>
                       <Grid item sm={2}>
                         { scenesExist ?
-                            <Scenes  dev_id={this.props.id}
+                            <Scenes  dev_id={this.props.dev_id}
                                      scenes={this.props.scenes}
                             /> : null
                         }

@@ -19,8 +19,6 @@ import location from '../location/locations'
 const styles = theme => ({
     root: {
         width: 200,
-        // maxWidth: 250,
-        // width:200,
         backgroundColor: theme.palette.background.paper,
     },
     nested: {

@@ -3,7 +3,7 @@ import lightActions from './lightActions'
 import wsActions from "./wsActions";
 
 //  Create unique Store for each Component
-function LightStoreFactory(id,  device_info){
+function LightStoreFactory(id,  device_info, location, group){
 
     const visible = true;
 
@@ -18,8 +18,8 @@ function LightStoreFactory(id,  device_info){
                            device_state: device_info.state,
                            last_seen: device_info.last_seen,
                            commands: device_info.commands,
-                           group_id: '',
-                           location: 'default',
+                           group_id: group,
+                           location: location,
                            loading:false,
                            visible: visible,
             };
@@ -35,6 +35,7 @@ function LightStoreFactory(id,  device_info){
             this.onToggle = this.onToggle.bind(this);
             this.onOn = this.onOn.bind(this);
             this.onOff = this.onOff.bind(this);
+            this.onSetScene = this.onSetScene.bind(this);
         }
 
         // WebSocket messenger
@@ -85,7 +86,6 @@ function LightStoreFactory(id,  device_info){
             }
         }
 
-
         onToggle (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand('toggle', "");
@@ -93,9 +93,16 @@ function LightStoreFactory(id,  device_info){
             }
         }
 
+        onSetScene(dev_id, scene_item) {
+            if ( dev_id === id ) {
+                this.doCommand('set-scene', scene_item);
+                this.setState({'loading':true});
+            }
+        }
+
         onVisible(location) {
             this.setState({visible: false});
-            if ( location === id) {
+            if ( location === this.state.location) {
                 this.setState({visible: true});
             }
         }

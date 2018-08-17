@@ -30,7 +30,7 @@ const styles = theme => ({
 class LightManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        this.store = LightStoreFactory(props.id, props.device_state);
+        this.store = LightStoreFactory(props.id, props.device_state, props.location, props.group_id);
     }
 
     render () {

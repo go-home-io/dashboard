@@ -1,26 +1,24 @@
 import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from "@material-ui/core/Button/Button";
-import Grid from "@material-ui/core/Grid/Grid";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import Icon from "@material-ui/core/Icon/Icon";
-
+import lightActions from '../../reflux/lightActions';
 
 const ITEM_HEIGHT = 60;
 
 class Scenes extends React.Component {
     state = {
         anchorEl: null,
+        dev_id: this.props.dev_id,
     };
 
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
 
-    handleClose = () => {
+    handleClose = (option) => {
+        lightActions.setScene(this.state.dev_id, option);
         this.setState({ anchorEl: null });
     };
 
@@ -44,6 +42,7 @@ class Scenes extends React.Component {
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
+                    value = {this.state.selectedItem}
                     PaperProps={{
                         style: {
                             maxHeight: ITEM_HEIGHT * 4.0,
@@ -52,7 +51,8 @@ class Scenes extends React.Component {
                     }}
                 >
                     {options.map(option => (
-                        <MenuItem key={option} selected={option === 0} onClick={this.handleClose}>
+                        <MenuItem key={option} selected={option === 0}
+                                  onClick={this.handleClose.bind(this, option)}>
                             {option}
                         </MenuItem>
                     ))}

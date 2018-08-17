@@ -13,13 +13,10 @@ class Location extends Component {
         const location = this.props.location.name;
         const devices = this.props.location.devices;
         const generalState = this.props.generalState;
-        // function deviceType(dev_id)  {
-        //     return getDeviceState(dev_id, generalState.devices).type
-        // }
 
         return (
-                 <Grid container alignContent='center'>
-                     {   devices.map(function (device) {
+                 <Grid container>
+                     {   devices.map( (device) => {
                          const deviceType = getDeviceState(device, generalState.devices).type;
                          return(
                                  deviceType === 'group' ?
@@ -28,8 +25,7 @@ class Location extends Component {
                                              device = {device}
                                              generalState = {generalState}
                                              key = {'gm'+device}
-
-                                        /> :
+                                     /> :
                                      deviceType === 'light' ?
                                         <LightManager
                                              location = {location}
@@ -37,7 +33,6 @@ class Location extends Component {
                                              key = {'lm'+device}
                                              device_state = {getDeviceState(device, generalState.devices)}
                                         /> : null
-
                          )
                          })
                      }
