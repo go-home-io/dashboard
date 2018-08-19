@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import NewColorPicker from "./NewColorPicker";
 import Scenes from "./Scenes";
+import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
         root: {
@@ -48,7 +49,6 @@ class LightManager extends Reflux.Component{
                      <LightHeader dev_id={this.props.id}
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
-                                  color = {color}
                      />
 
                      <CardContent>
@@ -63,7 +63,6 @@ class LightManager extends Reflux.Component{
 
                                          : null
                                  }
-
                                  { isColorControl ?
 
                                          <NewColorPicker dev_id={this.props.id}
@@ -71,7 +70,6 @@ class LightManager extends Reflux.Component{
                                                          loading={this.state.loading}
 
                                          />
-
                                          : null
                                  }
                                  { scenesExist ?

@@ -10,9 +10,10 @@ function RGBSlider(value, colorThumb, colorTrack, handleChange) {
             MuiSlider: {
                 // Name of the rule
                 root: {
-                    width:'100%',
+                    width:'90%',
                     padding:'3px 10px',
                     marginTop:8,
+                    marginLeft:3,
                 },
                 thumb : {
                     backgroundColor: colorThumb,

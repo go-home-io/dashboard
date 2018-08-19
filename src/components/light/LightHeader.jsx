@@ -52,15 +52,14 @@ class LightHeader extends Reflux.Component {
     render () {
         // Styles
         const {classes} = this.props;
-        const color = (this.props.color) ? rgbColor(this.props.color) :
-                         this.props.on ? 'gold' : rgbColor(100,100,100);
+        const color =  this.props.on ? 'orange' : '#3f51b5';
 
         return (
             <Paper className={classes.paper} elevation={0}>
                 <Grid container className={classes.root} >
 
                       <Grid item sm={10}>
-                         <Icon style={{color:color}}
+                         <Icon style={{color: color}}
                                className={classes.icon}
                                onClick={this.handleClick}
                          >

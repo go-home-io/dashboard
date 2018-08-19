@@ -52,25 +52,19 @@ class NewColorPicker extends Reflux.Component {
     render () {
         const {classes} = this.props;
         const color = rgbColor(this.props.color);
+        // console.log(color);
 
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         return (
             this.props.loading ? null :
                 <Grid container  className={classes.root}>
-                       {/*style={{marginTop:this.props.marginTop}}>*/}
                     <div className={classes.text} onClick={this.handleClick}>
                         Color:
                         <div className={classes.box}
                              style={{backgroundColor:color}}>
                         </div>
                     </div>
-                    {/*<IconButton style={{ width:25, height:25}}*/}
-                                {/*className={classes.button}*/}
-                                {/*onClick={this.handleClick}*/}
-                    {/*>*/}
-                        {/*<ExpandMore style={{color:'grey'}}/>*/}
-                    {/*</IconButton>*/}
                     <Popover
                         id="simple-popper"
                         open={open}
