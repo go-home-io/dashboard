@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Scenes from "./Scenes";
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
+import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
     paper: {
@@ -51,19 +52,19 @@ class LightHeader extends Reflux.Component {
     render () {
         // Styles
         const {classes} = this.props;
-        const color = (this.props.on) ? 'secondary' : 'primary';
-        const scenesExist = (this.props.scenes != null);
+        const color = (this.props.color) ? rgbColor(this.props.color) :
+                         this.props.on ? 'gold' : rgbColor(100,100,100);
 
         return (
             <Paper className={classes.paper} elevation={0}>
                 <Grid container className={classes.root} >
 
                       <Grid item sm={10}>
-                         <Icon color={color}
+                         <Icon style={{color:color}}
                                className={classes.icon}
                                onClick={this.handleClick}
                          >
-                             wb_sunny
+                             <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
                          </Icon>
 
                          <Typography variant="subheading"
@@ -73,13 +74,6 @@ class LightHeader extends Reflux.Component {
 
                             {this.props.name}
                          </Typography>
-                      </Grid>
-                      <Grid item sm={2}>
-                        {/*{ scenesExist ?*/}
-                            {/*<Scenes  dev_id={this.props.dev_id}*/}
-                                     {/*scenes={this.props.scenes}*/}
-                            {/*/> : null*/}
-                        {/*}*/}
                       </Grid>
 
                  </Grid>

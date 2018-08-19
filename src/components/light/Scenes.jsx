@@ -53,6 +53,7 @@ class Scenes extends React.Component {
         const { anchorEl } = this.state;
 
         return (
+            this.props.loading ? null :
             <Grid container className={classes.root}>
 
                 <div id="label" className={classes.text} onClick={this.handleClick}>

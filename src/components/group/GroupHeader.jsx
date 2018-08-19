@@ -39,7 +39,7 @@ class GroupHeader extends React.Component{
 
         return (
 
-               <Paper className={classes.root} elevation={3}>
+               <Paper className={classes.root} elevation={0}>
                    <Grid container
                          className={classes.grid}
                          onClick = {this.handleClick}
@@ -47,8 +47,10 @@ class GroupHeader extends React.Component{
                     <Icon color={color}
                           className={classes.icon}
                     >
-                        wb_sunny
+                        <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
                     </Icon>
+                    <div></div>
+
 
                     <Typography variant="subheading"
                                 className={classes.typography}

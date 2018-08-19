@@ -14,8 +14,8 @@ import Scenes from "./Scenes";
 
 const styles = theme => ({
         root: {
-            minWidth:300,
-            maxWidth:330,
+            minWidth:290,
+            maxWidth:300,
             marginRight:7,
             marginTop:5,
             marginBottom:5,
@@ -48,6 +48,7 @@ class LightManager extends Reflux.Component{
                      <LightHeader dev_id={this.props.id}
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
+                                  color = {color}
                      />
 
                      <CardContent>
@@ -76,6 +77,7 @@ class LightManager extends Reflux.Component{
                                  { scenesExist ?
                                      <Scenes  dev_id={this.props.id}
                                               scenes={scenes}
+                                              loading={this.state.loading}
                                      /> : null
                                  }
 

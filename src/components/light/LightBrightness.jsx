@@ -47,36 +47,28 @@ class LightBrightness extends Reflux.Component {
         return (
             this.props.loading ? null :
             <Grid container className={classes.root} >
-                <div id="label" className={classes.text} onClick={this.handleClick}>
-                    Brightness: {this.props.level}%
-                </div>
-                {/*<IconButton style={{ width:25, height:25}}*/}
-                            {/*className={classes.button}*/}
-                            {/*aria-label="More"*/}
-                            {/*aria-haspopup="true"*/}
-                            {/*onClick={this.handleClick}*/}
-                {/*>*/}
-                    {/*<ExpandMore style={{color:'grey'}}/>*/}
-                {/*</IconButton>*/}
-                <Popover
-                    id="simple-popper"
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={this.handleClose}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                >
+                 <div id="label" className={classes.text} onClick={this.handleClick}>
+                     Brightness: {this.props.level}%
+                 </div>
+                 <Popover
+                     id="simple-popper"
+                     open={open}
+                     anchorEl={anchorEl}
+                     onClose={this.handleClose}
+                     anchorOrigin={{
+                         vertical: 'top',
+                         horizontal: 'left',
+                     }}
+                     transformOrigin={{
+                         vertical: 'top',
+                         horizontal: 'left',
+                     }}
+                 >
 
-                    <BrightnessSlider level={this.props.level}
-                                      close = {this.handleClose.bind(this)}
-                                      dev_id = {this.props.dev_id}  />
-                </Popover>
+                     <BrightnessSlider level={this.props.level}
+                                       close = {this.handleClose.bind(this)}
+                                       dev_id = {this.props.dev_id}  />
+                 </Popover>
 
 
             </Grid>
