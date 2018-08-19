@@ -3,20 +3,14 @@ import Reflux from 'reflux'
 import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid/Grid";
-import Collapse from "@material-ui/core/Collapse/Collapse";
 import ColorSliders from "./ColorSliders";
-import lightActions from "../../reflux/lightActions";
-import LightStoreFactory from "../../reflux/LightStore";
 import Popover from "@material-ui/core/Popover/Popover";
-import Button from "@material-ui/core/Button/Button";
 import rgbColor from "../utils/rgbColor";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import ExpandMore from "@material-ui/icons/ExpandMore";
 
 const styles = theme => ({
     root : {
-        marginTop: 10,
         width:'100%',
+        marginTop: 2,
         // cursor: 'pointer',
     },
     box: {
@@ -35,13 +29,7 @@ const styles = theme => ({
         fontColor:'lightgray',
         cursor: 'pointer',
     },
-    // button: {
-    //     position: 'relative',
-    //     top: 1,
-    //     left: 10,
-    // },
-
-});
+  });
 
 
 class NewColorPicker extends Reflux.Component {
@@ -69,7 +57,8 @@ class NewColorPicker extends Reflux.Component {
         const open = Boolean(anchorEl);
         return (
             this.props.loading ? null :
-                <Grid container className={classes.root} >
+                <Grid container  className={classes.root}>
+                       {/*style={{marginTop:this.props.marginTop}}>*/}
                     <div className={classes.text} onClick={this.handleClick}>
                         Color:
                         <div className={classes.box}

@@ -12,7 +12,6 @@ class StartPage extends Component {
             generalState:{},
             authenticated: false,
         };
-
         this.getComponentStateByHTTP();
     }
 

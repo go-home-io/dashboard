@@ -40,6 +40,7 @@ class LightManager extends Reflux.Component{
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
 
+
         return (
                 ! (lightType) ? null :
                  <Card style={{display:display}} className={classes.root}>
@@ -53,18 +54,23 @@ class LightManager extends Reflux.Component{
                          <Grid container justify='center'>
 
                                  {isBrightnessControl ?
+
                                          <LightBrightness dev_id={this.props.id}
                                                           level={this.state.device_state.brightness}
                                                           loading={this.state.loading}
                                          />
+
                                          : null
                                  }
 
                                  { isColorControl ?
+
                                          <NewColorPicker dev_id={this.props.id}
                                                          color={color}
                                                          loading={this.state.loading}
+
                                          />
+
                                          : null
                                  }
                                  { scenesExist ?

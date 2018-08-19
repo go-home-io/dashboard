@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import RGBSlider from "./RGBSlider";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import rgbColor from "../utils/rgbColor";
 import Grid from "@material-ui/core/Grid/Grid";
 import SlidersHeader from "./SlidersHeader";
 import lightActions from "../../reflux/lightActions";
@@ -13,7 +11,7 @@ const styles = theme => ({
     root : {
         marginTop:0,
         width:250,
-        height:120,
+        height:110,
         cursor: 'default',
     },
     color: {

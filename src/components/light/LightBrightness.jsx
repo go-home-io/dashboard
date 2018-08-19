@@ -3,15 +3,13 @@ import Reflux from 'reflux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid/Grid";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Popover from "@material-ui/core/Popover/Popover";
 import BrightnessSlider from "./BrightnessSlider";
 
 const styles = theme => ( {
     root: {
         width: '100%',
-        marginTop: -5,
+        marginTop: 0,
     },
     text: {
         fontSize:12,
@@ -19,11 +17,7 @@ const styles = theme => ( {
         fontColor:'lightgray',
         cursor:'pointer',
     },
-    // button: {
-    //     position: 'relative',
-    //     top: -5,
-    //     left: 10,
-    // },
+
 });
 
 class LightBrightness extends Reflux.Component {
@@ -37,10 +31,6 @@ class LightBrightness extends Reflux.Component {
         });
     };
 
-    // handleChange = (event, value) => {
-    //     const level = Math.round(value);
-    //     lightActions.setBrightness(this.props.dev_id, this.state.value);
-    // };
 
     handleClose = () => {
         this.setState({
