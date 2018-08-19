@@ -19,6 +19,7 @@ const styles = theme => ( {
         fontSize:12,
         letterSpacing:1,
         fontColor:'lightgray',
+        cursor:'pointer',
     },
     button: {
         position: 'relative',
@@ -54,18 +55,18 @@ class Scenes extends React.Component {
         return (
             <Grid container className={classes.root}>
 
-                <div id="label" className={classes.text}>
+                <div id="label" className={classes.text} onClick={this.handleClick}>
                     Scenes
                 </div>
-                <IconButton style={{ width:25, height:25}}
-                            className={classes.button}
-                            aria-label="More"
-                            aria-owns={anchorEl ? 'long-menu' : null}
-                            aria-haspopup="true"
-                            onClick={this.handleClick}
-                >
-                    <ExpandMore style={{color:'grey'}}/>
-                </IconButton>
+                {/*<IconButton style={{ width:25, height:25}}*/}
+                            {/*className={classes.button}*/}
+                            {/*aria-label="More"*/}
+                            {/*aria-owns={anchorEl ? 'long-menu' : null}*/}
+                            {/*aria-haspopup="true"*/}
+                            {/*onClick={this.handleClick}*/}
+                {/*>*/}
+                    {/*<ExpandMore style={{color:'grey'}}/>*/}
+                {/*</IconButton>*/}
                 <Menu
                     id="long-menu"
                     anchorEl={anchorEl}

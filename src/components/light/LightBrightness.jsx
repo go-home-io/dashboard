@@ -1,32 +1,29 @@
 import React from 'react';
 import Reflux from 'reflux';
 import PropTypes from 'prop-types';
-import lightActions from '../../reflux/lightActions'
 import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid/Grid";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import Icon from "@material-ui/core/Icon/Icon";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Popover from "@material-ui/core/Popover/Popover";
-import ColorSliders from "./ColorSliders";
-import Slider from "@material-ui/lab/Slider/Slider";
 import BrightnessSlider from "./BrightnessSlider";
 
 const styles = theme => ( {
     root: {
         width: '100%',
-        marginTop: 0,
+        marginTop: -5,
     },
     text: {
         fontSize:12,
         letterSpacing:1,
         fontColor:'lightgray',
+        cursor:'pointer',
     },
-    button: {
-        position: 'relative',
-        top: -5,
-        left: 10,
-    },
+    // button: {
+    //     position: 'relative',
+    //     top: -5,
+    //     left: 10,
+    // },
 });
 
 class LightBrightness extends Reflux.Component {
@@ -60,17 +57,17 @@ class LightBrightness extends Reflux.Component {
         return (
             this.props.loading ? null :
             <Grid container className={classes.root} >
-                <div id="label" className={classes.text}>
+                <div id="label" className={classes.text} onClick={this.handleClick}>
                     Brightness: {this.props.level}%
                 </div>
-                <IconButton style={{ width:25, height:25}}
-                            className={classes.button}
-                            aria-label="More"
-                            aria-haspopup="true"
-                            onClick={this.handleClick}
-                >
-                    <ExpandMore style={{color:'grey'}}/>
-                </IconButton>
+                {/*<IconButton style={{ width:25, height:25}}*/}
+                            {/*className={classes.button}*/}
+                            {/*aria-label="More"*/}
+                            {/*aria-haspopup="true"*/}
+                            {/*onClick={this.handleClick}*/}
+                {/*>*/}
+                    {/*<ExpandMore style={{color:'grey'}}/>*/}
+                {/*</IconButton>*/}
                 <Popover
                     id="simple-popper"
                     open={open}

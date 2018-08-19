@@ -38,6 +38,7 @@ class LightManager extends Reflux.Component{
         const isColorControl = (this.state.device_state.color != null);
         const scenes = this.state.device_state.scenes;
         const scenesExist = (scenes != null);
+        const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
 
         return (
                 ! (lightType) ? null :
@@ -61,7 +62,7 @@ class LightManager extends Reflux.Component{
 
                                  { isColorControl ?
                                          <NewColorPicker dev_id={this.props.id}
-                                                         color={this.state.device_state.color}
+                                                         color={color}
                                                          loading={this.state.loading}
                                          />
                                          : null

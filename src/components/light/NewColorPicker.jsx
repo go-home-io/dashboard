@@ -15,7 +15,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 
 const styles = theme => ({
     root : {
-        marginTop:0,
+        marginTop: 10,
         width:'100%',
         // cursor: 'pointer',
     },
@@ -33,13 +33,13 @@ const styles = theme => ({
         fontSize:12,
         letterSpacing:1,
         fontColor:'lightgray',
-
+        cursor: 'pointer',
     },
-    button: {
-        position: 'relative',
-        top: 1,
-        left: 10,
-    },
+    // button: {
+    //     position: 'relative',
+    //     top: 1,
+    //     left: 10,
+    // },
 
 });
 
@@ -61,20 +61,6 @@ class NewColorPicker extends Reflux.Component {
         });
     };
 
-    // handleColorChange(color) {
-    //     let state = this.state;
-    //     state.color = color;
-    //     this.setState(state);
-    // }
-
-    // handleSetColor(color) {
-    //     // this.setState(state => ({ open: !state.open}));
-    //     lightActions.setColor(this.props.dev_id, this.state.color);
-    //     this.setState(state => ({ open: !state.open,
-    //         color:this.props.color }));
-    //
-    // }
-
     render () {
         const {classes} = this.props;
         const color = rgbColor(this.props.color);
@@ -84,18 +70,18 @@ class NewColorPicker extends Reflux.Component {
         return (
             this.props.loading ? null :
                 <Grid container className={classes.root} >
-                    <div className={classes.text}>
+                    <div className={classes.text} onClick={this.handleClick}>
                         Color:
                         <div className={classes.box}
                              style={{backgroundColor:color}}>
                         </div>
                     </div>
-                    <IconButton style={{ width:25, height:25}}
-                                className={classes.button}
-                                onClick={this.handleClick}
-                    >
-                        <ExpandMore style={{color:'grey'}}/>
-                    </IconButton>
+                    {/*<IconButton style={{ width:25, height:25}}*/}
+                                {/*className={classes.button}*/}
+                                {/*onClick={this.handleClick}*/}
+                    {/*>*/}
+                        {/*<ExpandMore style={{color:'grey'}}/>*/}
+                    {/*</IconButton>*/}
                     <Popover
                         id="simple-popper"
                         open={open}
