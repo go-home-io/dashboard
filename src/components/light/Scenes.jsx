@@ -4,8 +4,30 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import lightActions from '../../reflux/lightActions';
+import Grid from "@material-ui/core/Grid/Grid";
+import PropTypes from "prop-types";
+import { withStyles } from '@material-ui/core/styles';
 
 const ITEM_HEIGHT = 60;
+
+const styles = theme => ( {
+    root: {
+        width: '100%',
+        marginTop: 10,
+    },
+    text: {
+        fontSize:12,
+        letterSpacing:1,
+        fontColor:'lightgray',
+    },
+    button: {
+        position: 'relative',
+        top: -5,
+        left: 29,
+    },
+});
+
+
 
 class Scenes extends React.Component {
     state = {
@@ -25,19 +47,24 @@ class Scenes extends React.Component {
     };
 
     render() {
+        const {classes} = this.props;
         const options = this.props.scenes;
         const { anchorEl } = this.state;
 
         return (
-            <div>
+            <Grid container className={classes.root}>
+
+                <div id="label" className={classes.text}>
+                    Scenes
+                </div>
                 <IconButton style={{ width:25, height:25}}
-                    aria-label="More"
-                    aria-owns={anchorEl ? 'long-menu' : null}
-                    aria-haspopup="true"
-                    onClick={this.handleClick}
+                            className={classes.button}
+                            aria-label="More"
+                            aria-owns={anchorEl ? 'long-menu' : null}
+                            aria-haspopup="true"
+                            onClick={this.handleClick}
                 >
                     <ExpandMore style={{color:'grey'}}/>
-                    {/*<Icon style={{width:15, height:15, color:'lightgray'}}>settings</Icon>*/}
                 </IconButton>
                 <Menu
                     id="long-menu"
@@ -59,9 +86,13 @@ class Scenes extends React.Component {
                         </MenuItem>
                     ))}
                 </Menu>
-            </div>
+            </Grid>
         );
     }
 }
 
-export default Scenes;
+Scenes.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Scenes);

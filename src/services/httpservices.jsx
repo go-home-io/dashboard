@@ -1,13 +1,12 @@
-import base64 from 'base-64';
+// import base64 from 'base-64';
+import BASE_URL from '../settings/baseUrl'
 
-const baseUrl = 'http://localhost:8000';
 
 const service = {
     get:(url, user, password) => {
         // console.log(user+':'+password);
-        const credentials = 'Basic ' + base64.encode(user + ":" + password);
-        // alert(credentials);
-        return fetch(baseUrl+url, {
+        // const credentials = 'Basic ' + base64.encode(user + ":" + password);
+        return fetch(BASE_URL+url, {
             headers: {
                 // 'Authorization': credentials
             },
@@ -27,14 +26,14 @@ const service = {
             })
     },
     post:(url, data) => {
-        return fetch(baseUrl + url, {
+        return fetch(BASE_URL + url, {
             headers: {
                 'Accept': 'text/plain',
                 'Content-Type': 'application/json'
             },
             method: 'post',
             body: JSON.stringify(data)
-        }).then(function(response) {
+        }).then( (response) => {
             return response;
         });
     }

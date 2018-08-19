@@ -2,14 +2,15 @@ import React from 'react'
 import Reflux from 'reflux'
 import LightHeader from "./LightHeader";
 import LightStoreFactory from "../../reflux/LightStore";
-import LightColorPicker from "./LightColorPicker";
 import IconLoading from "./IconLoading";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from "@material-ui/core/Grid/Grid";
-import LevelSlider from "./LevelSlider";
+import LightBrightness from "./LightBrightness";
+import NewColorPicker from "./NewColorPicker";
+import Scenes from "./Scenes";
 
 const styles = theme => ({
         root: {
@@ -35,31 +36,42 @@ class LightManager extends Reflux.Component{
         const lightType = this.props.device_state.type === 'light';
         const isBrightnessControl = (this.state.device_state.brightness != null);
         const isColorControl = (this.state.device_state.color != null);
+        const scenes = this.state.device_state.scenes;
+        const scenesExist = (scenes != null);
 
         return (
                 ! (lightType) ? null :
                  <Card style={{display:display}} className={classes.root}>
 
                      <LightHeader dev_id={this.props.id}
-                                  scenes={this.state.device_state.scenes}
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
                      />
 
                      <CardContent>
-                         <Grid container>
-                             {isBrightnessControl ?
-                                 <LevelSlider dev_id={this.props.id}
-                                              level={this.state.device_state.brightness}
-                                              loading={this.state.loading}
-                                 /> : null
-                             }
-                             { isColorControl ?
-                                 <LightColorPicker dev_id={this.props.id}
-                                                   color={this.state.device_state.color}
-                                                   loading={this.state.loading}
-                                 /> : null
-                             }
+                         <Grid container justify='center'>
+
+                                 {isBrightnessControl ?
+                                         <LightBrightness dev_id={this.props.id}
+                                                          level={this.state.device_state.brightness}
+                                                          loading={this.state.loading}
+                                         />
+                                         : null
+                                 }
+
+                                 { isColorControl ?
+                                         <NewColorPicker dev_id={this.props.id}
+                                                         color={this.state.device_state.color}
+                                                         loading={this.state.loading}
+                                         />
+                                         : null
+                                 }
+                                 { scenesExist ?
+                                     <Scenes  dev_id={this.props.id}
+                                              scenes={scenes}
+                                     /> : null
+                                 }
+
                              <IconLoading loading = {this.state.loading}/>
                         </Grid>
                     </CardContent>

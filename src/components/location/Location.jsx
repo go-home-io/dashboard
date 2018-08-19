@@ -2,7 +2,7 @@ import LightManager from "../light/LightManager";
 import React, {Component} from "react";
 import Grid from "@material-ui/core/Grid/Grid";
 import GroupManager from "../group/GroupManager";
-import getDeviceState from '../getDeviceState';
+import getDeviceState from '../utils/getDeviceState';
 
 
 class Location extends Component {

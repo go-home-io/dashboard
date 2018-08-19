@@ -75,11 +75,11 @@ class LightHeader extends Reflux.Component {
                          </Typography>
                       </Grid>
                       <Grid item sm={2}>
-                        { scenesExist ?
-                            <Scenes  dev_id={this.props.dev_id}
-                                     scenes={this.props.scenes}
-                            /> : null
-                        }
+                        {/*{ scenesExist ?*/}
+                            {/*<Scenes  dev_id={this.props.dev_id}*/}
+                                     {/*scenes={this.props.scenes}*/}
+                            {/*/> : null*/}
+                        {/*}*/}
                       </Grid>
 
                  </Grid>

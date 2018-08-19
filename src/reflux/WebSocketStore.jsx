@@ -1,6 +1,7 @@
 import Reflux from 'reflux'
 import lightActions from "./lightActions";
 import wsActions from "./wsActions";
+import SOCKET_URL from '../settings/websocketUrl'
 
 class WebSocketStore extends Reflux.Store {
     constructor() {
@@ -8,7 +9,7 @@ class WebSocketStore extends Reflux.Store {
         this.state = {};
         this.listenables = wsActions;
 
-        this.socket = new WebSocket("ws://localhost:8000/websocket");
+        this.socket = new WebSocket(SOCKET_URL);
         this.socket.onmessage = this.onMessage;
         // this.socket.onopen = this.onOpen;
 

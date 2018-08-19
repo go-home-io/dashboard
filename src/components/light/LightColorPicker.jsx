@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
+import Reflux from 'reflux'
 import PropTypes from 'prop-types'
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid/Grid";
 import Collapse from "@material-ui/core/Collapse/Collapse";
 import ColorSliders from "./ColorSliders";
 import lightActions from "../../reflux/lightActions";
+import LightStoreFactory from "../../reflux/LightStore";
 
 const styles = theme => ({
     root : {
@@ -37,11 +39,10 @@ const styles = theme => ({
 });
 
 
-class LightColorPicker extends Component {
+class LightColorPicker extends Reflux.Component {
     state={ open:false,
-            color: this.props.color
+        color: this.props.color
     };
-
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
@@ -51,11 +52,14 @@ class LightColorPicker extends Component {
         let state = this.state;
         state.color = color;
         this.setState(state);
-          }
+    }
 
     handleSetColor(color) {
-        this.setState(state => ({ open: !state.open}));
+        // this.setState(state => ({ open: !state.open}));
         lightActions.setColor(this.props.dev_id, this.state.color);
+        this.setState(state => ({ open: !state.open,
+                                  color:this.props.color }));
+
     }
 
     handleClose() {
