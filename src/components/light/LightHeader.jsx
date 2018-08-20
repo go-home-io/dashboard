@@ -5,10 +5,8 @@ import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
-import Scenes from "./Scenes";
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
-import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
     paper: {
@@ -20,23 +18,31 @@ const styles = theme => ({
 
     },
     root: {
-
-        marginLeft: 10,
+        marginLeft: 0,
         marginTop:-7,
         marginBottom:0,
+        // overflow: 'hidden',
     },
     icon: {
         float:'left',
         cursor:'pointer',
+        marginLeft: 3,
     },
     typography: {
         float:'left',
-        marginLeft:10,
+        marginLeft:3,
         cursor:'pointer',
     },
-
 });
 
+function shortName(name) {
+     if ( name.length <= 22) {
+         return name
+     } else {
+         return name.substr(0,20) + '..'
+     }
+
+}
 
 class LightHeader extends Reflux.Component {
 
@@ -50,7 +56,6 @@ class LightHeader extends Reflux.Component {
     }
 
     render () {
-        // Styles
         const {classes} = this.props;
         const color =  this.props.on ? 'orange' : '#3f51b5';
 
@@ -58,22 +63,20 @@ class LightHeader extends Reflux.Component {
             <Paper className={classes.paper} elevation={0}>
                 <Grid container className={classes.root} >
 
-                      <Grid item sm={10}>
+
                          <Icon style={{color: color}}
                                className={classes.icon}
                                onClick={this.handleClick}
                          >
-                             <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
+                             <i className="fa fa-lightbulb-o" aria-hidden="true"> </i>
                          </Icon>
 
                          <Typography variant="subheading"
                                      className={classes.typography}
                                      onClick={this.handleClick}
                          >
-
-                            {this.props.name}
+                             {shortName(this.props.name)}
                          </Typography>
-                      </Grid>
 
                  </Grid>
             </Paper>

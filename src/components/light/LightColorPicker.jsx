@@ -1,17 +1,16 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Reflux from 'reflux'
 import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid/Grid";
-import Collapse from "@material-ui/core/Collapse/Collapse";
 import ColorSliders from "./ColorSliders";
-import lightActions from "../../reflux/lightActions";
-import LightStoreFactory from "../../reflux/LightStore";
+import Popover from "@material-ui/core/Popover/Popover";
+import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
     root : {
-        marginTop:0,
         width:'100%',
+        marginTop: 2,
         // cursor: 'pointer',
     },
     box: {
@@ -19,7 +18,7 @@ const styles = theme => ({
         border:'solid 1px #000',
         width:15,
         height:15,
-        marginLeft:10,
+        marginLeft:38,
         position:'relative',
         top:5,
         cursor: 'pointer',
@@ -30,70 +29,63 @@ const styles = theme => ({
         fontColor:'lightgray',
         cursor: 'pointer',
     },
-    // button: {
-    //     width:15,
-    //     height:15,
-    //     color:'gray',
-    //
-    // }
 });
 
 
 class LightColorPicker extends Reflux.Component {
-    state={ open:false,
-        color: this.props.color
+    state={
+            anchorEl: null
     };
 
-    handleClick = () => {
-        this.setState(state => ({ open: !state.open }));
+    handleClick = event => {
+        this.setState({
+            anchorEl: event.currentTarget,
+        });
     };
 
-    handleColorChange(color) {
-        let state = this.state;
-        state.color = color;
-        this.setState(state);
-    }
-
-    handleSetColor(color) {
-        // this.setState(state => ({ open: !state.open}));
-        lightActions.setColor(this.props.dev_id, this.state.color);
-        this.setState(state => ({ open: !state.open,
-                                  color:this.props.color }));
-
-    }
-
-    handleClose() {
-        this.setState(state => ({ open: !state.open,
-                                  color:this.props.color }));
-    }
+    handleClose = () => {
+        this.setState({
+            anchorEl: null,
+        });
+    };
 
     render () {
         const {classes} = this.props;
-        const color = 'rgb(' + this.state.color.r + ','
-                             + this.state.color.g + ','
-                             + this.state.color.b + ')';
+        const color = rgbColor(this.props.color);
+        // console.log(color);
 
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
         return (
-                 this.props.loading ? null :
-                    <Grid container
-                          className={classes.root}
+            this.props.loading ? null :
+                <Grid container  className={classes.root}>
+                    <div className={classes.text} onClick={this.handleClick}>
+                        Color:
+                        <div className={classes.box}
+                             style={{backgroundColor:color}}>
+                        </div>
+                    </div>
+                    <Popover
+                        id="simple-popper"
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={this.handleClose}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'left',
+                        }}
                     >
-                            <div className={classes.text} onClick={this.handleClick}>
-                                Color:
-                                <div className={classes.box}
-                                     style={{backgroundColor:color}}>
-                                </div>
-                            </div>
+                        <ColorSliders color={this.props.color}
+                                      dev_id = {this.props.dev_id}
+                                      close = {this.handleClose.bind(this)}
+                        />
 
-                        <Collapse in={this.state.open} className={classes.root} timeout="auto" unmountOnExit >
-                            <ColorSliders color={this.state.color}
-                                          close={this.handleClose.bind(this)}
-                                          setParentState={this.handleColorChange.bind(this)}
-                                          setColor={this.handleSetColor.bind(this)}
-                            />
-
-                        </Collapse>
-                    </Grid>
+                    </Popover>
+                </Grid>
         )
     }
 }

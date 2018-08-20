@@ -9,14 +9,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
-import NewColorPicker from "./NewColorPicker";
+import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
-import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
         root: {
-            minWidth:290,
-            maxWidth:300,
+            width:260,
+            // maxWidth:280,
             marginRight:7,
             marginTop:5,
             marginBottom:5,
@@ -40,7 +39,7 @@ class LightManager extends Reflux.Component{
         const scenes = this.state.device_state.scenes;
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
-
+        const rows = ~~isBrightnessControl + ~~isColorControl + ~~scenesExist;
 
         return (
                 ! (lightType) ? null :
@@ -50,27 +49,20 @@ class LightManager extends Reflux.Component{
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
                      />
-
                      <CardContent>
                          <Grid container justify='center'>
-
                                  {isBrightnessControl ?
-
                                          <LightBrightness dev_id={this.props.id}
                                                           level={this.state.device_state.brightness}
                                                           loading={this.state.loading}
-                                         />
-
-                                         : null
+                                         /> : null
                                  }
                                  { isColorControl ?
+                                         <LightColorPicker dev_id={this.props.id}
+                                                           color={color}
+                                                           loading={this.state.loading}
 
-                                         <NewColorPicker dev_id={this.props.id}
-                                                         color={color}
-                                                         loading={this.state.loading}
-
-                                         />
-                                         : null
+                                         /> : null
                                  }
                                  { scenesExist ?
                                      <Scenes  dev_id={this.props.id}
@@ -78,11 +70,10 @@ class LightManager extends Reflux.Component{
                                               loading={this.state.loading}
                                      /> : null
                                  }
-
-                             <IconLoading loading = {this.state.loading}/>
+                                 <IconLoading loading = {this.state.loading}
+                                              rows={rows} />
                         </Grid>
                     </CardContent>
-
                 </Card>
         )
      }

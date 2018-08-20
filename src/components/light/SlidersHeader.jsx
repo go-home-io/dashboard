@@ -1,8 +1,6 @@
 import React from 'react'
 import Grid from "@material-ui/core/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
-import rgbColor from "../utils/rgbColor";
-
 
 class SlidersHeader extends React.Component {
     render () {

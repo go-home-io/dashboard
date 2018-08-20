@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Grid from "@material-ui/core/Grid/Grid";
+
+const iconSize = [22, 35, 57];
 
 const styles = theme => ({
     progress: {
-        height: 20,
+        height: 50,
+        widths: 50,
+
     },
 });
 
@@ -14,17 +17,10 @@ class IconLoading extends React.Component {
 
    render () {
        const {classes} = this.props;
-
+       const size = iconSize[this.props.rows-1];
        return (
            this.props.loading ?
-               <Grid
-                   container
-                   justify={'center'}
-                   alignItems={'center'}>
-
-                   <CircularProgress className={classes.progress} size={65}/>
-
-               </Grid>
+            <CircularProgress className={classes.progress} size={size}/>
              : null
        )
    }

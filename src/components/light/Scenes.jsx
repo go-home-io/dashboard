@@ -1,8 +1,6 @@
 import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import ExpandMore from "@material-ui/icons/ExpandMore";
 import lightActions from '../../reflux/lightActions';
 import Grid from "@material-ui/core/Grid/Grid";
 import PropTypes from "prop-types";
@@ -59,15 +57,6 @@ class Scenes extends React.Component {
                 <div id="label" className={classes.text} onClick={this.handleClick}>
                     Scenes
                 </div>
-                {/*<IconButton style={{ width:25, height:25}}*/}
-                            {/*className={classes.button}*/}
-                            {/*aria-label="More"*/}
-                            {/*aria-owns={anchorEl ? 'long-menu' : null}*/}
-                            {/*aria-haspopup="true"*/}
-                            {/*onClick={this.handleClick}*/}
-                {/*>*/}
-                    {/*<ExpandMore style={{color:'grey'}}/>*/}
-                {/*</IconButton>*/}
                 <Menu
                     id="long-menu"
                     anchorEl={anchorEl}
