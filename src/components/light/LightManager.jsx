@@ -14,8 +14,9 @@ import Scenes from "./Scenes";
 
 const styles = theme => ({
         root: {
-            width:260,
-            // maxWidth:280,
+            maxWidth:260,
+            minWidth:260,
+            minHeight:120,
             marginRight:7,
             marginTop:5,
             marginBottom:5,
@@ -39,7 +40,6 @@ class LightManager extends Reflux.Component{
         const scenes = this.state.device_state.scenes;
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
-        const rows = ~~isBrightnessControl + ~~isColorControl + ~~scenesExist;
 
         return (
                 ! (lightType) ? null :
@@ -48,6 +48,7 @@ class LightManager extends Reflux.Component{
                      <LightHeader dev_id={this.props.id}
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
+                                  status = {this.state.status}
                      />
                      <CardContent>
                          <Grid container justify='center'>
@@ -70,8 +71,9 @@ class LightManager extends Reflux.Component{
                                               loading={this.state.loading}
                                      /> : null
                                  }
-                                 <IconLoading loading = {this.state.loading}
-                                              rows={rows} />
+                                 <IconLoading dev_id={this.props.id}
+                                              loading = {this.state.loading}
+                                 />
                         </Grid>
                     </CardContent>
                 </Card>

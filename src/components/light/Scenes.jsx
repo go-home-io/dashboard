@@ -55,7 +55,7 @@ class Scenes extends React.Component {
             <Grid container className={classes.root}>
 
                 <div id="label" className={classes.text} onClick={this.handleClick}>
-                    Scenes
+                    Set scene
                 </div>
                 <Menu
                     id="long-menu"

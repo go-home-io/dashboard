@@ -1,22 +1,20 @@
 import Reflux from 'reflux'
 import wsActions from "./wsActions";
+import lightActions from "./lightActions";
+import locationActions from "./locationActions";
 
 //  Create unique Store for each Component
-function LocationStoreFactory(id,  members){
-
-    // const visible = (id === "cabinet");
+function LocationStoreFactory(name,  members){
 
     class LocationStore extends Reflux.Store {
 
         constructor() {
             super();
 
-            this.state = { name:id,
+            this.state = { name:name,
                            members: members,
-                           visible: true,
-            };
-
-            // this.listenables = locationActions;
+                         };
+            this.listenables = locationActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
@@ -26,7 +24,7 @@ function LocationStoreFactory(id,  members){
 
         // WebSocket messenger
         doCommand(command, value) {
-            const mess = {id:id, cmd:command,value: value};
+            const mess = {id:name, cmd:command,value: value};
 
             this.setState({'loading':true});
             wsActions.doCommand(mess);
@@ -34,8 +32,7 @@ function LocationStoreFactory(id,  members){
 
         // WebSocket listener
         onMessage (data) {
-            if (data.id === id) {
-                // console.log(data);
+            if (data.id === name) {
                 let state = this.state.device_state;
                 state = data.state;
                 this.setState({device_state: state,'loading':false});
@@ -43,17 +40,18 @@ function LocationStoreFactory(id,  members){
         }
 
         // Actions
-
         onVisible(location) {
-            this.setState({visible: false});
-            if ( location === this.state.location) {
-                this.setState({visible: true});
+            if (location === name) {
+                // this.state.members.map( member => {
+                    // console.log('Location store: '+member);
+                    lightActions.visible(name);
+                // })
             }
         }
     }
 
-    LocationStore.id = id;
-    return LocationStore
+    LocationStore.id = name;
+    return LocationStore;
 }
 
 export default LocationStoreFactory

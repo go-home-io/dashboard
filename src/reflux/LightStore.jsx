@@ -5,8 +5,13 @@ import wsActions from "./wsActions";
 //  Create unique Store for each Component
 function LightStoreFactory(id,  device_info, location, group){
 
-    const visible = true;
 
+    const visible = true;
+        // (location === 'Default');
+    // console.log('store dev_id:'+id+' | location: '+location+' | group: '+ group);
+    // console.log(device_info);
+
+    // alert('Stop');
     class LightStore extends Reflux.Store {
 
         constructor() {
@@ -22,6 +27,7 @@ function LightStoreFactory(id,  device_info, location, group){
                            location: location,
                            loading:false,
                            visible: visible,
+                           status:'normal',
             };
 
             this.listenables = lightActions;
@@ -41,7 +47,6 @@ function LightStoreFactory(id,  device_info, location, group){
         // WebSocket messenger
         doCommand(command, value) {
             const mess = {id:id, cmd:command,value: value};
-
             this.setState({'loading':true});
             wsActions.doCommand(mess);
         }
@@ -49,10 +54,11 @@ function LightStoreFactory(id,  device_info, location, group){
        // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
-                // console.log(data);
-                let state = this.state.device_state;
-                state = data.state;
-                this.setState({device_state: state,'loading':false});
+                // let state = this.state.device_state;
+                let state = data.state;
+                this.setState({device_state: state,
+                               loading:false,
+                               status:'success'});
             }
         }
 
@@ -101,10 +107,22 @@ function LightStoreFactory(id,  device_info, location, group){
 
         onVisible(location) {
             this.setState({visible: false});
-            if ( location === this.state.location) {
+            if (this.state.location === location) {
                 this.setState({visible: true});
             }
         }
+
+        onStatus(dev_id, status) {
+            if ( dev_id === id ) {
+                this.setState({status:status});
+                if (status === 'error') {
+                    this.setState({loading:false});
+                }
+            }
+        }
+
+
+
   }
 
     LightStore.id = id;

@@ -28,22 +28,28 @@ class GroupManager  extends React.Component {
         const this_group_members = this.members(this.props.device, this.props.generalState.groups);
         const devStates = this.props.generalState.devices;
         const devName = getDeviceState(this.props.device, devStates).name;
+        const group_id = this.props.device;
         const isGroup = getDeviceState(this.props.device, devStates).type === 'group';
+        const location = this.props.location;
+
+        // console.log('members:' + this_group_members);
+        //
+        // alert ("Location:"+location+' Group:'+group_id);
 
         return (
              !isGroup ? null :
                     <Grid className={classes.root} style={{display:'block'}}>
-
                        <GroupHeader title = {devName}  />
-
-                        <Grid container>
+                        <Grid container justify='center'>
                         {this_group_members.map(function (dev_id) {
+                            const device_state = getDeviceState(dev_id, devStates);
                             return (
                                 <LightManager
                                     key={dev_id}
                                     id={dev_id}
-                                    group_id = {dev_id}
-                                    device_state = {getDeviceState(dev_id, devStates)}
+                                    device_state = {device_state}
+                                    location = {location}
+                                    group_id = {group_id}
                                 />
                             )
                         })}

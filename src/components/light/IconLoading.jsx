@@ -1,27 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearWaitingProgress from "./LinearWaitingProgress";
 
-const iconSize = [22, 35, 57];
+// const margins = [8, 35, 57];
 
 const styles = theme => ({
-    progress: {
-        height: 50,
-        widths: 50,
-
-    },
+    timer: {
+        width:'100%',
+        marginTop:15,
+        // height: ,
+    }
 });
 
 class IconLoading extends React.Component {
 
    render () {
        const {classes} = this.props;
-       const size = iconSize[this.props.rows-1];
        return (
            this.props.loading ?
-            <CircularProgress className={classes.progress} size={size}/>
-             : null
+               <div className={classes.timer}>
+                     <LinearWaitingProgress time={3000}
+                                            dev_id ={this.props.dev_id} />
+               </div>  : null
        )
    }
 }

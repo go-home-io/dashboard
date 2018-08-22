@@ -11,8 +11,6 @@ class Location extends Reflux.Component {
         super(props);
 
         this.store = LocationStoreFactory(props.location.name, props.location.devices);
-        // props.location.devices);
-        // alert(props.location.name+' : '+props.location.devices);
     }
 
     render () {
@@ -26,33 +24,26 @@ class Location extends Reflux.Component {
                  <Grid container>
                      { devices.map( (device, index) => {
                          const deviceType = getDeviceState(device, generalState.devices).type;
-                         const display = this.state.visible ? 'block' : 'none';
-
 
                          return(
                                  deviceType === 'group' ?
-                                    <div style={{display:display}} key = {device}>
                                          <GroupManager
+                                                 key = {device}
                                                  location = {location}
                                                  device = {device}
                                                  generalState = {generalState}
-                                                 key = {device}
-                                         />
-                                    </div>   :
-                                     deviceType === 'light' ?
 
-                                            <LightManager
-                                                 location = {location}
-                                                 id = {device}
-                                                 key = {device}
-                                                 device_state = {getDeviceState(device, generalState.devices)}
-                                            />
-
-                                              : null
+                                         /> :
+                                 deviceType === 'light' ?
+                                        <LightManager
+                                             key = {device}
+                                             location = {location}
+                                             id = {device}
+                                             device_state = {getDeviceState(device, generalState.devices)}
+                                        />  : null
                          )})
                      }
                  </Grid>
-
         )
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from "@material-ui/core/Icon/Icon";
-import lightActions from "../../reflux/lightActions";
+import locationActions from "../../reflux/locationActions";
 
 
 class ListItemActionWrapper extends React.Component {
@@ -12,7 +12,7 @@ class ListItemActionWrapper extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick () {
-        lightActions.visible(this.props.location);
+        locationActions.visible(this.props.location);
     }
 
     render () {
