@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import LeftSideNav from "../components/SideBar/LeftSideNav";
 import WebSocketStore from "../reflux/WebSocketStore";
 import Location from "../components/location/Location";
+import Notification from "../components/notification/Notification";
 
 
 class HomePage extends Reflux.Component {
@@ -23,11 +24,11 @@ class HomePage extends Reflux.Component {
                     <NavBar/>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={3} lg={2}>
+                <Grid item  sm={12} md={3} lg={2}>
                     <LeftSideNav locations={this.props.generalState.locations}/>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={9} lg={10} >
+                <Grid item  sm={12} md={9} lg={10} >
 
                     {this.props.generalState.locations.map(function (location) {
                         return (
@@ -36,12 +37,9 @@ class HomePage extends Reflux.Component {
                                         generalState = {generalState}/>
                         )
                     })}
-                    <Grid item xs={12} sm={4} md={2} lg={2}>
-
-                    </Grid>
 
                 </Grid>
-
+                <Notification/>
             </Grid>
 
         )

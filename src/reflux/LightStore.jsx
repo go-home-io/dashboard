@@ -1,6 +1,7 @@
 import Reflux from 'reflux'
 import lightActions from './lightActions'
 import wsActions from "./wsActions";
+import notificationActions from "./notificationActions";
 
 //  Create unique Store for each Component
 function LightStoreFactory(id,  device_info, location, group){
@@ -117,6 +118,7 @@ function LightStoreFactory(id,  device_info, location, group){
                 this.setState({status:status});
                 if (status === 'error') {
                     this.setState({loading:false});
+                    notificationActions.notification('The server does not respond, the command is not complete');
                 }
             }
         }

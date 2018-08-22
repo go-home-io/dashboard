@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
+import SnackBar from "../notification/Notification";
 
 const styles = theme => ({
         root: {
@@ -40,6 +41,7 @@ class LightManager extends Reflux.Component{
         const scenes = this.state.device_state.scenes;
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
+        const snackOpen = (this.state.status === 'error');
 
         return (
                 ! (lightType) ? null :
@@ -74,6 +76,7 @@ class LightManager extends Reflux.Component{
                                  <IconLoading dev_id={this.props.id}
                                               loading = {this.state.loading}
                                  />
+
                         </Grid>
                     </CardContent>
                 </Card>
