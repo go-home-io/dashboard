@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from "@material-ui/core/Button/Button";
-import NavBar from "../views/NavBar";
+import NavBar from "./NavBar";
 
 
 class Login extends React.Component {

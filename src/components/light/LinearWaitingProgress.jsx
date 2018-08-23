@@ -25,15 +25,18 @@ class LinearWaitingProgress extends React.Component {
         clearInterval(this.timer);
     }
 
+    onComplete () {
+        clearInterval(this.timer);
+        this.setState({ completed: 0 });
+        lightActions.status(this.props.dev_id, 'error');
+    }
+
     progress = () => {
         const { completed } = this.state;
         const diff = 2;
 
         if (completed === 100) {
-            clearInterval(this.timer);
-
-            this.setState({ completed: 0 });
-            lightActions.status(this.props.dev_id, 'error');
+                setTimeout(this.onComplete.bind(this), 300)
         } else {
             this.setState({ completed: completed + diff });
         }

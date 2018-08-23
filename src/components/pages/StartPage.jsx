@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import HomePage from "./HomePage";
-import HTTP from "../services/httpservices";
-import Login from "../components/Login";
+import HTTP from "../../services/httpservices";
+import Login from "./Login";
 
 const url = '/state';
 

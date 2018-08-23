@@ -1,5 +1,5 @@
 // import base64 from 'base-64';
-import BASE_URL from '../settings/baseUrl'
+import {BASE_URL} from '../settings/urls';
 
 
 const service = {

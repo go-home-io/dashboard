@@ -8,6 +8,11 @@ import PropTypes from 'prop-types'
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
 import rgbColor from "../utils/rgbColor";
+import {HEADER_HIGHLIGHT_DURATION} from '../../settings/delays';
+
+const normal = '#e8e7e836';
+const success = '#d2fad9';
+const error = '#f44336';
 
 const styles = theme => ({
     paper: {
@@ -15,7 +20,7 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         height: 10,
-        backgroundColor:'#e8e7e836',
+        backgroundColor:normal,
     },
     root: {
         marginLeft: 0,
@@ -34,19 +39,15 @@ const styles = theme => ({
     },
 });
 
-const success = '#d2fad9';
-const error = '#f44336';
-
-function shortName(name) {
-     if ( name.length <= 22) {
+function truncateName(name) {
+     if ( name.length <= 19) {
          return name
      } else {
-         return name.substr(0,20) + '..'
+         return name.substr(0,17) + '..'
      }
 }
 
-
-class LightHeader extends Reflux.Component {
+class LightHeader extends React.Component {
      timer = null;
 
      constructor(props) {
@@ -64,7 +65,7 @@ class LightHeader extends Reflux.Component {
         }
         if (bgColor) {
             clearInterval(this.timer);
-            this.timer = setInterval(this.setStatus, 2000);
+            this.timer = setInterval(this.setStatus, HEADER_HIGHLIGHT_DURATION);
             return bgColor;
         }
     }
@@ -74,11 +75,8 @@ class LightHeader extends Reflux.Component {
     }
 
     setStatus() {
-        // clearInterval(this.timer);
         lightActions.status(this.props.dev_id, 'normal');
     }
-
-
 
     render () {
         const {classes} = this.props;
@@ -100,13 +98,11 @@ class LightHeader extends Reflux.Component {
                                      className={classes.typography}
                                      onClick={this.handleClick}
                          >
-                             {shortName(this.props.name)}
+                             {truncateName(this.props.name)}
                          </Typography>
 
                  </Grid>
             </Paper>
-
-
         )
     }
 }

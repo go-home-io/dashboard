@@ -1,5 +1,4 @@
 import React from 'react'
-import Reflux from 'reflux'
 import PropTypes from 'prop-types'
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid/Grid";
@@ -32,7 +31,7 @@ const styles = theme => ({
 });
 
 
-class LightColorPicker extends Reflux.Component {
+class LightColorPicker extends React.Component {
     state={
             anchorEl: null
     };

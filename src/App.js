@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import HomePage from "./views/HomePage";
+import HomePage from "./components/pages/HomePage";
 
 
 class App extends Component {

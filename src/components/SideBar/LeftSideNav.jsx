@@ -13,7 +13,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import ListItemActionWrapper from "./ListItemActionWrapper";
-import location from '../location/locations'
+// import location from '../location/locations'
 
 const styles = theme => ({
     root: {
@@ -26,7 +26,12 @@ const styles = theme => ({
 });
 
 class LeftSideNav extends React.Component {
-    state = { open: false };
+   constructor(props) {
+       super(props);
+       this.state = { open: false,
+                      location: props.location};
+   }
+
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
@@ -34,6 +39,8 @@ class LeftSideNav extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const locations = this.props.locations;
+        // console.log(locations);
 
         return (
             <div className={classes.root}>
@@ -62,17 +69,17 @@ class LeftSideNav extends React.Component {
                         {this.state.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
 
-                    <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                        <List component="nav" disablePadding >
-                            {location.map(function (item) {
+                    <Collapse in={this.state.open} timeout="auto" unmountOnExit >
+                        <List component="nav"  disablePadding >
 
-                                    return (
+                            {locations.map( item => {
+                                  return (
                                         <ListItemActionWrapper classes={classes.nested}
-                                                               location={item.room}
+                                                               location={item.name}
                                                                icon={item.icon}
                                                                key={'liAW'+Math.floor(Math.random()*10000)}>
                                         </ListItemActionWrapper>
-                                    )
+                                  )
                               })
                             }
                         </List>

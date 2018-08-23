@@ -20,7 +20,7 @@ const styles = theme => ( {
 
 });
 
-class LightBrightness extends Reflux.Component {
+class LightBrightness extends React.Component {
     state={
         anchorEl: null
     };

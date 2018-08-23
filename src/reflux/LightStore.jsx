@@ -6,15 +6,10 @@ import notificationActions from "./notificationActions";
 //  Create unique Store for each Component
 function LightStoreFactory(id,  device_info, location, group){
 
-
     const visible = true;
-        // (location === 'Default');
-    // console.log('store dev_id:'+id+' | location: '+location+' | group: '+ group);
-    // console.log(device_info);
+    let count = 0;
 
-    // alert('Stop');
     class LightStore extends Reflux.Store {
-
         constructor() {
             super();
 
@@ -60,6 +55,7 @@ function LightStoreFactory(id,  device_info, location, group){
                 this.setState({device_state: state,
                                loading:false,
                                status:'success'});
+
             }
         }
 
@@ -118,7 +114,7 @@ function LightStoreFactory(id,  device_info, location, group){
                 this.setState({status:status});
                 if (status === 'error') {
                     this.setState({loading:false});
-                    notificationActions.notification('The server does not respond, the command is not complete');
+                        notificationActions.notification('The server does not respond, the command is not complete');
                 }
             }
         }

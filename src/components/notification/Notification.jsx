@@ -36,7 +36,7 @@ class Notification extends Reflux.Component {
                 <Snackbar
                     anchorOrigin={{
                         vertical: "top",
-                        horizontal: "left"
+                        horizontal: "right"
                     }}
                     open={this.state.open}
                     autoHideDuration={6000}
@@ -46,14 +46,7 @@ class Notification extends Reflux.Component {
                     }}
                     message={<span id="message-id">{this.state.message}</span>}
                     action={[
-                        <Button
-                            key="undo"
-                            color="secondary"
-                            size="small"
-                            onClick={this.handleClose}
-                        >
-                            UNDO
-                        </Button>,
+
                         <IconButton
                             key="close"
                             aria-label="Close"

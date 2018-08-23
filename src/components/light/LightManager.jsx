@@ -11,12 +11,11 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
-import SnackBar from "../notification/Notification";
 
 const styles = theme => ({
         root: {
-            maxWidth:260,
-            minWidth:260,
+            maxWidth:240,
+            minWidth:240,
             minHeight:120,
             marginRight:7,
             marginTop:5,
