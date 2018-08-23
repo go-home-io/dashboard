@@ -2,33 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73d80a5f-025f-4534-8c10-526ca257a143" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/settings/delays.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/settings/urls.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LevelOnOffSlider.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightBrightness.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightBrightness.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightColorPicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightColorPicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightManager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LightScenes.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/LinearWaitingProgress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LinearWaitingProgress.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/notification/Notification.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reflux/LightStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/LightStore.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reflux/wsActions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/wsActions.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/httpservices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/httpservices.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/settings/baseUrl.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/settings/websocketUrl.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/HomePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/NavBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/NavBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/StartPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/StartPage.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -110,7 +85,7 @@
           <entry key="html" value="51" />
           <entry key="js" value="28" />
           <entry key="json" value="3" />
-          <entry key="jsx" value="31888" />
+          <entry key="jsx" value="31962" />
           <entry key="md" value="21" />
         </counts>
       </usages-collector>
@@ -119,7 +94,7 @@
           <entry key="CSS" value="13" />
           <entry key="HTML" value="51" />
           <entry key="JSON" value="3" />
-          <entry key="JSX Harmony" value="31888" />
+          <entry key="JSX Harmony" value="31962" />
           <entry key="JavaScript" value="28" />
           <entry key="Markdown" value="21" />
           <entry key="PLAIN_TEXT" value="44" />
@@ -132,7 +107,7 @@
           <entry key="html" value="2" />
           <entry key="js" value="9" />
           <entry key="json" value="2" />
-          <entry key="jsx" value="290" />
+          <entry key="jsx" value="292" />
           <entry key="md" value="1" />
           <entry key="svg" value="1" />
         </counts>
@@ -142,7 +117,7 @@
           <entry key="CSS" value="3" />
           <entry key="HTML" value="2" />
           <entry key="JSON" value="2" />
-          <entry key="JSX Harmony" value="290" />
+          <entry key="JSX Harmony" value="292" />
           <entry key="JavaScript" value="9" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -180,11 +155,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="384">
+              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/group/GroupManager.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/group/GroupHeader.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="40" column="16" lean-forward="true" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -236,7 +229,6 @@
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/light/BrightnessSlider.jsx" />
-        <option value="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/RGBSlider.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/NewColorPicker.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/ColorPicker.jsx" />
@@ -271,6 +263,7 @@
         <option value="$PROJECT_DIR$/src/components/light/LightScenes.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/LightManager.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/LightStore.jsx" />
+        <option value="$PROJECT_DIR$/src/components/group/GroupHeader.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" />
       </list>
     </option>
@@ -297,7 +290,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-75" />
     <option name="width" value="1460" />
     <option name="height" value="1050" />
@@ -365,6 +358,13 @@
               <item name="react-material" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-material" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="group" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
@@ -462,18 +462,18 @@
       <workItem from="1534964245008" duration="325000" />
       <workItem from="1534964770501" duration="1746000" />
       <workItem from="1535003516926" duration="30573000" />
-      <workItem from="1535050169608" duration="5180000" />
+      <workItem from="1535050169608" duration="6278000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="446066000" />
+    <option name="totallyTimeSpent" value="447164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19431593" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19431593" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -487,7 +487,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" weight="0.27864215" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" visible="true" weight="0.27864215" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" visible="true" weight="0.27864215" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -662,6 +662,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-84">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -696,20 +699,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/light/LevelOnOffSlider.jsx" />
     <entry file="file://$PROJECT_DIR$/src/components/light/LightScenes.jsx" />
-    <entry file="file://$PROJECT_DIR$/src/components/group/GroupHeader.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/group/GroupManager.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="50" column="57" lean-forward="true" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/light/BrightnessSlider.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -745,6 +734,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-384">
           <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -797,6 +789,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1272">
           <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -834,10 +829,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/group/GroupHeader.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="40" column="16" lean-forward="true" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/group/GroupManager.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="384">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>

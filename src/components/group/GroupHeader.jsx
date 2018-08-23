@@ -36,10 +36,11 @@ class GroupHeader extends React.Component{
 
         const {classes} = this.props;
         const color = 'primary';
+        const display = this.props.visible ? 'block' : 'none';
 
         return (
 
-               <Paper className={classes.root} elevation={0}>
+               <Paper className={classes.root} elevation={0} style={{display:display}}>
                    <Grid container
                          className={classes.grid}
                          onClick = {this.handleClick}
@@ -49,8 +50,6 @@ class GroupHeader extends React.Component{
                     >
                         <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
                     </Icon>
-                    <div></div>
-
 
                     <Typography variant="subheading"
                                 className={classes.typography}

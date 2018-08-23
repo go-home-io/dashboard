@@ -3,7 +3,7 @@ import lightActions from "./lightActions";
 import {SOCKET_URL} from "../settings/urls";
 import wsActions from "./wsActions";
 
-const connectionTimeout = 2000; // ms
+const connectionTimeout = 3000; // ms
 const pingInterval = 5000;
 
 let timer = null;
@@ -13,10 +13,9 @@ class WebSocketStore extends Reflux.Store {
 
     constructor() {
         super();
-        this.state = {};
+        // this.state = {};
         this.listenables = wsActions;
 
-        // this.socket = ws;
         ws.onmessage = this.onMessage;
         ws.onerror = this.onError;
 
