@@ -3,29 +3,29 @@ import lightActions from './lightActions'
 import wsActions from "./wsActions";
 import notificationActions from "./notificationActions";
 
+
 //  Create unique Store for each Component
-function LightStoreFactory(id,  device_info, location, group){
+function GroupStoreFactory(id,  device_info, location){
 
     const visible = true;
 
-    class LightStore extends Reflux.Store {
+    class GroupStore extends Reflux.Store {
         constructor() {
             super();
 
             this.state = { id:id,
-                           name: device_info.name,
-                           worker: device_info.worker,
-                           device_state: device_info.state,
-                           last_seen: device_info.last_seen,
-                           commands: device_info.commands,
-                           group_id: group,
-                           location: location,
-                           loading:false,
-                           visible: visible,
-                           status:'normal',
+                name: device_info.name,
+                worker: device_info.worker,
+                device_state: device_info.state,
+                last_seen: device_info.last_seen,
+                commands: device_info.commands,
+                location: location,
+                loading:false,
+                visible: visible,
+                status:'normal',
             };
 
-            this.listenables = lightActions;
+            this.listenables = groupActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
@@ -46,13 +46,15 @@ function LightStoreFactory(id,  device_info, location, group){
             wsActions.doCommand(mess);
         }
 
-       // WebSocket listener
+        // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
+                // let state = this.state.device_state;
                 let state = data.state;
                 this.setState({device_state: state,
-                               loading:false,
-                               status:'success'});
+                    loading:false,
+                    status:'success'});
+
             }
         }
 
@@ -111,15 +113,17 @@ function LightStoreFactory(id,  device_info, location, group){
                 this.setState({status:status});
                 if (status === 'error') {
                     this.setState({loading:false});
-                    // wsActions.reconnect();
                     notificationActions.notification('The server does not respond, the command is not complete');
                 }
             }
         }
-  }
 
-    LightStore.id = id;
-    return LightStore
+
+
+    }
+
+    GroupStore.id = id;
+    return GroupStore
 }
 
-export default LightStoreFactory
+export default GroupStoreFactory

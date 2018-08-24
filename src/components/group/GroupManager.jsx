@@ -1,4 +1,5 @@
 import React from 'react';
+import Reflux from 'reflux';
 import Grid from "@material-ui/core/Grid/Grid";
 import LightManager from "../light/LightManager";
 import getDeviceState from "../utils/getDeviceState";
@@ -14,7 +15,7 @@ const styles = theme => ({
      }
 });
 
-class GroupManager  extends React.Component {
+class GroupManager  extends Reflux.Component {
 
      members (group_id, groups) {
         const this_group = groups.find(function (grp) {
@@ -31,14 +32,11 @@ class GroupManager  extends React.Component {
         const group_id = this.props.device;
         const isGroup = getDeviceState(this.props.device, devStates).type === 'group';
         const location = this.props.location;
-
-        // console.log('members:' + this_group_members);
-        //
-        // alert ("Location:"+location+' Group:'+group_id);
+        const display = this.props.visible ? 'block' : 'block';
 
         return (
              !isGroup ? null :
-                    <Grid className={classes.root} style={{display:'block'}}>
+                    <Grid className={classes.root} style={{display:display}}>
                        <GroupHeader title = {devName}  />
                         <Grid container justify='center'>
                         {this_group_members.map(function (dev_id) {

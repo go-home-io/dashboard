@@ -36,11 +36,11 @@ class GroupHeader extends React.Component{
 
         const {classes} = this.props;
         const color = 'primary';
-        const display = this.props.visible ? 'block' : 'none';
+
 
         return (
 
-               <Paper className={classes.root} elevation={0} style={{display:display}}>
+               <Paper className={classes.root} elevation={0} >
                    <Grid container
                          className={classes.grid}
                          onClick = {this.handleClick}

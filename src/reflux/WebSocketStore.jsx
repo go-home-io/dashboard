@@ -6,8 +6,33 @@ import wsActions from "./wsActions";
 const connectionTimeout = 3000; // ms
 const pingInterval = 5000;
 
-let timer = null;
+const actions = [lightActions];
+
+let timerConnectionTimeout = null;
+let timerPingInterval = null;
+let connectingState = false;
+let pingSent = false;
+
 let ws = new WebSocket(SOCKET_URL);
+
+const ping = () => {
+    if (!connectingState) {
+        console.log('ping');
+        pingSent = true;
+        ws.send('ping');
+        timerConnectionTimeout = setTimeout( () => {
+            connectingState = true;
+            clearInterval(timerPingInterval);
+            wsActions.reconnect();
+        }, connectionTimeout);
+    }
+};
+
+const pong =  () => {
+    clearTimeout(timerConnectionTimeout);
+    pingSent = false;
+};
+
 
 class WebSocketStore extends Reflux.Store {
 
@@ -16,50 +41,59 @@ class WebSocketStore extends Reflux.Store {
         // this.state = {};
         this.listenables = wsActions;
 
-        ws.onmessage = this.onMessage;
-        ws.onerror = this.onError;
+        ws.onmessage = this.onMessage.bind(this);
+        ws.onerror = this.onError.bind(this);
+        ws.onopen = this.onOpen.bind(this);
 
-        setInterval(this.ping, pingInterval);
+        timerPingInterval = setInterval(ping, pingInterval);
 
-        this.onMessage = this.onMessage.bind(this);
         this.onDoCommand = this.onDoCommand.bind(this);
-        this.ping = this.ping.bind(this);
         this.onReconnect = this.onReconnect.bind(this);
-        this.onError = this.onError.bind(this);
     }
 
-    ping () {
+
+    // WebSocket event handlers
+
+     onOpen() {
+        console.log('Socket was open');
         ws.send('ping');
-        timer = setTimeout(wsActions.reconnect, connectionTimeout);
+        connectingState = false;
+        timerPingInterval = setInterval(ping, pingInterval);
+        console.log('Socket reconnected');
     }
 
-    // Socket events
-    onMessage (evt) {
-        if (evt.data === 'pong') {
-            // Pong handle
-            clearTimeout(timer);
-        } else {
-            // Send data to client store
-            const data = JSON.parse(evt.data);
-            lightActions.message(data);
-        }
-    }
-
-    onError (evt) {
+    onError () {
+        connectingState = true;
         wsActions.reconnect();
     };
 
+    onMessage (evt) {
+        if (evt.data === 'pong') {
+            // Pong handle
+            pong();
+        } else {
+            // Send data to clients store
+            const data = JSON.parse(evt.data);
+            actions.map(function (action) {
+                action.message(data);
+            });
+            // lightActions.message(data);
+        }
+    }
+
     // Actions
     onDoCommand(data) {
-        ws.send(JSON.stringify(data));
+        if (! connectingState && !pingSent) {
+            ws.send(JSON.stringify(data));
+        }
     }
 
     onReconnect () {
         ws.close();
         ws = new WebSocket(SOCKET_URL);
-        ws.onmessage = this.onMessage;
-        ws.onerror = this.onError;
-        console.log('Socket reconnected');
+        ws.onmessage = this.onMessage.bind(this);
+        ws.onerror = this.onError.bind(this);
+        ws.onopen = this.onOpen.bind(this);
     }
 }
 
