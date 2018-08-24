@@ -17,7 +17,7 @@ let ws = new WebSocket(SOCKET_URL);
 
 const ping = () => {
     if (!connectingState) {
-        console.log('ping');
+        // console.log('ping');
         pingSent = true;
         ws.send('ping');
         timerConnectionTimeout = setTimeout( () => {
@@ -38,7 +38,7 @@ class WebSocketStore extends Reflux.Store {
 
     constructor() {
         super();
-        // this.state = {};
+        this.state = {rejected:false};
         this.listenables = wsActions;
 
         ws.onmessage = this.onMessage.bind(this);
@@ -51,15 +51,12 @@ class WebSocketStore extends Reflux.Store {
         this.onReconnect = this.onReconnect.bind(this);
     }
 
-
     // WebSocket event handlers
-
      onOpen() {
-        console.log('Socket was open');
         ws.send('ping');
         connectingState = false;
         timerPingInterval = setInterval(ping, pingInterval);
-        console.log('Socket reconnected');
+        // console.log('Socket was reconnected');
     }
 
     onError () {
@@ -72,19 +69,21 @@ class WebSocketStore extends Reflux.Store {
             // Pong handle
             pong();
         } else {
-            // Send data to clients store
+            // Send data to all client stores
             const data = JSON.parse(evt.data);
             actions.map(function (action) {
                 action.message(data);
             });
-            // lightActions.message(data);
         }
     }
 
     // Actions
     onDoCommand(data) {
+        this.setState({rejected:true});
+        // Try to send command if socket ready
         if (! connectingState && !pingSent) {
             ws.send(JSON.stringify(data));
+            this.setState({rejected:false});
         }
     }
 

@@ -35,7 +35,9 @@ class Scenes extends React.Component {
     };
 
     handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
+        if ( !this.props.read_only ) {
+             this.setState({ anchorEl: event.currentTarget });
+        }
     };
 
     handleClose = (option) => {
@@ -49,12 +51,16 @@ class Scenes extends React.Component {
         const {classes} = this.props;
         const options = this.props.scenes;
         const { anchorEl } = this.state;
+        const cursor = this.props.read_only ? 'default' : 'pointer';
 
         return (
             this.props.loading ? null :
             <Grid container className={classes.root}>
 
-                <div id="label" className={classes.text} onClick={this.handleClick}>
+                <div id="label" className={classes.text}
+                                onClick={this.handleClick}
+                                style={{cursor:cursor}}
+                >
                     Set scene
                 </div>
                 <Menu

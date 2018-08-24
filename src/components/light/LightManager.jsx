@@ -14,8 +14,8 @@ import Scenes from "./Scenes";
 
 const styles = theme => ({
         root: {
-            maxWidth:240,
-            minWidth:240,
+            maxWidth:260,
+            minWidth:260,
             minHeight:120,
             marginRight:7,
             marginTop:5,
@@ -23,7 +23,6 @@ const styles = theme => ({
             marginLeft:5,
     },
 });
-
 
 class LightManager extends Reflux.Component{
     constructor(props) {
@@ -40,7 +39,7 @@ class LightManager extends Reflux.Component{
         const scenes = this.state.device_state.scenes;
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
-        const snackOpen = (this.state.status === 'error');
+        const loading = this.state.loading;
 
         return (
                 ! (lightType) ? null :
@@ -50,6 +49,7 @@ class LightManager extends Reflux.Component{
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
                                   status = {this.state.status}
+                                  read_only = {this.state.read_only}
                      />
                      <CardContent>
                          <Grid container justify='center'>
@@ -57,24 +57,35 @@ class LightManager extends Reflux.Component{
                                          <LightBrightness dev_id={this.props.id}
                                                           level={this.state.device_state.brightness}
                                                           loading={this.state.loading}
+                                                          read_only = {this.state.read_only}
                                          /> : null
                                  }
                                  { isColorControl ?
                                          <LightColorPicker dev_id={this.props.id}
                                                            color={color}
                                                            loading={this.state.loading}
-
+                                                           read_only = {this.state.read_only}
                                          /> : null
                                  }
                                  { scenesExist ?
                                      <Scenes  dev_id={this.props.id}
                                               scenes={scenes}
                                               loading={this.state.loading}
-                                     /> : null
+                                              read_only = {this.state.read_only}
+                                     />
+                                         : null
                                  }
-                                 <IconLoading dev_id={this.props.id}
-                                              loading = {this.state.loading}
-                                 />
+
+
+                                 { loading ?
+                                     <IconLoading dev_id={this.props.id}
+                                                  loading={this.state.loading}
+                                                  rejected={this.state.status}
+                                     />  :  null
+                                 }
+
+
+
 
                         </Grid>
                     </CardContent>

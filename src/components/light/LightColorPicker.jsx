@@ -37,9 +37,11 @@ class LightColorPicker extends React.Component {
     };
 
     handleClick = event => {
-        this.setState({
-            anchorEl: event.currentTarget,
-        });
+        if ( !this.props.read_only ) {
+            this.setState({
+                anchorEl: event.currentTarget,
+            });
+        }
     };
 
     handleClose = () => {
@@ -51,17 +53,20 @@ class LightColorPicker extends React.Component {
     render () {
         const {classes} = this.props;
         const color = rgbColor(this.props.color);
-        // console.log(color);
-
+        const cursor = this.props.read_only ? 'default' : 'pointer';
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
+
         return (
             this.props.loading ? null :
                 <Grid container  className={classes.root}>
-                    <div className={classes.text} onClick={this.handleClick}>
+                    <div className={classes.text}
+                         onClick={this.handleClick}
+                         style={{cursor:cursor}}
+                    >
                         Color:
                         <div className={classes.box}
-                             style={{backgroundColor:color}}>
+                             style={{backgroundColor:color, cursor:cursor}}>
                         </div>
                     </div>
                     <Popover

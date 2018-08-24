@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
 import rgbColor from "../utils/rgbColor";
 import {HEADER_HIGHLIGHT_DURATION} from '../../settings/delays';
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
 const normal = '#e8e7e836';
 const success = '#d2fad9';
@@ -37,6 +38,10 @@ const styles = theme => ({
         marginLeft:3,
         cursor:'pointer',
     },
+    ro_icon: {
+        float: 'right',
+        color: rgbColor({r:120,g:120,b:120}),
+    }
 });
 
 function truncateName(name) {
@@ -71,7 +76,9 @@ class LightHeader extends React.Component {
     }
 
         handleClick () {
-        lightActions.toggle(this.props.dev_id);
+         if (! this.props.read_only ) {
+             lightActions.toggle(this.props.dev_id);
+         }
     }
 
     setStatus() {
@@ -82,12 +89,16 @@ class LightHeader extends React.Component {
         const {classes} = this.props;
         const iconColor =  this.props.on ? 'orange' : rgbColor({r:100,g:100,b:100});
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
+        const readOnly = this.props.read_only;
+        const cursor = readOnly ? 'default' : 'pointer';
+        // classes.icon.cursor = readOnly ? 'default' : 'pointer';
+
 
         return (
             <Paper className={classes.paper} elevation={0} style={{backgroundColor:backgroundColor}}>
-                <Grid container className={classes.root} >
+                <div className={classes.root} >
 
-                         <Icon style={{color: iconColor}}
+                         <Icon style={{color: iconColor, cursor:cursor}}
                                className={classes.icon}
                                onClick={this.handleClick}
                          >
@@ -97,11 +108,22 @@ class LightHeader extends React.Component {
                          <Typography variant="subheading"
                                      className={classes.typography}
                                      onClick={this.handleClick}
+                                     style={{cursor:cursor}}
                          >
                              {truncateName(this.props.name)}
                          </Typography>
+                         { readOnly ?
+                             <Tooltip title='Read only device'
+                                      placement="top"
+                             >
+                                 <Icon className={classes.ro_icon}>
+                                     sync_disabled
+                                 </Icon>
+                             </Tooltip>
+                                        : null
+                         }
 
-                 </Grid>
+                 </div>
             </Paper>
         )
     }

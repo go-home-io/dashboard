@@ -9,7 +9,8 @@ const lightActions = Reflux.createActions([
     'setScene',
     'visible',
     'message',
-    'status'
+    'status',
+
 ]);
 
 export default lightActions

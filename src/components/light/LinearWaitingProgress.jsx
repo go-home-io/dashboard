@@ -22,23 +22,24 @@ class LinearWaitingProgress extends React.Component {
     }
 
     componentWillUnmount() {
-        clearInterval(this.timer);
+        clearInterval(this.progress);
+        // this.setState({ completed: 0 });
     }
 
     onComplete () {
-        clearInterval(this.timer);
+        clearInterval(this.progress);
         this.setState({ completed: 0 });
-        clearInterval(this.timer);
         lightActions.status(this.props.dev_id, 'error');
-
     }
 
     progress = () => {
-        const { completed } = this.state;
+        let { completed } = this.state;
         const diff = 2;
 
+
         if (completed === 100) {
-                this.onComplete();
+            // setTimeout(this.onComplete.bind(this), 100);
+            this.onComplete();
         } else {
             this.setState({ completed: completed + diff });
         }
@@ -47,8 +48,9 @@ class LinearWaitingProgress extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-                <LinearProgress variant="determinate" value={this.state.completed} />
-
+                <div style={{display:this.props.display}}>
+                    <LinearProgress variant="determinate" value={this.state.completed} />
+                </div>
         );
     }
 }

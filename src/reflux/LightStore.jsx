@@ -23,6 +23,7 @@ function LightStoreFactory(id,  device_info, location, group){
                            loading:false,
                            visible: visible,
                            status:'normal',
+                           read_only: device_info.read_only,
             };
 
             this.listenables = lightActions;
@@ -37,6 +38,8 @@ function LightStoreFactory(id,  device_info, location, group){
             this.onOn = this.onOn.bind(this);
             this.onOff = this.onOff.bind(this);
             this.onSetScene = this.onSetScene.bind(this);
+            this.onStatus = this.onStatus.bind(this);
+            // console.log('dev_id:'+id+'  read_only:'+this.state.read_only);
         }
 
         // WebSocket messenger
@@ -110,9 +113,11 @@ function LightStoreFactory(id,  device_info, location, group){
             if ( dev_id === id ) {
                 this.setState({status:status});
                 if (status === 'error') {
-                    this.setState({loading:false});
-                    // wsActions.reconnect();
-                    notificationActions.notification('The server does not respond, the command is not complete');
+                    this.setState({loading: false});
+                    notificationActions.notification('Server timeout , the command may not be completed');
+                } else if (status === 'rejected') {
+                    this.setState({loading: false, status:'error'});
+                    notificationActions.notification('Server busy, command rejected');
                 }
             }
         }
