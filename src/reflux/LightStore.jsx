@@ -26,6 +26,9 @@ function LightStoreFactory(id,  device_info, location, group){
                            read_only: device_info.read_only,
             };
 
+            // console.log('LM group: '+this.state.group_id);
+            // console.log(this.state);
+
             this.listenables = lightActions;
 
             // Bind it
@@ -39,6 +42,7 @@ function LightStoreFactory(id,  device_info, location, group){
             this.onOff = this.onOff.bind(this);
             this.onSetScene = this.onSetScene.bind(this);
             this.onStatus = this.onStatus.bind(this);
+            this.onSetLoading = this.onSetLoading.bind(this);
             // console.log('dev_id:'+id+'  read_only:'+this.state.read_only);
         }
 
@@ -120,6 +124,14 @@ function LightStoreFactory(id,  device_info, location, group){
                     notificationActions.notification('Command aborted due to connection problems');
                     wsActions.clear();
                 }
+            }
+        }
+
+        onSetLoading (group_id) {
+            // alert('Group: ' + group_id);
+            if (this.state.group_id === group_id) {
+                this.setState({loading: true});
+                //alert('Light setLoading:' + id);
             }
         }
   }

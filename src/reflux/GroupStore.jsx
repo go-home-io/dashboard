@@ -2,6 +2,7 @@ import Reflux from 'reflux'
 import groupActions from './groupActions';
 import wsActions from "./wsActions";
 import notificationActions from "./notificationActions";
+import lightActions from "./lightActions";
 
 
 //  Create unique Store for each Component
@@ -22,8 +23,9 @@ function GroupStoreFactory(id,  members, device_info, location){
                 commands: device_info.commands,
                 location: location,
                 visible: true,
-                status:'normal',
-                read_only: device_info.read_only
+                // status:'normal',
+                read_only: device_info.read_only,
+                // loading: false
             };
 
             this.listenables = groupActions;
@@ -35,9 +37,10 @@ function GroupStoreFactory(id,  members, device_info, location){
             this.onToggle = this.onToggle.bind(this);
             this.onOn = this.onOn.bind(this);
             this.onOff = this.onOff.bind(this);
+            // this.onStatus = this.onStatus.bind(this);
 
-            console.log('Group store');
-            console.log(this.state);
+            // console.log('Group store');
+            // console.log(this.state);
         }
 
         // componentDidMount () {
@@ -58,7 +61,7 @@ function GroupStoreFactory(id,  members, device_info, location){
                 // let state = this.state.device_state;
                 let state = data.state;
                 this.setState({device_state: state,
-                    loading:false,
+                    // loading:false,
                     status:'success'});
 
             }
@@ -69,20 +72,22 @@ function GroupStoreFactory(id,  members, device_info, location){
         onOn (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand('on', "");
-                this.setState({'loading':true});
+                // this.setState({'loading':true});
             }
         }
 
         onOff (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand('off', "");
-                this.setState({'loading':true});
+                // this.setState({'loading':true});
             }
         }
 
         onToggle (dev_id) {
             if ( dev_id === id ) {
+                // alert('Group toggle');
                 this.doCommand('toggle', "");
+                lightActions.setLoading(dev_id);
             }
         }
 
@@ -92,6 +97,20 @@ function GroupStoreFactory(id,  members, device_info, location){
                 this.setState({visible: true});
             }
         }
+
+        // onStatus(dev_id, status) {
+        //     if ( dev_id === id ) {
+        //         this.setState({status:status});
+        //         if (status === 'error') {
+        //             this.setState({loading: false});
+        //             notificationActions.notification('Connection timeout , the command may not be completed');
+        //         } else if (status === 'rejected') {
+        //             this.setState({loading: false, status:'error'});
+        //             notificationActions.notification('Command aborted due to connection problems');
+        //             wsActions.clear();
+        //         }
+        //     }
+        // }
 
     }
 

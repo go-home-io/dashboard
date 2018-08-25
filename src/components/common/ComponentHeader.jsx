@@ -75,6 +75,7 @@ class ComponentHeader extends React.Component {
 
         handleClick () {
          if (! this.props.read_only ) {
+             // alert('Clicked by '+this.props.dev_id);
              this.props.actions.toggle(this.props.dev_id);
          }
     }

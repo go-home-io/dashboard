@@ -25,17 +25,20 @@ class GroupManager  extends Reflux.Component {
      constructor(props) {
          super(props);
 
-         this.store = GroupStoreFactory(this.props.dev_id,
-                                        this.props.members,
-                                        this.props.device_info,
-                                        this.props.location);
+         this.store = GroupStoreFactory(props.dev_id,
+                                        props.members,
+                                        props.device_info,
+                                        props.location);
+
      }
 
     render () {
+        // console.log('GM state ');
+        // console.log(this.state);
         const {classes} = this.props;
         const devStates = this.props.device_states;
 
-        const group_id = this.props.device;
+        const group_id = this.props.dev_id;
         const location = this.props.location;
         const display = this.state.visible ? 'block' : 'none';
 
@@ -43,7 +46,7 @@ class GroupManager  extends Reflux.Component {
                     <Grid className={classes.root} style={{display:display}}>
                         <div className={classes.header}>
                         <ComponentHeader
-                                         dev_id={this.props.id}
+                                         dev_id={this.props.dev_id}
                                          name = {this.state.name}
                                          on = {this.state.device_state.on}
                                          status = {this.state.status}
