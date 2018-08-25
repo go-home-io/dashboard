@@ -6,7 +6,7 @@ import LeftSideNav from "../SideBar/LeftSideNav";
 import WebSocketStore from "../../reflux/WebSocketStore";
 import Location from "../location/Location";
 import Notification from "../notification/Notification";
-
+// import Fade from "@material-ui/core/Fade/Fade";
 
 class HomePage extends Reflux.Component {
     constructor(props){

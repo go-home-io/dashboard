@@ -1,6 +1,6 @@
 import React from 'react'
 import Reflux from 'reflux'
-import LightHeader from "./LightHeader";
+import ComponentHeader from "../common/ComponentHeader";
 import LightStoreFactory from "../../reflux/LightStore";
 import IconLoading from "./IconLoading";
 import PropTypes from 'prop-types';
@@ -11,17 +11,26 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
+// import Fade from "@material-ui/core/Fade/Fade";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import lightActions from "../../reflux/lightActions";
 
 const styles = theme => ({
         root: {
             maxWidth:260,
             minWidth:260,
-            minHeight:120,
+            minHeight:130,
+            maxHeight:130,
             marginRight:7,
             marginTop:5,
             marginBottom:5,
             marginLeft:5,
-    },
+        },
+        icon: {
+            width:'100%',
+            height:'100%',
+        }
+
 });
 
 class LightManager extends Reflux.Component{
@@ -45,50 +54,49 @@ class LightManager extends Reflux.Component{
                 ! (lightType) ? null :
                  <Card style={{display:display}} className={classes.root}>
 
-                     <LightHeader dev_id={this.props.id}
+                     <ComponentHeader dev_id={this.props.id}
                                   name = {this.state.name}
                                   on = {this.state.device_state.on}
                                   status = {this.state.status}
                                   read_only = {this.state.read_only}
+                                  actions = {lightActions}
                      />
                      <CardContent>
-                         <Grid container justify='center'>
-                                 {isBrightnessControl ?
+                         {loading ? null :
+                             <Zoom in={!this.state.loading}>
+                                 <Grid container justify='flex-start' alignItems='center' alignContent='center'>
+                                     {isBrightnessControl ?
                                          <LightBrightness dev_id={this.props.id}
                                                           level={this.state.device_state.brightness}
                                                           loading={this.state.loading}
-                                                          read_only = {this.state.read_only}
+                                                          read_only={this.state.read_only}
                                          /> : null
-                                 }
-                                 { isColorControl ?
+                                     }
+                                     {isColorControl ?
                                          <LightColorPicker dev_id={this.props.id}
                                                            color={color}
                                                            loading={this.state.loading}
-                                                           read_only = {this.state.read_only}
+                                                           read_only={this.state.read_only}
                                          /> : null
-                                 }
-                                 { scenesExist ?
-                                     <Scenes  dev_id={this.props.id}
-                                              scenes={scenes}
-                                              loading={this.state.loading}
-                                              read_only = {this.state.read_only}
-                                     />
-                                         : null
-                                 }
-
-
-                                 { loading ?
-                                     <IconLoading dev_id={this.props.id}
-                                                  loading={this.state.loading}
-                                                  rejected={this.state.status}
-                                     />  :  null
-                                 }
-
-
-
-
-                        </Grid>
-                    </CardContent>
+                                     }
+                                     {scenesExist ?
+                                         <Scenes dev_id={this.props.id}
+                                                 scenes={scenes}
+                                             // loading={this.state.loading}
+                                                 read_only={this.state.read_only}
+                                         /> : null
+                                     }
+                                 </Grid>
+                             </Zoom>
+                         }
+                         {loading ?
+                             <div className={classes.icon}>
+                                 <IconLoading
+                                              dev_id={this.props.id}
+                                 />
+                             </div> : null
+                         }
+                     </CardContent>
                 </Card>
         )
      }

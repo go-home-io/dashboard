@@ -1,5 +1,4 @@
 import React from 'react';
-import Reflux from 'reflux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid/Grid";
@@ -47,8 +46,8 @@ class LightBrightness extends React.Component {
         const cursor = this.props.read_only ? 'default' : 'pointer';
 
         return (
-            this.props.loading ? null :
-            <Grid container className={classes.root} >
+            // this.props.loading ? null :
+            <Grid  className={classes.root} >
                  <div id="label" className={classes.text}
                                  onClick={this.handleClick}
                                  style={{cursor:cursor}}

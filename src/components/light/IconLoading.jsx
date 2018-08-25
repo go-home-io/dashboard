@@ -6,11 +6,12 @@ import {CONNECTION_TIMEOUT} from '../../settings/delays';
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import lightActions from "../../reflux/lightActions";
 import WebSocketStore from "../../reflux/WebSocketStore";
+import wsActions from "../../reflux/wsActions";
 
 const styles = theme => ({
-    progress: {
+    root: {
         width:'100%',
-        marginTop:15,
+        marginTop:20,
     }
 });
 
@@ -44,16 +45,21 @@ class IconLoading extends Reflux.Component {
 
     progress = () => {
         let { completed } = this.state;
+        let {reset} = this.state;
+        let {rejected} = this.state;
+
         const diff = 5;
 
-        if (this.state.rejected ) {
-            // alert('Rejected');
-            clearInterval(this.progress);
+        if (rejected ) {
             this.onComplete('rejected');
         }
 
+        if (reset) {
+            this.setState({completed:0});
+            wsActions.clear();
+        }
+
         if (completed === 100) {
-            // setTimeout(this.onComplete.bind(this), 100);
             this.onComplete('error');
         } else {
             this.setState({ completed: completed + diff });
@@ -62,13 +68,10 @@ class IconLoading extends Reflux.Component {
 
    render () {
        const {classes} = this.props;
-       // this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/50);
        return (
-               this.props.loading ?
-                   <div className={classes.progress}>
+                   <div className={classes.root}>
                        <LinearProgress variant="determinate" value={this.state.completed} />
                    </div>
-           : null
        )
    }
 }

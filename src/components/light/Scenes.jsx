@@ -12,12 +12,15 @@ const styles = theme => ( {
     root: {
         width: '100%',
         marginTop: 6,
+        float: 'left',
     },
     text: {
         fontSize:12,
         letterSpacing:1,
         fontColor:'lightgray',
-        cursor:'pointer',
+        // cursor:'pointer',
+        // position: 'relative',
+        // left: 10,
     },
     button: {
         position: 'relative',
@@ -54,8 +57,8 @@ class Scenes extends React.Component {
         const cursor = this.props.read_only ? 'default' : 'pointer';
 
         return (
-            this.props.loading ? null :
-            <Grid container className={classes.root}>
+            // this.props.loading ? null :
+            <div  className={classes.root}>
 
                 <div id="label" className={classes.text}
                                 onClick={this.handleClick}
@@ -83,7 +86,7 @@ class Scenes extends React.Component {
                         </MenuItem>
                     ))}
                 </Menu>
-            </Grid>
+            </div>
         );
     }
 }

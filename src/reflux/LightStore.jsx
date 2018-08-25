@@ -114,10 +114,11 @@ function LightStoreFactory(id,  device_info, location, group){
                 this.setState({status:status});
                 if (status === 'error') {
                     this.setState({loading: false});
-                    notificationActions.notification('Server timeout , the command may not be completed');
+                    notificationActions.notification('Connection timeout , the command may not be completed');
                 } else if (status === 'rejected') {
                     this.setState({loading: false, status:'error'});
-                    notificationActions.notification('Server busy, command rejected');
+                    notificationActions.notification('Command aborted due to connection problems');
+                    wsActions.clear();
                 }
             }
         }

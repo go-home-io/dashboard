@@ -3,43 +3,56 @@ import Reflux from 'reflux';
 import Grid from "@material-ui/core/Grid/Grid";
 import LightManager from "../light/LightManager";
 import getDeviceState from "../utils/getDeviceState";
-import GroupHeader from "./GroupHeader";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
+import GroupStoreFactory from "../../reflux/GroupStore";
+import ComponentHeader from "../common/ComponentHeader";
+import groupActions from "../../reflux/groupActions";
 
 const styles = theme => ({
      root: {
          border:'solid 1px lightgrey',
          borderRadius:5,
          padding:5,
-     }
+         marginTop: 5,
+     },
+    header: {
+         marginBottom: 5,
+    }
 });
 
 class GroupManager  extends Reflux.Component {
+     constructor(props) {
+         super(props);
 
-     members (group_id, groups) {
-        const this_group = groups.find(function (grp) {
-            return grp.id === group_id;
-        });
-        return (this_group) ?  this_group.devices : null;
+         this.store = GroupStoreFactory(this.props.dev_id,
+                                        this.props.members,
+                                        this.props.device_info,
+                                        this.props.location);
      }
 
     render () {
         const {classes} = this.props;
-        const this_group_members = this.members(this.props.device, this.props.generalState.groups);
-        const devStates = this.props.generalState.devices;
-        const devName = getDeviceState(this.props.device, devStates).name;
+        const devStates = this.props.device_states;
+
         const group_id = this.props.device;
-        const isGroup = getDeviceState(this.props.device, devStates).type === 'group';
         const location = this.props.location;
-        const display = this.props.visible ? 'block' : 'block';
+        const display = this.state.visible ? 'block' : 'none';
 
         return (
-             !isGroup ? null :
                     <Grid className={classes.root} style={{display:display}}>
-                       <GroupHeader title = {devName}  />
+                        <div className={classes.header}>
+                        <ComponentHeader
+                                         dev_id={this.props.id}
+                                         name = {this.state.name}
+                                         on = {this.state.device_state.on}
+                                         status = {this.state.status}
+                                         read_only = {this.state.read_only}
+                                         actions = {groupActions}
+                        />
+                        </div>
                         <Grid container justify='center'>
-                        {this_group_members.map(function (dev_id) {
+                        {this.state.members.map(function (dev_id) {
                             const device_state = getDeviceState(dev_id, devStates);
                             return (
                                 <LightManager

@@ -1,17 +1,15 @@
 import React from 'react'
-import Reflux from 'reflux'
 import lightActions from "../../reflux/lightActions"
 import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
-import Grid from "@material-ui/core/Grid/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
 import rgbColor from "../utils/rgbColor";
 import {HEADER_HIGHLIGHT_DURATION} from '../../settings/delays';
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
-const normal = '#e8e7e836';
+const normal = '#d7d2d736';
 const success = '#d2fad9';
 const error = '#f44336';
 
@@ -40,7 +38,7 @@ const styles = theme => ({
     },
     ro_icon: {
         float: 'right',
-        color: rgbColor({r:120,g:120,b:120}),
+        color: rgbColor({r:130,g:130,b:130}),
     }
 });
 
@@ -52,13 +50,13 @@ function truncateName(name) {
      }
 }
 
-class LightHeader extends React.Component {
+class ComponentHeader extends React.Component {
      timer = null;
 
      constructor(props) {
          super(props);
          this.handleClick = this.handleClick.bind(this);
-         this.setStatus = this.setStatus.bind(this);
+         this.setNormalStatus = this.setNormalStatus.bind(this);
      }
 
     getHeaderBackgroundColor(status) {
@@ -70,19 +68,19 @@ class LightHeader extends React.Component {
         }
         if (bgColor) {
             clearInterval(this.timer);
-            this.timer = setInterval(this.setStatus, HEADER_HIGHLIGHT_DURATION);
+            this.timer = setInterval(this.setNormalStatus, HEADER_HIGHLIGHT_DURATION);
             return bgColor;
         }
     }
 
         handleClick () {
          if (! this.props.read_only ) {
-             lightActions.toggle(this.props.dev_id);
+             this.props.actions.toggle(this.props.dev_id);
          }
     }
 
-    setStatus() {
-        lightActions.status(this.props.dev_id, 'normal');
+    setNormalStatus() {
+        this.props.actions.status(this.props.dev_id, 'normal');
     }
 
     render () {
@@ -91,8 +89,6 @@ class LightHeader extends React.Component {
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
         const readOnly = this.props.read_only;
         const cursor = readOnly ? 'default' : 'pointer';
-        // classes.icon.cursor = readOnly ? 'default' : 'pointer';
-
 
         return (
             <Paper className={classes.paper} elevation={0} style={{backgroundColor:backgroundColor}}>
@@ -119,8 +115,7 @@ class LightHeader extends React.Component {
                                  <Icon className={classes.ro_icon}>
                                      sync_disabled
                                  </Icon>
-                             </Tooltip>
-                                        : null
+                             </Tooltip> : null
                          }
 
                  </div>
@@ -129,8 +124,8 @@ class LightHeader extends React.Component {
     }
 }
 
-LightHeader.propTypes = {
+ComponentHeader.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LightHeader)
+export default withStyles(styles)(ComponentHeader)

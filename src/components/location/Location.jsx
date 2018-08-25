@@ -5,6 +5,7 @@ import GroupManager from "../group/GroupManager";
 import getDeviceState from '../utils/getDeviceState';
 import LightManager from "../light/LightManager";
 import LocationStoreFactory from "../../reflux/LocationStore";
+import Fade from "@material-ui/core/Fade/Fade";
 
 class Location extends Reflux.Component {
     constructor(props) {
@@ -17,33 +18,41 @@ class Location extends Reflux.Component {
         const location = this.props.location.name;
         const devices = this.props.location.devices;
         const generalState = this.props.generalState;
-        // console.log('location state');
-        // console.log(this.state);
+        const members = (group_id, groups) => {
+                        const this_group = groups.find(function (grp) {
+                            return grp.id === group_id;
+                        });
+                        return this_group.devices;
+        };
+
 
         return (
-                 <Grid container>
+                 <Grid container  justify='flex-start'>
                      { devices.map( (device, index) => {
-                         const deviceType = getDeviceState(device, generalState.devices).type;
+                         const device_info = getDeviceState(device, generalState.devices);
+                         const deviceType = device_info.type;
 
                          return(
                                  deviceType === 'group' ?
                                          <GroupManager
                                                  key = {device}
                                                  location = {location}
-                                                 device = {device}
-                                                 generalState = {generalState}
-
+                                                 dev_id = {device}
+                                                 members = {members(device,generalState.groups)}
+                                                 device_info = {device_info}
+                                                 device_states = {generalState.devices}
                                          /> :
                                  deviceType === 'light' ?
                                         <LightManager
                                              key = {device}
                                              location = {location}
                                              id = {device}
-                                             device_state = {getDeviceState(device, generalState.devices)}
+                                             device_state = {device_info}
                                         />  : null
                          )})
                      }
                  </Grid>
+
         )
     }
 }
