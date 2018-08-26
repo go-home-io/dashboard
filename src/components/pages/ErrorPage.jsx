@@ -1,4 +1,4 @@
-import AppBarPlaceHolder from "../navbar/AppBarPlaceHolder";
+import AppBarPlaceHolder from "../navigation/AppBarPlaceHolder";
 import Grid from "@material-ui/core/Grid/Grid";
 import React from "react";
 import PropTypes from 'prop-types';

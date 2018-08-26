@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button/Button";
-import GoHomeBar from "../navbar/GoHomeBar";
 import withStyles from "@material-ui/core/styles/withStyles";
 import TextField from "@material-ui/core/TextField/TextField";
 import Grid from "@material-ui/core/Grid/Grid";
 import FormControl from "@material-ui/core/FormControl/FormControl";
 import FormLabel from "@material-ui/core/FormLabel/FormLabel";
-import AppBarPlaceHolder from "../navbar/AppBarPlaceHolder";
+import AppBarPlaceHolder from "../navigation/AppBarPlaceHolder";
 
 const styles = theme => ({
     container: {
@@ -49,7 +48,6 @@ class Login extends React.Component {
 
     render () {
         const { classes } = this.props;
-        const error = this.props.error;
         return (
                 <div>
                     <AppBarPlaceHolder/>

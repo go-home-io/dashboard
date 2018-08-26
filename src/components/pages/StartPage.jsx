@@ -3,8 +3,6 @@ import HomePage from "./HomePage";
 import HTTP from "../../services/httpservices";
 import Login from "./Login";
 import base64 from 'base-64';
-import AppBarPlaceHolder from "../navbar/AppBarPlaceHolder";
-import Grid from "@material-ui/core/Grid/Grid";
 import ErrorPage from "./ErrorPage";
 
 const url = '/state';
@@ -56,7 +54,6 @@ class StartPage extends Component {
         document.cookie = "X-Authorization="+ credentials +"; path=/";
        // document.cookie = "X-Authorization=Basic dXNlcjE6cHdkMQ==; path=/";
         this.getComponentStateByHTTP(user, password);
-
     }
 
     render () {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Reflux from 'reflux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -6,17 +7,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-
 import ListItemActionWrapper from "./ListItemActionWrapper";
-// import Hidden from "@material-ui/core/Hidden/Hidden";
-// import location from '../location/locations'
-
-
+import AppStore from "../../reflux/AppStore";
+import appActions from "../../reflux/appActions";
 
 const styles = theme => ({
     root: {
@@ -35,16 +32,22 @@ const styles = theme => ({
     }
 });
 
-class NavBar extends React.Component {
+class NavBar extends Reflux.Component {
    constructor(props) {
        super(props);
        this.state = { open: false,
-                      location: props.location};
+                      locations: props.locations};
+       this.store = AppStore;
    }
-
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
+    };
+
+    handleClose = () => {
+        if (this.state.openMenu) {
+            appActions.toggleMenu();
+        }
     };
 
     render() {
@@ -59,13 +62,17 @@ class NavBar extends React.Component {
                     component="nav"
                     // subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
                 >
-                    <ListItem button>
+                    <ListItem button
+                              onClick = {this.handleClose}
+                    >
                         <ListItemIcon>
                             <SendIcon />
                         </ListItemIcon>
                         <ListItemText inset primary="Some Link" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button
+                              onClick = {this.handleClose}
+                    >
                         <ListItemIcon>
                             <DraftsIcon />
                         </ListItemIcon>

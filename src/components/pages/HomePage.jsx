@@ -1,8 +1,8 @@
 import React from 'react'
 import Reflux from 'reflux'
 import Grid from '@material-ui/core/Grid';
-import NavBar from "../navbar/GoHomeBar";
-import LeftSideNav from "../navbar/NavBar";
+import GoHomeBar from "../navigation/GoHomeBar";
+import NavBar from "../navigation/NavBar";
 import WebSocketStore from "../../reflux/WebSocketStore";
 import Location from "../location/Location";
 import Notification from "../notification/Notification";
@@ -23,12 +23,12 @@ class HomePage extends Reflux.Component {
         return (
             <Grid container spacing={8} justify='flex-start'>
                 <Grid item xs={12}>
-                    <NavBar locations={locations}/>
+                    <GoHomeBar locations={locations}/>
                 </Grid>
 
-                <Grid item  md={2} sm={0}>
+                <Grid item  md={2}>
                     <Hidden mdDown>
-                         <LeftSideNav locations={locations}/>
+                         <NavBar locations={locations}/>
                     </Hidden>
                 </Grid>
 

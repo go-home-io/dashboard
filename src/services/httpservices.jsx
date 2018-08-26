@@ -11,7 +11,7 @@ const service = {
 
         return fetch(BASE_URL+url, {
             headers: {
-                'Authorization': credentials
+                // 'Authorization': credentials
             },
             method: 'get',
         })

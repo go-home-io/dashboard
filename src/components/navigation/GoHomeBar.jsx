@@ -1,4 +1,5 @@
 import React from 'react'
+import Reflux from 'reflux'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -6,14 +7,11 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Hidden from "@material-ui/core/Hidden/Hidden";
-import Icon from "@material-ui/core/Icon/Icon";
-// import Collapse from "@material-ui/core/Collapse/Collapse";
-import LeftSideNav from "./NavBar";
-// import locations from "../location/locations";
-// import SwipeableDrawer from "@material-ui/core/SwipeableDrawer/SwipeableDrawer";
-
+import NavBar from "./NavBar";
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from "@material-ui/core/Drawer/Drawer";
+import AppStore from "../../reflux/AppStore";
+import appActions from "../../reflux/appActions";
 
 const styles = theme => ({
     button: {
@@ -23,26 +21,23 @@ const styles = theme => ({
 
 });
 
-class GoHomeBar extends React.Component {
+class GoHomeBar extends Reflux.Component {
     constructor(props){
         super(props);
-        this.state = {open:false};
-
+        // this.state = {open:false};
+        this.store = AppStore;
     }
 
     handleClick () {
-        this.setState({open:!this.state.open})
+        appActions.toggleMenu();
     }
 
-    // toggleDrawer (open) {
-    //     this.setState({open:open})
-    // }
 
     render() {
         const {classes} = this.props;
         const locations = this.props.locations;
         // console.log('App Bar:');
-        // console.log(this.props.locations);
+        // console.log(this.state);
 
         return(
             <div>
@@ -57,13 +52,13 @@ class GoHomeBar extends React.Component {
                             </IconButton>
                             <Drawer
                                 anchor="top"
-                                open={this.state.open}
+                                open={this.state.openMenu}
                                 onClose={this.handleClick.bind(this)}
-                                // onOpen={this.toggleDrawer(true)}
                             >
-                             {/*<div role="button" onClick={this.toggleDrawer(false)}>*/}
-                               <LeftSideNav locations={locations}/>
-                             {/*</div>*/}
+                                <NavBar
+                                    locations={locations}
+                                    closable = {true}
+                                />
                             </Drawer>
 
                         </Hidden>
