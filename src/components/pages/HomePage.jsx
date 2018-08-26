@@ -1,11 +1,12 @@
 import React from 'react'
 import Reflux from 'reflux'
 import Grid from '@material-ui/core/Grid';
-import NavBar from "./NavBar";
-import LeftSideNav from "../SideBar/LeftSideNav";
+import NavBar from "../navbar/GoHomeBar";
+import LeftSideNav from "../navbar/NavBar";
 import WebSocketStore from "../../reflux/WebSocketStore";
 import Location from "../location/Location";
 import Notification from "../notification/Notification";
+import Hidden from "@material-ui/core/Hidden/Hidden";
 // import Fade from "@material-ui/core/Fade/Fade";
 
 class HomePage extends Reflux.Component {
@@ -20,26 +21,29 @@ class HomePage extends Reflux.Component {
         // console.log(locations);
 
         return (
-            <Grid container spacing={0} justify='center'>
+            <Grid container spacing={8} justify='flex-start'>
                 <Grid item xs={12}>
-                    <NavBar/>
+                    <NavBar locations={locations}/>
                 </Grid>
 
-                <Grid item  sm={12} md={3} lg={2}>
-                    <LeftSideNav locations={locations}/>
+                <Grid item  md={2} sm={0}>
+                    <Hidden mdDown>
+                         <LeftSideNav locations={locations}/>
+                    </Hidden>
                 </Grid>
 
-                <Grid item  sm={12} md={9} lg={10} >
+                <Grid item md={10} sm={12} >
 
-                    {this.props.generalState.locations.map(function (location) {
+                    {this.props.generalState.locations.map( (location) => {
                         return (
                              <Location  key = {location.name}
                                         location = {location}
                                         generalState = {generalState}/>
                         )
                     })}
-
                 </Grid>
+
+                <Notification/>
                 <Notification/>
             </Grid>
 

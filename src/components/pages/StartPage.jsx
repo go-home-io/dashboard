@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import HomePage from "./HomePage";
 import HTTP from "../../services/httpservices";
 import Login from "./Login";
+import base64 from 'base-64';
+import AppBarPlaceHolder from "../navbar/AppBarPlaceHolder";
+import Grid from "@material-ui/core/Grid/Grid";
+import ErrorPage from "./ErrorPage";
 
 const url = '/state';
 
@@ -11,40 +15,62 @@ class StartPage extends Component {
         this.state = {
             generalState:{},
             authenticated: false,
+            auth_error: false,
+            auth_required: false,
+            status: null,
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getComponentStateByHTTP();
     }
 
     getComponentStateByHTTP (user, password) {
-        // console.log(headers);
         HTTP.get(url, user, password)
             .then((data) => {
-                if (data !== 'Failed to fetch') {
-                    this.setState({generalState:data});
-                    this.setState({authenticated: true});
+                if (data === 'Failed to fetch' || data >= 400) {
+                    if (data === 401) {
+                        // Server request authentication
+                        this.setState({authenticated:false, auth_required: true, status:401});
+                        if (user) {
+                            this.setState({auth_error: true});
+                        }
+                    } else {
+                        // Unknown connection error
+                        this.setState({auth_required: false, status:data});
+                    }
                 } else {
-                    this.setState({authenticated:false})
+                    // Success
+                    this.setState({generalState:data,
+                                   authenticated: true,
+                                   auth_error: false,
+                                   auth_required: false,
+                                   status: null,
+                    });
                 }
-
             });
     }
 
-    handleSubmit () {
-        const user = this.refs.LoginForm.state.user;
-        const password = this.refs.LoginForm.state.password;
-
+    getCredentials (user, password) {
+        const credentials = 'Basic ' + base64.encode(user + ":" + password);
+        document.cookie = "X-Authorization="+ credentials +"; path=/";
+       // document.cookie = "X-Authorization=Basic dXNlcjE6cHdkMQ==; path=/";
         this.getComponentStateByHTTP(user, password);
+
     }
 
     render () {
         return (
            this.state.authenticated ?
                <HomePage generalState={this.state.generalState}/> :
-               <Login onSubmit={this.handleSubmit.bind(this)}
-                      ref='LoginForm' />
+
+               this.state.auth_required ?
+
+                   <Login
+                       getCredentials={this.getCredentials.bind(this)}
+                       error={this.state.auth_error}
+                   /> :
+                     <ErrorPage status={this.state.status}/>
         )
     }
 }

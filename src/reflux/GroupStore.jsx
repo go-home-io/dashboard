@@ -1,14 +1,14 @@
 import Reflux from 'reflux'
 import groupActions from './groupActions';
 import wsActions from "./wsActions";
-import notificationActions from "./notificationActions";
+// import notificationActions from "./notificationActions";
 import lightActions from "./lightActions";
 
 
 //  Create unique Store for each Component
 function GroupStoreFactory(id,  members, device_info, location){
 
-    const visible = true;
+    // const visible = true;
 
     class GroupStore extends Reflux.Store {
         constructor() {

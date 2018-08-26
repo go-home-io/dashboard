@@ -5,7 +5,6 @@ import GroupManager from "../group/GroupManager";
 import getDeviceState from '../utils/getDeviceState';
 import LightManager from "../light/LightManager";
 import LocationStoreFactory from "../../reflux/LocationStore";
-import Fade from "@material-ui/core/Fade/Fade";
 
 class Location extends Reflux.Component {
     constructor(props) {
@@ -25,9 +24,8 @@ class Location extends Reflux.Component {
                         return this_group.devices;
         };
 
-
         return (
-                 <Grid container  justify='flex-start'>
+                 <Grid container >
                      { devices.map( (device, index) => {
                          const device_info = getDeviceState(device, generalState.devices);
                          const deviceType = device_info.type;

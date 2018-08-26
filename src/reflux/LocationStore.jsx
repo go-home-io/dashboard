@@ -1,5 +1,4 @@
 import Reflux from 'reflux'
-import wsActions from "./wsActions";
 import lightActions from "./lightActions";
 import locationActions from "./locationActions";
 import groupActions from "./groupActions";

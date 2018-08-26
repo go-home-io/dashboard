@@ -2,7 +2,6 @@ import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import lightActions from '../../reflux/lightActions';
-import Grid from "@material-ui/core/Grid/Grid";
 import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
 
@@ -28,8 +27,6 @@ const styles = theme => ( {
         left: 29,
     },
 });
-
-
 
 class Scenes extends React.Component {
     state = {

@@ -13,19 +13,29 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import ListItemActionWrapper from "./ListItemActionWrapper";
+// import Hidden from "@material-ui/core/Hidden/Hidden";
 // import location from '../location/locations'
+
+
 
 const styles = theme => ({
     root: {
         width: 200,
         backgroundColor: theme.palette.background.paper,
+        // height: 800,
     },
     nested: {
         paddingLeft: theme.spacing.unit * 4,
     },
+    expand: {
+        position: 'relative',
+        left: 8,
+        top:1,
+        color:'rgba(0, 0, 0, 0.54)',
+    }
 });
 
-class LeftSideNav extends React.Component {
+class NavBar extends React.Component {
    constructor(props) {
        super(props);
        this.state = { open: false,
@@ -43,7 +53,8 @@ class LeftSideNav extends React.Component {
         // console.log(locations);
 
         return (
-            <div className={classes.root}>
+            <div className={classes.root} >
+
                 <List
                     component="nav"
                     // subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
@@ -62,11 +73,15 @@ class LeftSideNav extends React.Component {
                     </ListItem>
 
                     <ListItem button onClick={this.handleClick}>
-                            <ListItemIcon>
-                            <InboxIcon />
+
+                        <ListItemIcon>
+                            <i className="material-icons">
+                                room
+                            </i>
                         </ListItemIcon>
-                        <ListItemText inset primary="Location" />
-                        {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                        <ListItemText inset primary="Locations" />
+                        {this.state.open ? <ExpandLess className={classes.expand}/> :
+                                           <ExpandMore className={classes.expand}/>}
                     </ListItem>
 
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit >
@@ -77,7 +92,7 @@ class LeftSideNav extends React.Component {
                                         <ListItemActionWrapper classes={classes.nested}
                                                                location={item.name}
                                                                icon={item.icon}
-                                                               key={'liAW'+Math.floor(Math.random()*10000)}>
+                                                               key={item.name}>
                                         </ListItemActionWrapper>
                                   )
                               })
@@ -87,13 +102,14 @@ class LeftSideNav extends React.Component {
 
 
                 </List>
+
             </div>
         );
     }
 }
 
-LeftSideNav.propTypes = {
+NavBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LeftSideNav);
+export default withStyles(styles)(NavBar);

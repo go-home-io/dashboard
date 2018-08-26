@@ -15,6 +15,7 @@ const styles = theme => ({
          borderRadius:5,
          padding:5,
          marginTop: 5,
+         backgroundColor: 'white',
      },
     header: {
          marginBottom: 5,

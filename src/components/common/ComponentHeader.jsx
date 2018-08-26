@@ -1,5 +1,4 @@
 import React from 'react'
-import lightActions from "../../reflux/lightActions"
 import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -115,6 +114,7 @@ class ComponentHeader extends React.Component {
                              >
                                  <Icon className={classes.ro_icon}>
                                      sync_disabled
+                                     {/*block*/}
                                  </Icon>
                              </Tooltip> : null
                          }

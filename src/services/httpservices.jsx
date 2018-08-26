@@ -1,19 +1,21 @@
-// import base64 from 'base-64';
+import base64 from 'base-64';
 import {BASE_URL} from '../settings/urls';
 
 
 const service = {
     get:(url, user, password) => {
-        // console.log(user+':'+password);
-        // const credentials = 'Basic ' + base64.encode(user + ":" + password);
+
+        const credentials = 'Basic ' + base64.encode(user + ":" + password);
+        // console.log('url:'+url+' || user:'+user+' || '+'password:'+password);
+        // console.log(credentials);
+
         return fetch(BASE_URL+url, {
             headers: {
-                // 'Authorization': credentials
+                'Authorization': credentials
             },
             method: 'get',
         })
             .then((response) => {
-                // console.log(response.status + ' -> ' +response.ok);
                 if (response.ok) {
                     return response.json();
                 } else {
