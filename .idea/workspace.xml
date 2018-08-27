@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="73d80a5f-025f-4534-8c10-526ca257a143" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/httpservices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/httpservices.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -89,7 +90,7 @@
           <entry key="html" value="83" />
           <entry key="js" value="28" />
           <entry key="json" value="3" />
-          <entry key="jsx" value="43179" />
+          <entry key="jsx" value="43289" />
           <entry key="md" value="21" />
         </counts>
       </usages-collector>
@@ -98,7 +99,7 @@
           <entry key="CSS" value="13" />
           <entry key="HTML" value="83" />
           <entry key="JSON" value="3" />
-          <entry key="JSX Harmony" value="43179" />
+          <entry key="JSX Harmony" value="43289" />
           <entry key="JavaScript" value="28" />
           <entry key="Markdown" value="21" />
           <entry key="PLAIN_TEXT" value="44" />
@@ -156,8 +157,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+            <state relative-caret-position="360">
+              <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -180,8 +181,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="67" column="2" selection-start-line="67" selection-start-column="2" selection-end-line="67" selection-end-column="2" />
+            <state relative-caret-position="264">
+              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -306,8 +307,8 @@
         <option value="$PROJECT_DIR$/src/components/light/IconLoading.jsx" />
         <option value="$PROJECT_DIR$/src/components/pages/Login.jsx" />
         <option value="$PROJECT_DIR$/src/settings/cookie.jsx" />
-        <option value="$PROJECT_DIR$/src/services/httpservices.jsx" />
         <option value="$PROJECT_DIR$/src/components/pages/StartPage.jsx" />
+        <option value="$PROJECT_DIR$/src/services/httpservices.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" />
       </list>
     </option>
@@ -494,12 +495,12 @@
       <workItem from="1535228954331" duration="33000" />
       <workItem from="1535260330874" duration="33778000" />
       <workItem from="1535305231654" duration="4958000" />
-      <workItem from="1535342489491" duration="10622000" />
+      <workItem from="1535342489491" duration="12538000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="579205000" />
+    <option name="totallyTimeSpent" value="581121000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -850,16 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/settings/cookie.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -887,10 +878,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="67" column="2" selection-start-line="67" selection-start-column="2" selection-end-line="67" selection-end-column="2" />
+        <state relative-caret-position="264">
+          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
         </state>
       </provider>
     </entry>

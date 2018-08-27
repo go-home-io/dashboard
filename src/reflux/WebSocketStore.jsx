@@ -24,10 +24,11 @@ const connAlive = () => {
 
 let ws = new WebSocket(SOCKET_URL);
 let firstConnect = true;
+let reconnectCount = 0;
 
 const ping = () => {
     if (!connectingState) {
-        // console.log('ping:'+reconnectAttempts);
+        console.log('ping:'+reconnectCount);
         pongReceived = false;
         ws.send('ping');
         timerConnectionTimeout = setTimeout(reconnectSocket, connectionTimeout);
@@ -35,11 +36,14 @@ const ping = () => {
 };
 
 const pong =  () => {
+    console.log('pong:'+reconnectCount);
     clearTimeout(timerConnectionTimeout);
     pongReceived = true;
 };
 
 const reconnectSocket = () => {
+    reconnectCount = reconnectCount + 1;
+    console.log('reconnect:'+reconnectCount);
     connectingState = true;
     pongReceived = false;
     clearInterval(timerPingInterval);
@@ -65,6 +69,9 @@ class WebSocketStore extends Reflux.Store {
         ws.onopen = this.onOpen.bind(this);
         ws.onclose = this.onClose.bind(this);
 
+        ws.send('ping');
+        timerPingInterval = setInterval(ping, pingInterval);
+
         this.onDoCommand = this.onDoCommand.bind(this);
         this.onReconnect = this.onReconnect.bind(this);
         this.onClear = this.onClear.bind(this);
@@ -72,6 +79,7 @@ class WebSocketStore extends Reflux.Store {
 
     // WebSocket event handlers
      onOpen() {
+         console.log('open:'+reconnectCount);
          ws.send('ping');
          connectingState = false;
          pongReceived = false;
@@ -79,6 +87,7 @@ class WebSocketStore extends Reflux.Store {
     }
 
     onClose() {
+        console.log('close:'+reconnectCount);
         ws = new WebSocket(SOCKET_URL);
         ws.onmessage = this.onMessage.bind(this);
         ws.onerror = this.onError.bind(this);
@@ -87,6 +96,7 @@ class WebSocketStore extends Reflux.Store {
     }
 
     onError () {
+        console.log('error:'+reconnectCount);
         reconnectSocket();
     };
 
