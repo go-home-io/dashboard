@@ -14,6 +14,7 @@ import Scenes from "./Scenes";
 // import Fade from "@material-ui/core/Fade/Fade";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import lightActions from "../../reflux/lightActions";
+import Fade from "@material-ui/core/Fade/Fade";
 
 const styles = theme => ({
         root: {
@@ -68,33 +69,33 @@ class LightManager extends Reflux.Component{
                                      {isBrightnessControl ?
                                          <LightBrightness dev_id={this.props.id}
                                                           level={this.state.device_state.brightness}
-                                                          loading={this.state.loading}
                                                           read_only={this.state.read_only}
                                          /> : null
                                      }
                                      {isColorControl ?
                                          <LightColorPicker dev_id={this.props.id}
                                                            color={color}
-                                                           loading={this.state.loading}
                                                            read_only={this.state.read_only}
-                                         /> : null
+                                         />
+                                         : null
                                      }
                                      {scenesExist ?
                                          <Scenes dev_id={this.props.id}
                                                  scenes={scenes}
-                                             // loading={this.state.loading}
                                                  read_only={this.state.read_only}
-                                         /> : null
+                                         />
+                                         : null
                                      }
                                  </Grid>
                              </Zoom>
                          }
                          {loading ?
-                             <div className={classes.icon}>
-                                 <IconLoading
-                                              dev_id={this.props.id}
-                                 />
-                             </div> : null
+                             <Zoom in={loading}>
+                                 <div className={classes.icon}>
+                                     <IconLoading dev_id={this.props.id} />
+                                 </div>
+                             </Zoom>
+                             : null
                          }
                      </CardContent>
                 </Card>

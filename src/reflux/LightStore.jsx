@@ -6,7 +6,7 @@ import notificationActions from "./notificationActions";
 //  Create unique Store for each Component
 function LightStoreFactory(id,  device_info, location, group){
 
-    const visible = true;
+    const visible = (location === 'Default');
 
     class LightStore extends Reflux.Store {
         constructor() {

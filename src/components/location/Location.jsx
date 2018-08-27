@@ -5,6 +5,7 @@ import GroupManager from "../group/GroupManager";
 import getDeviceState from '../utils/getDeviceState';
 import LightManager from "../light/LightManager";
 import LocationStoreFactory from "../../reflux/LocationStore";
+import locationActions from "../../reflux/locationActions";
 
 class Location extends Reflux.Component {
     constructor(props) {

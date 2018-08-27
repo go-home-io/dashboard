@@ -31,13 +31,14 @@ class IconLoading extends Reflux.Component {
         this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/20);
     }
 
-    componentWillUnmount() {
-        clearInterval(this.timer);
-        this.setState({ completed: 0 });
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.timer);
+    //     this.setState({ completed: 0 });
+    // }
 
     onComplete (status) {
         clearInterval(this.timer);
+        this.timer = null;
         this.setState({ completed: 0 });
         lightActions.status(this.props.dev_id, status);
     }
@@ -60,6 +61,7 @@ class IconLoading extends Reflux.Component {
 
         if (reset) {
             clearInterval(this.timer);
+            this.timer = null;
             this.setState({completed:0});
             completed = this.state.completed;
             wsActions.clear();

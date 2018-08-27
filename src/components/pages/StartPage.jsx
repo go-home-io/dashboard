@@ -26,7 +26,7 @@ class StartPage extends Component {
     }
 
     getComponentStateByHTTP (user, password) {
-        HTTP.get(url, user, password)
+        HTTP.get(url)
             .then((data) => {
                 if (data === 'Failed to fetch' || data >= 400) {
                     if (data === 401) {
@@ -61,7 +61,9 @@ class StartPage extends Component {
     render () {
         return (
            this.state.authenticated ?
-               <HomePage generalState={this.state.generalState}/> :
+               <HomePage generalState={this.state.generalState}
+                         auth={this.state.authenticated}
+               /> :
 
                this.state.auth_required ?
 

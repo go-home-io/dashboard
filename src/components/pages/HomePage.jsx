@@ -7,6 +7,7 @@ import WebSocketStore from "../../reflux/WebSocketStore";
 import Location from "../location/Location";
 import Notification from "../notification/Notification";
 import Hidden from "@material-ui/core/Hidden/Hidden";
+// import locationActions from "../../reflux/locationActions";
 // import Fade from "@material-ui/core/Fade/Fade";
 
 class HomePage extends Reflux.Component {
@@ -34,19 +35,19 @@ class HomePage extends Reflux.Component {
 
                 <Grid item md={10} sm={12} >
 
-                    {this.props.generalState.locations.map( (location) => {
+                    {locations.map( (location) => {
                         return (
                              <Location  key = {location.name}
                                         location = {location}
                                         generalState = {generalState}/>
                         )
                     })}
+
                 </Grid>
 
                 <Notification/>
                 <Notification/>
             </Grid>
-
         )
     }
 }

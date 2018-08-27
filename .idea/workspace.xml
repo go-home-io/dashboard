@@ -2,6 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73d80a5f-025f-4534-8c10-526ca257a143" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/light/LightManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/LightManager.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/location/Location.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/location/Location.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/HomePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/StartPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/StartPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reflux/GroupStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/GroupStore.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reflux/LightStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/LightStore.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/httpservices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/httpservices.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -84,12 +93,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="13" />
-          <entry key="dummy" value="42" />
+          <entry key="dummy" value="49" />
           <entry key="gitignore" value="2" />
           <entry key="html" value="83" />
           <entry key="js" value="28" />
           <entry key="json" value="3" />
-          <entry key="jsx" value="43289" />
+          <entry key="jsx" value="44093" />
           <entry key="md" value="21" />
         </counts>
       </usages-collector>
@@ -98,10 +107,10 @@
           <entry key="CSS" value="13" />
           <entry key="HTML" value="83" />
           <entry key="JSON" value="3" />
-          <entry key="JSX Harmony" value="43289" />
+          <entry key="JSX Harmony" value="44093" />
           <entry key="JavaScript" value="28" />
           <entry key="Markdown" value="21" />
-          <entry key="PLAIN_TEXT" value="44" />
+          <entry key="PLAIN_TEXT" value="51" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -111,7 +120,7 @@
           <entry key="html" value="4" />
           <entry key="js" value="9" />
           <entry key="json" value="2" />
-          <entry key="jsx" value="348" />
+          <entry key="jsx" value="359" />
           <entry key="md" value="1" />
           <entry key="svg" value="1" />
         </counts>
@@ -121,7 +130,7 @@
           <entry key="CSS" value="3" />
           <entry key="HTML" value="4" />
           <entry key="JSON" value="2" />
-          <entry key="JSX Harmony" value="348" />
+          <entry key="JSX Harmony" value="359" />
           <entry key="JavaScript" value="9" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -133,12 +142,36 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+              <folding>
+                <element signature="e#33#75#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/pages/StartPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+            <state relative-caret-position="180">
+              <caret line="65" column="19" lean-forward="true" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-916">
+              <caret line="61" selection-start-line="60" selection-end-line="61" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -148,28 +181,37 @@
         <entry file="file://$PROJECT_DIR$/src/settings/cookie.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="45" selection-start-column="45" selection-end-column="45" />
+              <caret column="43" lean-forward="true" selection-start-column="28" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/location/Location.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="156">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/pages/HomePage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#0#25#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/light/IconLoading.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/navigation/NavBar.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-24">
-              <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+            <state relative-caret-position="-85">
+              <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -178,19 +220,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="63" column="10" lean-forward="true" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/pages/Login.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-192">
-              <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+            <state relative-caret-position="-432">
+              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -201,39 +234,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="31" column="44" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="44" />
+            <state relative-caret-position="-1428">
+              <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/navigation/GoHomeBar.jsx">
+        <entry file="file://$PROJECT_DIR$/src/reflux/GroupStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+            <state relative-caret-position="-900">
+              <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reflux/appActions.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reflux/AppStore.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -246,10 +259,12 @@
       <find>/es</find>
       <find>/es/</find>
       <find>actions</find>
+      <find>ping</find>
     </findStrings>
     <replaceStrings>
       <replace>actions</replace>
       <replace>this.props.actions</replace>
+      <replace>this.ping</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -277,38 +292,38 @@
         <option value="$PROJECT_DIR$/src/components/SideBar/ListItemActionWrapper.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/LightHeader.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/ComponentHeader.jsx" />
-        <option value="$PROJECT_DIR$/src/components/light/LightManager.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/lightActions.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/LocationStore.jsx" />
-        <option value="$PROJECT_DIR$/src/reflux/GroupStore.jsx" />
         <option value="$PROJECT_DIR$/src/components/notification/Notification.jsx" />
         <option value="$PROJECT_DIR$/src/components/light/Scenes.jsx" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/group/GroupManager.jsx" />
         <option value="$PROJECT_DIR$/src/components/common/ComponentHeader.jsx" />
         <option value="$PROJECT_DIR$/src/components/SideBar/LeftSideNav.jsx" />
-        <option value="$PROJECT_DIR$/src/reflux/LightStore.jsx" />
         <option value="$PROJECT_DIR$/src/components/pages/NavBar.jsx" />
         <option value="$PROJECT_DIR$/src/components/pages/GoHomeBar.jsx" />
         <option value="$PROJECT_DIR$/src/components/SideBar/GoHomeBar.jsx" />
         <option value="$PROJECT_DIR$/src/components/navbar/LeftSideNav.jsx" />
         <option value="$PROJECT_DIR$/src/components/navbar/GoHomeBar.jsx" />
-        <option value="$PROJECT_DIR$/src/components/location/Location.jsx" />
         <option value="$PROJECT_DIR$/src/components/navbar/AppBarPlaceHolder.jsx" />
         <option value="$PROJECT_DIR$/src/components/pages/ErrorPage.jsx" />
         <option value="$PROJECT_DIR$/src/components/navbar/NavBar.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/appActions.jsx" />
-        <option value="$PROJECT_DIR$/src/components/pages/HomePage.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/AppStore.jsx" />
         <option value="$PROJECT_DIR$/src/components/navigation/GoHomeBar.jsx" />
         <option value="$PROJECT_DIR$/src/components/navigation/NavBar.jsx" />
         <option value="$PROJECT_DIR$/src/components/navigation/ListItemActionWrapper.jsx" />
-        <option value="$PROJECT_DIR$/src/components/light/IconLoading.jsx" />
-        <option value="$PROJECT_DIR$/src/components/pages/Login.jsx" />
         <option value="$PROJECT_DIR$/src/settings/cookie.jsx" />
-        <option value="$PROJECT_DIR$/src/components/pages/StartPage.jsx" />
-        <option value="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" />
+        <option value="$PROJECT_DIR$/src/components/light/IconLoading.jsx" />
+        <option value="$PROJECT_DIR$/src/components/light/LightManager.jsx" />
+        <option value="$PROJECT_DIR$/src/components/location/Location.jsx" />
+        <option value="$PROJECT_DIR$/src/reflux/LightStore.jsx" />
+        <option value="$PROJECT_DIR$/src/reflux/GroupStore.jsx" />
+        <option value="$PROJECT_DIR$/src/components/pages/Login.jsx" />
         <option value="$PROJECT_DIR$/src/services/httpservices.jsx" />
+        <option value="$PROJECT_DIR$/src/components/pages/StartPage.jsx" />
+        <option value="$PROJECT_DIR$/src/components/pages/HomePage.jsx" />
+        <option value="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" />
       </list>
     </option>
   </component>
@@ -368,13 +383,8 @@
               <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-material" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-material" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-material" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -494,12 +504,12 @@
       <workItem from="1535228954331" duration="33000" />
       <workItem from="1535260330874" duration="33778000" />
       <workItem from="1535305231654" duration="4958000" />
-      <workItem from="1535342489491" duration="12628000" />
+      <workItem from="1535342489491" duration="26107000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="581211000" />
+    <option name="totallyTimeSpent" value="594690000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
@@ -524,6 +534,26 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18374091" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32956153" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32956153" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" weight="0.27864215" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" visible="true" weight="0.27864215" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -565,13 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reflux/locationActions.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -676,20 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/light/LightManager.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reflux/GroupStore.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/notification/Notification.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -749,13 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/location/Location.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/navigation/AppBarPlaceHolder.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
@@ -777,16 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/navigation/NavBar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/navigation/ListItemActionWrapper.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -794,23 +786,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/pages/HomePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="31" column="44" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -842,8 +817,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/light/IconLoading.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-24">
-          <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+        <state relative-caret-position="288">
+          <caret line="63" column="30" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/light/LightManager.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reflux/locationActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/navigation/NavBar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/location/Location.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reflux/GroupStore.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-900">
+          <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/pages/Login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-432">
+          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -853,43 +879,53 @@
     <entry file="file://$PROJECT_DIR$/src/settings/cookie.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="45" selection-start-column="45" selection-end-column="45" />
+          <caret column="43" lean-forward="true" selection-start-column="28" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/pages/Login.jsx">
+    <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-192">
-          <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+        <state relative-caret-position="408">
+          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#33#75#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reflux/LightStore.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1428">
+          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/pages/StartPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        <state relative-caret-position="180">
+          <caret line="65" column="19" lean-forward="true" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="19" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/pages/HomePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="63" column="10" lean-forward="true" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
+        <state relative-caret-position="192">
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
+    <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        <state relative-caret-position="-916">
+          <caret line="61" selection-start-line="60" selection-end-line="61" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="true" />
           </folding>
         </state>
       </provider>

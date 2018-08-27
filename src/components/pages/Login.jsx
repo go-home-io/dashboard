@@ -22,7 +22,7 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         position:'relative',
-        left: 118,
+        left: 125,
         top:20,
     },
 });
@@ -46,6 +46,14 @@ class Login extends React.Component {
         this.props.getCredentials(this.state.name, this.state.password);
     };
 
+    handleKeyPressed = (evt) => {
+        if (evt.key === 'Enter') {
+            this.handleClick();
+            alert('Enter');
+        }
+
+    };
+
     render () {
         const { classes } = this.props;
         return (
@@ -62,7 +70,7 @@ class Login extends React.Component {
                                 onChange={this.handleChange('name')}
                                 margin="normal"
                                 error={this.props.error}
-
+                                onKeyPress={this.handleKeyPressed}
                             />
                             <TextField
                                 id="password-input"
@@ -72,6 +80,7 @@ class Login extends React.Component {
                                 autoComplete="current-password"
                                 margin="normal"
                                 onChange={this.handleChange('password')}
+                                onKeyPress={this.handleKeyPressed}
                                 value={this.state.password}
                                 error={this.props.error}
 
@@ -81,7 +90,7 @@ class Login extends React.Component {
                                 variant="outlined"
                                 color="primary" className={classes.button}
                             >
-                                Sign in
+                                Log in
                             </Button>
                         </FormControl>
                     </Grid>
