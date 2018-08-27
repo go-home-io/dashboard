@@ -65,8 +65,6 @@ class WebSocketStore extends Reflux.Store {
         ws.onopen = this.onOpen.bind(this);
         ws.onclose = this.onClose.bind(this);
 
-        timerPingInterval = setInterval(ping, pingInterval);
-
         this.onDoCommand = this.onDoCommand.bind(this);
         this.onReconnect = this.onReconnect.bind(this);
         this.onClear = this.onClear.bind(this);
@@ -74,12 +72,10 @@ class WebSocketStore extends Reflux.Store {
 
     // WebSocket event handlers
      onOpen() {
-        if (! firstConnect) {
-            ws.send('ping');
-            connectingState = false;
-            pongReceived = false;
-            timerPingInterval = setInterval(ping, pingInterval);
-        }
+         ws.send('ping');
+         connectingState = false;
+         pongReceived = false;
+         timerPingInterval = setInterval(ping, pingInterval);
     }
 
     onClose() {
