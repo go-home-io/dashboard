@@ -30,7 +30,8 @@ class StartPage extends Component {
             .then((data) => {
                 if (data === 'Failed to fetch' || data >= 400) {
                     if (data === 401) {
-                        // Server request authentication
+                        // Authentication required
+                        Cookie.remove(COOKIE_NAME);
                         this.setState({authenticated:false, auth_required: true, status:401});
                         if (user) {
                             this.setState({auth_error: true});

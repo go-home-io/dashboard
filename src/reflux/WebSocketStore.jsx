@@ -40,13 +40,14 @@ const pong =  () => {
 };
 
 const reconnectSocket = () => {
-    setTimeout(function () {
-        connectingState = true;
-        pongReceived = false;
-        clearInterval(timerPingInterval);
-        clearTimeout(timerConnectionTimeout);
-        wsActions.reconnect();
-    }, 500);
+    connectingState = true;
+    pongReceived = false;
+    clearInterval(timerPingInterval);
+    clearTimeout(timerConnectionTimeout);
+    wsActions.reconnect();
+    // setTimeout(function () {
+    //     wsActions.reconnect();
+    // }, 500);
 };
 
 

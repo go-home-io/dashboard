@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73d80a5f-025f-4534-8c10-526ca257a143" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/settings/cookie.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/light/IconLoading.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pages/StartPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/StartPage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/httpservices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/httpservices.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -97,7 +90,7 @@
           <entry key="html" value="83" />
           <entry key="js" value="28" />
           <entry key="json" value="3" />
-          <entry key="jsx" value="43164" />
+          <entry key="jsx" value="43175" />
           <entry key="md" value="21" />
         </counts>
       </usages-collector>
@@ -106,7 +99,7 @@
           <entry key="CSS" value="13" />
           <entry key="HTML" value="83" />
           <entry key="JSON" value="3" />
-          <entry key="JSX Harmony" value="43164" />
+          <entry key="JSX Harmony" value="43175" />
           <entry key="JavaScript" value="28" />
           <entry key="Markdown" value="21" />
           <entry key="PLAIN_TEXT" value="44" />
@@ -140,11 +133,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/pages/StartPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="50" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="50" />
+            <state relative-caret-position="336">
+              <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -185,11 +178,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="72">
+              <caret line="45" column="41" lean-forward="true" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -197,7 +190,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/pages/Login.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
+            <state relative-caret-position="-192">
               <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -314,9 +307,9 @@
         <option value="$PROJECT_DIR$/src/components/light/IconLoading.jsx" />
         <option value="$PROJECT_DIR$/src/components/pages/Login.jsx" />
         <option value="$PROJECT_DIR$/src/settings/cookie.jsx" />
-        <option value="$PROJECT_DIR$/src/components/pages/StartPage.jsx" />
         <option value="$PROJECT_DIR$/src/services/httpservices.jsx" />
         <option value="$PROJECT_DIR$/src/reflux/WebSocketStore.jsx" />
+        <option value="$PROJECT_DIR$/src/components/pages/StartPage.jsx" />
       </list>
     </option>
   </component>
@@ -502,18 +495,18 @@
       <workItem from="1535228954331" duration="33000" />
       <workItem from="1535260330874" duration="33778000" />
       <workItem from="1535305231654" duration="4958000" />
-      <workItem from="1535342489491" duration="8091000" />
+      <workItem from="1535342489491" duration="9495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="576674000" />
+    <option name="totallyTimeSpent" value="578078000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18374091" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18374091" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -532,26 +525,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18374091" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32956153" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32956153" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50033045" side_tool="true" weight="0.27864215" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49966952" visible="true" weight="0.27864215" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -878,26 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/pages/Login.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/pages/StartPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="50" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/httpservices.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -917,8 +870,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reflux/WebSocketStore.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="72">
+          <caret line="45" column="41" lean-forward="true" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/pages/Login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-192">
+          <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/pages/StartPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
