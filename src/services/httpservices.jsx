@@ -7,7 +7,7 @@ const service = {
     get:(url) => {
         return fetch(BASE_URL+url, {
             headers: {
-                // 'Authorization': Cookie.get(COOKIE_NAME)
+                'Authorization': Cookie.get(COOKIE_NAME)
             },
             method: 'get',
         })
