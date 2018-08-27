@@ -23,24 +23,30 @@ const connAlive = () => {
 };
 
 let ws = new WebSocket(SOCKET_URL);
-
+let firstConnect = true;
 
 const ping = () => {
     if (!connectingState) {
-        // console.log('ping');
+        // console.log('ping:'+reconnectAttempts);
         pongReceived = false;
         ws.send('ping');
-        timerConnectionTimeout = setTimeout( () => {
-            connectingState = true;
-            clearInterval(timerPingInterval);
-            wsActions.reconnect();
-        }, connectionTimeout);
+        timerConnectionTimeout = setTimeout(reconnectSocket, connectionTimeout);
     }
 };
 
 const pong =  () => {
     clearTimeout(timerConnectionTimeout);
     pongReceived = true;
+};
+
+const reconnectSocket = () => {
+    setTimeout(function () {
+        connectingState = true;
+        pongReceived = false;
+        clearInterval(timerPingInterval);
+        clearTimeout(timerConnectionTimeout);
+        wsActions.reconnect();
+    }, 500);
 };
 
 
@@ -56,6 +62,7 @@ class WebSocketStore extends Reflux.Store {
         ws.onmessage = this.onMessage.bind(this);
         ws.onerror = this.onError.bind(this);
         ws.onopen = this.onOpen.bind(this);
+        ws.onclose = this.onClose.bind(this);
 
         timerPingInterval = setInterval(ping, pingInterval);
 
@@ -66,15 +73,24 @@ class WebSocketStore extends Reflux.Store {
 
     // WebSocket event handlers
      onOpen() {
-        ws.send('ping');
-        connectingState = false;
-        timerPingInterval = setInterval(ping, pingInterval);
-        // console.log('Socket was reconnected');
+        if (! firstConnect) {
+            ws.send('ping');
+            connectingState = false;
+            pongReceived = false;
+            timerPingInterval = setInterval(ping, pingInterval);
+        }
+    }
+
+    onClose() {
+        ws = new WebSocket(SOCKET_URL);
+        ws.onmessage = this.onMessage.bind(this);
+        ws.onerror = this.onError.bind(this);
+        ws.onopen = this.onOpen.bind(this);
+        ws.onclose = this.onClose.bind(this);
     }
 
     onError () {
-        connectingState = true;
-        wsActions.reconnect();
+        reconnectSocket();
     };
 
     onMessage (evt) {
@@ -101,18 +117,15 @@ class WebSocketStore extends Reflux.Store {
             if (attempts > 0) {
                 this.setState({reset: true});
             }
-            // console.log('send '+'| attempt = '+attempts);
             attempts = 0;
         } else {
             if (attempts >= maxAttempts) {
                 this.setState({rejected:true});
                 clearTimeout(timerAttempts);
                 attempts = 0;
-                // console.log('rejected:'+this.state.rejected);
             } else {
                 timerAttempts = setTimeout(function () {
                     attempts = attempts + 1;
-                    // console.log('try again! attemt: '+attempts);
                     wsActions.doCommand(data);
                 }, 500)
             }
@@ -122,16 +135,11 @@ class WebSocketStore extends Reflux.Store {
 
     onClear() {
         this.setState({rejected: false, reset:false});
-        // console.log('Clear state');
-        // console.log(this.state);
     }
 
     onReconnect () {
+        firstConnect = false;
         ws.close();
-        ws = new WebSocket(SOCKET_URL);
-        ws.onmessage = this.onMessage.bind(this);
-        ws.onerror = this.onError.bind(this);
-        ws.onopen = this.onOpen.bind(this);
     }
 }
 

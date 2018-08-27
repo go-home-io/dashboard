@@ -42,10 +42,14 @@ class IconLoading extends Reflux.Component {
         lightActions.status(this.props.dev_id, status);
     }
 
+    restart = () => {
+        this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/20);
+    };
+
     progress = () => {
-        let { completed } = this.state;
-        let {reset} = this.state;
-        let {rejected} = this.state;
+        let { completed, reset, rejected } = this.state;
+       // let {reset, rejected} = this.state;
+        // let {rejected} = this.state;
 
         const diff = 5;
 
@@ -55,9 +59,11 @@ class IconLoading extends Reflux.Component {
         }
 
         if (reset) {
+            clearInterval(this.timer);
             this.setState({completed:0});
+            completed = this.state.completed;
             wsActions.clear();
-          //  setTimeout(this.onComplete.bind(this), 230,'error' );
+            setTimeout(this.restart.bind(this), 300);
         }
 
         if (completed === 100) {

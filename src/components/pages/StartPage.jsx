@@ -4,6 +4,8 @@ import HTTP from "../../services/httpservices";
 import Login from "./Login";
 import base64 from 'base-64';
 import ErrorPage from "./ErrorPage";
+import Cookie from "js-cookie";
+import {COOKIE_NAME} from '../../settings/cookie';
 
 const url = '/state';
 
@@ -51,8 +53,7 @@ class StartPage extends Component {
 
     getCredentials (user, password) {
         const credentials = 'Basic ' + base64.encode(user + ":" + password);
-        document.cookie = "X-Authorization="+ credentials +"; path=/";
-       // document.cookie = "X-Authorization=Basic dXNlcjE6cHdkMQ==; path=/";
+        Cookie.set(COOKIE_NAME, credentials);
         this.getComponentStateByHTTP(user, password);
     }
 

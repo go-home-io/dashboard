@@ -1,17 +1,18 @@
 import base64 from 'base-64';
 import {BASE_URL} from '../settings/urls';
-
+import Cookie from "js-cookie";
+import {COOKIE_NAME} from '../settings/cookie';
 
 const service = {
     get:(url, user, password) => {
 
         const credentials = 'Basic ' + base64.encode(user + ":" + password);
-        // console.log('url:'+url+' || user:'+user+' || '+'password:'+password);
-        // console.log(credentials);
+        console.log('url:'+url+' || user:'+user+' || '+'password:'+password);
+        console.log(credentials);
 
         return fetch(BASE_URL+url, {
             headers: {
-                // 'Authorization': credentials
+                'Authorization': Cookie.get(COOKIE_NAME)
             },
             method: 'get',
         })

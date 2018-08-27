@@ -53,7 +53,7 @@ class Login extends React.Component {
                     <AppBarPlaceHolder/>
                     <Grid container justify='center' alignItems='center' className={classes.container}>
                         <FormControl component="fieldset" className={classes.formControl}>
-                            <FormLabel component="label"><h3>Login, please</h3></FormLabel>
+                            <FormLabel component="label"><h3>Authentication required</h3></FormLabel>
                             <TextField
                                 id="name"
                                 label="Name"
@@ -81,7 +81,7 @@ class Login extends React.Component {
                                 variant="outlined"
                                 color="primary" className={classes.button}
                             >
-                                Submit
+                                Sign in
                             </Button>
                         </FormControl>
                     </Grid>
