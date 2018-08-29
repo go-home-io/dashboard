@@ -17,11 +17,12 @@ import locationActions from "../../reflux/location/locationActions";
 // import Fade from "@material-ui/core/Fade/Fade";
 // import AppStore from "../../reflux/application/AppStore";
 import storage from "../../services/storage";
+import truncateCaption from "../utils/truncate";
 
 const styles = theme => ({
         root: {
-            maxWidth:260,
-            minWidth:260,
+            maxWidth:250,
+            minWidth:250,
             minHeight:130,
             maxHeight:130,
             marginRight:7,
@@ -30,8 +31,12 @@ const styles = theme => ({
             marginLeft:5,
         },
         icon: {
-            width:'100%',
-            height:'100%',
+            position: 'relative',
+            left:-10,
+            top:-5,
+            padding:3,
+            fontSize: 22,
+            color: 'rgba(0, 0, 0, 0.54)'
         }
 
 });
@@ -55,6 +60,7 @@ class LightManager extends Reflux.Component{
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
         const loading = this.state.loading;
+        const name = truncateCaption(this.state.name, 24);
 
         return (
                 ! (lightType) ? null :
@@ -62,7 +68,7 @@ class LightManager extends Reflux.Component{
 
                      <ComponentHeader
                          dev_id={this.props.id}
-                         name = {this.state.name}
+                         name = {name}
                          on = {this.state.device_state.on}
                          status = {this.state.status}
                          read_only = {this.state.read_only}

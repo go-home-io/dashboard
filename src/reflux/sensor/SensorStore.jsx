@@ -37,8 +37,9 @@ function SensorStoreFactory(id,  device_info, location){
         // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
-                this.setState({device_state: data.state});
-
+                this.setState({device_state: data.state,
+                               status:'success',
+                });
             }
         }
 

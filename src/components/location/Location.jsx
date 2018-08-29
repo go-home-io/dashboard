@@ -28,7 +28,7 @@ class Location extends Reflux.Component {
 
         return (
                  <Grid container >
-                   <Grid item sm={9}>
+                   <Grid item xl={8} lg={9} md={12} sm={12}>
                      <Grid container justify='center'>
                      { devices.map( (device, index) => {
                          const device_info = getDeviceState(device, generalState.devices);
@@ -56,8 +56,9 @@ class Location extends Reflux.Component {
                      }
                      </Grid>
                    </Grid>
-                     <Grid item sm={3}>
-                         <Grid container justify='flex-start'>
+
+                     <Grid item xl={4} lg={3} md={12} sm={12}>
+                         <Grid container justify='center'>
                          { devices.map( device => {
                              const device_info = getDeviceState(device, generalState.devices);
                              const deviceType = device_info.type;

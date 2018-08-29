@@ -9,14 +9,32 @@ import CardContent from "@material-ui/core/CardContent/CardContent";
 import SensorHeader from "./SensorHeader";
 import sensorIcons from "./sensorIcons";
 import truncateCaption from "../utils/truncate";
+import sensorActions from "../../reflux/sensor/sensorActions";
+import Icon from "@material-ui/core/Icon/Icon";
+import BatteryIcon from "./BatteryIcon";
 
 const styles = theme => ({
     root: {
         minWidth: 250,
+        naxWidth: 250,
         minHeight: 130,
         maxHeight: 130,
         margin: 5,
     },
+    icon: {
+        top: -25,
+        left: 196,
+        color: 'rgba(0, 0, 0, 0.54)',
+        padding: '0 7px',
+        position: 'relative',
+        fontSize: 13,
+    },
+    label: {
+        fontSize: 11,
+        position: 'relative',
+        left: 177,
+        top:-9,
+    }
 
 });
 
@@ -39,9 +57,12 @@ class SensorManager extends Reflux.Component {
                             name = {name}
                             status = {this.state.status}
                             icon = {icon}
+                            action={sensorActions}
                     />
                 <CardContent>
-
+                    <BatteryIcon
+                        battery_level={this.state.device_state.battery_level}
+                    />
                 </CardContent>
             </Card>
         )

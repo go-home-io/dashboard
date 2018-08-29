@@ -39,9 +39,18 @@ const styles = theme => ({
         left: 23,
         top: -32,
     },
+    battery: {
+        position: 'relative',
+        left: 190,
+        top:-300,
+        padding:3,
+        fontSize: 22,
+        color: 'rgba(0, 0, 0, 0.54)'
+    }
 
 });
 
+const iconBattery = 'battery_50';
 
 class SensorHeader extends React.Component {
     timer = null;
@@ -95,6 +104,12 @@ class SensorHeader extends React.Component {
                     >
                         {this.props.name}
                     </Typography>
+                    {/*<Icon className={classes.battery}>*/}
+                        {/*<i className="material-icons">*/}
+                            {/*battery_50*/}
+                        {/*</i>*/}
+
+                    {/*</Icon>*/}
                 </div>
             </Paper>
         )

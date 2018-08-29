@@ -28,18 +28,25 @@ const styles = theme => ({
         width: '100%'
     },
     icon: {
-        float:'left',
-        cursor:'pointer',
-        marginLeft: 3,
+        position: 'relative',
+        left:-12,
+        top:-5,
+        padding:3,
+        fontSize: 22,
+        color: 'rgba(0, 0, 0, 0.54)'
     },
     typography: {
-        float:'left',
-        marginLeft:5,
-        cursor:'pointer',
+        position: 'relative',
+        left: 20,
+        top: -32,
     },
     ro_icon: {
-        float: 'right',
-        color: rgbColor({r:130,g:130,b:130}),
+        position: 'relative',
+        left: 191,
+        top:-58,
+        padding:3,
+        fontSize: 22,
+        color: 'rgba(0, 0, 0, 0.54)'
     }
 });
 
@@ -80,7 +87,7 @@ class ComponentHeader extends React.Component {
 
     render () {
         const {classes} = this.props;
-        const iconColor =  this.props.on ? 'orange' : rgbColor({r:100,g:100,b:100});
+        const iconColor =  this.props.on ? '#ffa500d1' : 'rgba(0,0,0,0.54)';
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
         const readOnly = this.props.read_only;
         const cursor = readOnly ? 'default' : 'pointer';
