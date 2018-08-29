@@ -6,8 +6,7 @@ import base64 from 'base-64';
 import ErrorPage from "./ErrorPage";
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from '../../settings/cookie';
-
-const url = '/state';
+import {URL} from '../../settings/urls';
 
 class StartPage extends Component {
     constructor(props) {
@@ -25,10 +24,10 @@ class StartPage extends Component {
         this.getComponentStateByHTTP();
     }
 
-    getComponentStateByHTTP (user, password) {
-        HTTP.get(url)
+    getComponentStateByHTTP (user) {
+        HTTP.get(URL)
             .then((data) => {
-                if (data === 'Failed to fetch' || data >= 400) {
+                if (data === 'Failed to fetch' || data >= 300) {
                     if (data === 401) {
                         // Authentication required
                         Cookie.remove(COOKIE_NAME);
@@ -37,7 +36,7 @@ class StartPage extends Component {
                             this.setState({auth_error: true});
                         }
                     } else {
-                        // Unknown connection error
+                        // Other connection errors
                         this.setState({auth_required: false, status:data});
                     }
                 } else {
@@ -55,23 +54,21 @@ class StartPage extends Component {
     getCredentials (user, password) {
         const credentials = 'Basic ' + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
-        this.getComponentStateByHTTP(user, password);
+        this.getComponentStateByHTTP(user);
     }
 
     render () {
         return (
            this.state.authenticated ?
-               <HomePage generalState={this.state.generalState}
-                         auth={this.state.authenticated}
+               <HomePage
+                   generalState={this.state.generalState}
                /> :
-
                this.state.auth_required ?
-
                    <Login
                        getCredentials={this.getCredentials.bind(this)}
                        error={this.state.auth_error}
                    /> :
-                     <ErrorPage status={this.state.status}/>
+                      <ErrorPage status={this.state.status}/>
         )
     }
 }

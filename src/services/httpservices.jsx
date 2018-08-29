@@ -1,4 +1,3 @@
-// import base64 from 'base-64';
 import {BASE_URL} from '../settings/urls';
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from '../settings/cookie';

@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import lightActions from '../../reflux/lightActions';
+import lightActions from '../../reflux/light/lightActions';
 import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
 

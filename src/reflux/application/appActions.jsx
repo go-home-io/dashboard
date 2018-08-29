@@ -1,7 +1,7 @@
 import Reflux from 'reflux'
 
 const appActions = Reflux.createActions([
-    'changeLocation',
+    'setLocation',
     'toggleMenu',
 
 ]);

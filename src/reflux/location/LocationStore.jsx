@@ -1,9 +1,10 @@
 import Reflux from 'reflux'
-import lightActions from "./lightActions";
+import lightActions from "../light/lightActions";
 import locationActions from "./locationActions";
-import groupActions from "./groupActions";
+import groupActions from "../group/groupActions";
+import sensorActions from "../sensor/sensorActions";
 
-const actions = [lightActions, groupActions];
+const actions = [lightActions, groupActions, sensorActions];
 
 //  Create unique Store for each Component
 function LocationStoreFactory(name,  members){

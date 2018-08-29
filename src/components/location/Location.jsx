@@ -4,8 +4,9 @@ import Grid from "@material-ui/core/Grid/Grid";
 import GroupManager from "../group/GroupManager";
 import getDeviceState from '../utils/getDeviceState';
 import LightManager from "../light/LightManager";
-import LocationStoreFactory from "../../reflux/LocationStore";
-import locationActions from "../../reflux/locationActions";
+import LocationStoreFactory from "../../reflux/location/LocationStore";
+import locationActions from "../../reflux/location/locationActions";
+import SensorManager from "../sensor/SensorManager";
 
 class Location extends Reflux.Component {
     constructor(props) {
@@ -27,6 +28,8 @@ class Location extends Reflux.Component {
 
         return (
                  <Grid container >
+                   <Grid item sm={9}>
+                     <Grid container justify='center'>
                      { devices.map( (device, index) => {
                          const device_info = getDeviceState(device, generalState.devices);
                          const deviceType = device_info.type;
@@ -48,8 +51,30 @@ class Location extends Reflux.Component {
                                              id = {device}
                                              device_state = {device_info}
                                         />  : null
+
                          )})
                      }
+                     </Grid>
+                   </Grid>
+                     <Grid item sm={3}>
+                         <Grid container justify='flex-start'>
+                         { devices.map( device => {
+                             const device_info = getDeviceState(device, generalState.devices);
+                             const deviceType = device_info.type;
+
+                             return(
+                                 deviceType === 'sensor' ?
+                                     <SensorManager
+                                         key = {device}
+                                         location = {location}
+                                         id = {device}
+                                         device_info = {device_info}
+                                     />  : null
+                             )})
+                         }
+                         </Grid>
+
+                     </Grid>
                  </Grid>
 
         )

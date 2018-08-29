@@ -1,8 +1,8 @@
 import Reflux from 'reflux'
 import groupActions from './groupActions';
-import wsActions from "./wsActions";
+import wsActions from "../socket/wsActions";
 // import notificationActions from "./notificationActions";
-import lightActions from "./lightActions";
+import lightActions from "../light/lightActions";
 
 
 //  Create unique Store for each Component

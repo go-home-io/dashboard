@@ -5,8 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import notificationStore from '../../reflux/notificationStore';
-import notificationActions from '../../reflux/notificationActions';
+import notificationStore from '../../reflux/notification/notificationStore';
+import notificationActions from '../../reflux/notification/notificationActions';
 
 const styles = theme => ({
     close: {

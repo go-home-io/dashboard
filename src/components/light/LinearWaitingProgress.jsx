@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import lightActions from "../../reflux/lightActions";
+import lightActions from "../../reflux/light/lightActions";
 
 const styles = {
     root: {

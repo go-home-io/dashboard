@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import rgbColor from "../utils/rgbColor";
 import Grid from "@material-ui/core/Grid/Grid";
 import SlidersHeader from "./SlidersHeader";
-import lightActions from "../../reflux/lightActions";
+import lightActions from "../../reflux/light/lightActions";
 
 const styles = theme => ({
     root : {

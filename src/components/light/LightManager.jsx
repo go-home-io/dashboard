@@ -1,7 +1,7 @@
 import React from 'react'
 import Reflux from 'reflux'
 import ComponentHeader from "../common/ComponentHeader";
-import LightStoreFactory from "../../reflux/LightStore";
+import LightStoreFactory from "../../reflux/light/LightStore";
 import IconLoading from "./IconLoading";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,10 +11,12 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
-// import Fade from "@material-ui/core/Fade/Fade";
 import Zoom from "@material-ui/core/Zoom/Zoom";
-import lightActions from "../../reflux/lightActions";
-import Fade from "@material-ui/core/Fade/Fade";
+import lightActions from "../../reflux/light/lightActions";
+import locationActions from "../../reflux/location/locationActions";
+// import Fade from "@material-ui/core/Fade/Fade";
+// import AppStore from "../../reflux/application/AppStore";
+import storage from "../../services/storage";
 
 const styles = theme => ({
         root: {
@@ -34,11 +36,14 @@ const styles = theme => ({
 
 });
 
+const lightIcon = <i className="fa fa-lightbulb-o" aria-hidden="true"> </i>;
+
 class LightManager extends Reflux.Component{
     constructor(props) {
         super(props);
         this.store = LightStoreFactory(props.id, props.device_state, props.location, props.group_id);
     }
+
 
     render () {
         const {classes} = this.props;
@@ -55,12 +60,14 @@ class LightManager extends Reflux.Component{
                 ! (lightType) ? null :
                  <Card style={{display:display}} className={classes.root}>
 
-                     <ComponentHeader dev_id={this.props.id}
-                                  name = {this.state.name}
-                                  on = {this.state.device_state.on}
-                                  status = {this.state.status}
-                                  read_only = {this.state.read_only}
-                                  actions = {lightActions}
+                     <ComponentHeader
+                         dev_id={this.props.id}
+                         name = {this.state.name}
+                         on = {this.state.device_state.on}
+                         status = {this.state.status}
+                         read_only = {this.state.read_only}
+                         actions = {lightActions}
+                         icon = {lightIcon}
                      />
                      <CardContent>
                          {loading ? null :

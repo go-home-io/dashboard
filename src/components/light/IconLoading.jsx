@@ -2,11 +2,11 @@ import React from 'react';
 import Reflux from 'reflux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {CONNECTION_TIMEOUT} from '../../settings/delays';
+import {CONNECTION_TIMEOUT} from '../../settings/deviceDelays';
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
-import lightActions from "../../reflux/lightActions";
-import WebSocketStore from "../../reflux/WebSocketStore";
-import wsActions from "../../reflux/wsActions";
+import lightActions from "../../reflux/light/lightActions";
+import WebSocketStore from "../../reflux/socket/WebSocketStore";
+import wsActions from "../../reflux/socket/wsActions";
 
 const styles = theme => ({
     root: {
@@ -31,10 +31,10 @@ class IconLoading extends Reflux.Component {
         this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/20);
     }
 
-    // componentWillUnmount() {
-    //     clearInterval(this.timer);
-    //     this.setState({ completed: 0 });
-    // }
+    componentWillUnmount() {
+        clearInterval(this.timer);
+        this.setState({ completed: 0 });
+    }
 
     onComplete (status) {
         clearInterval(this.timer);
@@ -48,14 +48,13 @@ class IconLoading extends Reflux.Component {
     };
 
     progress = () => {
-        let { completed, reset, rejected } = this.state;
-       // let {reset, rejected} = this.state;
+        let { completed, reset, rejected} = this.state;
+        // let {reset} = this.state;
         // let {rejected} = this.state;
 
         const diff = 5;
 
         if (rejected ) {
-            // alert('rejected');
             this.onComplete('rejected');
         }
 
@@ -65,11 +64,11 @@ class IconLoading extends Reflux.Component {
             this.setState({completed:0});
             completed = this.state.completed;
             wsActions.clear();
-            setTimeout(this.restart.bind(this), 300);
+            setTimeout(this.restart.bind(this), 200);
         }
 
         if (completed === 100) {
-            setTimeout(this.onComplete.bind(this), 230,'error' );
+            this.onComplete('error');
         } else {
             this.setState({ completed: completed + diff });
         }

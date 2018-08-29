@@ -12,8 +12,8 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItemActionWrapper from "./ListItemActionWrapper";
-import AppStore from "../../reflux/AppStore";
-import appActions from "../../reflux/appActions";
+import AppStore from "../../reflux/application/AppStore";
+import appActions from "../../reflux/application/appActions";
 
 const styles = theme => ({
     root: {

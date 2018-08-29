@@ -7,7 +7,7 @@ class AppStore extends Reflux.Store {
 
         this.state = {
                  locations: [],
-                 active_location: '',
+                 active_location: 'Default',
                  credentials: {},
                  openMenu: false,
         };
@@ -17,13 +17,14 @@ class AppStore extends Reflux.Store {
 
     }
 
-    // componentDidMount () {
-    //     this.setState({openMenu:false})
-    // }
 
     // Actions
     onToggleMenu () {
         this.setState({openMenu: !this.state.openMenu})
+    }
+
+    onSetLocation (location) {
+        this.setState({active_location: location});
     }
 }
 

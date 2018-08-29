@@ -10,8 +10,8 @@ import Hidden from "@material-ui/core/Hidden/Hidden";
 import NavBar from "./NavBar";
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from "@material-ui/core/Drawer/Drawer";
-import AppStore from "../../reflux/AppStore";
-import appActions from "../../reflux/appActions";
+import AppStore from "../../reflux/application/AppStore";
+import appActions from "../../reflux/application/appActions";
 
 const styles = theme => ({
     button: {

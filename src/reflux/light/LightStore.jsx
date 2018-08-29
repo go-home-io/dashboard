@@ -1,12 +1,12 @@
 import Reflux from 'reflux'
 import lightActions from './lightActions'
-import wsActions from "./wsActions";
-import notificationActions from "./notificationActions";
+import wsActions from "../socket/wsActions";
+import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Component
 function LightStoreFactory(id,  device_info, location, group){
 
-    const visible = (location === 'Default');
+    // const visible = (location === active_location);
 
     class LightStore extends Reflux.Store {
         constructor() {
@@ -21,10 +21,12 @@ function LightStoreFactory(id,  device_info, location, group){
                            group_id: group,
                            location: location,
                            loading:false,
-                           visible: visible,
+                           visible: false,
                            status:'normal',
                            read_only: device_info.read_only,
             };
+            // this.store = AppStore;
+
 
             // console.log('LM group: '+this.state.group_id);
             // console.log(this.state);

@@ -5,10 +5,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
 import Paper from "@material-ui/core/Paper/Paper";
 import rgbColor from "../utils/rgbColor";
-import {HEADER_HIGHLIGHT_DURATION} from '../../settings/delays';
+import {HEADER_HIGHLIGHT_DURATION} from '../../settings/deviceDelays';
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import truncateCaption from '../utils/truncate';
 
-const normal = '#d7d2d736';
+const normal =  '#d7d2d736';
 const success = '#d2fad9';
 const error = '#f44336';
 
@@ -24,6 +25,7 @@ const styles = theme => ({
         marginLeft: 0,
         marginTop:-7,
         marginBottom:0,
+        width: '100%'
     },
     icon: {
         float:'left',
@@ -32,7 +34,7 @@ const styles = theme => ({
     },
     typography: {
         float:'left',
-        marginLeft:3,
+        marginLeft:5,
         cursor:'pointer',
     },
     ro_icon: {
@@ -41,13 +43,6 @@ const styles = theme => ({
     }
 });
 
-function truncateName(name) {
-     if ( name.length <= 19) {
-         return name
-     } else {
-         return name.substr(0,17) + '..'
-     }
-}
 
 class ComponentHeader extends React.Component {
      timer = null;
@@ -89,6 +84,7 @@ class ComponentHeader extends React.Component {
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
         const readOnly = this.props.read_only;
         const cursor = readOnly ? 'default' : 'pointer';
+        // const (this.props.type === 'sensor') ? 'lightgrey' :
 
         return (
             <Paper className={classes.paper} elevation={0} style={{backgroundColor:backgroundColor}}>
@@ -98,7 +94,7 @@ class ComponentHeader extends React.Component {
                                className={classes.icon}
                                onClick={this.handleClick}
                          >
-                             <i className="fa fa-lightbulb-o" aria-hidden="true"> </i>
+                             {this.props.icon}
                          </Icon>
 
                          <Typography variant="subheading"
@@ -106,7 +102,7 @@ class ComponentHeader extends React.Component {
                                      onClick={this.handleClick}
                                      style={{cursor:cursor}}
                          >
-                             {truncateName(this.props.name)}
+                             {truncateCaption(this.props.name, 20)}
                          </Typography>
                          { readOnly ?
                              <Tooltip title='Read only device'
@@ -114,7 +110,6 @@ class ComponentHeader extends React.Component {
                              >
                                  <Icon className={classes.ro_icon}>
                                      sync_disabled
-                                     {/*block*/}
                                  </Icon>
                              </Tooltip> : null
                          }

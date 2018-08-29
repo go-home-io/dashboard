@@ -3,9 +3,10 @@ import Reflux from 'reflux';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from "@material-ui/core/Icon/Icon";
-import locationActions from "../../reflux/locationActions";
-import AppStore from "../../reflux/AppStore";
-import appActions from "../../reflux/appActions";
+import locationActions from "../../reflux/location/locationActions";
+import AppStore from "../../reflux/application/AppStore";
+import appActions from "../../reflux/application/appActions";
+import storage from "../../services/storage";
 
 
 class ListItemActionWrapper extends Reflux.Component {
@@ -16,6 +17,7 @@ class ListItemActionWrapper extends Reflux.Component {
     }
     handleClick () {
         locationActions.visible(this.props.location);
+        storage.set('location', this.props.location);
         if (this.state.openMenu) {
             appActions.toggleMenu();
         }
