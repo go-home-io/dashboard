@@ -4,27 +4,27 @@ import MenuItem from '@material-ui/core/MenuItem';
 import lightActions from '../../reflux/light/lightActions';
 import PropTypes from "prop-types";
 import { withStyles } from '@material-ui/core/styles';
+import Typography from "@material-ui/core/Typography/Typography";
 
 const ITEM_HEIGHT = 60;
 
 const styles = theme => ( {
     root: {
         width: '100%',
-        marginTop: 6,
-        float: 'left',
+        marginTop: 0,
     },
     text: {
-        fontSize:12,
+        // fontSize:12,
         letterSpacing:1,
-        fontColor:'lightgray',
-        // cursor:'pointer',
+        // fontColor:'lightgray',
+        cursor:'pointer',
         // position: 'relative',
         // left: 10,
     },
     button: {
-        position: 'relative',
-        top: -5,
-        left: 29,
+        // position: 'relative',
+        // top: -5,
+        // left: 29,
     },
 });
 
@@ -61,7 +61,9 @@ class Scenes extends React.Component {
                                 onClick={this.handleClick}
                                 style={{cursor:cursor}}
                 >
-                    Set scene
+                    <Typography variant='body1'>
+                        Set scene
+                    </Typography>
                 </div>
                 <Menu
                     id="long-menu"

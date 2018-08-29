@@ -30,6 +30,10 @@ const styles = theme => ({
             marginBottom:5,
             marginLeft:5,
         },
+        content: {
+            marginLeft: 15,
+            marginTop: 10,
+        },
         icon: {
             position: 'relative',
             left:-10,
@@ -77,7 +81,8 @@ class LightManager extends Reflux.Component{
                      />
                      <CardContent>
                          {loading ? null :
-                             <Zoom in={!this.state.loading}>
+
+                               <Zoom in={!this.state.loading}>
                                  <Grid container justify='flex-start' alignItems='center' alignContent='center'>
                                      {isBrightnessControl ?
                                          <LightBrightness dev_id={this.props.id}
@@ -99,8 +104,9 @@ class LightManager extends Reflux.Component{
                                          />
                                          : null
                                      }
-                                 </Grid>
-                             </Zoom>
+                                     </Grid>
+                                 </Zoom>
+
                          }
                          {loading ?
                              <Zoom in={loading}>

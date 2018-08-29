@@ -41,7 +41,7 @@ class GoHomeBar extends Reflux.Component {
 
         return(
             <div>
-                <AppBar position="static">
+                <AppBar position="fixed">
                     <Toolbar>
                         <Hidden lgUp>
                             <IconButton  className={classes.button}

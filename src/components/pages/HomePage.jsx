@@ -30,7 +30,7 @@ class HomePage extends Reflux.Component {
         const locations = generalState.locations;
 
         return (
-            <Grid container spacing={8} justify='flex-start'>
+            <Grid container spacing={0} justify='flex-start' style={{marginTop:69}}>
                 <Grid item xs={12}>
                     <GoHomeBar locations={locations}/>
                 </Grid>

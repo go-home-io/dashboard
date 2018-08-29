@@ -12,13 +12,16 @@ import truncateCaption from "../utils/truncate";
 import sensorActions from "../../reflux/sensor/sensorActions";
 import Icon from "@material-ui/core/Icon/Icon";
 import BatteryIcon from "./BatteryIcon";
+import Temperature from "./Temperature";
 
 const styles = theme => ({
     root: {
-        minWidth: 250,
-        naxWidth: 250,
-        minHeight: 130,
-        maxHeight: 130,
+        // minWidth: 250,
+        // naxWidth: 250,
+        // minHeight: 130,
+        // maxHeight: 130,
+        width: 250,
+        height: 130,
         margin: 5,
     },
     icon: {
@@ -50,6 +53,7 @@ class SensorManager extends Reflux.Component {
         const name = truncateCaption(this.state.name, 24);
         const display = this.state.visible ? 'block' : 'none';
 
+
         return (
             <Card className={classes.root} style={{display:display}}>
                     <SensorHeader
@@ -59,11 +63,18 @@ class SensorManager extends Reflux.Component {
                             icon = {icon}
                             action={sensorActions}
                     />
-                <CardContent>
+                {/*<CardContent>*/}
                     <BatteryIcon
                         battery_level={this.state.device_state.battery_level}
                     />
-                </CardContent>
+                    { this.state.type === 'temperature' ?
+                        <Temperature
+                            temperature={this.state.device_state.temperature}
+                            humidity={this.state.device_state.humidity}
+                        /> : null
+
+                    }
+                {/*</CardContent>*/}
             </Card>
         )
     }

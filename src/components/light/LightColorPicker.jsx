@@ -5,27 +5,26 @@ import Grid from "@material-ui/core/Grid/Grid";
 import ColorSliders from "./ColorSliders";
 import Popover from "@material-ui/core/Popover/Popover";
 import rgbColor from "../utils/rgbColor";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const styles = theme => ({
     root : {
         width:'100%',
+        height: 21,
         marginTop: 2,
-        // cursor: 'pointer',
+        cursor: 'pointer',
     },
     box: {
-        display: 'inline-block',
         border:'solid 1px #000',
         width:15,
         height:15,
-        marginLeft:38,
         position:'relative',
-        top:5,
+        top:-20,
+        left:86,
         cursor: 'pointer',
     },
     text: {
-        fontSize:12,
         letterSpacing:1,
-        fontColor:'lightgray',
         cursor: 'pointer',
     },
 });
@@ -64,7 +63,9 @@ class LightColorPicker extends React.Component {
                          onClick={this.handleClick}
                          style={{cursor:cursor}}
                     >
-                        Color:
+                        <Typography variant='body1'>
+                             Color:
+                        </Typography>
                         <div className={classes.box}
                              style={{backgroundColor:color, cursor:cursor}}>
                         </div>

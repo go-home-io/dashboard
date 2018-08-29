@@ -4,11 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid/Grid";
 import Popover from "@material-ui/core/Popover/Popover";
 import BrightnessSlider from "./BrightnessSlider";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const styles = theme => ( {
     root: {
         width: '100%',
-        marginTop: 0,
+        marginTop: -5,
     },
     text: {
         fontSize:12,
@@ -52,7 +53,9 @@ class LightBrightness extends React.Component {
                                  onClick={this.handleClick}
                                  style={{cursor:cursor}}
                  >
-                     Brightness: {this.props.level}%
+                     <Typography variant='body1'>
+                         Brightness: {this.props.level}%
+                     </Typography>
                  </div>
                  <Popover
                      id="simple-popper"
