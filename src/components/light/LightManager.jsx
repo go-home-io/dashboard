@@ -13,18 +13,15 @@ import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import lightActions from "../../reflux/light/lightActions";
-import locationActions from "../../reflux/location/locationActions";
-// import Fade from "@material-ui/core/Fade/Fade";
-// import AppStore from "../../reflux/application/AppStore";
-import storage from "../../services/storage";
 import truncateCaption from "../utils/truncate";
+import {LIGHT_BKG_COLOR} from "../../settings/colors";
 
 const styles = theme => ({
         root: {
-            maxWidth:250,
-            minWidth:250,
-            minHeight:130,
-            maxHeight:130,
+            // maxWidth:250,
+            width:250,
+            height:130,
+            // maxHeight:130,
             marginRight:7,
             marginTop:5,
             marginBottom:5,
@@ -45,6 +42,7 @@ const styles = theme => ({
 
 });
 
+const ordinaryBkgColor = LIGHT_BKG_COLOR;
 const lightIcon = <i className="fa fa-lightbulb-o" aria-hidden="true"> </i>;
 
 class LightManager extends Reflux.Component{
@@ -78,6 +76,7 @@ class LightManager extends Reflux.Component{
                          read_only = {this.state.read_only}
                          actions = {lightActions}
                          icon = {lightIcon}
+                         ordinaryBkgColor={ordinaryBkgColor}
                      />
                      <CardContent>
                          {loading ? null :

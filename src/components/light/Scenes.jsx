@@ -62,7 +62,7 @@ class Scenes extends React.Component {
                                 style={{cursor:cursor}}
                 >
                     <Typography variant='body1'>
-                        Set scene
+                        Select scene
                     </Typography>
                 </div>
                 <Menu

@@ -3,12 +3,14 @@ import {SOCKET_URL} from "../../settings/urls";
 import lightActions from "../light/lightActions";
 import wsActions from "./wsActions";
 import groupActions from "../group/groupActions";
+import sensorActions from "../sensor/sensorActions";
 
 const connectionTimeout = 3000; // ms
 const pingInterval = 5000;
 const maxAttempts = 5;
 
-const actions = [lightActions, groupActions];
+// Broadcasting list
+const actions = [lightActions, groupActions, sensorActions];
 
 let timerConnectionTimeout = null;
 let timerPingInterval = null;
@@ -23,22 +25,11 @@ const connAlive = () => {
     return pongReceived && !connectingState
 };
 
-// let firstConnect = true;
-
 const pong =  () => {
     clearTimeout(timerConnectionTimeout);
     timerConnectionTimeout = null;
     pongReceived = true;
 };
-
-// const reconnectSocket = () => {
-//     connectingState = true;
-//     pongReceived = false;
-//     clearInterval(timerPingInterval);
-//     clearTimeout(timerConnectionTimeout);
-//     timerPingInterval = null;
-//     wsActions.reconnect();
-// };
 
 class WebSocketStore extends Reflux.Store {
     socket = null;
@@ -51,11 +42,6 @@ class WebSocketStore extends Reflux.Store {
         };
         this.listenables = wsActions;
         this.createSocket();
-        // this.socket = new WebSocket(SOCKET_URL);
-        // this.socket.onmessage = this.onMessage.bind(this);
-        // this.socket.onerror = this.onError.bind(this);
-        // this.socket.onopen = this.onOpen.bind(this);
-        // this.socket.onclose = this.onClose.bind(this);
 
         this.onDoCommand = this.onDoCommand.bind(this);
         this.onReconnect = this.onReconnect.bind(this);
@@ -72,7 +58,7 @@ class WebSocketStore extends Reflux.Store {
         this.socket.onclose = this.onClose.bind(this);
     };
 
-    reconnectSocket = () => {
+    reopenSocket = () => {
         connectingState = true;
         pongReceived = false;
         clearInterval(timerPingInterval);
@@ -85,7 +71,7 @@ class WebSocketStore extends Reflux.Store {
         if (!connectingState) {
             pongReceived = false;
             this.socket.send('ping');
-            timerConnectionTimeout = setTimeout(this.reconnectSocket, connectionTimeout);
+            timerConnectionTimeout = setTimeout(this.reopenSocket, connectionTimeout);
         }
     };
 
@@ -105,7 +91,7 @@ class WebSocketStore extends Reflux.Store {
 
     onError() {
         console.log('Socket error');
-       this.reconnectSocket();
+       this.reopenSocket();
     };
 
     onMessage(evt) {
@@ -153,7 +139,7 @@ class WebSocketStore extends Reflux.Store {
     }
 
     onReconnect() {
-        this.reconnectSocket();
+        this.reopenSocket();
     }
 }
 

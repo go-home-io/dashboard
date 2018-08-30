@@ -8,10 +8,10 @@ import rgbColor from "../utils/rgbColor";
 import {HEADER_HIGHLIGHT_DURATION} from '../../settings/deviceDelays';
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import truncateCaption from '../utils/truncate';
+import {SUCCESS_BKG_COLOR, ERROR_BKG_COLOR} from '../../settings/colors';
 
-const normal =  '#d7d2d736';
-const success = '#d2fad9';
-const error = '#f44336';
+const success = SUCCESS_BKG_COLOR;
+const error = ERROR_BKG_COLOR;
 
 const styles = theme => ({
     paper: {
@@ -19,7 +19,6 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         height: 10,
-        backgroundColor:normal,
     },
     root: {
         marginLeft: 0,
@@ -50,15 +49,14 @@ const styles = theme => ({
     }
 });
 
-
 class ComponentHeader extends React.Component {
-     timer = null;
+    timer = null;
 
-     constructor(props) {
+    constructor(props) {
          super(props);
          this.handleClick = this.handleClick.bind(this);
-         this.setNormalStatus = this.setNormalStatus.bind(this);
-     }
+         this.setOrdinaryStatus = this.setOrdinaryStatus.bind(this);
+    }
 
     getHeaderBackgroundColor(status) {
         let bgColor = null;
@@ -69,20 +67,23 @@ class ComponentHeader extends React.Component {
         }
         if (bgColor) {
             clearInterval(this.timer);
-            this.timer = setInterval(this.setNormalStatus, HEADER_HIGHLIGHT_DURATION);
-            return bgColor;
+            this.timer = setInterval(this.setOrdinaryStatus, HEADER_HIGHLIGHT_DURATION);
+            return bgColor
+        } else {
+            return this.props.ordinaryBkgColor
         }
     }
 
-        handleClick () {
+
+    handleClick () {
          if (! this.props.read_only ) {
              // alert('Clicked by '+this.props.dev_id);
              this.props.actions.toggle(this.props.dev_id);
          }
-    }
+     }
 
-    setNormalStatus() {
-        this.props.actions.status(this.props.dev_id, 'normal');
+    setOrdinaryStatus() {
+        this.props.actions.status(this.props.dev_id, 'ordinary');
     }
 
     render () {
@@ -91,7 +92,6 @@ class ComponentHeader extends React.Component {
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
         const readOnly = this.props.read_only;
         const cursor = readOnly ? 'default' : 'pointer';
-        // const (this.props.type === 'sensor') ? 'lightgrey' :
 
         return (
             <Paper className={classes.paper} elevation={0} style={{backgroundColor:backgroundColor}}>

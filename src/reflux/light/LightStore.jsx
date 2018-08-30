@@ -22,14 +22,9 @@ function LightStoreFactory(id,  device_info, location, group){
                            location: location,
                            loading:false,
                            visible: false,
-                           status:'normal',
+                           status:'ordinary',
                            read_only: device_info.read_only,
             };
-            // this.store = AppStore;
-
-
-            // console.log('LM group: '+this.state.group_id);
-            // console.log(this.state);
 
             this.listenables = lightActions;
 

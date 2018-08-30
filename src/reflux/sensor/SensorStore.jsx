@@ -1,7 +1,6 @@
 import Reflux from 'reflux'
 import sensorActions from './sensorActions'
 import notificationActions from "../notification/notificationActions";
-import wsActions from "../socket/wsActions";
 
 //  Create unique Store for each Component
 function SensorStoreFactory(id,  device_info, location){
@@ -19,19 +18,14 @@ function SensorStoreFactory(id,  device_info, location){
                 location: location,
                 visible: false,
                 read_only: device_info.read_only,
-                status: 'normal',
+                status: 'ordinary',
             };
-
-            // console.log('Sensor: ');
-            // console.log(this.state);
-
             this.listenables = sensorActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
-
-            console.log('dev_id:'+id+'  read_only:'+this.state.read_only);
-            console.log(this.state);
+            this.onVisible = this.onVisible.bind(this);
+            this.onStatus = this.onStatus.bind(this);
         }
 
         // WebSocket listener

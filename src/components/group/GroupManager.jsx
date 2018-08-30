@@ -9,6 +9,9 @@ import GroupStoreFactory from "../../reflux/group/GroupStore";
 import ComponentHeader from "../common/ComponentHeader";
 import groupActions from "../../reflux/group/groupActions";
 import SensorManager from "../sensor/SensorManager";
+import {GROUP_BKG_COLOR} from "../../settings/colors";
+
+const ordinaryBkgColor = GROUP_BKG_COLOR;
 
 const styles = theme => ({
      root: {
@@ -55,6 +58,7 @@ class GroupManager  extends Reflux.Component {
                             read_only = {this.state.read_only}
                             actions = {groupActions}
                             icon = {groupIcon}
+                            ordinaryBkgColor={ordinaryBkgColor}
                         />
                         </div>
                         <Grid container justify='center'>

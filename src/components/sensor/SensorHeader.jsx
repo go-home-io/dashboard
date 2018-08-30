@@ -4,13 +4,13 @@ import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
 import Paper from "@material-ui/core/Paper/Paper";
-import rgbColor from "../utils/rgbColor";
 import {HEADER_HIGHLIGHT_DURATION} from '../../settings/deviceDelays';
-// import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import {SUCCESS_BKG_COLOR, ERROR_BKG_COLOR} from '../../settings/colors';
+import sensorActions from "../../reflux/sensor/sensorActions";
 
-const normal =  '#c8edee5e';
-const success = '#d2fad9';
-const error = '#f44336';
+
+const success = SUCCESS_BKG_COLOR;
+const error = ERROR_BKG_COLOR;
 
 const styles = theme => ({
     paper: {
@@ -18,8 +18,7 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         height: 10,
-        backgroundColor:normal,
-    },
+     },
     root: {
         marginLeft: 0,
         marginTop:-7,
@@ -50,16 +49,8 @@ const styles = theme => ({
 
 });
 
-const iconBattery = 'battery_50';
-
 class SensorHeader extends React.Component {
     timer = null;
-
-    // constructor(props) {
-    //     super(props);
-    //     this.handleClick = this.handleClick.bind(this);
-    //     this.setNormalStatus = this.setNormalStatus.bind(this);
-    // }
 
     getHeaderBackgroundColor(status) {
         let bgColor = null;
@@ -70,20 +61,15 @@ class SensorHeader extends React.Component {
         }
         if (bgColor) {
             clearInterval(this.timer);
-            this.timer = setInterval(this.setNormalStatus, HEADER_HIGHLIGHT_DURATION);
-            return bgColor;
+            this.timer = setInterval(this.setOrdinaryStatus, HEADER_HIGHLIGHT_DURATION);
+            return bgColor
+        } else {
+            return this.props.ordinaryBkgColor
         }
     }
 
-    handleClick () {
-        if (! this.props.read_only ) {
-            // alert('Clicked by '+this.props.dev_id);
-            this.props.actions.toggle(this.props.dev_id);
-        }
-    }
-
-    setNormalStatus() {
-        this.props.actions.status(this.props.dev_id, 'normal');
+    setOrdinaryStatus() {
+        sensorActions.status(this.props.dev_id, 'ordinary');
     }
 
     render () {
@@ -98,18 +84,10 @@ class SensorHeader extends React.Component {
                         {this.props.icon}
                     </Icon>
 
-                    <Typography variant="subheading"
-                                className={classes.typography}
-                                onClick={this.handleClick}
-                    >
+                    <Typography variant="subheading" className={classes.typography} >
                         {this.props.name}
                     </Typography>
-                    {/*<Icon className={classes.battery}>*/}
-                        {/*<i className="material-icons">*/}
-                            {/*battery_50*/}
-                        {/*</i>*/}
 
-                    {/*</Icon>*/}
                 </div>
             </Paper>
         )
