@@ -59,7 +59,6 @@ class SensorManager extends Reflux.Component {
                             name = {name}
                             status = {this.state.status}
                             icon = {icon}
-                            action={sensorActions}
                             ordinaryBkgColor={ordinaryBkgColor}
                     />
 

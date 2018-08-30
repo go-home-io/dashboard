@@ -52,6 +52,11 @@ const styles = theme => ({
 class SensorHeader extends React.Component {
     timer = null;
 
+    constructor(props) {
+        super(props);
+        this.setOrdinaryStatus = this.setOrdinaryStatus.bind(this);
+    }
+
     getHeaderBackgroundColor(status) {
         let bgColor = null;
         if ((status === 'success')) {
@@ -69,7 +74,9 @@ class SensorHeader extends React.Component {
     }
 
     setOrdinaryStatus() {
-        sensorActions.status(this.props.dev_id, 'ordinary');
+        if (this.props.dev_id) {
+            sensorActions.status(this.props.dev_id, 'ordinary');
+        }
     }
 
     render () {
