@@ -4,10 +4,8 @@ import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
 import Paper from "@material-ui/core/Paper/Paper";
-import rgbColor from "../utils/rgbColor";
 import {HEADER_HIGHLIGHT_DURATION} from '../../settings/deviceDelays';
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import truncateCaption from '../utils/truncate';
 import {SUCCESS_BKG_COLOR, ERROR_BKG_COLOR} from '../../settings/colors';
 
 const success = SUCCESS_BKG_COLOR;
@@ -18,7 +16,8 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        height: 10,
+        height: 40,
+
     },
     root: {
         marginLeft: 0,
@@ -28,24 +27,24 @@ const styles = theme => ({
     },
     icon: {
         position: 'relative',
-        left:-12,
-        top:-5,
+        left:-19,
+        top:-10,
         padding:3,
         fontSize: 22,
-        color: 'rgba(0, 0, 0, 0.54)'
+        color: '#ffffffe6'
     },
     typography: {
         position: 'relative',
-        left: 20,
-        top: -32,
+        left: 10,
+        top: -28,
+        color: "#ffffffe6",
     },
     ro_icon: {
         position: 'relative',
-        left: 191,
-        top:-58,
-        padding:3,
-        fontSize: 22,
-        color: 'rgba(0, 0, 0, 0.54)'
+        left: -49,
+        top: 32,
+        fontSize: 21,
+        color: '#ff9b9b'
     }
 });
 
@@ -88,7 +87,7 @@ class ComponentHeader extends React.Component {
 
     render () {
         const {classes} = this.props;
-        const iconColor =  this.props.on ? '#ffa500d1' : 'rgba(0,0,0,0.54)';
+        const iconColor =  this.props.on ? "#f2f0c2" : 'rgba(0,0,0,0.47)';
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
         const readOnly = this.props.read_only;
         const cursor = readOnly ? 'default' : 'pointer';
@@ -103,23 +102,24 @@ class ComponentHeader extends React.Component {
                          >
                              {this.props.icon}
                          </Icon>
+                        { readOnly ?
+                            <Tooltip title='Read only device'
+                                     placement="top"
+                            >
+                                <Icon className={classes.ro_icon}>
+                                    sync_disabled
+                                </Icon>
+                            </Tooltip> : null
+                        }
 
                          <Typography variant="subheading"
                                      className={classes.typography}
                                      onClick={this.handleClick}
                                      style={{cursor:cursor}}
                          >
-                             {truncateCaption(this.props.name, 20)}
+                             {this.props.name}
                          </Typography>
-                         { readOnly ?
-                             <Tooltip title='Read only device'
-                                      placement="top"
-                             >
-                                 <Icon className={classes.ro_icon}>
-                                     sync_disabled
-                                 </Icon>
-                             </Tooltip> : null
-                         }
+
 
                  </div>
             </Paper>

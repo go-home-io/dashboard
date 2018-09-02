@@ -11,7 +11,7 @@ const ITEM_HEIGHT = 60;
 const styles = theme => ( {
     root: {
         width: '100%',
-        marginTop: 0,
+        marginTop: 3,
     },
     text: {
         // fontSize:12,

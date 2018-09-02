@@ -10,7 +10,7 @@ import lightActions from "../../reflux/light/lightActions";
 
 const styles = theme => ({
     root : {
-        marginTop:0,
+        marginTop:3,
         width:250,
         height:120,
         cursor: 'default',

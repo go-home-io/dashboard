@@ -19,13 +19,13 @@ import {LIGHT_BKG_COLOR} from "../../settings/colors";
 const styles = theme => ({
         root: {
             // maxWidth:250,
-            width:250,
-            height:130,
+            width:172,
+            height:165,
             // maxHeight:130,
-            marginRight:7,
-            marginTop:5,
-            marginBottom:5,
-            marginLeft:5,
+            margin: 5,
+            // marginTop:5,
+            // marginBottom:5,
+            // marginLeft:5,
         },
         content: {
             marginLeft: 15,
@@ -62,7 +62,7 @@ class LightManager extends Reflux.Component{
         const scenesExist = (scenes != null);
         const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
         const loading = this.state.loading;
-        const name = truncateCaption(this.state.name, 24);
+        const name = truncateCaption(this.state.name, 40);
 
         return (
                 ! (lightType) ? null :

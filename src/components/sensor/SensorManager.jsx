@@ -17,8 +17,8 @@ import MotionIcon from "./MotionIcon";
 
 const styles = theme => ({
     root: {
-        width: 250,
-        height: 130,
+        width:172,
+        height:165,
         margin: 5,
     },
     icon: {
@@ -52,7 +52,7 @@ class SensorManager extends Reflux.Component {
     render () {
         const {classes} = this.props;
         const icon = sensorIcons(this.state.type);
-        const name = truncateCaption(this.state.name, 24);
+        const name = truncateCaption(this.state.name, 40);
         const display = this.state.visible ? 'block' : 'none';
 
         return (

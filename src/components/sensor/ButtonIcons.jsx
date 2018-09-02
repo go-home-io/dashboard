@@ -3,29 +3,32 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Icon from "@material-ui/core/Icon/Icon";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import GoHomeBar from "../navigation/GoHomeBar";
+import Grid from "@material-ui/core/Grid/Grid";
 
 const styles = theme => ({
-    iconClick: {
-        position: 'relative',
-        left: 30,
-        top: -8,
-        color: 'rgba(0,0,0,0.54)',
-        fontSize: 40,
+    root: {
+        // position: 'relative',
+        // left: 30,
+        // top: -8,
+        // color: 'rgba(0,0,0,0.54)',
+        // fontSize: 40,
+        marginTop: -3,
     },
-    iconDblClick: {
-        position: 'relative',
-        left: 56,
-        top: -8,
+    icon: {
+        // position: 'relative',
+        // left: 56,
+        // top: -8,
         color: 'rgba(0,0,0,0.54)',
-        fontSize: 40,
+        fontSize: 38,
     },
-    iconPress: {
-        position: 'relative',
-        left: 92,
-        top: -8,
-        color: 'rgba(0,0,0,0.54)',
-        fontSize: 40,
-    },
+    // iconPress: {
+    //     // position: 'relative',
+    //     // left: 92,
+    //     // top: -8,
+    //     color: 'rgba(0,0,0,0.54)',
+    //     fontSize: 40,
+    // },
 });
 
 const color = (state) => {
@@ -41,10 +44,10 @@ class ButtonIcons extends React.Component {
         const {classes} = this.props;
 
         return (
-            <div>
+            <Grid container justify='center' alignItems='center' className={classes.root}>
                 <Tooltip title={"Click: "+this.props.click} placement="top">
                     <Icon
-                        className={classes.iconClick}
+                        className={classes.icon}
                         style={{color:color(this.props.click)}}
                     >
                         done
@@ -52,7 +55,7 @@ class ButtonIcons extends React.Component {
                 </Tooltip>
                 <Tooltip title={"Double click: "+this.props.double_click} placement="top">
                     <Icon
-                        className={classes.iconDblClick}
+                        className={classes.icon}
                         style={{color:color(this.props.double_click)}}
                     >
                         done_all
@@ -60,13 +63,13 @@ class ButtonIcons extends React.Component {
                 </Tooltip>
                 <Tooltip title={"Press: "+this.props.press} placement="top">
                     <Icon
-                        className={classes.iconPress}
+                        className={classes.icon}
                         style={{color:color(this.props.press)}}
                     >
                             done_outline
                     </Icon>
                 </Tooltip>
-            </div>
+            </Grid>
 
         )
     }

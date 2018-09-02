@@ -17,7 +17,8 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        height: 10,
+        height: 40,
+
      },
     root: {
         marginLeft: 0,
@@ -27,26 +28,18 @@ const styles = theme => ({
     },
     icon: {
         position: 'relative',
-        left:-10,
-        top:-5,
+        left:-19,
+        top:-10,
         padding:3,
         fontSize: 22,
-        color: 'rgba(0, 0, 0, 0.54)'
+        color: '#ffffffe6'
     },
     typography: {
         position: 'relative',
-        left: 23,
-        top: -32,
+        left: 10,
+        top: -28,
+        color: "#ffffffe6",
     },
-    battery: {
-        position: 'relative',
-        left: 190,
-        top:-300,
-        padding:3,
-        fontSize: 22,
-        color: 'rgba(0, 0, 0, 0.54)'
-    }
-
 });
 
 class SensorHeader extends React.Component {

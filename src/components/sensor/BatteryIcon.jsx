@@ -14,12 +14,12 @@ const styles = theme => ({
         position: 'relative',
         fontSize: 13,
         top: -15,
-        left: 218,
+        left: 143,
     },
     label: {
         fontSize: 11,
         position: 'relative',
-        left: 200,
+        left: 126,
         top:2,
     }
 
