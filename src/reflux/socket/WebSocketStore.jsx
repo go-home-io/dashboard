@@ -1,19 +1,16 @@
 import Reflux from 'reflux'
 import {SOCKET_URL} from "../../settings/urls";
+import {CONNECTION_TIMEOUT, PING_INTERVAL, MAX_ATTEMPTS} from "../../settings/websocket";
 import lightActions from "../light/lightActions";
 import wsActions from "./wsActions";
 import groupActions from "../group/groupActions";
 import sensorActions from "../sensor/sensorActions";
 
-const connectionTimeout = 3000; // ms
-const pingInterval = 5000;
-const maxAttempts = 5;
-
-// Broadcasting list
+/// Broadcasting list
 const actions = [lightActions, groupActions, sensorActions];
 
-let timerConnectionTimeout = null;
-let timerPingInterval = null;
+let timerCONNECTION_TIMEOUT = null;
+let timerPING_INTERVAL = null;
 
 let timerAttempts = null;
 let attempts = 0;
@@ -25,11 +22,11 @@ const connAlive = () => {
     return pongReceived && !connectingState
 };
 
-const pong =  () => {
-    clearTimeout(timerConnectionTimeout);
-    timerConnectionTimeout = null;
-    pongReceived = true;
-};
+// const pong =  () => {
+//     clearTimeout(timerCONNECTION_TIMEOUT);
+//     timerCONNECTION_TIMEOUT = null;
+//     pongReceived = true;
+// };
 
 class WebSocketStore extends Reflux.Store {
     socket = null;
@@ -61,9 +58,9 @@ class WebSocketStore extends Reflux.Store {
     reopenSocket = () => {
         connectingState = true;
         pongReceived = false;
-        clearInterval(timerPingInterval);
-        clearTimeout(timerConnectionTimeout);
-        timerPingInterval = null;
+        clearInterval(timerPING_INTERVAL);
+        clearTimeout(timerCONNECTION_TIMEOUT);
+        timerPING_INTERVAL = null;
         this.socket.close();
     };
 
@@ -71,16 +68,22 @@ class WebSocketStore extends Reflux.Store {
         if (!connectingState) {
             pongReceived = false;
             this.socket.send('ping');
-            timerConnectionTimeout = setTimeout(this.reopenSocket, connectionTimeout);
+            timerCONNECTION_TIMEOUT = setTimeout(this.reopenSocket, CONNECTION_TIMEOUT);
         }
+    };
+
+    pong =  () => {
+        clearTimeout(timerCONNECTION_TIMEOUT);
+        timerCONNECTION_TIMEOUT = null;
+        pongReceived = true;
     };
 
     // WebSocket event handlers
     onOpen() {
         connectingState = false;
         pongReceived = false;
-        if (!timerPingInterval) {
-            timerPingInterval = setInterval(this.ping.bind(this), pingInterval);
+        if (!timerPING_INTERVAL) {
+            timerPING_INTERVAL = setInterval(this.ping.bind(this), PING_INTERVAL);
         }
         this.ping();
     }
@@ -97,7 +100,7 @@ class WebSocketStore extends Reflux.Store {
     onMessage(evt) {
         if (evt.data === 'pong') {
             // Pong handle
-            pong();
+            this.pong();
         } else {
             // Send data to all client stores
             const data = JSON.parse(evt.data);
@@ -110,7 +113,7 @@ class WebSocketStore extends Reflux.Store {
     // Actions
     onDoCommand(data) {
         // Try to send command to server if socket ready
-        // up to maxAttempts times. If not, set the state {rejected:true}
+        // up to MAX_ATTEMPTS times. If not, set the state {rejected:true}
         if (connAlive()) {
             this.socket.send(JSON.stringify(data));
             this.setState({rejected: false});
@@ -120,7 +123,7 @@ class WebSocketStore extends Reflux.Store {
             }
             attempts = 0;
         } else {
-            if (attempts >= maxAttempts) {
+            if (attempts >= MAX_ATTEMPTS) {
                 this.setState({rejected: true});
                 clearTimeout(timerAttempts);
                 attempts = 0;

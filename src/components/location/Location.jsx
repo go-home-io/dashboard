@@ -28,8 +28,8 @@ class Location extends Reflux.Component {
 
         return (
                  <Grid container >
-                   <Grid item xl={8} lg={9} md={12} sm={12}>
-                     <Grid container justify='center'>
+
+                   <Grid container justify='center'>
                      { devices.map( (device, index) => {
                          const device_info = getDeviceState(device, generalState.devices);
                          const deviceType = device_info.type;
@@ -50,32 +50,27 @@ class Location extends Reflux.Component {
                                              location = {location}
                                              id = {device}
                                              device_state = {device_info}
-                                        />  : null
-
+                                        />  :
+                                               null
                          )})
                      }
-                     </Grid>
+                       { devices.map( (device, index) => {
+                           const device_info = getDeviceState(device, generalState.devices);
+                           const deviceType = device_info.type;
+
+                           return(
+                                       deviceType === 'sensor' ?
+                                           <SensorManager
+                                               key = {device}
+                                               location = {location}
+                                               id = {device}
+                                               device_info = {device_info}
+                                           />  :
+                                           null
+                           )})
+                       }
+
                    </Grid>
-
-                     <Grid item xl={4} lg={3} md={12} sm={12}>
-                         <Grid container justify='center'>
-                         { devices.map( device => {
-                             const device_info = getDeviceState(device, generalState.devices);
-                             const deviceType = device_info.type;
-
-                             return(
-                                 deviceType === 'sensor' ?
-                                     <SensorManager
-                                         key = {device}
-                                         location = {location}
-                                         id = {device}
-                                         device_info = {device_info}
-                                     />  : null
-                             )})
-                         }
-                         </Grid>
-
-                     </Grid>
                  </Grid>
 
         )

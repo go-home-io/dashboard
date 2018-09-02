@@ -6,7 +6,6 @@ import base64 from 'base-64';
 import ErrorPage from "./ErrorPage";
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from '../../settings/cookie';
-import {URL} from '../../settings/urls';
 
 class StartPage extends Component {
     constructor(props) {
@@ -25,7 +24,7 @@ class StartPage extends Component {
     }
 
     getComponentStateByHTTP (user) {
-        HTTP.get(URL)
+        HTTP.get()
             .then((data) => {
                 if (data === 'Failed to fetch' || data >= 300) {
                     if (data === 401) {

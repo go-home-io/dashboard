@@ -34,6 +34,9 @@ const styles = theme => ({
         position: 'relative',
         left: 177,
         top:-9,
+    },
+    weather:{
+
     }
 
 });

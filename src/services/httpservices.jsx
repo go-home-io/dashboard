@@ -1,10 +1,12 @@
-import {BASE_URL} from '../settings/urls';
+import {STATE_URL} from '../settings/urls';
+
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from '../settings/cookie';
 
 const service = {
-    get:(url) => {
-        return fetch(BASE_URL+url, {
+    get:() => {
+        // const url = process.env.NODE_ENV === 'development' ? STATE_URL : BASE_URL_PRODUCTION;
+        return fetch(STATE_URL, {
             headers: {
                 'Authorization': Cookie.get(COOKIE_NAME)
             },
@@ -23,7 +25,7 @@ const service = {
             })
     },
     post:(url, data) => {
-        return fetch(BASE_URL + url, {
+        return fetch(STATE_URL + url, {
             headers: {
                 'Accept': 'text/plain',
                 'Content-Type': 'application/json'

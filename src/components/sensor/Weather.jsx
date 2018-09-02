@@ -7,13 +7,12 @@ import Grid from "@material-ui/core/Grid/Grid";
 const styles = theme => ({
 
     root: {
-       marginTop: 0,
+        marginTop: 0,
     },
-
 
 });
 
-class Temperature extends React.Component {
+class Weather extends React.Component {
 
     render () {
         const {classes} = this.props;
@@ -21,20 +20,20 @@ class Temperature extends React.Component {
         return (
 
             <div className={classes.root}>
-                <Typography variant='display1' align='center'>
+                <Typography variant='subheading' align='center'>
                     {this.props.temperature} F
                 </Typography>
                 <Typography variant='body1' align='center'>
-                   Humidity {this.props.humidity}%
+                    Humidity {this.props.humidity}%
                 </Typography>
             </div>
         )
     }
 }
 
-Temperature.propTypes = {
+Weather.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Temperature)
+export default withStyles(styles)(Weather)
 
