@@ -12,7 +12,7 @@ const styles = theme => ({
         width:'100%',
         height: 21,
         marginTop: 2,
-        cursor: 'pointer',
+        // cursor: 'pointer',
     },
     box: {
         border:'solid 1px #000',

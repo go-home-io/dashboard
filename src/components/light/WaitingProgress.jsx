@@ -11,12 +11,12 @@ import wsActions from "../../reflux/socket/wsActions";
 const styles = theme => ({
     root: {
         width:'100%',
-        marginTop:20,
+        marginTop:25,
         marginLeft: 10,
     }
 });
 
-class IconLoading extends Reflux.Component {
+class WaitingProgress extends Reflux.Component {
     timer = null;
 
     state = {
@@ -85,8 +85,8 @@ class IconLoading extends Reflux.Component {
    }
 }
 
-IconLoading.propTypes = {
+WaitingProgress.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IconLoading);
+export default withStyles(styles)(WaitingProgress);

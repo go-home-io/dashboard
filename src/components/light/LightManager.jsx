@@ -2,7 +2,6 @@ import React from 'react'
 import Reflux from 'reflux'
 import ComponentHeader from "../common/ComponentHeader";
 import LightStoreFactory from "../../reflux/light/LightStore";
-import IconLoading from "./IconLoading";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,10 +10,11 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
+import WaitingProgress from "./WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import lightActions from "../../reflux/light/lightActions";
 import truncateCaption from "../utils/truncate";
-import {LIGHT_BKG_COLOR} from "../../settings/colors";
+import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF, LIGHT_RO_ICON_COLOR} from "../../settings/colors";
 
 const styles = theme => ({
         root: {
@@ -27,22 +27,19 @@ const styles = theme => ({
             // marginBottom:5,
             // marginLeft:5,
         },
-        content: {
-            marginLeft: 15,
-            marginTop: 10,
-        },
-        icon: {
-            position: 'relative',
-            left:-10,
-            top:-5,
+        // content: {
+        //     marginLeft: 15,
+        //     marginTop: 10,
+        // },
+        progress: {
+
             padding:3,
-            fontSize: 22,
-            color: 'rgba(0, 0, 0, 0.54)'
+
         }
 
 });
 
-const ordinaryBkgColor = LIGHT_BKG_COLOR;
+const ordinaryBkgColor = LIGHT_HEADER_BKG_COLOR;
 const lightIcon = <i className="fa fa-lightbulb-o" aria-hidden="true"> </i>;
 
 class LightManager extends Reflux.Component{
@@ -77,6 +74,9 @@ class LightManager extends Reflux.Component{
                          actions = {lightActions}
                          icon = {lightIcon}
                          ordinaryBkgColor={ordinaryBkgColor}
+                         iconColorOn = {LIGHT_HEADER_ICON_COLOR_ON}
+                         iconColorOff = {LIGHT_HEADER_ICON_COLOR_OFF}
+                         iconROColor = {LIGHT_RO_ICON_COLOR}
                      />
                      <CardContent>
                          {loading ? null :
@@ -109,8 +109,8 @@ class LightManager extends Reflux.Component{
                          }
                          {loading ?
                              <Zoom in={loading}>
-                                 <div className={classes.icon}>
-                                     <IconLoading dev_id={this.props.id} />
+                                 <div className={classes.progress}>
+                                     <WaitingProgress dev_id={this.props.id} />
                                  </div>
                              </Zoom>
                              : null

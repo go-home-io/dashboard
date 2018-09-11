@@ -3,39 +3,26 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Icon from "@material-ui/core/Icon/Icon";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import GoHomeBar from "../navigation/GoHomeBar";
 import Grid from "@material-ui/core/Grid/Grid";
+import {SENSOR_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF} from '../../settings/colors';
 
 const styles = theme => ({
     root: {
-        // position: 'relative',
-        // left: 30,
-        // top: -8,
-        // color: 'rgba(0,0,0,0.54)',
-        // fontSize: 40,
-        marginTop: -3,
+        marginTop: 0,
     },
     icon: {
-        // position: 'relative',
-        // left: 56,
-        // top: -8,
         color: 'rgba(0,0,0,0.54)',
-        fontSize: 38,
+        fontSize: 26,
+        margin:'5px 10px 0 10px',
     },
-    // iconPress: {
-    //     // position: 'relative',
-    //     // left: 92,
-    //     // top: -8,
-    //     color: 'rgba(0,0,0,0.54)',
-    //     fontSize: 40,
-    // },
+
 });
 
 const color = (state) => {
     if (state) {
-        return 'rgba(0,0,0,0.54)';
+        return SENSOR_ICON_COLOR_ON;
     } else {
-        return 'rgba(0,0,0,0.3)';
+        return SENSOR_ICON_COLOR_OFF;
     }
 };
 

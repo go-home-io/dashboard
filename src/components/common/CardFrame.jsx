@@ -14,7 +14,7 @@ import Scenes from "./Scenes";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import lightActions from "../../reflux/light/lightActions";
 import truncateCaption from "../utils/truncate";
-import {LIGHT_BKG_COLOR} from "../../settings/colors";
+import {LIGHT_HEADER_BKG_COLOR} from "../../settings/colors";
 
 const styles = theme => ({
     root: {

@@ -5,15 +5,17 @@ import GroupManager from "../group/GroupManager";
 import getDeviceState from '../utils/getDeviceState';
 import LightManager from "../light/LightManager";
 import LocationStoreFactory from "../../reflux/location/LocationStore";
-import locationActions from "../../reflux/location/locationActions";
 import SensorManager from "../sensor/SensorManager";
 
 class Location extends Reflux.Component {
     constructor(props) {
         super(props);
-
         this.store = LocationStoreFactory(props.location.name, props.location.devices);
     }
+
+    // componentDidMount () {
+    //     console.log(this.state);
+    // }
 
     render () {
         const location = this.props.location.name;

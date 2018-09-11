@@ -4,16 +4,15 @@ import SensorStoreFactory from '../../reflux/sensor/SensorStore';
 import Card from '@material-ui/core/Card/Card';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import SensorHeader from "./SensorHeader";
-import sensorIcons from "./sensorIcons";
+import {sensorHeaderIcon} from "./sensorIcons";
 import truncateCaption from "../utils/truncate";
-import sensorActions from "../../reflux/sensor/sensorActions";
 import BatteryIcon from "./BatteryIcon";
 import Temperature from "./Temperature";
-import Lock from "./Lock";
-import {SENSOR_BKG_COLOR} from '../../settings/colors';
+import DefaultSensor from "./DefaultSensor";
+import {SENSOR_HEADER_ICON_COLOR, SENSOR_HEADER_BKG_COLOR} from '../../settings/colors';
 import ButtonIcons from "./ButtonIcons";
-import MotionIcon from "./MotionIcon";
+import ComponentHeader from "../common/ComponentHeader";
+import SensorButton from "./SensorButton";
 
 const styles = theme => ({
     root: {
@@ -21,50 +20,57 @@ const styles = theme => ({
         height:165,
         margin: 5,
     },
-    icon: {
-        top: -25,
-        left: 196,
-        color: 'rgba(0, 0, 0, 0.54)',
-        padding: '0 7px',
-        position: 'relative',
-        fontSize: 13,
-    },
-    label: {
-        fontSize: 11,
-        position: 'relative',
-        left: 177,
-        top:-9,
-    },
-    weather:{
-
-    }
+    // icon: {
+    //     top: -25,
+    //     left: 196,
+    //     color: 'rgba(0, 0, 0, 0.54)',
+    //     padding: '0 7px',
+    //     position: 'relative',
+    //     fontSize: 13,
+    // },
+    // label: {
+    //     fontSize: 11,
+    //     position: 'relative',
+    //     left: 177,
+    //     top:-9,
+    // },
+    // weather:{
+    //
+    // }
 
 });
 
-const ordinaryBkgColor = SENSOR_BKG_COLOR;
+const ordinaryBkgColor = SENSOR_HEADER_BKG_COLOR;
 
 class SensorManager extends Reflux.Component {
     constructor(props) {
         super(props);
-        this.store = SensorStoreFactory(this.props.id,  this.props.device_info, this.props.location)
+        this.store = SensorStoreFactory(this.props.id,  this.props.device_info, this.props.location);
     }
+
+    // componentDidMount() {
+    //     console.log(this.state);
+    //
+    // }
 
     render () {
         const {classes} = this.props;
-        const icon = sensorIcons(this.state.type);
-        const name = truncateCaption(this.state.name, 40);
+        const icon = sensorHeaderIcon(this.state.type);
+        const name = truncateCaption(this.state.name, 45);
         const display = this.state.visible ? 'block' : 'none';
+        // console.log('Sensor RO:'+this.state.read_only);
 
         return (
             <Card className={classes.root} style={{display:display}}>
-                    <SensorHeader
-                            dev_id={this.props.id}
-                            name = {name}
-                            status = {this.state.status}
-                            icon = {icon}
-                            ordinaryBkgColor={ordinaryBkgColor}
+                    <ComponentHeader
+                        dev_id={this.props.id}
+                        name = {name}
+                        status = {this.state.status}
+                        icon = {icon}
+                        ordinaryBkgColor={ordinaryBkgColor}
+                        variant = 'sensor'
+                        iconColorOn = {SENSOR_HEADER_ICON_COLOR}
                     />
-
                     <BatteryIcon
                         battery_level={this.state.device_state.battery_level}
                     />
@@ -73,22 +79,14 @@ class SensorManager extends Reflux.Component {
                             temperature={this.state.device_state.temperature}
                             humidity={this.state.device_state.humidity}
                         /> :
-                    this.state.type === 'lock' ?
-                        <Lock
-                            on={this.state.device_state.on}
-
-                        /> :
                     this.state.type === 'button' ?
-                        <ButtonIcons
-                           click={this.state.device_state.click}
-                           double_click={this.state.device_state.double_click}
-                           press={this.state.device_state.press}
+                        <SensorButton
+                            state={this.state.device_state}
                         />
                         :
-                    this.state.type === 'motion' ?
-                        <MotionIcon
-                            on={this.state.device_state.on}
-                        /> :  null
+                        <DefaultSensor
+                            state={this.state.device_state}
+                        />
                     }
 
             </Card>

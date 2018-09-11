@@ -5,7 +5,6 @@ import {COOKIE_NAME} from '../settings/cookie';
 
 const service = {
     get:() => {
-        // const url = process.env.NODE_ENV === 'development' ? STATE_URL : BASE_URL_PRODUCTION;
         return fetch(STATE_URL, {
             headers: {
                 'Authorization': Cookie.get(COOKIE_NAME)

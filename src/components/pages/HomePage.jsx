@@ -17,12 +17,15 @@ class HomePage extends Reflux.Component {
         this.store = WebSocketStore;
     }
 
-    // Restore active location from local storage and make it visible
     componentDidMount () {
+        // Restore active location from local storage and make it visible
         let active_location = storage.get('location');
         active_location = active_location ? active_location : 'Default';
         locationActions.visible(active_location);
         appActions.setLocation(active_location);
+
+        // Set UOM scheme to AppStore
+        appActions.setUOM(this.props.generalState.uom);
     }
 
     render () {

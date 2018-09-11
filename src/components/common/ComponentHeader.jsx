@@ -4,20 +4,16 @@ import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types'
 import Paper from "@material-ui/core/Paper/Paper";
-import {HEADER_HIGHLIGHT_DURATION} from '../../settings/deviceDelays';
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import {HEADER_HIGHLIGHT_DURATION} from '../../settings/deviceDelays';
 import {SUCCESS_BKG_COLOR, ERROR_BKG_COLOR} from '../../settings/colors';
-
-const success = SUCCESS_BKG_COLOR;
-const error = ERROR_BKG_COLOR;
 
 const styles = theme => ({
     paper: {
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        height: 40,
-
+        height: 38,
     },
     root: {
         marginLeft: 0,
@@ -31,7 +27,6 @@ const styles = theme => ({
         top:-10,
         padding:3,
         fontSize: 22,
-        color: '#ffffffe6'
     },
     typography: {
         position: 'relative',
@@ -44,7 +39,6 @@ const styles = theme => ({
         left: -49,
         top: 32,
         fontSize: 21,
-        color: '#ff9b9b'
     }
 });
 
@@ -60,9 +54,9 @@ class ComponentHeader extends React.Component {
     getHeaderBackgroundColor(status) {
         let bgColor = null;
         if ((status === 'success')) {
-            bgColor = success;
+            bgColor = SUCCESS_BKG_COLOR;
         } else if (status === 'error') {
-            bgColor = error;
+            bgColor = ERROR_BKG_COLOR;
         }
         if (bgColor) {
             clearInterval(this.timer);
@@ -73,10 +67,9 @@ class ComponentHeader extends React.Component {
         }
     }
 
-
     handleClick () {
-         if (! this.props.read_only ) {
-             // alert('Clicked by '+this.props.dev_id);
+         if ( !this.props.read_only &&
+               this.props.variant !== 'sensor' ) {
              this.props.actions.toggle(this.props.dev_id);
          }
      }
@@ -87,10 +80,14 @@ class ComponentHeader extends React.Component {
 
     render () {
         const {classes} = this.props;
-        const iconColor =  this.props.on ? "#f2f0c2" : 'rgba(0,0,0,0.47)';
+
         const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
         const readOnly = this.props.read_only;
-        const cursor = readOnly ? 'default' : 'pointer';
+        const variantSensor = this.props.variant === 'sensor';
+        const cursor = variantSensor ? 'default' :
+                            readOnly ? 'default' : 'pointer';
+        const iconColor = variantSensor ? this.props.iconColorOn :
+                          this.props.on ? this.props.iconColorOn : this.props.iconColorOff;
 
         return (
             <Paper className={classes.paper} elevation={0} style={{backgroundColor:backgroundColor}}>
@@ -102,11 +99,13 @@ class ComponentHeader extends React.Component {
                          >
                              {this.props.icon}
                          </Icon>
-                        { readOnly ?
+                        { readOnly && !variantSensor ?
                             <Tooltip title='Read only device'
                                      placement="top"
                             >
-                                <Icon className={classes.ro_icon}>
+                                <Icon className={classes.ro_icon}
+                                      style={{color:this.props.iconROColor}}
+                                >
                                     sync_disabled
                                 </Icon>
                             </Tooltip> : null
@@ -119,8 +118,6 @@ class ComponentHeader extends React.Component {
                          >
                              {this.props.name}
                          </Typography>
-
-
                  </div>
             </Paper>
         )
