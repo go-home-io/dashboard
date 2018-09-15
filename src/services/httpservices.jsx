@@ -7,7 +7,7 @@ const service = {
     get:() => {
         return fetch(STATE_URL, {
             headers: {
-                // 'Authorization': Cookie.get(COOKIE_NAME)
+                'Authorization': Cookie.get(COOKIE_NAME)
             },
             method: 'get',
         })
