@@ -9,7 +9,7 @@ class TemperatureSymbol extends Reflux.Component {
     }
 
     render () {
-        const temperatureSymbol = (this.state.uom === "imperial" ) ? '&#8457;' : '&#8451;';
+        const temperatureSymbol = (this.state.uom === "imperial" ) ? '&deg;F' : '&deg;C';
 
         return <div  style={{display:'inline-block'}}
                      dangerouslySetInnerHTML={{__html: temperatureSymbol}}

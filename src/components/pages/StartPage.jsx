@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import HomePage from "./HomePage";
 import HTTP from "../../services/httpservices";
-import Login from "./Login";
 import base64 from 'base-64';
 import ErrorPage from "./ErrorPage";
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from '../../settings/cookie';
+import SignIn from "./SignIn";
+import AppBarPlaceholder from "../navigation/AppBarPlaceholder";
 
 class StartPage extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class StartPage extends Component {
         this.getComponentStateByHTTP();
     }
 
-    getComponentStateByHTTP (user) {
+    getComponentStateByHTTP () {
         HTTP.get()
             .then((data) => {
                 if (data === 'Failed to fetch' || data >= 300) {
@@ -31,12 +32,9 @@ class StartPage extends Component {
                         // Authentication required
                         Cookie.remove(COOKIE_NAME);
                         this.setState({authenticated:false, auth_required: true, status:401});
-                        if (user) {
-                            this.setState({auth_error: true});
-                        }
                     } else {
                         // Other connection errors
-                        this.setState({auth_required: false, status:data});
+                        this.setState({status:data});
                     }
                 } else {
                     // Success
@@ -53,7 +51,8 @@ class StartPage extends Component {
     getCredentials (user, password) {
         const credentials = 'Basic ' + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
-        this.getComponentStateByHTTP(user);
+        this.setState({auth_error: true});
+        this.getComponentStateByHTTP();
     }
 
     render () {
@@ -63,11 +62,14 @@ class StartPage extends Component {
                    generalState={this.state.generalState}
                /> :
                this.state.auth_required ?
-                   <Login
-                       getCredentials={this.getCredentials.bind(this)}
-                       error={this.state.auth_error}
-                   /> :
-                      <ErrorPage status={this.state.status}/>
+                   <div>
+                       <AppBarPlaceholder/>
+                        <SignIn
+                            getCredentials={this.getCredentials.bind(this)}
+                            error={this.state.auth_error}
+                        />
+                   </div> :
+                   <ErrorPage status={this.state.status}/>
         )
     }
 }

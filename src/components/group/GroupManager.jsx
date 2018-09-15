@@ -6,7 +6,6 @@ import getDeviceState from "../utils/getDeviceState";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import GroupStoreFactory from "../../reflux/group/GroupStore";
-import ComponentHeader from "../common/ComponentHeader";
 import groupActions from "../../reflux/group/groupActions";
 import SensorManager from "../sensor/SensorManager";
 import {GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF} from "../../settings/colors";
@@ -58,18 +57,9 @@ class GroupManager  extends Reflux.Component {
         const iconColor = this.state.device_state.on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
 
         return (
-                    <Grid className={classes.root} style={{display:display}}>
+                    <div className={classes.root} style={{display:display}}>
+
                         <Grid  container justify='flex-start' onClick={this.handleClick.bind(this)}>
-                        {/*<ComponentHeader*/}
-                            {/*dev_id={this.props.dev_id}*/}
-                            {/*name = {this.state.name}*/}
-                            {/*on = {this.state.device_state.on}*/}
-                            {/*status = {this.state.status}*/}
-                            {/*read_only = {this.state.read_only}*/}
-                            {/*actions = {groupActions}*/}
-                            {/*icon = {groupIcon}*/}
-                            {/*ordinaryBkgColor={ordinaryBkgColor}*/}
-                        {/*/>*/}
                             <Icon className={classes.icon} style={{color:iconColor}}>
                                 {groupIcon}
                             </Icon>
@@ -91,11 +81,16 @@ class GroupManager  extends Reflux.Component {
                                     group_id = {group_id}
                                 /> :
                                 deviceType === 'sensor' ?
-                                <SensorManager/> : null
+                                <SensorManager
+                                    key = {dev_id}
+                                    location = {location}
+                                    id = {dev_id}
+                                    device_info = {device_state}/> : null
                             )
                         })}
+
                        </Grid>
-                    </Grid>
+                    </div>
         )
     }
 }

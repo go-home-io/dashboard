@@ -6,10 +6,9 @@ class AppStore extends Reflux.Store {
         super();
 
         this.state = {
-                 locations: [],
+                 // locations: [],
                  active_location: 'Default',
                  uom: '',
-                 // credentials: {},
                  openMenu: false,
         };
 
@@ -19,16 +18,13 @@ class AppStore extends Reflux.Store {
         this.onSetUOM = this.onSetUOM.bind(this);
     }
 
-
     // Actions
     onToggleMenu () {
         this.setState({openMenu: !this.state.openMenu})
     }
-
     onSetLocation (location) {
         this.setState({active_location: location});
     }
-
     onSetUOM(unit_scheme) {
         this.setState({uom: unit_scheme});
     }

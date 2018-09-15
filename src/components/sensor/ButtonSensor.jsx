@@ -14,10 +14,10 @@ const styles = theme => ({
         position: 'relative',
         top: 5,
         left: -67,
-    },
+    }
 });
 
-class SensorButton extends React.Component {
+class ButtonSensor extends React.Component {
     render () {
         const {classes} = this.props;
         const on = this.props.state.on;
@@ -52,9 +52,9 @@ class SensorButton extends React.Component {
     }
 }
 
-SensorButton.propTypes = {
+ButtonSensor.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SensorButton)
+export default withStyles(styles)(ButtonSensor)
 

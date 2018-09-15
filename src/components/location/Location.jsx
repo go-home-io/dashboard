@@ -13,10 +13,6 @@ class Location extends Reflux.Component {
         this.store = LocationStoreFactory(props.location.name, props.location.devices);
     }
 
-    // componentDidMount () {
-    //     console.log(this.state);
-    // }
-
     render () {
         const location = this.props.location.name;
         const devices = this.props.location.devices;
@@ -29,52 +25,47 @@ class Location extends Reflux.Component {
         };
 
         return (
-                 <Grid container >
+                <Grid container justify='center' alignItems='center'>
+                     { devices.map( (device) => {
+                         const device_info = getDeviceState(device, generalState.devices);
+                         const deviceType = device_info.type;
 
-                   <Grid container justify='center'>
+                         return(
+                               deviceType === 'group' ?
+                                   <GroupManager
+                                         key = {device}
+                                         location = {location}
+                                         dev_id = {device}
+                                         members = {members(device,generalState.groups)}
+                                         device_info = {device_info}
+                                         device_states = {generalState.devices}
+                                   />  :
+                               deviceType === 'light' ?
+                                    <LightManager
+                                         key = {device}
+                                         location = {location}
+                                         id = {device}
+                                         device_state = {device_info}
+                                    />  :
+                                           null
+                         )})
+                     }
                      { devices.map( (device, index) => {
                          const device_info = getDeviceState(device, generalState.devices);
                          const deviceType = device_info.type;
 
                          return(
-                                 deviceType === 'group' ?
-                                         <GroupManager
-                                                 key = {device}
-                                                 location = {location}
-                                                 dev_id = {device}
-                                                 members = {members(device,generalState.groups)}
-                                                 device_info = {device_info}
-                                                 device_states = {generalState.devices}
-                                         /> :
-                                 deviceType === 'light' ?
-                                        <LightManager
-                                             key = {device}
-                                             location = {location}
-                                             id = {device}
-                                             device_state = {device_info}
-                                        />  :
-                                               null
+                               deviceType === 'sensor' ?
+                                   <SensorManager
+                                       key = {device}
+                                       location = {location}
+                                       id = {device}
+                                       device_info = {device_info}
+                                   />  :
+                                   null
                          )})
                      }
-                       { devices.map( (device, index) => {
-                           const device_info = getDeviceState(device, generalState.devices);
-                           const deviceType = device_info.type;
-
-                           return(
-                                       deviceType === 'sensor' ?
-                                           <SensorManager
-                                               key = {device}
-                                               location = {location}
-                                               id = {device}
-                                               device_info = {device_info}
-                                           />  :
-                                           null
-                           )})
-                       }
-
-                   </Grid>
                  </Grid>
-
         )
     }
 }

@@ -20,7 +20,6 @@ const styles = theme => ({
         marginLeft: 10,
         marginTop: 5,
     },
-
 });
 
 class TemperatureUpperLine extends React.Component {
@@ -37,13 +36,11 @@ class TemperatureUpperLine extends React.Component {
                             <TemperatureSymbol/>
                         </Typography> : null
                     }
-
                     { this.props.humidity ?
                         <Typography variant='caption' align='center' className={classes.humidity}>
                             Hmd: {this.props.humidity}%
                         </Typography> : null
                     }
-
                 </Grid>
         )
     }

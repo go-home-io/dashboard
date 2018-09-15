@@ -22,7 +22,7 @@ class DefaultSensor extends React.Component {
         const icon = sensorContentIcon(this.props.state.sensor_type, on);
         const tip = sensorTip(this.props.state.sensor_type, on);
         const color = sensorIconColor(this.props.state.sensor_type, on);
-        const fontSize = (this.props.state.click !== null) ? 30 : 38;
+        const fontSize = (this.props.state.click != null) ? 30 : 40;
 
         return (
             <div>

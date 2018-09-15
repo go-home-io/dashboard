@@ -8,11 +8,10 @@ import {sensorHeaderIcon} from "./sensorIcons";
 import truncateCaption from "../utils/truncate";
 import BatteryIcon from "./BatteryIcon";
 import Temperature from "./Temperature";
+import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
 import {SENSOR_HEADER_ICON_COLOR, SENSOR_HEADER_BKG_COLOR} from '../../settings/colors';
-import ButtonIcons from "./ButtonIcons";
 import ComponentHeader from "../common/ComponentHeader";
-import SensorButton from "./SensorButton";
 
 const styles = theme => ({
     root: {
@@ -20,24 +19,6 @@ const styles = theme => ({
         height:165,
         margin: 5,
     },
-    // icon: {
-    //     top: -25,
-    //     left: 196,
-    //     color: 'rgba(0, 0, 0, 0.54)',
-    //     padding: '0 7px',
-    //     position: 'relative',
-    //     fontSize: 13,
-    // },
-    // label: {
-    //     fontSize: 11,
-    //     position: 'relative',
-    //     left: 177,
-    //     top:-9,
-    // },
-    // weather:{
-    //
-    // }
-
 });
 
 const ordinaryBkgColor = SENSOR_HEADER_BKG_COLOR;
@@ -47,18 +28,11 @@ class SensorManager extends Reflux.Component {
         super(props);
         this.store = SensorStoreFactory(this.props.id,  this.props.device_info, this.props.location);
     }
-
-    // componentDidMount() {
-    //     console.log(this.state);
-    //
-    // }
-
     render () {
         const {classes} = this.props;
         const icon = sensorHeaderIcon(this.state.type);
         const name = truncateCaption(this.state.name, 45);
         const display = this.state.visible ? 'block' : 'none';
-        // console.log('Sensor RO:'+this.state.read_only);
 
         return (
             <Card className={classes.root} style={{display:display}}>
@@ -80,7 +54,7 @@ class SensorManager extends Reflux.Component {
                             humidity={this.state.device_state.humidity}
                         /> :
                     this.state.type === 'button' ?
-                        <SensorButton
+                        <ButtonSensor
                             state={this.state.device_state}
                         />
                         :

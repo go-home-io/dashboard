@@ -1,4 +1,4 @@
-import AppBarPlaceHolder from "../navigation/AppBarPlaceHolder";
+import AppBarPlaceHolder from "../navigation/AppBarPlaceholder";
 import Grid from "@material-ui/core/Grid/Grid";
 import React from "react";
 import PropTypes from 'prop-types';
@@ -30,9 +30,7 @@ class ErrorPage extends React.Component {
                             Connection error
                         </Typography>
                     </Grid>
-
                 </Grid>
-
             </div>
         )
     }

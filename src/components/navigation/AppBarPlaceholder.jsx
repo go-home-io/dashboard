@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
-class AppBarPlaceHolder extends React.Component {
+class AppBarPlaceholder extends React.Component {
 
     render() {
         return(
@@ -11,7 +11,7 @@ class AppBarPlaceHolder extends React.Component {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="title" color="inherit">
-                            GO-HOME DASHBOARD
+                            GO-HOME
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -20,4 +20,4 @@ class AppBarPlaceHolder extends React.Component {
     }
 }
 
-export default (AppBarPlaceHolder);
+export default (AppBarPlaceholder);
