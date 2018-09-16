@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
-import TemperatureSymbol from "./TemperatureSymbol";
+import TemperatureSymbol from "../common/TemperatureSymbol";
 // import Grid from "@material-ui/core/Grid/Grid";
 
 const styles = theme => ({

@@ -7,12 +7,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {sensorHeaderIcon} from "./sensorIcons";
 import truncateCaption from "../utils/truncate";
 import BatteryIcon from "./BatteryIcon";
-import Temperature from "./Temperature";
+import TemperatureSensor from "./TemperatureSensor";
 import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
 import {SENSOR_HEADER_ICON_COLOR, SENSOR_HEADER_BKG_COLOR} from '../../settings/colors';
 import ComponentHeader from "../common/ComponentHeader";
-import lightActions from "../../reflux/light/lightActions";
+import sensorActions from "../../reflux/sensor/sensorActions";
 
 const styles = theme => ({
     root: {
@@ -41,7 +41,7 @@ class SensorManager extends Reflux.Component {
                         dev_id={this.props.id}
                         name = {name}
                         status = {this.state.status}
-                        actions = {lightActions}
+                        actions = {sensorActions}
                         icon = {icon}
                         ordinaryBkgColor={ordinaryBkgColor}
                         variant = 'sensor'
@@ -51,7 +51,7 @@ class SensorManager extends Reflux.Component {
                         battery_level={this.state.device_state.battery_level}
                     />
                     { this.state.type === 'temperature' ?
-                        <Temperature
+                        <TemperatureSensor
                             temperature={this.state.device_state.temperature}
                             humidity={this.state.device_state.humidity}
                         /> :

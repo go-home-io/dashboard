@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
-import TemperatureSymbol from "./TemperatureSymbol";
+import TemperatureSymbol from "../common/TemperatureSymbol";
 
 const styles = theme => ({
     root: {
@@ -11,7 +11,7 @@ const styles = theme => ({
     },
 });
 
-class Temperature extends React.Component {
+class TemperatureSensor extends React.Component {
 
     render () {
         const {classes} = this.props;
@@ -35,9 +35,9 @@ class Temperature extends React.Component {
     }
 }
 
-Temperature.propTypes = {
+TemperatureSensor.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Temperature)
+export default withStyles(styles)(TemperatureSensor)
 
