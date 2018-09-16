@@ -12,6 +12,7 @@ import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
 import {SENSOR_HEADER_ICON_COLOR, SENSOR_HEADER_BKG_COLOR} from '../../settings/colors';
 import ComponentHeader from "../common/ComponentHeader";
+import lightActions from "../../reflux/light/lightActions";
 
 const styles = theme => ({
     root: {
@@ -40,6 +41,7 @@ class SensorManager extends Reflux.Component {
                         dev_id={this.props.id}
                         name = {name}
                         status = {this.state.status}
+                        actions = {lightActions}
                         icon = {icon}
                         ordinaryBkgColor={ordinaryBkgColor}
                         variant = 'sensor'
