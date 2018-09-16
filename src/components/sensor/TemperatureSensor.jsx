@@ -7,7 +7,8 @@ import TemperatureSymbol from "../common/TemperatureSymbol";
 
 const styles = theme => ({
     root: {
-       marginTop: 10,
+       marginTop: 5,
+       height: '100%',
     },
 });
 

@@ -26,6 +26,6 @@ export const LIGHT_HEADER_ICON_COLOR_OFF = 'rgba(0,0,0,0.47)';
 
 // Sensor
 export const SENSOR_HEADER_ICON_COLOR = "#ffffffe6";
-export const SENSOR_ICON_COLOR_ON = "rgba(0,0,0,0.54)";
+export const SENSOR_ICON_COLOR_ON = "#1cbbb6";
 export const SENSOR_ICON_COLOR_OFF = "rgba(0,0,0,0.3)";
-export const MOTION_ICON_COLOR_ON = '#ff0000a1';
+export const MOTION_ICON_COLOR_ON = '#1cbbb6';
