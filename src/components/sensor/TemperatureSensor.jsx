@@ -13,12 +13,10 @@ const styles = theme => ({
 });
 
 class TemperatureSensor extends React.Component {
-
     render () {
         const {classes} = this.props;
 
         return (
-
             <Grid container justify='center' alignItems='center'>
                 <Grid item xs={12} className={classes.root}>
                     <Typography variant='display1' align='center'>
