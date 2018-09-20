@@ -17,10 +17,9 @@ const styles = theme => ({
         height: 38,
     },
     root: {
-        // marginLeft: 0,
         marginTop:-7,
-        // marginBottom:0,
-        width: "100%"
+        width: "100%",
+        height: "100%",
     },
     icon: {
         position: "relative",
@@ -52,7 +51,9 @@ class ComponentHeader extends React.Component {
     }
 
     getHeaderBackgroundColor(status) {
+        const { ordinaryBkgColor } = this.props;
         let bgColor = null;
+
         if ((status === "success")) {
             bgColor = SUCCESS_BKG_COLOR;
         } else if (status === "error") {
@@ -63,31 +64,33 @@ class ComponentHeader extends React.Component {
             this.timer = setInterval(this.setOrdinaryStatus, HEADER_HIGHLIGHT_DURATION);
             return bgColor;
         } else {
-            return this.props.ordinaryBkgColor;
+            return ordinaryBkgColor;
         }
     }
 
     handleClick () {
-        if ( !this.props.read_only &&
-               this.props.variant !== "sensor" ) {
-            this.props.actions.toggle(this.props.dev_id);
+        const { read_only, variant, actions, dev_id } = this.props;
+        if ( ! read_only && variant !== "sensor" ) {
+            actions.toggle(dev_id);
         }
     }
 
     setOrdinaryStatus() {
-        this.props.actions.status(this.props.dev_id, "ordinary");
+        const { dev_id, actions } = this.props;
+        actions.status(dev_id, "ordinary");
     }
 
     render () {
-        const {classes} = this.props;
+        const { classes, status, read_only, variant, name, iconColorOn,
+            on, iconColorOff, icon, ro_icon, iconROColor} = this.props;
 
-        const backgroundColor = this.getHeaderBackgroundColor(this.props.status);
-        const readOnly = this.props.read_only;
-        const variantSensor = this.props.variant === "sensor";
+        const backgroundColor = this.getHeaderBackgroundColor(status);
+        //  const read_only = this.props.read_only;
+        const variantSensor = (variant === "sensor");
         const cursor = variantSensor ? "default" :
-            readOnly ? "default" : "pointer";
-        const iconColor = variantSensor ? this.props.iconColorOn :
-            this.props.on ? this.props.iconColorOn : this.props.iconColorOff;
+            read_only ? "default" : "pointer";
+        const iconColor = variantSensor ? iconColorOn :
+            on ? iconColorOn : iconColorOff;
 
         return (
             <Paper className = { classes.paper } elevation = { 0 } style = { {backgroundColor:backgroundColor} }>
@@ -97,14 +100,14 @@ class ComponentHeader extends React.Component {
                         className = { classes.icon }
                         onClick = { this.handleClick }
                     >
-                        {this.props.icon}
+                        { icon }
                     </Icon>
-                    { readOnly && !variantSensor ?
+                    { read_only && !variantSensor ?
                         <Tooltip title = 'Read only device'
                             placement = "top"
                         >
-                            <Icon className = { classes.ro_icon }
-                                style = { {color:this.props.iconROColor} }
+                            <Icon className = { ro_icon }
+                                style = { {color: iconROColor} }
                             >
                                     sync_disabled
                             </Icon>
@@ -116,7 +119,7 @@ class ComponentHeader extends React.Component {
                         onClick = { this.handleClick }
                         style = { {cursor:cursor} }
                     >
-                        {this.props.name}
+                        { name }
                     </Typography>
                 </div>
             </Paper>
@@ -126,6 +129,19 @@ class ComponentHeader extends React.Component {
 
 ComponentHeader.propTypes = {
     classes: PropTypes.object.isRequired,
+    ordinaryBkgColor: PropTypes.string.isRequired,
+    read_only: PropTypes.bool,
+    variant: PropTypes.string,
+    actions: PropTypes.func.isRequired,
+    dev_id: PropTypes.string.isRequired,
+    iconColorOn: PropTypes.string,
+    iconColorOff: PropTypes.string,
+    iconROColor: PropTypes.string,
+    icon: PropTypes.string,
+    ro_icon: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    on: PropTypes.bool
 };
 
 export default withStyles(styles)(ComponentHeader);

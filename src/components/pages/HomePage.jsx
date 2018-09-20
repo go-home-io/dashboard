@@ -1,7 +1,7 @@
 import React from "react";
 import Reflux from "reflux";
 import Grid from "@material-ui/core/Grid";
-import GoHomeBar from "../navigation/AppBar";
+import GoHomeAppBar from "../navigation/AppBar";
 import NavBar from "../navigation/NavBar";
 import WebSocketStore from "../../reflux/socket/WebSocketStore";
 import Location from "../location/Location";
@@ -10,6 +10,15 @@ import Hidden from "@material-ui/core/Hidden/Hidden";
 import storage from "../../services/storage";
 import appActions from "../../reflux/application/appActions";
 import locationActions from "../../reflux/location/locationActions";
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+const styles = () => ({
+    root: {
+        marginTop:69,
+        fontFamily: "\"Roboto\", sans-serif",
+    }
+});
 
 class HomePage extends Reflux.Component {
     constructor(props){
@@ -29,13 +38,18 @@ class HomePage extends Reflux.Component {
     }
 
     render () {
+        const { classes } = this.props;
         const generalState = this.props.generalState;
         const locations = generalState.locations;
 
         return (
-            <Grid container spacing = { 0 } justify = 'flex-start' style = { {marginTop:69} }>
+            <Grid container
+                spacing = { 0 }
+                justify = 'flex-start'
+                className = { classes.root }
+            >
                 <Grid item xs = { 12 }>
-                    <GoHomeBar locations = { locations }/>
+                    <GoHomeAppBar locations = { locations }/>
                 </Grid>
                 <Hidden mdDown>
                     <Grid item md = { 2 }>
@@ -61,4 +75,8 @@ class HomePage extends Reflux.Component {
     }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+    classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(HomePage);

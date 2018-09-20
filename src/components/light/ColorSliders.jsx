@@ -77,6 +77,6 @@ ColorSliders.propTypes = {
     dev_id: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
     color: PropTypes.object.isRequired,
- };
+};
 
 export default withStyles(styles)(ColorSliders);
