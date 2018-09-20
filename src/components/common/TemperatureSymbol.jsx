@@ -1,5 +1,5 @@
-import React from 'react'
-import Reflux from 'reflux'
+import React from "react";
+import Reflux from "reflux";
 import AppStore from "../../reflux/application/AppStore";
 
 class TemperatureSymbol extends Reflux.Component {
@@ -9,12 +9,17 @@ class TemperatureSymbol extends Reflux.Component {
     }
 
     render () {
-        const temperatureSymbol = (this.state.uom === "imperial" ) ? '&deg;F' : '&deg;C';
-
-        return <div  style={{display:'inline-block'}}
-                     dangerouslySetInnerHTML={{__html: temperatureSymbol}}
-               />
+        const { uom } = this.state;
+        return (
+            uom === "imperial"  ?
+                <div style = { {display:"inline-block"} }>
+                    &deg;F
+                </div> :
+                <div style = { {display:"inline-block"} }>
+                    &deg;C
+                </div>
+        );
     }
 }
 
-export default TemperatureSymbol
+export default TemperatureSymbol;

@@ -1,0 +1,70 @@
+env:
+  browser: true
+  commonjs: true
+  es6: true
+extends: 
+  - eslint:recommended
+  - plugin:react/recommended
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+rules:
+  indent:
+    - error
+    - 4
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - double
+  semi:
+    - error
+    - always
+  "react/boolean-prop-naming": 2
+  "react/destructuring-assignment": 2
+  "react/no-access-state-in-setstate": 2 
+  "react/no-array-index-key": 2
+  "react/no-children-prop": 2
+  "react/no-danger": 2
+  "react/no-danger-with-children": 2
+  "react/no-deprecated": 1
+  "react/no-did-update-set-state": 2
+  "react/no-direct-mutation-state": 2
+  "react/no-multi-comp": 2
+  "react/no-typos": 2
+  "react/no-string-refs": 2
+  "react/no-this-in-sfc": 2
+  "react/no-unescaped-entities": 1
+  "react/no-unknown-property": 2
+  "react/no-unused-prop-types": 1
+  "react/prefer-es6-class": 2
+  "react/prop-types": 2
+  "react/react-in-jsx-scope": 2
+  "react/require-render-return": 2
+  "react/self-closing-comp": 1
+  "react/sort-comp": 2
+  "react/void-dom-elements-no-children": 2
+
+  "react/jsx-closing-bracket-location": 1
+  "react/jsx-closing-tag-location": 1
+  "react/jsx-curly-spacing":
+    - 1
+    - when: always
+  "react/jsx-equals-spacing": 
+    - 1
+    - always
+  "react/jsx-one-expression-per-line": 1
+  "react/jsx-pascal-case": 1
+  "react/jsx-props-no-multi-spaces": 1
+
+  "react/jsx-filename-extension": 2
+  "react/jsx-indent": 2
+  "react/jsx-no-duplicate-props": 2
+settings: 
+  react: 
+    version: 16.5

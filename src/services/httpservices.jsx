@@ -1,15 +1,15 @@
-import {STATE_URL} from '../settings/urls';
+import {STATE_URL} from "../settings/urls";
 
 import Cookie from "js-cookie";
-import {COOKIE_NAME} from '../settings/cookie';
+import {COOKIE_NAME} from "../settings/cookie";
 
 const service = {
     get:() => {
         return fetch(STATE_URL, {
             headers: {
-                'Authorization': Cookie.get(COOKIE_NAME)
+                "Authorization": Cookie.get(COOKIE_NAME)
             },
-            method: 'get',
+            method: "get",
         })
             .then((response) => {
                 if (response.ok) {
@@ -19,17 +19,19 @@ const service = {
                 }
             })
             .catch(err => {
-                console.log(err.message);
-                return err.message;
-            })
+                // eslint-disable-next-line
+                console.error("Error during server connection:", err.messageInfo);
+                return 404;
+                // err.messageInfo;
+            });
     },
     post:(url, data) => {
         return fetch(STATE_URL + url, {
             headers: {
-                'Accept': 'text/plain',
-                'Content-Type': 'application/json'
+                "Accept": "text/plain",
+                "Content-Type": "application/json"
             },
-            method: 'post',
+            method: "post",
             body: JSON.stringify(data)
         }).then( (response) => {
             return response;
@@ -37,4 +39,4 @@ const service = {
     }
 };
 
-export default service
+export default service;

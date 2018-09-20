@@ -1,42 +1,55 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React from "react";
+import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import TemperatureSymbol from "../common/TemperatureSymbol";
+import withStyles from "@material-ui/core/styles/withStyles";
 
-const styles = theme => ({
+const styles = () => ({
     root: {
-       marginTop: 5,
-       height: '100%',
+        margin: 0,
     },
+    temperature: {
+        position: 'relative',
+        top: 10,
+        left: 0
+    },
+    humidity: {
+        position: 'relative',
+        top: 10,
+        left: 0
+    }
 });
 
 class TemperatureSensor extends React.Component {
     render () {
-        const {classes} = this.props;
+        const {classes, temperature, humidity} = this.props;
 
         return (
-            <Grid container justify='center' alignItems='center'>
-                <Grid item xs={12} className={classes.root}>
-                    <Typography variant='display1' align='center'>
-                        {this.props.temperature}
+            <div className={classes.root}>
+                <div className={classes.temperature}>
+                    <Typography variant = 'display1' align = 'center'>
+                        {temperature}
                         <TemperatureSymbol/>
                     </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant='body1' align='center'>
-                       Humidity {this.props.humidity}%
+                </div>
+                <div className={classes.humidity}>
+                    <Typography variant = 'body1' align = 'center'>
+                        Humidity
+                        {" "}
+                        {humidity}
+                        %
                     </Typography>
-                </Grid>
-            </Grid>
-        )
+                </div>
+            </div>
+        );
     }
 }
 
 TemperatureSensor.propTypes = {
-    classes: PropTypes.object.isRequired,
+    temperature: PropTypes.number.isRequired,
+    humidity: PropTypes.number.isRequired
 };
 
-export default withStyles(styles)(TemperatureSensor)
+export default  withStyles(styles)(TemperatureSensor);
 

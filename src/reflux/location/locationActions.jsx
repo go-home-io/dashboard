@@ -1,7 +1,7 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 
 const locationActions = Reflux.createActions([
-      'visible',
+    "visible",
 ]);
 
-export default locationActions
+export default locationActions;

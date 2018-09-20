@@ -1,5 +1,5 @@
-import Reflux from 'reflux'
-import groupActions from './groupActions';
+import Reflux from "reflux";
+import groupActions from "./groupActions";
 import wsActions from "../socket/wsActions";
 // import notificationActions from "./notificationActions";
 import lightActions from "../light/lightActions";
@@ -8,7 +8,7 @@ import lightActions from "../light/lightActions";
 //  Create unique Store for each Component
 function GroupStoreFactory(id,  members, device_info, location){
 
-    const visible = (location === 'Default');
+    const visible = (location === "Default");
 
     class GroupStore extends Reflux.Store {
         constructor() {
@@ -54,20 +54,20 @@ function GroupStoreFactory(id,  members, device_info, location){
         // Actions
         onOn (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand('on', "");
+                this.doCommand("on", "");
 
             }
         }
 
         onOff (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand('off', "");
-                           }
+                this.doCommand("off", "");
+            }
         }
 
         onToggle (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand('toggle', "");
+                this.doCommand("toggle", "");
 
             }
         }
@@ -81,7 +81,7 @@ function GroupStoreFactory(id,  members, device_info, location){
     }
 
     GroupStore.id = id;
-    return GroupStore
+    return GroupStore;
 }
 
-export default GroupStoreFactory
+export default GroupStoreFactory;

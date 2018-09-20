@@ -1,31 +1,35 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RGBSlider from "./RGBSlider";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import rgbColor from "../utils/rgbColor";
-import Grid from "@material-ui/core/Grid/Grid";
 import SlidersHeader from "./SlidersHeader";
 import lightActions from "../../reflux/light/lightActions";
+import SliderButton from "./SliderButton";
 
-const styles = theme => ({
+const styles = () => ({
     root : {
         marginTop:3,
         width:250,
         height:120,
-        cursor: 'default',
+        cursor: "default",
     },
     color: {
-        width:25,
-        height:25,
-        float:'right',
-  },
+        width: 25,
+        height: 25,
+        float: "right",
+    },
+    icon: {
+        width: 25,
+        height: 25,
+        margin: 10,
+        color: "#15d915",
+    }
 });
 
 class ColorSliders extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             r: props.color.r,
             g: props.color.g,
@@ -34,60 +38,45 @@ class ColorSliders extends React.Component {
         this.setColor = this.setColor.bind(this);
     }
 
-    handleChangeRed(event, value) {
+    handleColorChange = colorName => (event, value) => {
         const color = Math.round(value);
-        let state = this.state;
-        state.r = color;
-        this.setState(state);
+        this.setState({ [colorName]: color });
+    };
 
-    }
-    handleChangeGreen(event, value) {
-        const color = Math.round(value);
-        let state = this.state;
-        state.g = color;
-        this.setState(state);
-    }
-    handleChangeBlue(event, value) {
-        const color = Math.round(value);
-        let state = this.state;
-        state.b = color;
-        this.setState(state);
-    }
     setColor() {
-        // alert('SetColor'+this.props.dev_id);
-        lightActions.setColor(this.props.dev_id, this.state);
-        this.props.close();
+        const { dev_id, close } = this.props;
+        lightActions.setColor(dev_id, this.state);
+        close();
     }
 
     render () {
-        const {classes} = this.props;
-        const color = rgbColor(this.state);
+        const { classes } = this.props;
+        const { r, g, b } = this.state;
+        const css_color = rgbColor(this.state);
 
         return (
-            <div className={classes.root}>
-                <SlidersHeader color = {color}
-                               caption = 'Set color'
+            <div className = { classes.root }>
+                <SlidersHeader
+                    color = { css_color }
+                    caption = 'Set color'
                 />
+                { RGBSlider(r, "#f50057","#e46363", this.handleColorChange("r")) }
+                { RGBSlider(g, "green","lightgreen", this.handleColorChange("g")) }
+                { RGBSlider(b, "blue","lightblue", this.handleColorChange("b")) }
 
-                {RGBSlider(this.state.r, '#f50057','#e46363', this.handleChangeRed.bind(this))}
-                {RGBSlider(this.state.g, 'green','lightgreen', this.handleChangeGreen.bind(this))}
-                {RGBSlider(this.state.b, 'blue','lightblue', this.handleChangeBlue.bind(this))}
-
-                <Grid container justify='flex-start' className={classes.action}>
-                    <IconButton onClick={this.setColor}
-                                style={{width:25, height:25,margin:10}}>
-                                <i className="material-icons">done</i>
-                    </IconButton>
-                </Grid>
+                <SliderButton
+                    action = { this.setColor.bind(this) }
+                />
             </div>
-        )
+        );
     }
-
 }
 
 ColorSliders.propTypes = {
+    classes: PropTypes.object.isRequired,
+    dev_id: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired,
+    color: PropTypes.object.isRequired,
+ };
 
-    classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(ColorSliders)
+export default withStyles(styles)(ColorSliders);

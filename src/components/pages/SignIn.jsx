@@ -46,7 +46,10 @@ class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = { name: '',
-                       password: ''}
+                       password: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange = name => event => {
@@ -55,17 +58,16 @@ class SignIn extends React.Component {
         });
     };
 
-     handleClick = (event) => {
-         if (this.state.name.length === 0 || this.state.password.length === 0 ) {
+    handleClick (event) {
+        if (this.state.name.length === 0 || this.state.password.length === 0 ) {
             return
-         }
-         event.preventDefault();
-         this.props.getCredentials(this.state.name, this.state.password);
-     };
+        }
+        event.preventDefault();
+        this.props.getCredentials(this.state.name, this.state.password);
+    };
 
     render() {
         const {classes} = this.props;
-        console.log('error:'+this.props.error);
         return (
             <div>
                 <CssBaseline/>

@@ -1,9 +1,9 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 
 const appActions = Reflux.createActions([
-    'setLocation',
-    'toggleMenu',
-    'setUOM',
+    "setLocation",
+    "toggleMenu",
+    "setUOM",
 ]);
 
-export default appActions
+export default appActions;

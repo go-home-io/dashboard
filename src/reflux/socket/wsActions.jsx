@@ -1,9 +1,9 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 
 const wsActions = Reflux.createActions([
-    'doCommand',
-    'reconnect',
-    'clear',
+    "doCommand",
+    "reconnect",
+    "clear",
 ]);
 
-export default wsActions
+export default wsActions;

@@ -4,4 +4,4 @@ function sleep(sleepDuration) {
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
 
-export default sleep
+export default sleep;

@@ -1,24 +1,22 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import Grid from "@material-ui/core/Grid/Grid";
 import SlidersHeader from "./SlidersHeader";
 import lightActions from "../../reflux/light/lightActions";
 import Slider from "@material-ui/lab/Slider/Slider";
+import SliderButton from "./SliderButton";
 
-const styles = theme => ({
+const styles = () => ({
     root : {
         marginTop:0,
         width:250,
         height:110,
-        cursor: 'default',
+        cursor: "default",
     },
-    color: {
-        width:25,
-        height:25,
-        float:'right',
-    },
+    slider: {
+        width:"90%",
+        marginLeft:3
+    }
 });
 
 class BrightnessSlider extends React.Component {
@@ -26,48 +24,51 @@ class BrightnessSlider extends React.Component {
         super(props);
 
         this.state = {
-             value: props.level,
+            value: props.level,
         };
         this.setBrightness = this.setBrightness.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange = (event, value) => {
+    handleChange (event, value) {
         const level = Math.floor(value);
         this.setState({ value:level });
-    };
+    }
 
     setBrightness() {
-        lightActions.setBrightness(this.props.dev_id, this.state.value);
-        this.props.close();
+        const { dev_id, close } = this.props;
+        const { value } = this.state;
+        lightActions.setBrightness(dev_id, value);
+        close();
     }
 
     render () {
-        const {classes} = this.props;
+        const { classes } = this.props;
         const { value } = this.state;
 
         return (
-            <div className={classes.root}>
-                <SlidersHeader caption = 'Set brightness'
-                               level={this.state.value} />
-                <div style={{width:'90%', marginLeft:3}}>
-                    <Slider value={value}  onChange={this.handleChange} />
+            <div className = { classes.root }>
+                <SlidersHeader
+                    caption = 'Set brightness'
+                    level = { value }
+                />
+                <div className = { classes.slider }>
+                    <Slider value = { value } onChange = { this.handleChange } />
                 </div>
-
-                <Grid container justify='flex-start' className={classes.action}>
-                    <IconButton onClick={this.setBrightness}
-                                style={{width:25, height:25,margin:10}}>
-                        <i className="material-icons">done</i>
-                    </IconButton>
-                </Grid>
+                <SliderButton
+                    action = { this.setBrightness.bind(this) }
+                />
             </div>
-        )
+        );
     }
 
 }
 
 BrightnessSlider.propTypes = {
-
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    dev_id: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired,
+    level: PropTypes.number.isRequired
 };
 
-export default withStyles(styles)(BrightnessSlider)
+export default withStyles(styles)(BrightnessSlider);

@@ -1,4 +1,4 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 import lightActions from "../light/lightActions";
 import locationActions from "./locationActions";
 import groupActions from "../group/groupActions";
@@ -15,29 +15,12 @@ function LocationStoreFactory(name,  members){
             super();
 
             this.state = { name:name,
-                           members: members,
-                           visible: false,
-                         };
+                members: members,
+                visible: false,
+            };
             this.listenables = locationActions;
 
-            this.onMessage = this.onMessage.bind(this);
-            this.doCommand = this.doCommand.bind(this);
             this.onVisible = this.onVisible.bind(this);
-        }
-
-        // WebSocket messenger
-        doCommand(command, value) {
-            // const mess = {id:name, cmd:command,value: value};
-            //
-            // this.setState({'loading':true});
-            // wsActions.doCommand(mess);
-        }
-
-        // WebSocket listener
-        onMessage (data) {
-            // if (data.id === name) {
-            //     this.setState({device_state: data.state});
-            // }
         }
 
         // Actions
@@ -56,4 +39,4 @@ function LocationStoreFactory(name,  members){
     return LocationStore;
 }
 
-export default LocationStoreFactory
+export default LocationStoreFactory;

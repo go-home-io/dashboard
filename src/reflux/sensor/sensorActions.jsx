@@ -1,9 +1,9 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 
 const sensorActions = Reflux.createActions([
-    'visible',
-    'status',
-    'message',
+    "visible",
+    "status",
+    "message",
 ]);
 
-export default sensorActions
+export default sensorActions;

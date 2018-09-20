@@ -1,21 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon/Icon";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
-import {SENSOR_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF} from '../../settings/colors';
+import {SENSOR_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF} from "../../settings/colors";
 
-const styles = theme => ({
+const styles = () => ({
     root: {
         marginTop: 0,
     },
     icon: {
-        color: 'rgba(0,0,0,0.54)',
+        color: "rgba(0,0,0,0.54)",
         fontSize: 26,
-        margin:'5px 10px 0 10px',
+        margin:"5px 10px 0 10px",
     },
-
 });
 
 const color = (state) => {
@@ -28,43 +27,46 @@ const color = (state) => {
 
 class ButtonIcons extends React.Component {
     render () {
-        const {classes} = this.props;
+        const {classes, click, double_click, press} = this.props;
 
         return (
-            <Grid container justify='center' alignItems='center' className={classes.root}>
-                <Tooltip title={"Click: "+this.props.click} placement="top">
+            <Grid container justify = 'center' alignItems = 'center' className = { classes.root }>
+                <Tooltip title = { "Click: " + click } placement = "top">
                     <Icon
-                        className={classes.icon}
-                        style={{color:color(this.props.click)}}
+                        className = { classes.icon }
+                        style = { {color:color(click)} }
                     >
                         done
                     </Icon>
                 </Tooltip>
-                <Tooltip title={"Double click: "+this.props.double_click} placement="top">
+                <Tooltip title = { "Double click: " + double_click } placement = "top">
                     <Icon
-                        className={classes.icon}
-                        style={{color:color(this.props.double_click)}}
+                        className = { classes.icon }
+                        style = { {color:color(double_click)} }
                     >
                         done_all
                     </Icon>
                 </Tooltip>
-                <Tooltip title={"Press: "+this.props.press} placement="top">
+                <Tooltip title = { "Press: " + press } placement = "top">
                     <Icon
-                        className={classes.icon}
-                        style={{color:color(this.props.press)}}
+                        className = { classes.icon }
+                        style = { {color:color(press)} }
                     >
                             done_outline
                     </Icon>
                 </Tooltip>
             </Grid>
 
-        )
+        );
     }
 }
 
 ButtonIcons.propTypes = {
     classes: PropTypes.object.isRequired,
+    click: PropTypes.bool.isRequired,
+    double_click: PropTypes.bool.isRequired,
+    press: PropTypes.bool.isRequired
 };
 
-export default withStyles(styles)(ButtonIcons)
+export default withStyles(styles)(ButtonIcons);
 

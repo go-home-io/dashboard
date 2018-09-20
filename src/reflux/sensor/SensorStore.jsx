@@ -1,6 +1,6 @@
-import Reflux from 'reflux'
-import sensorActions from './sensorActions'
-import notificationActions from "../notification/notificationActions";
+import Reflux from "reflux";
+import sensorActions from "./sensorActions";
+// import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Component
 function SensorStoreFactory(id,  device_info, location){
@@ -18,7 +18,7 @@ function SensorStoreFactory(id,  device_info, location){
                 location: location,
                 visible: false,
                 read_only: device_info.read_only,
-                status: 'ordinary',
+                status: "ordinary",
             };
             this.listenables = sensorActions;
 
@@ -32,7 +32,7 @@ function SensorStoreFactory(id,  device_info, location){
         onMessage (data) {
             if (data.id === id) {
                 this.setState({device_state: data.state,
-                               status:'success',
+                    status:"success",
                 });
             }
         }
@@ -53,7 +53,7 @@ function SensorStoreFactory(id,  device_info, location){
     }
 
     SensorStore.id = id;
-    return SensorStore
+    return SensorStore;
 }
 
-export default SensorStoreFactory
+export default SensorStoreFactory;

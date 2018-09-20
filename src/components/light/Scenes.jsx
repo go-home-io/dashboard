@@ -1,86 +1,81 @@
-import React from 'react';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import lightActions from '../../reflux/light/lightActions';
+import React from "react";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import lightActions from "../../reflux/light/lightActions";
 import PropTypes from "prop-types";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography/Typography";
 
 const ITEM_HEIGHT = 60;
 
-const styles = theme => ( {
+const styles = () => ( {
     root: {
-        width: '100%',
+        width: "100%",
         marginTop: 3,
     },
     text: {
-        // fontSize:12,
         letterSpacing:1,
-        // fontColor:'lightgray',
-        cursor:'pointer',
-        // position: 'relative',
-        // left: 10,
-    },
-    button: {
-        // position: 'relative',
-        // top: -5,
-        // left: 29,
+        cursor:"pointer",
     },
 });
 
 class Scenes extends React.Component {
-    state = {
-        anchorEl: null,
-        dev_id: this.props.dev_id,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            anchorEl: null,
+        };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    }
 
-    handleClick = event => {
-        if ( !this.props.read_only ) {
-             this.setState({ anchorEl: event.currentTarget });
+    handleClick (event)  {
+        const { read_only } = this.props;
+        if ( ! read_only ) {
+            this.setState({ anchorEl: event.currentTarget });
         }
-    };
+    }
 
-    handleClose = (option) => {
-        if (typeof(option) === 'string') {
-            lightActions.setScene(this.state.dev_id, option);
+    handleClose (option)  {
+        const { dev_id } = this.props;
+        if (typeof(option) === "string") {
+            lightActions.setScene(dev_id, option);
         }
         this.setState({ anchorEl: null });
-    };
+    }
 
     render() {
-        const {classes} = this.props;
-        const options = this.props.scenes;
+        const { classes, scenes, read_only } = this.props;
         const { anchorEl } = this.state;
-        const cursor = this.props.read_only ? 'default' : 'pointer';
+        const cursor = read_only ? "default" : "pointer";
 
         return (
-            // this.props.loading ? null :
-            <div  className={classes.root}>
-
-                <div id="label" className={classes.text}
-                                onClick={this.handleClick}
-                                style={{cursor:cursor}}
+            <div className = { classes.root }>
+                <div id = "label" className = { classes.text }
+                    onClick = { this.handleClick }
+                    style = { {cursor:cursor} }
                 >
-                    <Typography variant='body1'>
+                    <Typography variant = 'body1'>
                         Select scene
                     </Typography>
                 </div>
                 <Menu
-                    id="long-menu"
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={this.handleClose}
-                    value = {this.state.selectedItem}
-                    PaperProps={{
+                    id = "long-menu"
+                    anchorEl = { anchorEl }
+                    open = { Boolean(anchorEl) }
+                    onClose = { this.handleClose }
+                    value = { null }
+                    PaperProps = { {
                         style: {
                             maxHeight: ITEM_HEIGHT * 4.0,
                             width: 200,
                         },
-                    }}
+                    } }
                 >
-                    {options.map(option => (
-                        <MenuItem key={option} selected={option === 0}
-                                  onClick={this.handleClose.bind(this, option)}>
+                    {scenes.map(option => (
+                        <MenuItem key = { option } selected = { option === 0 }
+                            onClick = { this.handleClose.bind(this, option) }
+                        >
                             {option}
                         </MenuItem>
                     ))}
@@ -92,6 +87,9 @@ class Scenes extends React.Component {
 
 Scenes.propTypes = {
     classes: PropTypes.object.isRequired,
+    scenes: PropTypes.array.isRequired,
+    read_only: PropTypes.bool.isRequired,
+    dev_id: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Scenes);

@@ -1,5 +1,5 @@
-import Reflux from 'reflux'
-import lightActions from './lightActions'
+import Reflux from "reflux";
+import lightActions from "./lightActions";
 import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
@@ -13,17 +13,17 @@ function LightStoreFactory(id,  device_info, location, group){
             super();
 
             this.state = { id:id,
-                           name: device_info.name,
-                           worker: device_info.worker,
-                           device_state: device_info.state,
-                           last_seen: device_info.last_seen,
-                           commands: device_info.commands,
-                           group_id: group,
-                           location: location,
-                           loading:false,
-                           visible: false,
-                           status:'ordinary',
-                           read_only: device_info.read_only,
+                name: device_info.name,
+                worker: device_info.worker,
+                device_state: device_info.state,
+                last_seen: device_info.last_seen,
+                commands: device_info.commands,
+                group_id: group,
+                location: location,
+                loading:false,
+                visible: false,
+                status:"ordinary",
+                read_only: device_info.read_only,
             };
 
             this.listenables = lightActions;
@@ -46,60 +46,60 @@ function LightStoreFactory(id,  device_info, location, group){
         // WebSocket messenger
         doCommand(command, value) {
             const mess = {id:id, cmd:command,value: value};
-            this.setState({'loading':true});
+            this.setState({"loading":true});
             wsActions.doCommand(mess);
         }
 
-       // WebSocket listener
+        // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
                 let state = data.state;
                 this.setState({device_state: state,
-                               loading:false,
-                               status:'success'});
+                    loading:false,
+                    status:"success"});
             }
         }
 
         // Actions
         onSetColor (dev_id, color) {
             if ( dev_id === id) {
-                this.doCommand('set-color', color);
-                this.setState({'loading':true});
+                this.doCommand("set-color", color);
+                this.setState({"loading":true});
             }
         }
 
         onSetBrightness (dev_id, level) {
             if ( dev_id === id ) {
-                this.doCommand('set-brightness', level);
-                this.setState({'loading':true});
+                this.doCommand("set-brightness", level);
+                this.setState({"loading":true});
             }
         }
 
         onOn (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand('on', "");
-                this.setState({'loading':true});
+                this.doCommand("on", "");
+                this.setState({"loading":true});
             }
         }
 
         onOff (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand('off', "");
-                this.setState({'loading':true});
+                this.doCommand("off", "");
+                this.setState({"loading":true});
             }
         }
 
         onToggle (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand('toggle', "");
-                this.setState({'loading':true});
+                this.doCommand("toggle", "");
+                this.setState({"loading":true});
             }
         }
 
         onSetScene(dev_id, scene_item) {
             if ( dev_id === id ) {
-                this.doCommand('set-scene', scene_item);
-                this.setState({'loading':true});
+                this.doCommand("set-scene", scene_item);
+                this.setState({"loading":true});
             }
         }
 
@@ -113,13 +113,12 @@ function LightStoreFactory(id,  device_info, location, group){
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
                 this.setState({status:status});
-                if (status === 'error') {
+                if (status === "error") {
                     this.setState({loading: false});
-                    notificationActions.notification('Connection timeout , the command may not be completed');
-                    // notificationActions.notification('Connection timeout , the command may not be completed');
-                } else if (status === 'rejected') {
-                    this.setState({loading: false, status:'error'});
-                    notificationActions.notification('Command aborted due to connection problems');
+                    notificationActions.notification(this.state.name + ": Connection timeout , the command may not be completed");
+                } else if (status === "rejected") {
+                    this.setState({loading: false, status:"error"});
+                    notificationActions.notification(this.state.name + ": Command aborted due to connection problems");
                     wsActions.clear();
                 }
             }
@@ -132,10 +131,10 @@ function LightStoreFactory(id,  device_info, location, group){
                 //alert('Light setLoading:' + id);
             }
         }
-  }
+    }
 
     LightStore.id = id;
-    return LightStore
+    return LightStore;
 }
 
-export default LightStoreFactory
+export default LightStoreFactory;

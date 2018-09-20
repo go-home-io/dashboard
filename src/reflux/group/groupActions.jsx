@@ -1,13 +1,13 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 
 const groupActions = Reflux.createActions([
-    'setColor',
-    'on',
-    'off',
-    'toggle',
-    'visible',
-    'message',
+    "setColor",
+    "on",
+    "off",
+    "toggle",
+    "visible",
+    "message",
 
 ]);
 
-export default groupActions
+export default groupActions;

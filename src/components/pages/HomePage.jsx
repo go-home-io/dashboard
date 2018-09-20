@@ -1,7 +1,7 @@
-import React from 'react'
-import Reflux from 'reflux'
-import Grid from '@material-ui/core/Grid';
-import GoHomeBar from "../navigation/GoHomeBar";
+import React from "react";
+import Reflux from "reflux";
+import Grid from "@material-ui/core/Grid";
+import GoHomeBar from "../navigation/AppBar";
 import NavBar from "../navigation/NavBar";
 import WebSocketStore from "../../reflux/socket/WebSocketStore";
 import Location from "../location/Location";
@@ -19,8 +19,8 @@ class HomePage extends Reflux.Component {
 
     componentDidMount () {
         // Restore active location from local storage and make it visible
-        let active_location = storage.get('location');
-        active_location = active_location ? active_location : 'Default';
+        let active_location = storage.get("location");
+        active_location = active_location ? active_location : "Default";
         locationActions.visible(active_location);
         appActions.setLocation(active_location);
 
@@ -33,31 +33,32 @@ class HomePage extends Reflux.Component {
         const locations = generalState.locations;
 
         return (
-            <Grid container spacing={0} justify='flex-start' style={{marginTop:69}}>
-                <Grid item xs={12}>
-                    <GoHomeBar locations={locations}/>
+            <Grid container spacing = { 0 } justify = 'flex-start' style = { {marginTop:69} }>
+                <Grid item xs = { 12 }>
+                    <GoHomeBar locations = { locations }/>
                 </Grid>
                 <Hidden mdDown>
-                    <Grid item  md={2}>
-                             <NavBar locations={locations}/>
+                    <Grid item md = { 2 }>
+                        <NavBar locations = { locations }/>
                     </Grid>
                 </Hidden>
 
-                <Grid item md={12} lg={10} >
+                <Grid item md = { 12 } lg = { 10 } >
                     {locations.map( (location) => {
                         return (
-                             <Location  key = {location.name}
-                                        location = {location}
-                                        generalState = {generalState}/>
-                        )
+                            <Location key = { location.name }
+                                location = { location }
+                                generalState = { generalState }
+                            />
+                        );
                     })}
                 </Grid>
 
                 <Notification/>
                 <Notification/>
             </Grid>
-        )
+        );
     }
 }
 
-export default HomePage
+export default HomePage;

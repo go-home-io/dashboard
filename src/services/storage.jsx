@@ -22,9 +22,9 @@ const storage = {
             k.push(localStorage.key(index));
             index = index + 1;
         }
-        return k
+        return k;
     },
 
 };
 
-export default storage
+export default storage;

@@ -1,10 +1,10 @@
 function truncateCaption(caption, symbols) {
     if ( caption.length <= symbols) {
-        return caption
+        return caption;
     } else {
-        return caption.substr(0,symbols-2) + '..'
+        return caption.substr(0,symbols-2) + "..";
     }
 }
 
-export default truncateCaption
+export default truncateCaption;
 

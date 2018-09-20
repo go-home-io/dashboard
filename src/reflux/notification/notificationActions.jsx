@@ -1,8 +1,9 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 
 const notificationActions = Reflux.createActions([
-    'notification',
-    'close'
+    "notification",
+    "close",
+    "processQueue",
 ]);
 
-export default notificationActions
+export default notificationActions;

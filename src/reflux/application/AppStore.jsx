@@ -1,4 +1,4 @@
-import Reflux from 'reflux';
+import Reflux from "reflux";
 import appActions from "./appActions";
 
 class AppStore extends Reflux.Store {
@@ -6,10 +6,9 @@ class AppStore extends Reflux.Store {
         super();
 
         this.state = {
-                 // locations: [],
-                 active_location: 'Default',
-                 uom: '',
-                 openMenu: false,
+            active_location: "Default",
+            uom: "",
+            openMenu: false,
         };
 
         this.listenables = appActions;
@@ -20,7 +19,8 @@ class AppStore extends Reflux.Store {
 
     // Actions
     onToggleMenu () {
-        this.setState({openMenu: !this.state.openMenu})
+        // eslint-disable-next-line
+        this.setState({openMenu: !this.state.openMenu});
     }
     onSetLocation (location) {
         this.setState({active_location: location});

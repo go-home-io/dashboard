@@ -1,4 +1,4 @@
-import Reflux from 'reflux'
+import Reflux from "reflux";
 import {SOCKET_URL} from "../../settings/urls";
 import {CONNECTION_TIMEOUT, PING_INTERVAL, MAX_ATTEMPTS} from "../../settings/websocket";
 import lightActions from "../light/lightActions";
@@ -19,7 +19,7 @@ let attempts = 0;
 let connectingState = false;
 let pongReceived = false;
 const connAlive = () => {
-    return pongReceived && !connectingState
+    return pongReceived && !connectingState;
 };
 
 // const pong =  () => {
@@ -29,7 +29,7 @@ const connAlive = () => {
 // };
 
 class WebSocketStore extends Reflux.Store {
-    socket = null;
+
 
     constructor() {
         super();
@@ -38,13 +38,15 @@ class WebSocketStore extends Reflux.Store {
             reset: false,
         };
         this.listenables = wsActions;
+        this.socket = null;
         this.createSocket();
 
         this.onDoCommand = this.onDoCommand.bind(this);
         this.onReconnect = this.onReconnect.bind(this);
         this.onClear = this.onClear.bind(this);
         this.ping = this.ping.bind(this);
-
+        this.pong = this.pong.bind(this);
+        this.reopenSocket = this.reopenSocket.bind(this);
     }
 
     createSocket() {
@@ -53,30 +55,30 @@ class WebSocketStore extends Reflux.Store {
         this.socket.onerror = this.onError.bind(this);
         this.socket.onopen = this.onOpen.bind(this);
         this.socket.onclose = this.onClose.bind(this);
-    };
+    }
 
-    reopenSocket = () => {
+    reopenSocket ()  {
         connectingState = true;
         pongReceived = false;
         clearInterval(timerPING_INTERVAL);
         clearTimeout(timerCONNECTION_TIMEOUT);
         timerPING_INTERVAL = null;
         this.socket.close();
-    };
+    }
 
-    ping = () => {
+    ping () {
         if (!connectingState) {
             pongReceived = false;
-            this.socket.send('ping');
+            this.socket.send("ping");
             timerCONNECTION_TIMEOUT = setTimeout(this.reopenSocket, CONNECTION_TIMEOUT);
         }
-    };
+    }
 
-    pong =  () => {
+    pong ()  {
         clearTimeout(timerCONNECTION_TIMEOUT);
         timerCONNECTION_TIMEOUT = null;
         pongReceived = true;
-    };
+    }
 
     // WebSocket event handlers
     onOpen() {
@@ -93,12 +95,13 @@ class WebSocketStore extends Reflux.Store {
     }
 
     onError() {
-        console.log('Socket error');
-       this.reopenSocket();
-    };
+        // eslint-disable-next-line
+        console.log("Socket error");
+        this.reopenSocket();
+    }
 
     onMessage(evt) {
-        if (evt.data === 'pong') {
+        if (evt.data === "pong") {
             // Pong handle
             this.pong();
         } else {
@@ -131,10 +134,9 @@ class WebSocketStore extends Reflux.Store {
                 timerAttempts = setTimeout(function () {
                     attempts = attempts + 1;
                     wsActions.doCommand(data);
-                }, 500)
+                }, 500);
             }
         }
-
     }
 
     onClear() {
@@ -146,4 +148,4 @@ class WebSocketStore extends Reflux.Store {
     }
 }
 
-export default WebSocketStore
+export default WebSocketStore;

@@ -1,39 +1,43 @@
-import React from 'react';
-import Reflux from 'reflux';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import {CONNECTION_TIMEOUT} from '../../settings/deviceDelays';
+import React from "react";
+import Reflux from "reflux";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import {CONNECTION_TIMEOUT} from "../../settings/deviceDelays";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import lightActions from "../../reflux/light/lightActions";
 import WebSocketStore from "../../reflux/socket/WebSocketStore";
 import wsActions from "../../reflux/socket/wsActions";
 
-const styles = theme => ({
+const styles = () => ({
     root: {
-        width:'100%',
+        width:"100%",
         marginTop:25,
-        marginLeft: 10,
+        marginRight: 12,
     }
 });
 
 class WaitingProgress extends Reflux.Component {
-    timer = null;
-
-    state = {
-        completed: 0,
-    };
-
     constructor(props) {
         super(props);
+        this.state = {
+            completed: 0,
+        };
         this.store = WebSocketStore;
+        this.timer = null;
+
+        this.restart = this.restart.bind(this);
+        this.progress = this.progress.bind(this);
+        this.onComplete = this.onComplete.bind(this);
+        this.restart = this.restart.bind(this);
+        this.progress = this.progress.bind(this);
     }
 
     componentDidMount() {
-        this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/20);
+        this.setState({ completed: 0 });
+        this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/100);
     }
 
-    componentWillUnmount() {
-        clearInterval(this.timer);
+    componentWillUnmount () {
         this.setState({ completed: 0 });
     }
 
@@ -44,49 +48,47 @@ class WaitingProgress extends Reflux.Component {
         lightActions.status(this.props.dev_id, status);
     }
 
-    restart = () => {
-        this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/20);
-    };
+    restart ()  {
+        this.setState({ completed: 0 });
+        setTimeout(setInterval(this.progress, CONNECTION_TIMEOUT/100),300);
+        // setInterval(this.progress, CONNECTION_TIMEOUT/100);
+    }
 
-    progress = () => {
+    progress ()  {
         let { completed, reset, rejected} = this.state;
-        // let {reset} = this.state;
-        // let {rejected} = this.state;
-
-        const diff = 5;
+        const diff = 1;
 
         if (rejected ) {
-            this.onComplete('rejected');
+            this.onComplete("rejected");
         }
 
         if (reset) {
             clearInterval(this.timer);
             this.timer = null;
-            this.setState({completed:0});
-            completed = this.state.completed;
             wsActions.clear();
-            setTimeout(this.restart.bind(this), 200);
+            this.restart();
         }
 
         if (completed === 100) {
-            this.onComplete('error');
+            this.onComplete("error");
         } else {
             this.setState({ completed: completed + diff });
         }
-    };
+    }
 
-   render () {
-       const {classes} = this.props;
-       return (
-                   <div className={classes.root}>
-                       <LinearProgress variant="determinate" value={this.state.completed} />
-                   </div>
-       )
-   }
+    render () {
+        const {classes} = this.props;
+        return (
+            <div className = { classes.root }>
+                <LinearProgress variant = "determinate" value = { this.state.completed } />
+            </div>
+        );
+    }
 }
 
 WaitingProgress.propTypes = {
     classes: PropTypes.object.isRequired,
+    dev_id: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(WaitingProgress);
