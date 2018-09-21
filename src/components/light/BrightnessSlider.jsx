@@ -4,11 +4,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import SlidersHeader from "./SlidersHeader";
 import lightActions from "../../reflux/light/lightActions";
 import Slider from "@material-ui/lab/Slider/Slider";
-import SliderButton from "./SliderButton";
+import SliderActions from "./SliderActions";
 
 const styles = () => ({
     root : {
-        marginTop:0,
+        marginTop:20,
         width:250,
         height:110,
         cursor: "default",
@@ -43,7 +43,7 @@ class BrightnessSlider extends React.Component {
     }
 
     render () {
-        const { classes } = this.props;
+        const { classes, close } = this.props;
         const { value } = this.state;
 
         return (
@@ -55,8 +55,9 @@ class BrightnessSlider extends React.Component {
                 <div className = { classes.slider }>
                     <Slider value = { value } onChange = { this.handleChange } />
                 </div>
-                <SliderButton
-                    action = { this.setBrightness.bind(this) }
+                <SliderActions
+                    save = { this.setBrightness }
+                    close = { close }
                 />
             </div>
         );

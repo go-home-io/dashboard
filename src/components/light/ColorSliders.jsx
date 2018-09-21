@@ -5,26 +5,19 @@ import RGBSlider from "./RGBSlider";
 import rgbColor from "../utils/rgbColor";
 import SlidersHeader from "./SlidersHeader";
 import lightActions from "../../reflux/light/lightActions";
-import SliderButton from "./SliderButton";
+import SliderActions from "./SliderActions";
 
 const styles = () => ({
     root : {
-        marginTop:3,
+        marginTop:10,
         width:250,
         height:120,
-        cursor: "default",
     },
     color: {
         width: 25,
         height: 25,
         float: "right",
     },
-    icon: {
-        width: 25,
-        height: 25,
-        margin: 10,
-        color: "#15d915",
-    }
 });
 
 class ColorSliders extends React.Component {
@@ -50,7 +43,7 @@ class ColorSliders extends React.Component {
     }
 
     render () {
-        const { classes } = this.props;
+        const { classes, close } = this.props;
         const { r, g, b } = this.state;
         const css_color = rgbColor(this.state);
 
@@ -64,8 +57,9 @@ class ColorSliders extends React.Component {
                 { RGBSlider(g, "green","lightgreen", this.handleColorChange("g")) }
                 { RGBSlider(b, "blue","lightblue", this.handleColorChange("b")) }
 
-                <SliderButton
-                    action = { this.setColor.bind(this) }
+                <SliderActions
+                    close = { close }
+                    save = { this.setColor }
                 />
             </div>
         );

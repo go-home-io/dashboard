@@ -82,10 +82,9 @@ class ComponentHeader extends React.Component {
 
     render () {
         const { classes, status, read_only, variant, name, iconColorOn,
-            on, iconColorOff, icon, ro_icon, iconROColor} = this.props;
+            on, iconColorOff, icon, iconROColor} = this.props;
 
         const backgroundColor = this.getHeaderBackgroundColor(status);
-        //  const read_only = this.props.read_only;
         const variantSensor = (variant === "sensor");
         const cursor = variantSensor ? "default" :
             read_only ? "default" : "pointer";
@@ -106,7 +105,7 @@ class ComponentHeader extends React.Component {
                         <Tooltip title = 'Read only device'
                             placement = "top"
                         >
-                            <Icon className = { ro_icon }
+                            <Icon className = { classes.ro_icon }
                                 style = { {color: iconROColor} }
                             >
                                     sync_disabled
@@ -138,7 +137,6 @@ ComponentHeader.propTypes = {
     iconColorOff: PropTypes.string,
     iconROColor: PropTypes.string,
     icon: PropTypes.string,
-    ro_icon: PropTypes.string,
     name: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     on: PropTypes.bool
