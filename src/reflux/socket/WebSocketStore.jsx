@@ -5,9 +5,10 @@ import lightActions from "../light/lightActions";
 import wsActions from "./wsActions";
 import groupActions from "../group/groupActions";
 import sensorActions from "../sensor/sensorActions";
+import vacuumActions from "../vacuum/vacuumActions";
 
 /// Broadcasting list
-const actions = [lightActions, groupActions, sensorActions];
+const actions = [lightActions, groupActions, sensorActions, vacuumActions];
 
 let timerCONNECTION_TIMEOUT = null;
 let timerPING_INTERVAL = null;
@@ -107,6 +108,7 @@ class WebSocketStore extends Reflux.Store {
         } else {
             // Send data to all client stores
             const data = JSON.parse(evt.data);
+            // eslint-disable-next-line
             actions.map((action) => {
                 action.message(data);
             });

@@ -2,7 +2,7 @@ import Reflux from "reflux";
 import sensorActions from "./sensorActions";
 // import notificationActions from "../notification/notificationActions";
 
-//  Create unique Store for each Component
+//  Create unique Store for each Sensor
 function SensorStoreFactory(id,  device_info, location){
 
     class SensorStore extends Reflux.Store {

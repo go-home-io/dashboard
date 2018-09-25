@@ -6,6 +6,7 @@ import getDeviceState from "../utils/getDeviceState";
 import LightManager from "../light/LightManager";
 import LocationStoreFactory from "../../reflux/location/LocationStore";
 import SensorManager from "../sensor/SensorManager";
+import VacuumManager from "../vacuum/VacuumManager";
 
 class Location extends Reflux.Component {
     constructor(props) {
@@ -36,33 +37,35 @@ class Location extends Reflux.Component {
                                 key = { device }
                                 location = { location }
                                 dev_id = { device }
-                                members = { members(device,generalState.groups) }
+                                members = { members(device, generalState.groups) }
                                 device_info = { device_info }
-                                device_states = { generalState.devices }
+                                all_device_states = { generalState.devices }
                             />  :
                             deviceType === "light" ?
                                 <LightManager
                                     key = { device }
                                     location = { location }
                                     id = { device }
-                                    device_state = { device_info }
+                                    device_info = { device_info }
+                                    group_id = ""
                                 />  :
-                                null
-                    );})
-                }
-                { devices.map( (device) => {
-                    const device_info = getDeviceState(device, generalState.devices);
-                    const deviceType = device_info.type;
-
-                    return(
-                        deviceType === "sensor" ?
-                            <SensorManager
-                                key = { device }
-                                location = { location }
-                                id = { device }
-                                device_info = { device_info }
-                            />  :
-                            null
+                                deviceType === "sensor" ?
+                                    <SensorManager
+                                        key = { device }
+                                        location = { location }
+                                        id = { device }
+                                        device_info = { device_info }
+                                        group_id = ""
+                                    />  :
+                                    deviceType === "vacuum" ?
+                                        <VacuumManager
+                                            key = { device }
+                                            location = { location }
+                                            id = { device }
+                                            device_info = { device_info }
+                                            group_id = ""
+                                        />  :
+                                        null
                     );})
                 }
             </Grid>

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import SlidersHeader from "../common/SlidersHeader";
-import lightActions from "../../reflux/light/lightActions";
+import vacuumActions from "../../reflux/vacuum/vacuumActions";
 import Slider from "@material-ui/lab/Slider/Slider";
 import SliderActions from "../common/SliderActions";
 
@@ -19,14 +19,14 @@ const styles = () => ({
     }
 });
 
-class BrightnessSlider extends React.Component {
+class FanSpeedSlider extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             value: props.level,
         };
-        this.setValue = this.setValue.bind(this);
+        this.setFanSpeed = this.setFanSpeed.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -35,10 +35,10 @@ class BrightnessSlider extends React.Component {
         this.setState({ value:level });
     }
 
-    setValue() {
-        const { dev_id, close} = this.props;
+    setFanSpeed() {
+        const { dev_id, close } = this.props;
         const { value } = this.state;
-        lightActions.setBrightness(dev_id, value);
+        vacuumActions.setFanSpeed(dev_id, value);
         close();
     }
 
@@ -49,14 +49,14 @@ class BrightnessSlider extends React.Component {
         return (
             <div className = { classes.root }>
                 <SlidersHeader
-                    caption = 'Set brightness'
+                    caption = 'Set Fan Speed'
                     level = { value }
                 />
                 <div className = { classes.slider }>
                     <Slider value = { value } onChange = { this.handleChange } />
                 </div>
                 <SliderActions
-                    save = { this.setValue }
+                    save = { this.setFanSpeed }
                     close = { close }
                 />
             </div>
@@ -65,12 +65,11 @@ class BrightnessSlider extends React.Component {
 
 }
 
-BrightnessSlider.propTypes = {
+FanSpeedSlider.propTypes = {
     classes: PropTypes.object.isRequired,
     dev_id: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
-    level: PropTypes.number.isRequired,
-    // actionSetValue: PropTypes.func.isRequired
+    level: PropTypes.number.isRequired
 };
 
-export default withStyles(styles)(BrightnessSlider);
+export default withStyles(styles)(FanSpeedSlider);

@@ -38,7 +38,7 @@ class SliderActions extends React.Component {
                 >
                     <Icon>
                         {" "}
-close
+                        close
                         {" "}
                     </Icon>
                 </IconButton>
@@ -50,7 +50,7 @@ close
                 >
                     <Icon >
                         {" "}
-done_outline
+                        done_outline
                         {" "}
                     </Icon>
                 </IconButton>

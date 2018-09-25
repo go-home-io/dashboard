@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "./LightBrightness";
 import LightColorPicker from "./LightColorPicker";
 import Scenes from "./Scenes";
-import WaitingProgress from "./WaitingProgress";
+import WaitingProgress from "../common/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import lightActions from "../../reflux/light/lightActions";
 import truncateCaption from "../utils/truncate";
@@ -24,91 +24,91 @@ const styles = () => ({
     },
     progress: {
         padding:3,
+        marginTop: 25,
+        marginLeft: -3,
+        width: "100%"
     }
 });
 
-const ordinaryBkgColor = LIGHT_HEADER_BKG_COLOR;
-const lightIcon = <i className = "fa fa-lightbulb-o" aria-hidden = "true" />;
+const lightIcon = "wb_incandescent";
 
 class LightManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        this.store = LightStoreFactory(props.id, props.device_state, props.location, props.group_id);
+        const {id, device_info, location, group_id} = props;
+        this.store = LightStoreFactory(id, device_info, location, group_id);
     }
 
-
     render () {
-        const { classes, device_state, id }  = this.props;
-        const lightType = device_state.type === "light";
+        const { classes }  = this.props;
+        const { id, name, device_state, visible, loading, status, read_only } = this.state;
 
-        const display = this.state.visible ? "block" : "none";
-        const isBrightnessControl = (this.state.device_state.brightness != null);
-        const isColorControl = (this.state.device_state.color != null);
-        const scenes = this.state.device_state.scenes;
-        const scenesExist = (scenes != null);
-        const color = (this.state.device_state.on) ? this.state.device_state.color : {r:100,g:100,b:100};
-        const loading = this.state.loading;
-        const name = truncateCaption(this.state.name, 40);
+        const display = visible ? "block" : "none";
+        const isBrightnessExist = (device_state.brightness != null);
+        const isColorExist = (device_state.color != null);
+        const scenes = device_state.scenes;
+        const isScenesExist = (scenes != null);
+        const color = (device_state.on) ? device_state.color : {r:100,g:100,b:100};
+        const caption = truncateCaption(name, 40);
 
         return (
-            ! lightType ?
-                null :
-                <Card style = { {display:display} } className = { classes.root }>
-                    <ComponentHeader
-                        dev_id = { id }
-                        name = { name }
-                        on = { this.state.device_state.on }
-                        status = { this.state.status }
-                        read_only = { this.state.read_only }
-                        actions = { lightActions }
-                        icon = { lightIcon }
-                        ordinaryBkgColor = { ordinaryBkgColor }
-                        iconColorOn = { LIGHT_HEADER_ICON_COLOR_ON }
-                        iconColorOff = { LIGHT_HEADER_ICON_COLOR_OFF }
-                        iconROColor = { LIGHT_RO_ICON_COLOR }
-                    />
-                    <CardContent>
-                        {loading ?
-                            null :
-                            <Zoom in = { !this.state.loading }>
-                                <Grid container justify = 'flex-start' alignItems = 'center' alignContent = 'center'>
-                                    {isBrightnessControl ?
-                                        <LightBrightness
-                                            dev_id = { this.props.id }
-                                            level = { this.state.device_state.brightness }
-                                            read_only = { this.state.read_only }
-                                        /> :
-                                        null
-                                    }
-                                    { isColorControl ?
-                                        <LightColorPicker
-                                            dev_id = { this.props.id }
-                                            color = { color }
-                                            read_only = { this.state.read_only }
-                                        />  :
-                                        null
-                                    }
-                                    { scenesExist ?
-                                        <Scenes
-                                            dev_id = { this.props.id }
-                                            scenes = { scenes }
-                                            read_only = { this.state.read_only }
-                                        />  :
-                                        null
-                                    }
-                                </Grid>
-                            </Zoom>
-                        }
-                        { loading ?
-                            <Zoom in = { loading }>
-                                <div className = { classes.progress }>
-                                    <WaitingProgress dev_id = { this.props.id } />
-                                </div>
-                            </Zoom> :
-                            null
-                        }
-                    </CardContent>
-                </Card>
+            <Card style = { {display:display} } className = { classes.root }>
+                <ComponentHeader
+                    dev_id = { id }
+                    name = { caption }
+                    variant = "light"
+                    on = { device_state.on }
+                    status = { status }
+                    read_only = { read_only }
+                    actions = { lightActions }
+                    icon = { lightIcon }
+                    ordinaryBkgColor = { LIGHT_HEADER_BKG_COLOR }
+                    iconColorOn = { LIGHT_HEADER_ICON_COLOR_ON }
+                    iconColorOff = { LIGHT_HEADER_ICON_COLOR_OFF }
+                    iconROColor = { LIGHT_RO_ICON_COLOR }
+                />
+                <CardContent>
+                    {loading ?
+                        <Zoom in = { loading } >
+                            <div className = { classes.progress }>
+                                <WaitingProgress
+                                    dev_id = { id }
+                                    actions = { lightActions }
+                                />
+                            </div>
+                        </Zoom>
+                        :
+                        <Zoom in = { !loading }>
+                            <Grid container justify = 'flex-start' alignItems = 'center' alignContent = 'center'>
+                                {isBrightnessExist ?
+                                    <LightBrightness
+                                        dev_id = { id }
+                                        level = { device_state.brightness }
+                                        read_only = { read_only }
+                                    /> :
+                                    null
+                                }
+                                {isColorExist ?
+                                    <LightColorPicker
+                                        dev_id = { id }
+                                        color = { color }
+                                        read_only = { read_only }
+                                    /> :
+                                    null
+                                }
+                                {isScenesExist ?
+                                    <Scenes
+                                        dev_id = { id }
+                                        scenes = { scenes }
+                                        read_only = { read_only }
+                                    /> :
+                                    null
+                                }
+                            </Grid>
+                        </Zoom>
+                    }
+                </CardContent>
+            </Card>
         );
     }
 }
@@ -116,8 +116,10 @@ class LightManager extends Reflux.Component{
 
 LightManager.propTypes = {
     classes: PropTypes.object.isRequired,
-    device_state: PropTypes.object.isRequired ,
-    id: PropTypes.string.isRequired
+    device_info: PropTypes.object.isRequired ,
+    id: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    group_id: PropTypes.string
 };
 
 export default withStyles(styles)(LightManager);

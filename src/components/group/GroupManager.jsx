@@ -31,53 +31,50 @@ const styles = () => ({
     }
 });
 
+const groupIcon = "devices_other";
+
 class GroupManager  extends Reflux.Component {
     constructor(props) {
         super(props);
-
-        this.store = GroupStoreFactory(props.dev_id,
-            props.members,
-            props.device_info,
-            props.location);
-
+        const { dev_id, members, device_info, location} = props;
+        this.store = GroupStoreFactory(dev_id, members, device_info, location);
     }
 
     handleClick() {
-        groupActions.toggle(this.props.dev_id);
+        const { dev_id } = this.props;
+        groupActions.toggle(dev_id);
     }
 
     render () {
-        const {classes} = this.props;
-        const devStates = this.props.device_states;
-        const group_id = this.props.dev_id;
-        const location = this.props.location;
-        const display = this.state.visible ? "block" : "none";
-        const iconColor = this.state.device_state.on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
+        const {classes,  all_device_states, dev_id, location} = this.props;
+        const { visible, name, device_state, members } = this.state;
+        const group_id = dev_id;
+
+        const display = visible ? "block" : "none";
+        const iconColor = device_state.on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
 
         return (
             <div className = { classes.root } style = { {display:display} }>
-
                 <Grid container justify = 'flex-start' onClick = { this.handleClick.bind(this) }>
                     <Icon className = { classes.icon } style = { {color:iconColor} }>
-                        <i className = "material-icons">
-                            devices
-                        </i>
-;
+                        { groupIcon }
                     </Icon>
                     <Typography variant = 'subheading' className = { classes.text }>
-                        {this.state.name}
+                        {name}
                     </Typography>
                 </Grid>
-                <Grid container justify = 'center'>
-                    {this.state.members.map(function (dev_id) {
-                        const device_state = getDeviceState(dev_id, devStates);
+
+                {/* Render Group members devices */}
+                <Grid container justify = 'center' alignItems = 'center'>
+                    {members.map( (dev_id) => {
+                        const device_state = getDeviceState(dev_id, all_device_states);
                         const deviceType = device_state.type;
                         return (
                             deviceType === "light" ?
                                 <LightManager
                                     key = { dev_id }
                                     id = { dev_id }
-                                    device_state = { device_state }
+                                    device_info = { device_state }
                                     location = { location }
                                     group_id = { group_id }
                                 /> :
@@ -87,7 +84,9 @@ class GroupManager  extends Reflux.Component {
                                         location = { location }
                                         id = { dev_id }
                                         device_info = { device_state }
-                                    /> : null
+                                        group_id = { group_id }
+                                    /> :
+                                    null
                         );
                     })}
 
@@ -99,6 +98,7 @@ class GroupManager  extends Reflux.Component {
 
 GroupManager.propTypes = {
     classes: PropTypes.object.isRequired,
+
 };
 
 export default withStyles(styles)(GroupManager);

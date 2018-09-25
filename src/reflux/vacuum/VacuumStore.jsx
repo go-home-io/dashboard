@@ -1,68 +1,46 @@
 import Reflux from "reflux";
-import lightActions from "./lightActions";
+import vacuumActions from "./vacuumActions";
 import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
-//  Create unique Store for each Component
-function LightStoreFactory(id,  device_info, location, group_id){
-
-    // const visible = (location === active_location);
-
-    class LightStore extends Reflux.Store {
+//  Create unique Store for each Vacuum
+function VacuumStoreFactory(id, device_state, location, group_id) {
+    class VacuumStore extends Reflux.Store {
         constructor() {
             super();
-
             this.state = {
                 id:id,
-                name: device_info.name,
-                device_state: device_info.state,
-                last_seen: device_info.last_seen,
-                commands: device_info.commands,
+                name: device_state.name,
+                device_state: device_state.state,
+                last_seen: device_state.last_seen,
+                commands: device_state.commands,
                 group_id: group_id,
                 location: location,
                 loading:false,
                 visible: false,
-                read_only: device_info.read_only,
                 status:"ordinary",
             };
-
-            this.listenables = lightActions;
+            this.listenables = vacuumActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
-            this.onSetColor = this.onSetColor.bind(this);
+            this.onPause = this.onPause.bind(this);
             this.onVisible = this.onVisible.bind(this);
-            this.onSetBrightness = this.onSetBrightness.bind(this);
-            this.onToggle = this.onToggle.bind(this);
+            this.onDock = this.onDock.bind(this);
+            this.onFindMe = this.onFindMe.bind(this);
             this.onOn = this.onOn.bind(this);
             this.onOff = this.onOff.bind(this);
-            this.onSetScene = this.onSetScene.bind(this);
+            this.onSetFanSpeed = this.onSetFanSpeed.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onSetLoading = this.onSetLoading.bind(this);
-            this.onSetInitialState = this.onSetInitialState.bind(this);
-            // console.log('dev_id:'+id+'  read_only:'+this.state.read_only);
-        }
-
-        onSetInitialState (dev_id, device_state, location, group_id) {
-            if (dev_id === id) {
-                this.setState = ( {
-                    name: device_state.name,
-                    device_state: device_state.state,
-                    last_seen: device_state.last_seen,
-                    commands: device_state.commands,
-                    group_id: group_id,
-                    location: location,
-                    loading:false,
-                    visible: false,
-                    status:"ordinary",
-                });
-            }
+            this.onToggle = this.onToggle.bind(this);
+            this.onDo = this.onDo.bind(this);
         }
 
         // WebSocket messenger
         doCommand(command, value) {
-            const mess = {id:id, cmd:command,value: value};
+            const mess = { id:id, cmd:command, value: value };
             this.setState({"loading":true});
             wsActions.doCommand(mess);
         }
@@ -70,56 +48,70 @@ function LightStoreFactory(id,  device_info, location, group_id){
         // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
-                let state = data.state;
-                this.setState({device_state: state,
+                this.setState({
+                    device_state: data.state,
                     loading:false,
                     status:"success"});
             }
         }
 
-        // Actions
-        onSetColor (dev_id, color) {
-            if ( dev_id === id) {
-                this.doCommand("set-color", color);
-                this.setState({"loading":true});
-            }
-        }
+        /* -----------------------------
+                  Actions
+        --------------------------------- */
 
-        onSetBrightness (dev_id, level) {
+        // Command "toggle" emulation
+        onToggle (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand("set-brightness", level);
-                this.setState({"loading":true});
+                this.onFindMe(dev_id);
             }
         }
 
+        // Commands
         onOn (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("on", "");
                 this.setState({"loading":true});
             }
         }
-
         onOff (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("off", "");
                 this.setState({"loading":true});
             }
         }
-
-        onToggle (dev_id) {
+        onPause (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand("toggle", "");
+                this.doCommand("pause", "");
+                this.setState({"loading":true});
+            }
+        }
+        onDock (dev_id) {
+            if ( dev_id === id ) {
+                this.doCommand("dock", "");
+                this.setState({"loading":true});
+            }
+        }
+        onFindMe (dev_id) {
+            if ( dev_id === id ) {
+                this.doCommand("find-me", "");
+                this.setState({"loading":true});
+            }
+        }
+        onSetFanSpeed (dev_id, value) {
+            if ( dev_id === id ) {
+                this.doCommand("set-fan-speed", value);
+                this.setState({"loading":true});
+            }
+        }
+        onDo (dev_id, command) {
+            if ( dev_id === id ) {
+                this.doCommand(command, "");
                 this.setState({"loading":true});
             }
         }
 
-        onSetScene(dev_id, scene_item) {
-            if ( dev_id === id ) {
-                this.doCommand("set-scene", scene_item);
-                this.setState({"loading":true});
-            }
-        }
 
+        // Appearance
         onVisible(location) {
             this.setState({visible: false});
             if (this.state.location === location) {
@@ -142,16 +134,14 @@ function LightStoreFactory(id,  device_info, location, group_id){
         }
 
         onSetLoading (group_id) {
-            // alert('Group: ' + group_id);
             if (this.state.group_id === group_id) {
                 this.setState({loading: true});
-                //alert('Light setLoading:' + id);
             }
         }
     }
 
-    LightStore.id = id;
-    return LightStore;
+    VacuumStore.id = id;
+    return VacuumStore;
 }
 
-export default LightStoreFactory;
+export default VacuumStoreFactory;

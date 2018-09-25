@@ -20,17 +20,17 @@ const styles = () => ({
 class ButtonSensor extends React.Component {
     render () {
         const {classes, state} = this.props;
-        const on = state.on;
-        const icon = sensorContentIcon(state.sensor_type, on);
-        const tip = sensorTip(state.sensor_type, on);
-        const color = sensorIconColor(state.sensor_type, on);
+        const { on, sensor_type, temperature, humidity } = state;
+        const icon = sensorContentIcon(sensor_type, on);
+        const tip = sensorTip(sensor_type, on);
+        const color = sensorIconColor(sensor_type, on);
 
         return (
             <div>
                 <Grid container justify = 'center' alignItems = 'center'>
                     <TemperatureUpperLine
-                        temperature = { state.temperature }
-                        humidity = { state.humidity }
+                        temperature = { temperature }
+                        humidity = { humidity }
                     />
                     <ButtonIcons
                         click = { state.click }

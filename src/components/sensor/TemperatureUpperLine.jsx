@@ -8,7 +8,7 @@ import TemperatureSymbol from "../common/TemperatureSymbol";
 
 const styles = () => ({
     root: {
-        marginTop: -42,
+        marginTop: -20,
         marginLeft: 10,
     },
     temperature: {
@@ -25,7 +25,6 @@ class TemperatureUpperLine extends React.Component {
 
     render () {
         const {classes, temperature, humidity} = this.props;
-
         return (
             <Grid container justify = 'flex-start' className = { classes.root }>
                 { temperature ?

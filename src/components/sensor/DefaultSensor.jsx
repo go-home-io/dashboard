@@ -27,8 +27,8 @@ class DefaultSensor extends React.Component {
             <div>
                 <Grid container justify = 'center' alignItems = 'center'>
                     <TemperatureUpperLine
-                        temperature = { state.temperature }
-                        humidity = { state.humidity }
+                        temperature = { state.area }
+                        humidity = { state.duration }
                     />
                     
                     <Tooltip title = { tip } placement = "top">

@@ -1,12 +1,12 @@
 import React from "react";
 import {MOTION_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF, SENSOR_ICON_COLOR_ON} from "../../settings/colors";
 
-export const sensorHeaderIcon = (type) => {
+export const getSensorHeaderIcon = (type) => {
     switch(type) {
     case "motion":
         return "transfer_within_a_station";
     case "button":
-        return <i className = "fa fa-dot-circle-o" aria-hidden = "true" />;
+        return "touch_app";
     case "temperature":
         return <i className = "fa fa-thermometer-empty" aria-hidden = "true" />;
     case "lock":
