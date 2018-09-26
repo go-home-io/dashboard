@@ -128,19 +128,6 @@ stop
                 </IconButton>
                 <IconButton
                     className = { classes.button }
-                    aria-label = "Find me"
-                    color = "primary"
-                    disabled = { ! find }
-                    onClick = { this.handleClick("findMe") }
-                >
-                    <Icon>
-                        {" "}
-snooze
-                        {" "}
-                    </Icon>
-                </IconButton>
-                <IconButton
-                    className = { classes.button }
                     aria-label = "Dock"
                     color = "primary"
                     disabled = { ! dock }
@@ -152,6 +139,20 @@ save_alt
                         {" "}
                     </Icon>
                 </IconButton>
+                <IconButton
+                    className = { classes.button }
+                    aria-label = "Find me"
+                    color = "primary"
+                    disabled = { ! find }
+                    onClick = { this.handleClick("findMe") }
+                >
+                    <Icon>
+                        {" "}
+                        map-pin
+                        {" "}
+                    </Icon>
+                </IconButton>
+
             </Grid>
         );
     }
