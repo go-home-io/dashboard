@@ -101,7 +101,7 @@ class WebSocketStore extends Reflux.Store {
         this.reopenSocket();
     }
 
-     // Socket listener
+    // Socket listener
     onMessage(evt) {
         if (evt.data === "pong") {
             // Pong handle
@@ -149,10 +149,10 @@ class WebSocketStore extends Reflux.Store {
     }
     onSetOneWay () {
         this.setState({oneWay: true, sent: false});
-   }
-   onClearOneWay () {
-       this.setState({oneWay: false, sent: true});
-   }
+    }
+    onClearOneWay () {
+        this.setState({oneWay: false, sent: true});
+    }
 }
 
 export default WebSocketStore;

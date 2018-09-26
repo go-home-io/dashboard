@@ -62,7 +62,6 @@ class VacuumManager extends Reflux.Component{
         this.store = VacuumStoreFactory(id, device_info, location, group_id);
     }
 
-
     render () {
         const { classes }  = this.props;
         const { id, name: fullName, device_state, visible, loading, status } = this.state;
@@ -87,7 +86,6 @@ class VacuumManager extends Reflux.Component{
                         area = { area }
                         duration = { duration }
                     />
-
                     <BatteryIcon
                         battery_level = { battery_level }
                         cssClass = { classes }

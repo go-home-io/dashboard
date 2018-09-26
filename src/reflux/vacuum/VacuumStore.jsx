@@ -64,20 +64,20 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
             const { vac_status } = this.state.device_state;
             if ( dev_id === id ) {
                 switch (vac_status) {
-                    case "paused":  // continue
-                        this.onOn(dev_id);
-                        break;
-                    case "cleaning":  // pause
-                        this.onPause(dev_id);
-                        break;
-                    case "docked":  // start
-                        this.onOn(dev_id);
-                        break;
-                    case "full":  // find me
-                        this.onFindMe(dev_id);
-                        break;
-                    default:
-                        break;
+                case "paused":  // continue
+                    this.onOn(dev_id);
+                    break;
+                case "cleaning":  // pause
+                    this.onPause(dev_id);
+                    break;
+                case "docked":  // start
+                    this.onOn(dev_id);
+                    break;
+                case "full":  // find me
+                    this.onFindMe(dev_id);
+                    break;
+                default:
+                    break;
                 }
             }
         }

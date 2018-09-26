@@ -17,7 +17,7 @@ const styles = () => ( {
         width: 25,
         marginRight: 6
     }
- });
+});
 
 const accessibilityRules = {
     "unknown": {
@@ -88,7 +88,7 @@ const startPauseButtonRules = {
 class CommandPanel extends React.Component {
 
     handleClick = command => ()  => {
-         // alert(command);
+        // alert(command);
         const { dev_id } = this.props;
         vacuumActions[command](dev_id);
     };
@@ -99,42 +99,58 @@ class CommandPanel extends React.Component {
         const { icon, command} = startPauseButtonRules[vac_status];
         // alert("Start:"+start+" Stop:"+stop);
         return (
-            <Grid container justify='center' className = { classes.root } >
+            <Grid container justify = 'center' className = { classes.root } >
                 <IconButton
-                    className={classes.button}
-                    aria-label="Start"
-                    color="primary"
-                    disabled= { ! start }
+                    className = { classes.button }
+                    aria-label = "Start"
+                    color = "primary"
+                    disabled = { ! start }
                     onClick = { this.handleClick(command) }
                 >
-                    <Icon> { icon } </Icon>
+                    <Icon> 
+                        {" "}
+                        { icon }
+                        {" "}
+                    </Icon>
                 </IconButton>
                 <IconButton
-                    className={classes.button}
-                    aria-label="Stop"
-                    disabled={ ! stop }
-                    color="secondary"
-                    onClick = { this.handleClick('off') }
+                    className = { classes.button }
+                    aria-label = "Stop"
+                    disabled = { ! stop }
+                    color = "secondary"
+                    onClick = { this.handleClick("off") }
                 >
-                    <Icon> stop </Icon>
+                    <Icon>
+                        {" "}
+stop
+                        {" "}
+                    </Icon>
                 </IconButton>
                 <IconButton
-                    className={classes.button}
-                    aria-label="Find me"
-                    color="primary"
-                    disabled={ ! find }
-                    onClick = { this.handleClick('findMe') }
+                    className = { classes.button }
+                    aria-label = "Find me"
+                    color = "primary"
+                    disabled = { ! find }
+                    onClick = { this.handleClick("findMe") }
                 >
-                    <Icon> snooze </Icon>
+                    <Icon>
+                        {" "}
+snooze
+                        {" "}
+                    </Icon>
                 </IconButton>
                 <IconButton
-                    className = {classes.button}
+                    className = { classes.button }
                     aria-label = "Dock"
                     color = "primary"
-                    disabled={ ! dock }
-                    onClick = { this.handleClick('dock') }
+                    disabled = { ! dock }
+                    onClick = { this.handleClick("dock") }
                 >
-                    <Icon> save_alt </Icon>
+                    <Icon>
+                        {" "}
+save_alt
+                        {" "}
+                    </Icon>
                 </IconButton>
             </Grid>
         );
