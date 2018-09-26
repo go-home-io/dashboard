@@ -21,8 +21,6 @@ class WaitingProgress extends Reflux.Component {
         this.restart = this.restart.bind(this);
         this.progress = this.progress.bind(this);
         this.onComplete = this.onComplete.bind(this);
-        this.restart = this.restart.bind(this);
-        this.progress = this.progress.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +30,8 @@ class WaitingProgress extends Reflux.Component {
 
     componentWillUnmount () {
         this.setState({ completed: 0 });
+        clearInterval(this.timer);
+        this.timer = null;
     }
 
     onComplete (status) {
@@ -40,6 +40,7 @@ class WaitingProgress extends Reflux.Component {
         clearInterval(this.timer);
         this.timer = null;
         this.setState({ completed: 0 });
+        wsActions.clearOneWay();
         actions.status(dev_id, status);
     }
 
@@ -49,8 +50,11 @@ class WaitingProgress extends Reflux.Component {
     }
 
     progress ()  {
-        let { completed, reset, rejected} = this.state;
+        let { completed, reset, rejected, oneWay, sent} = this.state;
 
+        if ( oneWay && sent ) {
+            this.onComplete("success");
+        }
         if (rejected ) {
             this.onComplete("rejected");
         }

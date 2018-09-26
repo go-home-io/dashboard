@@ -61,8 +61,24 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
 
         // Command "toggle" emulation
         onToggle (dev_id) {
+            const { vac_status } = this.state.device_state;
             if ( dev_id === id ) {
-                this.onFindMe(dev_id);
+                switch (vac_status) {
+                    case "paused":  // continue
+                        this.onOn(dev_id);
+                        break;
+                    case "cleaning":  // pause
+                        this.onPause(dev_id);
+                        break;
+                    case "docked":  // start
+                        this.onOn(dev_id);
+                        break;
+                    case "full":  // find me
+                        this.onFindMe(dev_id);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -93,6 +109,7 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
         }
         onFindMe (dev_id) {
             if ( dev_id === id ) {
+                wsActions.setOneWay();
                 this.doCommand("find-me", "");
                 this.setState({"loading":true});
             }

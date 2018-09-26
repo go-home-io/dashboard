@@ -37,6 +37,8 @@ class WebSocketStore extends Reflux.Store {
         this.state = {
             rejected: false,
             reset: false,
+            oneWay: false,
+            sent: false,
         };
         this.listenables = wsActions;
         this.socket = null;
@@ -48,6 +50,8 @@ class WebSocketStore extends Reflux.Store {
         this.ping = this.ping.bind(this);
         this.pong = this.pong.bind(this);
         this.reopenSocket = this.reopenSocket.bind(this);
+        this.onSetOneWay = this.onSetOneWay.bind(this);
+        this.onClearOneWay = this.onClearOneWay.bind(this);
     }
 
     createSocket() {
@@ -57,7 +61,7 @@ class WebSocketStore extends Reflux.Store {
         this.socket.onopen = this.onOpen.bind(this);
         this.socket.onclose = this.onClose.bind(this);
     }
-
+    // Keep alive functions
     reopenSocket ()  {
         connectingState = true;
         pongReceived = false;
@@ -66,7 +70,6 @@ class WebSocketStore extends Reflux.Store {
         timerPING_INTERVAL = null;
         this.socket.close();
     }
-
     ping () {
         if (!connectingState) {
             pongReceived = false;
@@ -74,7 +77,6 @@ class WebSocketStore extends Reflux.Store {
             timerCONNECTION_TIMEOUT = setTimeout(this.reopenSocket, CONNECTION_TIMEOUT);
         }
     }
-
     pong ()  {
         clearTimeout(timerCONNECTION_TIMEOUT);
         timerCONNECTION_TIMEOUT = null;
@@ -90,23 +92,22 @@ class WebSocketStore extends Reflux.Store {
         }
         this.ping();
     }
-
     onClose() {
         this.createSocket();
     }
-
     onError() {
         // eslint-disable-next-line
         console.log("Socket error");
         this.reopenSocket();
     }
 
+     // Socket listener
     onMessage(evt) {
         if (evt.data === "pong") {
             // Pong handle
             this.pong();
         } else {
-            // Send data to all client stores
+            // Broadcast data to all client stores
             const data = JSON.parse(evt.data);
             // eslint-disable-next-line
             actions.map((action) => {
@@ -121,7 +122,7 @@ class WebSocketStore extends Reflux.Store {
         // up to MAX_ATTEMPTS times. If not, set the state {rejected:true}
         if (connAlive()) {
             this.socket.send(JSON.stringify(data));
-            this.setState({rejected: false});
+            this.setState({rejected: false, sent: true});
             clearTimeout(timerAttempts);
             if (attempts > 0) {
                 this.setState({reset: true});
@@ -140,14 +141,18 @@ class WebSocketStore extends Reflux.Store {
             }
         }
     }
-
     onClear() {
         this.setState({rejected: false, reset: false});
     }
-
     onReconnect() {
         this.reopenSocket();
     }
+    onSetOneWay () {
+        this.setState({oneWay: true, sent: false});
+   }
+   onClearOneWay () {
+       this.setState({oneWay: false, sent: true});
+   }
 }
 
 export default WebSocketStore;

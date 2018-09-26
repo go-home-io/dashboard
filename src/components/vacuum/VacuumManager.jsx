@@ -15,7 +15,7 @@ import vacuumActions from "../../reflux/vacuum/vacuumActions";
 import BatteryIcon from "../common/BatteryIcon";
 import VacuumReportLine from "./VacuumReportLine";
 import FanSpeedControl from "./FanSpeedControl";
-import VacuumDoCommand from "./VacuumDoCommand";
+import CommandPanel from "./CommandPanel";
 
 const styles = () => ({
     root: {
@@ -65,7 +65,7 @@ class VacuumManager extends Reflux.Component{
 
     render () {
         const { classes }  = this.props;
-        const { id, name: fullName, device_state, visible, loading, status, commands } = this.state;
+        const { id, name: fullName, device_state, visible, loading, status } = this.state;
         const display = visible ? "block" : "none";
         const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
         const area = Math.round(raw_area);
@@ -80,7 +80,6 @@ class VacuumManager extends Reflux.Component{
                     status = { status }
                     actions = { vacuumActions }
                     vac_status = { vac_status }
-                    // vac_status = { "paused" }
                     ordinaryBkgColor = { VACUUM_HEADER_BKG_COLOR }
                 />
                 <Grid container justify = 'flex-start' alignItems = 'center'>
@@ -110,9 +109,9 @@ class VacuumManager extends Reflux.Component{
                                     dev_id = { id }
                                     level = { fan_speed }
                                 />
-                                <VacuumDoCommand
+                                <CommandPanel
                                     dev_id = { id }
-                                    commands = { commands }
+                                    vac_status = { vac_status }
                                 />
                             </div>
                         </Zoom>
