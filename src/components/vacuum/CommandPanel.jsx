@@ -28,7 +28,7 @@ const accessibilityRules = {
     },
     "paused": {
         "start": true,
-        "stop": false,
+        "stop": true,
         "find": true,
         "dock": true
     },
