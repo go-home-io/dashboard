@@ -38,7 +38,6 @@ class WebSocketStore extends Reflux.Store {
             rejected: false,
             reset: false,
             oneWay: false,
-            sent: false,
         };
         this.listenables = wsActions;
         this.socket = null;
@@ -51,7 +50,7 @@ class WebSocketStore extends Reflux.Store {
         this.pong = this.pong.bind(this);
         this.reopenSocket = this.reopenSocket.bind(this);
         this.onSetOneWay = this.onSetOneWay.bind(this);
-        this.onClearOneWay = this.onClearOneWay.bind(this);
+        // this.onClearOneWay = this.onClearOneWay.bind(this);
     }
 
     createSocket() {
@@ -116,11 +115,21 @@ class WebSocketStore extends Reflux.Store {
         }
     }
 
+    oneWayResponseEmulation (dev_id) {
+        this.setState({oneWay: false});
+        const data = {"id":dev_id, "state":"oneWayResponse"};
+        // eslint-disable-next-line
+        actions.map((action) => {
+            action.message(data);
+        });
+    }
+
     // Actions
     onDoCommand(data) {
         // Try to send command to server if socket ready
         // up to MAX_ATTEMPTS times. If not, set the state {rejected:true}
         if (connAlive()) {
+            // Success
             this.socket.send(JSON.stringify(data));
             this.setState({rejected: false, sent: true});
             clearTimeout(timerAttempts);
@@ -128,12 +137,18 @@ class WebSocketStore extends Reflux.Store {
                 this.setState({reset: true});
             }
             attempts = 0;
+            if (this.state.oneWay) {
+                this.oneWayResponseEmulation(data.id);
+            }
         } else {
+            // Socket wasn't ready
             if (attempts >= MAX_ATTEMPTS) {
+                // Exceeded the limit of attempts
                 this.setState({rejected: true});
                 clearTimeout(timerAttempts);
                 attempts = 0;
             } else {
+                // Try to send command once more
                 timerAttempts = setTimeout(function () {
                     attempts = attempts + 1;
                     wsActions.doCommand(data);
@@ -148,11 +163,9 @@ class WebSocketStore extends Reflux.Store {
         this.reopenSocket();
     }
     onSetOneWay () {
-        this.setState({oneWay: true, sent: false});
+        this.setState({oneWay: true});
     }
-    onClearOneWay () {
-        this.setState({oneWay: false, sent: true});
-    }
+
 }
 
 export default WebSocketStore;

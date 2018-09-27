@@ -93,23 +93,23 @@ class VacuumManager extends Reflux.Component{
                 </Grid>
                 <CardContent>
                     {loading ?
-                        <Zoom in={loading}>
-                            <div className={classes.progress}>
+                        <Zoom in = { loading }>
+                            <div className = { classes.progress }>
                                 <WaitingProgress
-                                    dev_id={id}
-                                    actions={vacuumActions}
+                                    dev_id = { id }
+                                    actions = { vacuumActions }
                                 />
                             </div>
                         </Zoom> :
-                        <Zoom in={!loading}>
+                        <Zoom in = { !loading }>
                             <div>
                                 <FanSpeedControl
-                                    dev_id={id}
-                                    level={fan_speed}
+                                    dev_id = { id }
+                                    level = { fan_speed }
                                 />
                                 <CommandPanel
-                                    dev_id={id}
-                                    vac_status={vac_status}
+                                    dev_id = { id }
+                                    vac_status = { vac_status }
                                 />
                             </div>
                         </Zoom>

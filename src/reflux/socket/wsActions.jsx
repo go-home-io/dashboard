@@ -5,7 +5,6 @@ const wsActions = Reflux.createActions([
     "reconnect",
     "clear",
     "setOneWay",
-    "clearOneWay"
 ]);
 
 export default wsActions;

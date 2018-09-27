@@ -40,21 +40,17 @@ class WaitingProgress extends Reflux.Component {
         clearInterval(this.timer);
         this.timer = null;
         this.setState({ completed: 0 });
-        wsActions.clearOneWay();
         actions.status(dev_id, status);
     }
 
     restart ()  {
         this.setState({ completed: 0 });
-        setTimeout(setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),200);
+        setTimeout(setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),100);
     }
 
     progress ()  {
-        let { completed, reset, rejected, oneWay, sent} = this.state;
+        let { completed, reset, rejected } = this.state;
 
-        if ( oneWay && sent ) {
-            this.onComplete("success");
-        }
         if (rejected ) {
             this.onComplete("rejected");
         }

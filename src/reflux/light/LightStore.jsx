@@ -142,10 +142,8 @@ function LightStoreFactory(id,  device_info, location, group_id){
         }
 
         onSetLoading (group_id) {
-            // alert('Group: ' + group_id);
             if (this.state.group_id === group_id) {
                 this.setState({loading: true});
-                //alert('Light setLoading:' + id);
             }
         }
     }

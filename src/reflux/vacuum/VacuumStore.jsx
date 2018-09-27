@@ -49,9 +49,14 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
         onMessage (data) {
             if (data.id === id) {
                 this.setState({
-                    device_state: data.state,
                     loading:false,
                     status:"success"});
+                if (data.state !== "oneWayResponse") {
+                    this.setState({
+                        device_state: data.state
+                    });
+                }
+
             }
         }
 
@@ -146,6 +151,8 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
                     this.setState({loading: false, status:"error"});
                     notificationActions.notification(this.state.name + ": Command aborted due to connection problems");
                     wsActions.clear();
+                } else if (status === "success") {
+                    this.setState({loading: false});
                 }
             }
         }
