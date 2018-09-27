@@ -152,7 +152,7 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
                     notificationActions.notification(this.state.name + ": Command aborted due to connection problems");
                     wsActions.clear();
                 } else if (status === "success") {
-                    this.setState({loading: false});
+                    // this.setState({loading: false});
                 }
             }
         }
