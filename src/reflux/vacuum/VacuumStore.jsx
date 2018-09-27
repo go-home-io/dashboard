@@ -48,13 +48,17 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
         // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
-                this.setState({
-                    loading:false,
-                    status:"success"});
+
                 if (data.state !== "oneWayResponse") {
                     this.setState({
-                        device_state: data.state
+                        device_state: data.state,
+                        loading:false,
+                        status:"success"
                     });
+                } else {
+                    this.setState({
+                        loading:false,
+                        status:"success"});
                 }
 
             }
@@ -151,8 +155,6 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
                     this.setState({loading: false, status:"error"});
                     notificationActions.notification(this.state.name + ": Command aborted due to connection problems");
                     wsActions.clear();
-                } else if (status === "success") {
-                    // this.setState({loading: false});
                 }
             }
         }

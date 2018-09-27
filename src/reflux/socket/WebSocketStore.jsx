@@ -119,9 +119,12 @@ class WebSocketStore extends Reflux.Store {
         this.setState({oneWay: false});
         const data = {"id":dev_id, "state":"oneWayResponse"};
         // eslint-disable-next-line
-        actions.map((action) => {
-            action.message(data);
-        });
+        setTimeout(function () {
+            actions.map((action) => {
+                action.message(data);
+            });
+        }, 200);
+
     }
 
     // Actions
@@ -131,17 +134,18 @@ class WebSocketStore extends Reflux.Store {
         if (connAlive()) {
             // Success
             this.socket.send(JSON.stringify(data));
-            this.setState({rejected: false, sent: true});
+            this.setState({rejected: false});
             clearTimeout(timerAttempts);
             if (attempts > 0) {
                 this.setState({reset: true});
             }
             attempts = 0;
             if (this.state.oneWay) {
-                this.oneWayResponseEmulation(data.id);
+                // setTimeout(this.oneWayResponseEmulation(data.id),1000);
+                this.oneWayResponseEmulation(data.id)
             }
         } else {
-            // Socket wasn't ready
+            // Socket isn't ready
             if (attempts >= MAX_ATTEMPTS) {
                 // Exceeded the limit of attempts
                 this.setState({rejected: true});
