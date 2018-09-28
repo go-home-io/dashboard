@@ -5,154 +5,70 @@ import vacuumActions from "../../reflux/vacuum/vacuumActions";
 import Grid from "@material-ui/core/Grid/Grid";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Icon from "@material-ui/core/Icon/Icon";
+import { commandButtonsBehavior } from "./commandButtonsBehavior";
 
 const styles = () => ( {
     root: {
-        width: "100%",
         marginTop: 9,
     },
     button: {
-        fontSize: 17,
-        height:25,
-        width: 25,
-        marginRight: 6
+        // fontSize: 20,
+        height:30,
+        width: 30,
+        margin: '0 auto'
     }
 });
-
-const accessibilityRules = {
-    "unknown": {
-        "start": true,
-        "stop": true,
-        "find": true,
-        "dock": true
-    },
-    "paused": {
-        "start": true,
-        "stop": true,
-        "find": true,
-        "dock": true
-    },
-    "docked":  {
-        "start": true,
-        "stop": false,
-        "find": false,
-        "dock": false
-    },
-    "charging":  {
-        "start": false,
-        "stop": false,
-        "find": false,
-        "dock": false
-    },
-    "cleaning":  {
-        "start": true,
-        "stop": true,
-        "find": true,
-        "dock": true
-    },
-    "full":  {
-        "start": false,
-        "stop": false,
-        "find": true,
-        "dock": false
-    },
-};
-
-const startPauseButtonRules = {
-    "cleaning": {
-        "icon": "pause",
-        "command": "pause"
-    },
-    "unknown": {
-        "icon": "play_arrow",
-        "command": "on"
-    },
-    "paused": {
-        "icon": "play_arrow",
-        "command": "on"
-    },
-    "charging": {
-        "icon": "play_arrow",
-        "command": "on"
-    },
-    "docked": {
-        "icon": "play_arrow",
-        "command": "on"
-    },
-    "full": {
-        "icon": "play_arrow",
-        "command": "on"
-    },
-};
 
 class CommandPanel extends React.Component {
 
     handleClick = command => ()  => {
-        // alert(command);
         const { dev_id } = this.props;
         vacuumActions[command](dev_id);
     };
 
     render() {
         const { classes, vac_status } = this.props;
-        const { start, stop, find, dock } = accessibilityRules[vac_status];
-        const { icon, command} = startPauseButtonRules[vac_status];
-        // alert("Start:"+start+" Stop:"+stop);
+        const { start, stop, find, dock } = commandButtonsBehavior[vac_status];
+        console.log(find);
+
         return (
             <Grid container justify = 'center' className = { classes.root } >
                 <IconButton
                     className = { classes.button }
                     aria-label = "Start"
                     color = "primary"
-                    disabled = { ! start }
-                    onClick = { this.handleClick(command) }
+                    disabled = { start.disabled }
+                    onClick = { this.handleClick(start.command) }
                 >
-                    <Icon> 
-                        {" "}
-                        { icon }
-                        {" "}
-                    </Icon>
+                    <Icon>{ start.icon }</Icon>
                 </IconButton>
                 <IconButton
                     className = { classes.button }
                     aria-label = "Stop"
-                    disabled = { ! stop }
+                    disabled = { stop.disabled }
                     color = "secondary"
-                    onClick = { this.handleClick("off") }
+                    onClick = { this.handleClick(stop.command) }
                 >
-                    <Icon>
-                        {" "}
-stop
-                        {" "}
-                    </Icon>
+                    <Icon>{ stop.icon }</Icon>
                 </IconButton>
                 <IconButton
                     className = { classes.button }
                     aria-label = "Dock"
                     color = "primary"
-                    disabled = { ! dock }
-                    onClick = { this.handleClick("dock") }
+                    disabled = { dock.disabled }
+                    onClick = { this.handleClick(dock.command) }
                 >
-                    <Icon>
-                        {" "}
-save_alt
-                        {" "}
-                    </Icon>
+                    <Icon>{ dock.icon }</Icon>
                 </IconButton>
                 <IconButton
                     className = { classes.button }
                     aria-label = "Find me"
                     color = "primary"
-                    disabled = { ! find }
-                    onClick = { this.handleClick("findMe") }
+                    disabled = { find.disabled }
+                    onClick = { this.handleClick(find.command) }
                 >
-                    <Icon>
-                        {" "}
-                        map-pin
-                        {" "}
-                    </Icon>
+                    <Icon>{ find.icon }</Icon>
                 </IconButton>
-
             </Grid>
         );
     }

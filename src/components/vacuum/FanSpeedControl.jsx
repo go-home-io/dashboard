@@ -8,11 +8,10 @@ import FanSpeedSlider from "./FanSpeedSlider";
 
 const styles = () => ( {
     root: {
-        width: "100%",
-        marginTop: -10,
+        marginTop: -6,
+        marginLeft: 7,
     },
     text: {
-        // fontSize:12,
         letterSpacing:1,
         cursor:"pointer",
     },
@@ -44,10 +43,9 @@ class  FanSpeedControl extends React.Component {
         const { classes, level, dev_id } = this.props;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
-        // const cursor = read_only ? "default" : "pointer";
 
         return (
-            <Grid className = { classes.root } >
+            <Grid className = { classes.root } justify='center' >
                 <div id = "label"
                     className = { classes.text }
                     onClick = { this.handleClick }
