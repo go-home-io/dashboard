@@ -19,7 +19,7 @@ import CommandPanel from "./CommandPanel";
 
 const styles = () => ({
     root: {
-        width:172,
+        width: 172,
         height:165,
         margin: 5,
     },
@@ -64,7 +64,7 @@ class VacuumManager extends Reflux.Component{
 
     render () {
         const { classes }  = this.props;
-        const { id, name: fullName, device_state, visible, loading, status } = this.state;
+        const { id, name: fullName, device_state, visible, loading, status, commands } = this.state;
         const display = visible ? "block" : "none";
         const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
         const area = Math.round(raw_area);
@@ -106,16 +106,17 @@ class VacuumManager extends Reflux.Component{
                                 <FanSpeedControl
                                     dev_id = { id }
                                     level = { fan_speed }
+                                    commands = { commands }
                                 />
                                 <CommandPanel
                                     dev_id = { id }
                                     vac_status = { vac_status }
+                                    commands = { commands }
                                 />
                             </div>
                         </Zoom>
                     }
                 </CardContent>
-
             </Card>
         );
     }

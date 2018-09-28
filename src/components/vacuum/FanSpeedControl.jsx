@@ -40,44 +40,46 @@ class  FanSpeedControl extends React.Component {
     }
 
     render() {
-        const { classes, level, dev_id } = this.props;
+        const { classes, level, dev_id, commands } = this.props;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
 
         return (
-            <Grid className = { classes.root } justify='center' >
-                <div id = "label"
-                    className = { classes.text }
-                    onClick = { this.handleClick }
-                >
-                    <Typography variant = 'body1'>
-                        Fan Speed:
-                        {" "}
-                        { level }
-                        %
-                    </Typography>
-                </div>
-                <Popover
-                    id = "simple-popper"
-                    open = { open }
-                    anchorEl = { anchorEl }
-                    onClose = { this.handleClose }
-                    anchorOrigin = { {
-                        vertical: "top",
-                        horizontal: "left",
-                    } }
-                    transformOrigin = { {
-                        vertical: "top",
-                        horizontal: "left",
-                    } }
-                >
-                    <FanSpeedSlider
-                        level = { level }
-                        close = { this.handleClose.bind(this) }
-                        dev_id = { dev_id }
-                    />
-                </Popover>
-            </Grid>
+            commands.includes("set-fan-speed") ?
+                <Grid className = { classes.root } justify='center' >
+                    <div id = "label"
+                        className = { classes.text }
+                        onClick = { this.handleClick }
+                    >
+                        <Typography variant = 'body1'>
+                            Fan Speed:
+                            {" "}
+                            { level }
+                            %
+                        </Typography>
+                    </div>
+                    <Popover
+                        id = "simple-popper"
+                        open = { open }
+                        anchorEl = { anchorEl }
+                        onClose = { this.handleClose }
+                        anchorOrigin = { {
+                            vertical: "top",
+                            horizontal: "left",
+                        } }
+                        transformOrigin = { {
+                            vertical: "top",
+                            horizontal: "left",
+                        } }
+                    >
+                        <FanSpeedSlider
+                            level = { level }
+                            close = { this.handleClose.bind(this) }
+                            dev_id = { dev_id }
+                        />
+                    </Popover>
+                </Grid> :
+                null
         );
     }
 }
@@ -85,7 +87,8 @@ class  FanSpeedControl extends React.Component {
 FanSpeedControl.propTypes = {
     classes: PropTypes.object.isRequired,
     level: PropTypes.number.isRequired,
-    dev_id: PropTypes.string.isRequired
+    dev_id: PropTypes.string.isRequired,
+    commands: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(FanSpeedControl);

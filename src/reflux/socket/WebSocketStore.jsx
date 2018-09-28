@@ -114,17 +114,15 @@ class WebSocketStore extends Reflux.Store {
             });
         }
     }
-
-    oneWayResponseEmulation (dev_id) {
+    oneWayCommandServerResponseEmulation (dev_id) {
         this.setState({oneWay: false});
         const data = {"id":dev_id, "state":"oneWayResponse"};
         // eslint-disable-next-line
-        setTimeout(function () {
+        setTimeout( () => {
             actions.map((action) => {
                 action.message(data);
             });
         }, 200);
-
     }
 
     // Actions
@@ -141,8 +139,7 @@ class WebSocketStore extends Reflux.Store {
             }
             attempts = 0;
             if (this.state.oneWay) {
-                // setTimeout(this.oneWayResponseEmulation(data.id),1000);
-                this.oneWayResponseEmulation(data.id)
+                this.oneWayCommandServerResponseEmulation(data.id)
             }
         } else {
             // Socket isn't ready
