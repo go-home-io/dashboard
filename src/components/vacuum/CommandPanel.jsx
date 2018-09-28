@@ -9,10 +9,9 @@ import { commandButtonsBehavior } from "./commandButtonsBehavior";
 
 const styles = () => ( {
     root: {
-        marginTop: 9,
+        marginTop: 5,
     },
     button: {
-        // fontSize: 20,
         height:30,
         width: 30,
         margin: '0 auto'
@@ -29,7 +28,6 @@ class CommandPanel extends React.Component {
     render() {
         const { classes, vac_status, commands } = this.props;
         const { start, stop, find, dock } = commandButtonsBehavior[vac_status];
-        console.log(find);
 
         return (
             <Grid container justify = 'center' className = { classes.root } >
