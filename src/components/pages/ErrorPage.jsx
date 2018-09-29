@@ -64,7 +64,7 @@ class ErrorPage extends React.Component {
 
 ErrorPage.propTypes = {
     classes: PropTypes.object.isRequired,
-    status: PropTypes,
+    status: PropTypes.number,
     loading: PropTypes.bool
 };
 

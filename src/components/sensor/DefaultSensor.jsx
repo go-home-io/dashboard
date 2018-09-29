@@ -17,18 +17,18 @@ const styles = () => ({
 class DefaultSensor extends React.Component {
     render () {
         const {classes, state} = this.props;
-        const on = state.on;
-        const icon = sensorContentIcon(state.sensor_type, on);
-        const tip = sensorTip(state.sensor_type, on);
-        const color = sensorIconColor(state.sensor_type, on);
-        const fontSize = (state.click != null) ? 30 : 40;
+        const { on, sensor_type, temperature, humidity, click, double_click, press } = state;
+        const icon = sensorContentIcon(sensor_type, on);
+        const tip = sensorTip(sensor_type, on);
+        const color = sensorIconColor(sensor_type, on);
+        const fontSize = (click != null) ? 30 : 40;
 
         return (
             <div>
                 <Grid container justify = 'center' alignItems = 'center'>
                     <TemperatureUpperLine
-                        temperature = { state.area }
-                        humidity = { state.duration }
+                        temperature = { temperature}
+                        humidity = { humidity }
                     />
                     
                     <Tooltip title = { tip } placement = "top">
@@ -41,9 +41,9 @@ class DefaultSensor extends React.Component {
                     
                     { state.click != null ?
                         <ButtonIcons
-                            click = { state.click }
-                            double_click = { state.double_click }
-                            press = { state.press }
+                            click = { click }
+                            double_click = { double_click }
+                            press = { press }
                         /> : null
                     }
                 </Grid>

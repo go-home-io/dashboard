@@ -69,7 +69,7 @@ class SensorManager extends Reflux.Component {
                     variant = 'sensor'
                     sensor_type = { type }
                 />
-                { battery_level ?
+                { battery_level != null ?
                     <BatteryIcon
                         battery_level = { battery_level }
                         cssClass = { classes }

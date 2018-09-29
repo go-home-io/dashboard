@@ -25,9 +25,10 @@ class TemperatureUpperLine extends React.Component {
 
     render () {
         const {classes, temperature, humidity} = this.props;
+
         return (
             <Grid container justify = 'flex-start' className = { classes.root }>
-                { temperature ?
+                { temperature != null ?
                     <Typography variant = 'subheading' align = 'center' className = { classes.temperature }>
                         <strong>
                             {temperature}
@@ -35,7 +36,7 @@ class TemperatureUpperLine extends React.Component {
                         <TemperatureSymbol/>
                     </Typography> : null
                 }
-                { humidity ?
+                { humidity != null ?
                     <Typography variant = 'caption' align = 'center' className = { classes.humidity }>
                         Hmd:
                         {" "}

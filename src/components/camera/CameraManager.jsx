@@ -4,15 +4,10 @@ import ComponentHeader from "../common/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+// import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/Grid";
-import WaitingProgress from "../common/WaitingProgress";
-import Zoom from "@material-ui/core/Zoom/Zoom";
-import truncateCaption from "../utils/truncate";
-import { VACUUM_HEADER_BKG_COLOR } from "../../settings/colors";
-import cameraActions from "../../reflux/camera/cameraActions";
-import BatteryIcon from "../common/BatteryIcon";
 import CameraStoreFactory from "../../reflux/camera/cameraStore";
+
 
 const styles = () => ({
     root: {
@@ -63,18 +58,16 @@ class CameraManager extends Reflux.Component{
         const { classes }  = this.props;
         const { id, name: fullName, device_state, visible, loading, status, commands } = this.state;
         const display = visible ? "block" : "none";
-        const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
-        const area = Math.round(raw_area);
-        const name = truncateCaption(fullName, 40);
+        const {  picture } = device_state;
+        const image = "\"data:image/jpg;base64, " + picture + "\"";
+        console.log(image);
 
         return (
 
                  <Card className={classes.root}>
                      <Grid container justify = 'flex-start' alignItems = 'center'>
 
-                         <CardContent>
-                             camera
-                         </CardContent>
+                        <img src={image} alt="Red dot"/>
                      </Grid>
                 </Card>
 

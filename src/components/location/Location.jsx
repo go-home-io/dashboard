@@ -70,7 +70,13 @@ class Location extends Reflux.Component {
                             />
                             :
                         deviceType === "camera" ?
-                            <CameraManager/>
+                            <CameraManager
+                                key = { device }
+                                location = { location }
+                                id = { device }
+                                device_info = { device_info }
+                                group_id = ""
+                            />
                            :
                         null
                     );})
