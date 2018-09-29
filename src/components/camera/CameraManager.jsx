@@ -1,13 +1,12 @@
 import React from "react";
 import Reflux from "reflux";
-import ComponentHeader from "../common/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-// import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid/Grid";
 import CameraStoreFactory from "../../reflux/camera/CameraStore";
-
+import CardMedia from "@material-ui/core/CardMedia/CardMedia";
+import Typography from "@material-ui/core/Typography/Typography";
+import Zoom from "@material-ui/core/Zoom/Zoom";
 
 const styles = () => ({
     root: {
@@ -15,66 +14,82 @@ const styles = () => ({
         height:165,
         margin: 5,
     },
-    progress: {
-        padding:3,
-        marginTop: 5,
-        marginLeft: -3,
-        width: "100%"
+    caption: {
+        height:23,
+        backgroundColor:"rgba(0,0,0,0.35)",
     },
-    battery_root: {
-        // position: "relative",
-        // top: -12,
-        // left: 30,
-        height: 0,
-        width: 0
+    typography: {
+        color: "#ffffff",
+        marginLeft: 5,
+        marginBottom: 3,
     },
-    icon: {
-        color: "rgba(0, 0, 0, 0.54)",
-        position: "relative",
-        fontSize: 13,
-        top: -34,
-        left: 151,
-        width: 20,
+    media: {
+        height: 150,
+        cursor: "pointer",
     },
-    label: {
-        fontSize: 11,
-        position: "relative",
-        left: 120,
-        top:-18,
-    },
-    speed: {
-        marginTop: -10
+    bigImage: {
+        height: 618,
+        width: 810,
+        cursor: "pointer",
+        margin: 10
     }
 });
 
-const imageDOM = picture => {
+const imageHTMLString = picture => {
+    // eslint-disable-next-line
     const imageTag = "<img src=" + "\"data:image/jpg;base64, " + picture + "\"" + " />" ;
-    // alert(imageTag);
     return {__html: imageTag};
 };
 
+const imgDOMElement = picture => {
+    // eslint-disable-next-line
+    return <div dangerouslySetInnerHTML = { imageHTMLString(picture) } />;
+};
+
 class CameraManager extends Reflux.Component{
+
     constructor(props) {
         super(props);
         const { id, device_info, location, group_id } = props;
+        this.state = {preview: true};
         this.store = CameraStoreFactory(id, device_info, location, group_id);
+    }
+    handleClick () {
+        const { preview } = this.state;
+        this.setState({ preview: ! preview });
     }
 
     render () {
         const { classes }  = this.props;
-        const { id, name: fullName, device_state, visible, loading, status, commands } = this.state;
+        const { device_state, visible, name, preview } = this.state;
         const display = visible ? "block" : "none";
         const {  picture } = device_state;
-        const image = "\"data:image/jpg;base64, " + picture + "\"";
+        const image = "data:image/jpg;base64, " + picture  ;
 
         return (
+            preview ?
+                <Card style = { {display:display} } className = { classes.root }>
+                    <div className = { classes.caption }>
+                        <Typography variant = 'subheading' className = { classes.typography }>
+                            { name }
+                        </Typography>
+                    </div>
+                    <CardMedia
+                        className = { classes.media }
+                        image = { image }
+                        onClick = { this.handleClick.bind(this) }
+                    />
+                </Card> :
+                <Zoom in = { ! preview } style = { {display:display} } >
+                    <div
+                        className = { classes.bigImage }
+                        onClick = { this.handleClick.bind(this) }
+                    >
+                        {imgDOMElement(picture)}
+                    </div>
+                </Zoom>
 
-                 <Card className={classes.root} style={{display: display}}>
-                     <Grid container justify = 'flex-start' alignItems = 'center'>
-                         <div dangerouslySetInnerHTML={imageDOM(picture)} />
-                        {/*<img src="" alt="Red dot"/>*/}
-                     </Grid>
-                </Card>
+
 
         );
     }

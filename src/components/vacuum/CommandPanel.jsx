@@ -14,7 +14,7 @@ const styles = () => ( {
     button: {
         height:30,
         width: 30,
-        margin: '0 auto'
+        margin: "0 auto"
     }
 });
 
@@ -31,51 +31,59 @@ class CommandPanel extends React.Component {
 
         return (
             <Grid container justify = 'center' className = { classes.root } >
-                { commands.includes('on') ?
+                { commands.includes("on") ?
                     <IconButton
-                        className={classes.button}
-                        aria-label="Start"
-                        color="primary"
-                        disabled={start.disabled}
-                        onClick={this.handleClick(start.command)}
+                        className = { classes.button }
+                        aria-label = "Start"
+                        color = "primary"
+                        disabled = { start.disabled }
+                        onClick = { this.handleClick(start.command) }
                     >
-                        <Icon>{start.icon}</Icon>
+                        <Icon>
+                            {start.icon}
+                        </Icon>
                     </IconButton> :
                     null
                 }
-                { commands.includes('off') ?
+                { commands.includes("off") ?
                     <IconButton
-                        className={classes.button}
-                        aria-label="Stop"
-                        disabled={stop.disabled}
-                        color="secondary"
-                        onClick={this.handleClick(stop.command)}
+                        className = { classes.button }
+                        aria-label = "Stop"
+                        disabled = { stop.disabled }
+                        color = "secondary"
+                        onClick = { this.handleClick(stop.command) }
                     >
-                        <Icon>{stop.icon}</Icon>
+                        <Icon>
+                            {stop.icon}
+                        </Icon>
                     </IconButton> :
                     null
                 }
-                { commands.includes('dock') ?
+                { commands.includes("dock") ?
                     <IconButton
-                        className={classes.button}
-                        aria-label="Dock"
-                        color="primary"
-                        disabled={dock.disabled}
-                        onClick={this.handleClick(dock.command)}
+                        className = { classes.button }
+                        aria-label = "Dock"
+                        color = "primary"
+                        disabled = { dock.disabled }
+                        onClick = { this.handleClick(dock.command) }
                     >
-                        <Icon>{dock.icon}</Icon>
+                        <Icon>
+                            {dock.icon}
+                        </Icon>
                     </IconButton> :
                     null
                 }
-                { commands.includes('find-me') ?
+                { commands.includes("find-me") ?
                     <IconButton
-                        className={classes.button}
-                        aria-label="Find me"
-                        color="primary"
-                        disabled={find.disabled}
-                        onClick={this.handleClick(find.command)}
+                        className = { classes.button }
+                        aria-label = "Find me"
+                        color = "primary"
+                        disabled = { find.disabled }
+                        onClick = { this.handleClick(find.command) }
                     >
-                        <Icon>{find.icon}</Icon>
+                        <Icon>
+                            {find.icon}
+                        </Icon>
                     </IconButton> :
                     null
                 }

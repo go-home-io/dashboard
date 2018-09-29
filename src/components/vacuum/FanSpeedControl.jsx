@@ -9,7 +9,7 @@ import FanSpeedSlider from "./FanSpeedSlider";
 const styles = () => ( {
     root: {
         marginTop: -6,
-        marginLeft: 7,
+        marginLeft: 2,
     },
     text: {
         letterSpacing:1,
@@ -45,42 +45,42 @@ class  FanSpeedControl extends React.Component {
         const open = Boolean(anchorEl);
 
         return (
-                commands.includes("set-fan-speed") ?
-                    <Grid container className={classes.root} justify='center'>
-                        <div id="label"
-                             className={classes.text}
-                             onClick={this.handleClick}
-                        >
-                            <Typography variant='body1'>
+            commands.includes("set-fan-speed") ?
+                <Grid container className = { classes.root } justify = 'center'>
+                    <div id = "label"
+                        className = { classes.text }
+                        onClick = { this.handleClick }
+                    >
+                        <Typography variant = 'body1'>
                                 Fan Speed:
-                                {" "}
-                                {level}
+                            {" "}
+                            {level}
                                 %
-                            </Typography>
-                        </div>
-                        <Popover
-                            id="simple-popper"
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={this.handleClose}
-                            anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "left",
-                            }}
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "left",
-                            }}
-                        >
-                            <FanSpeedSlider
-                                level={level}
-                                close={this.handleClose.bind(this)}
-                                dev_id={dev_id}
-                            />
-                        </Popover>
-                    </Grid>
-                    :
-                    null
+                        </Typography>
+                    </div>
+                    <Popover
+                        id = "simple-popper"
+                        open = { open }
+                        anchorEl = { anchorEl }
+                        onClose = { this.handleClose }
+                        anchorOrigin = { {
+                            vertical: "top",
+                            horizontal: "left",
+                        } }
+                        transformOrigin = { {
+                            vertical: "top",
+                            horizontal: "left",
+                        } }
+                    >
+                        <FanSpeedSlider
+                            level = { level }
+                            close = { this.handleClose.bind(this) }
+                            dev_id = { dev_id }
+                        />
+                    </Popover>
+                </Grid>
+                :
+                null
 
         );
     }

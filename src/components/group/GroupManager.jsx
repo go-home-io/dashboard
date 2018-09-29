@@ -17,7 +17,7 @@ const styles = () => ({
         border:"solid 1px lightgrey",
         borderRadius:5,
         padding:5,
-        marginTop: 5,
+        margin: 5,
         // backgroundColor: 'white',
     },
     text: {

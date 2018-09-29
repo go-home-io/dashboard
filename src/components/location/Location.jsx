@@ -42,43 +42,43 @@ class Location extends Reflux.Component {
                                 device_info = { device_info }
                                 all_device_states = { generalState.devices }
                             />  :
-                        deviceType === "light" ?
-                            <LightManager
-                                key = { device }
-                                location = { location }
-                                id = { device }
-                                device_info = { device_info }
-                                group_id = ""
-                            />
+                            deviceType === "light" ?
+                                <LightManager
+                                    key = { device }
+                                    location = { location }
+                                    id = { device }
+                                    device_info = { device_info }
+                                    group_id = ""
+                                />
                                 :
-                        deviceType === "sensor" ?
-                            <SensorManager
-                                key = { device }
-                                location = { location }
-                                id = { device }
-                                device_info = { device_info }
-                                group_id = ""
-                            />
-                                :
-                        deviceType === "vacuum" ?
-                            <VacuumManager
-                                key = { device }
-                                location = { location }
-                                id = { device }
-                                device_info = { device_info }
-                                group_id = ""
-                            />
-                            :
-                        deviceType === "camera" ?
-                            <CameraManager
-                                key = { device }
-                                location = { location }
-                                id = { device }
-                                device_info = { device_info }
-                                group_id = ""
-                            />
-                           :
-                        null
+                                deviceType === "sensor" ?
+                                    <SensorManager
+                                        key = { device }
+                                        location = { location }
+                                        id = { device }
+                                        device_info = { device_info }
+                                        group_id = ""
+                                    />
+                                    :
+                                    deviceType === "vacuum" ?
+                                        <VacuumManager
+                                            key = { device }
+                                            location = { location }
+                                            id = { device }
+                                            device_info = { device_info }
+                                            group_id = ""
+                                        />
+                                        :
+                                        deviceType === "camera" ?
+                                            <CameraManager
+                                                key = { device }
+                                                location = { location }
+                                                id = { device }
+                                                device_info = { device_info }
+                                                group_id = ""
+                                            />
+                                            :
+                                            null
                     );})
                 }
             </Grid>

@@ -35,7 +35,6 @@ const styles = theme => ({
         left: 10,
         top: -28,
         color: "#ffffffff",
-
     },
     ro_icon: {
         position: "relative",
@@ -124,10 +123,6 @@ class ComponentHeader extends React.Component {
                             :
                             variant === "vacuum" ?
                                 <div>
-                                    {/*<VacuumHeaderIcon*/}
-                                    {/*vac_status = { vac_status }*/}
-                                    {/*cssClass = { classes.icon }*/}
-                                    {/*/>*/}
                                     <VacuumStatusIcon
                                         vac_status = { vac_status }
                                         cssClass = { classes.icon }

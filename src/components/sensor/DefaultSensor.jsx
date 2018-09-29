@@ -27,7 +27,7 @@ class DefaultSensor extends React.Component {
             <div>
                 <Grid container justify = 'center' alignItems = 'center'>
                     <TemperatureUpperLine
-                        temperature = { temperature}
+                        temperature = { temperature }
                         humidity = { humidity }
                     />
                     

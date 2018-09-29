@@ -1,8 +1,6 @@
 import Reflux from "reflux";
 import cameraActions from "./cameraActions";
 import wsActions from "../socket/wsActions";
-import notificationActions from "../notification/notificationActions";
-import AppStore from "../application/AppStore";
 
 //  Create unique Store for each Camera
 function CameraStoreFactory(id, device_state, location, group_id) {
@@ -17,7 +15,7 @@ function CameraStoreFactory(id, device_state, location, group_id) {
                 group_id: "",
                 location: "",
                 visible: false,
-             };
+            };
             this.listenables = cameraActions;
 
             // Bind it
@@ -25,6 +23,7 @@ function CameraStoreFactory(id, device_state, location, group_id) {
             this.onVisible = this.onVisible.bind(this);
 
             this.setInitialState(device_state, location, group_id);
+            // console.log(this.state);
         }
 
         setInitialState(device_state, location, group_id) {
@@ -36,14 +35,12 @@ function CameraStoreFactory(id, device_state, location, group_id) {
                 });
             }
             if (location) {
-                this.setState({location: location})
+                this.setState({location: location});
             }
             if (group_id) {
-                this.setState({group_id: group_id})
+                this.setState({group_id: group_id});
             }
         }
-
-
 
         // WebSocket messenger
         doCommand(command, value) {
@@ -57,16 +54,8 @@ function CameraStoreFactory(id, device_state, location, group_id) {
             if (data.id === id) {
                 if (data.state !== "oneWayResponse") {
                     this.setState({
-                        device_state: data.state,
-                        loading:false,
-                        status:"success"
-                    });
-                } else {
-                    this.setState({
-                        loading:false,
-                        status:"success"});
+                        device_state: data.state});
                 }
-
             }
         }
 

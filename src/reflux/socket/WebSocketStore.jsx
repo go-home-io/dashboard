@@ -117,8 +117,9 @@ class WebSocketStore extends Reflux.Store {
     oneWayCommandServerResponseEmulation (dev_id) {
         this.setState({oneWay: false});
         const data = {"id":dev_id, "state":"oneWayResponse"};
-        // eslint-disable-next-line
+
         setTimeout( () => {
+            // eslint-disable-next-line
             actions.map((action) => {
                 action.message(data);
             });
@@ -139,7 +140,7 @@ class WebSocketStore extends Reflux.Store {
             }
             attempts = 0;
             if (this.state.oneWay) {
-                this.oneWayCommandServerResponseEmulation(data.id)
+                this.oneWayCommandServerResponseEmulation(data.id);
             }
         } else {
             // Socket isn't ready
