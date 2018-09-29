@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 // import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/Grid";
-import CameraStoreFactory from "../../reflux/camera/cameraStore";
+import CameraStoreFactory from "../../reflux/camera/CameraStore";
 
 
 const styles = () => ({
@@ -47,6 +47,12 @@ const styles = () => ({
     }
 });
 
+const imageDOM = picture => {
+    const imageTag = "<img src=" + "\"data:image/jpg;base64, " + picture + "\"" + " />" ;
+    // alert(imageTag);
+    return {__html: imageTag};
+};
+
 class CameraManager extends Reflux.Component{
     constructor(props) {
         super(props);
@@ -60,14 +66,13 @@ class CameraManager extends Reflux.Component{
         const display = visible ? "block" : "none";
         const {  picture } = device_state;
         const image = "\"data:image/jpg;base64, " + picture + "\"";
-        console.log(image);
 
         return (
 
-                 <Card className={classes.root}>
+                 <Card className={classes.root} style={{display: display}}>
                      <Grid container justify = 'flex-start' alignItems = 'center'>
-
-                        <img src={image} alt="Red dot"/>
+                         <div dangerouslySetInnerHTML={imageDOM(picture)} />
+                        {/*<img src="" alt="Red dot"/>*/}
                      </Grid>
                 </Card>
 

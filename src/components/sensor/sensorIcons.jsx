@@ -21,7 +21,7 @@ export const sensorContentIcon = (type, on) => {
     case "motion":
         return on ? "directions_walk" : "hotel";
     case "lock":
-        return on ? "lock" : "lock_open";
+        return on ? "lock_open" : "lock";
     default:
         return on ? "toggle_on" : "toggle_off";
     }
@@ -40,10 +40,9 @@ export const sensorTip = (type, on) => {
 
 export const sensorIconColor = (type, on) => {
     switch (type) {
-    case "motion":
-        return  on ? MOTION_ICON_COLOR_ON : SENSOR_ICON_COLOR_OFF;
-    default:
-        return on ? SENSOR_ICON_COLOR_ON : SENSOR_ICON_COLOR_OFF;
+        case "motion":
+            return  on ? MOTION_ICON_COLOR_ON : SENSOR_ICON_COLOR_OFF;
+        default:
+            return on ? SENSOR_ICON_COLOR_ON : SENSOR_ICON_COLOR_OFF;
     }
-
 };

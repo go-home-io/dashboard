@@ -38,9 +38,8 @@ class HomePage extends Reflux.Component {
     }
 
     render () {
-        const { classes } = this.props;
-        const generalState = this.props.generalState;
-        const locations = generalState.locations;
+        const { classes, generalState } = this.props;
+        const { locations } = generalState;
 
         return (
             <Grid container

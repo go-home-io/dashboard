@@ -4,8 +4,9 @@ import locationActions from "./locationActions";
 import groupActions from "../group/groupActions";
 import sensorActions from "../sensor/sensorActions";
 import vacuumActions from "../vacuum/vacuumActions";
+import cameraActions from "../camera/cameraActions";
 
-const actions = [lightActions, groupActions, sensorActions, vacuumActions];
+const actions = [lightActions, groupActions, sensorActions, vacuumActions, cameraActions];
 
 //  Create unique Store for each Component
 function LocationStoreFactory(name,  members){

@@ -14,7 +14,6 @@ function CameraStoreFactory(id, device_state, location, group_id) {
                 name: "",
                 device_state: {},
                 last_seen: 0,
-                // commands: device_state.commands,
                 group_id: "",
                 location: "",
                 visible: false,
@@ -26,7 +25,6 @@ function CameraStoreFactory(id, device_state, location, group_id) {
             this.onVisible = this.onVisible.bind(this);
 
             this.setInitialState(device_state, location, group_id);
-            console.log(this.state);
         }
 
         setInitialState(device_state, location, group_id) {
