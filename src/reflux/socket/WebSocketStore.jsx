@@ -6,9 +6,10 @@ import wsActions from "./wsActions";
 import groupActions from "../group/groupActions";
 import sensorActions from "../sensor/sensorActions";
 import vacuumActions from "../vacuum/vacuumActions";
+import cameraActions from "../camera/cameraActions";
 
 /// Broadcasting list
-const actions = [lightActions, groupActions, sensorActions, vacuumActions];
+const actions = [lightActions, groupActions, sensorActions, vacuumActions, cameraActions];
 
 let timerCONNECTION_TIMEOUT = null;
 let timerPING_INTERVAL = null;

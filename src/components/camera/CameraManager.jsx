@@ -29,7 +29,7 @@ const styles = () => ({
     },
     bigImage: {
         height: 618,
-        width: 810,
+        width: 800,
         cursor: "pointer",
         margin: 10
     }
@@ -47,7 +47,6 @@ const imgDOMElement = picture => {
 };
 
 class CameraManager extends Reflux.Component{
-
     constructor(props) {
         super(props);
         const { id, device_info, location, group_id } = props;
@@ -63,7 +62,7 @@ class CameraManager extends Reflux.Component{
         const { classes }  = this.props;
         const { device_state, visible, name, preview } = this.state;
         const display = visible ? "block" : "none";
-        const {  picture } = device_state;
+        const { picture } = device_state;
         const image = "data:image/jpg;base64, " + picture  ;
 
         return (
@@ -79,7 +78,8 @@ class CameraManager extends Reflux.Component{
                         image = { image }
                         onClick = { this.handleClick.bind(this) }
                     />
-                </Card> :
+                </Card>
+                :
                 <Zoom in = { ! preview } style = { {display:display} } >
                     <div
                         className = { classes.bigImage }
@@ -88,13 +88,9 @@ class CameraManager extends Reflux.Component{
                         {imgDOMElement(picture)}
                     </div>
                 </Zoom>
-
-
-
-        );
+       );
     }
 }
-
 
 CameraManager.propTypes = {
     classes: PropTypes.object.isRequired,
