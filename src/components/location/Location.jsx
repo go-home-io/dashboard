@@ -8,6 +8,7 @@ import LocationStoreFactory from "../../reflux/location/LocationStore";
 import SensorManager from "../sensor/SensorManager";
 import VacuumManager from "../vacuum/VacuumManager";
 import CameraManager from "../camera/CameraManager";
+import SwitchManager from "../switch/SwitchManager";
 
 class Location extends Reflux.Component {
     constructor(props) {
@@ -78,7 +79,16 @@ class Location extends Reflux.Component {
                                                 group_id = ""
                                             />
                                             :
-                                            null
+                                            deviceType === "switch" ?
+                                                <SwitchManager
+                                                    key = { device }
+                                                    location = { location }
+                                                    id = { device }
+                                                    device_info = { device_info }
+                                                    group_id = ""
+                                                />
+                                                :
+                                                null
                     );})
                 }
             </Grid>

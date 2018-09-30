@@ -1,5 +1,4 @@
 import {STATE_URL} from "../settings/urls";
-
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from "../settings/cookie";
 
@@ -24,7 +23,6 @@ const service = {
                 // eslint-disable-next-line
                 console.error("Error during server connection:", err.messageInfo);
                 return 404;
-                // err.messageInfo;
             });
     },
     post:(url, data) => {

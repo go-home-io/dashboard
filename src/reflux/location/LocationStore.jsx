@@ -1,18 +1,11 @@
 import Reflux from "reflux";
-import lightActions from "../light/lightActions";
 import locationActions from "./locationActions";
-import groupActions from "../group/groupActions";
-import sensorActions from "../sensor/sensorActions";
-import vacuumActions from "../vacuum/vacuumActions";
-import cameraActions from "../camera/cameraActions";
+import actions from "../actions";
 
-const actions = [lightActions, groupActions, sensorActions, vacuumActions, cameraActions];
-
-//  Create unique Store for each Component
+//  Create unique Store for each Location
 function LocationStoreFactory(name,  members){
 
     class LocationStore extends Reflux.Store {
-
         constructor() {
             super();
 

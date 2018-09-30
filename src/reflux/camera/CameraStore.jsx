@@ -23,7 +23,6 @@ function CameraStoreFactory(id, device_state, location, group_id) {
             this.onVisible = this.onVisible.bind(this);
 
             this.setInitialState(device_state, location, group_id);
-            // console.log(this.state);
         }
 
         setInitialState(device_state, location, group_id) {

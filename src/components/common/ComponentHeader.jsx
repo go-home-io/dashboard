@@ -7,7 +7,7 @@ import Paper from "@material-ui/core/Paper/Paper";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { HEADER_HIGHLIGHT_DURATION } from "../../settings/deviceDelays";
 import { SUCCESS_BKG_COLOR, ERROR_BKG_COLOR } from "../../settings/colors";
-import IconHeaderLight from "../light/IconHeaderLight";
+import IconHeader from "../common/IconHeader";
 import SensorHeaderIcon from "../sensor/SensorHeaderIcon";
 import VacuumStatusIcon from "../vacuum/VacuumStatusIcon";
 
@@ -96,15 +96,17 @@ class ComponentHeader extends React.Component {
                 <div className = { classes.root } >
                     {variant === "light" ?
                         <div>
-                            <IconHeaderLight
-                                light_on = { on }
+                            <IconHeader
+                                variant = 'light'
+                                component_on = { on }
                                 cssClass = { classes.icon }
                             />
                             { read_only ?
                                 <Tooltip title = 'Read only device'
                                     placement = "top"
                                 >
-                                    <Icon className = { classes.ro_icon }
+                                    <Icon
+                                        className = { classes.ro_icon }
                                         style = { {color: iconROColor} }
                                     >
                                         sync_disabled
@@ -129,7 +131,31 @@ class ComponentHeader extends React.Component {
                                     />
                                 </div>
                                 :
-                                null
+                                variant === "switch" ?
+                                    <div>
+                                        <IconHeader
+                                            component_on = { on }
+                                            variant = "switch"
+                                            cssClass = { classes.icon }
+                                        />
+                                        { read_only ?
+                                            <Tooltip title = 'Read only device'
+                                                placement = "top"
+                                            >
+                                                <Icon
+                                                    className = { classes.ro_icon }
+                                                    style = { {color: iconROColor} }
+                                                >
+                                            sync_disabled
+                                                </Icon>
+                                            </Tooltip>
+                                            :
+                                            null
+                                        }
+
+                                    </div>
+                                    :
+                                    null
                     }
 
                     <Typography variant = "subheading"

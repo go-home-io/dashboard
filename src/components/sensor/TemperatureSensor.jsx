@@ -9,19 +9,14 @@ const styles = () => ({
         margin: 0,
         height: "55%",
         position: "relative",
-        top: 5,
+        top: 0,
         left: 0,
     },
     temperature: {
-        // position: "relative",
-        // top: 0,
-        // left: 0,
         height: "40%",
+        marginBottom: 3,
     },
     humidity: {
-        // position: "relative",
-        // top: 0,
-        // left: 0,
         height: "20%",
     }
 });

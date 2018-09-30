@@ -32,7 +32,7 @@ export const sensorTip = (type, on) => {
     case "motion":
         return on ? "Motion detected" : "No motion";
     case "lock":
-        return on ? "Lock closed" : "Lock open";
+        return on ?  "Lock open" : "Lock closed";
     default:
         return on ? "ON" : "OFF";
     }
