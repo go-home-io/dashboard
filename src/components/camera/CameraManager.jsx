@@ -28,15 +28,12 @@ const styles = () => ({
         cursor: "pointer",
     },
     bigCard: {
-        height: 641,
-        width: 800,
         margin: 5
     },
     bigImage: {
-        height: 618,
-        width: 800,
+        height: 600,
+        width: 4/3*600,
         cursor: "pointer",
-        // margin: 10
     }
 });
 
@@ -86,7 +83,7 @@ class CameraManager extends Reflux.Component{
                 </Card>
                 :
                 <Zoom in = { ! preview }  >
-                    <Card className = { classes.bigCard } style = { {display:display} }>
+                    <Card  style = { {display:display} } className={classes.bigCard}>
                         <div className = { classes.caption }>
                             <Typography variant = 'subheading' className = { classes.typography }>
                                 { name }
