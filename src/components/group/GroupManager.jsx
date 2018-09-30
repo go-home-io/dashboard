@@ -11,6 +11,7 @@ import SensorManager from "../sensor/SensorManager";
 import {GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF} from "../../settings/colors";
 import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
+import SwitchManager from "../switch/SwitchManager";
 
 const styles = () => ({
     root: {
@@ -80,6 +81,14 @@ class GroupManager  extends Reflux.Component {
                                 /> :
                                 deviceType === "sensor" ?
                                     <SensorManager
+                                        key = { dev_id }
+                                        location = { location }
+                                        id = { dev_id }
+                                        device_info = { device_state }
+                                        group_id = { group_id }
+                                    /> :
+                                deviceType === "switch" ?
+                                    <SwitchManager
                                         key = { dev_id }
                                         location = { location }
                                         id = { dev_id }
