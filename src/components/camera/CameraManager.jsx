@@ -29,15 +29,8 @@ const styles = () => ({
     },
     bigCard: {
         margin: 5,
-        // height: 620,
-        // width: 800,
     },
     bigImage: {
-        // height: 400,
-        // width: 4/3*600,
-        // // width: '100%',
-        // height: '100%',
-        // objectFit: 'contain',
         cursor: "pointer",
     }
 });
@@ -52,6 +45,13 @@ const styles = () => ({
 //     // eslint-disable-next-line
 //     return <div dangerouslySetInnerHTML = { imageHTMLString(picture) } />;
 // };
+
+let naturalWidth = 0;
+let naturalHeight = 0;
+
+const imageSrc = (picture) => {
+    return "data:image/jpg;base64, " + picture ;
+};
 
 class CameraManager extends Reflux.Component{
     constructor(props) {
@@ -70,12 +70,13 @@ class CameraManager extends Reflux.Component{
         const { device_state, visible, name, preview } = this.state;
         const display = visible ? "block" : "none";
         const { picture } = device_state;
-        const image = "data:image/jpg;base64, " + picture ;
+        const image = imageSrc(picture); // "data:image/jpg;base64, " + picture ;
         const img = new Image();
         img.src = image;
-        const naturalWidth = img.naturalWidth;
-        const naturalHeight = img.naturalHeight;
-
+        if (naturalHeight === 0 || naturalWidth === 0) {
+            naturalWidth = img.naturalWidth;
+            naturalHeight = img.naturalHeight;
+        }
         return (
             preview ?
                 <Card style = { {display:display} } className = { classes.root }>
