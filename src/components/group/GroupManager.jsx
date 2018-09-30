@@ -87,15 +87,15 @@ class GroupManager  extends Reflux.Component {
                                         device_info = { device_state }
                                         group_id = { group_id }
                                     /> :
-                                deviceType === "switch" ?
-                                    <SwitchManager
-                                        key = { dev_id }
-                                        location = { location }
-                                        id = { dev_id }
-                                        device_info = { device_state }
-                                        group_id = { group_id }
-                                    /> :
-                                    null
+                                    deviceType === "switch" ?
+                                        <SwitchManager
+                                            key = { dev_id }
+                                            location = { location }
+                                            id = { dev_id }
+                                            device_info = { device_state }
+                                            group_id = { group_id }
+                                        /> :
+                                        null
                         );
                     })}
 

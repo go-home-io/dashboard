@@ -28,11 +28,16 @@ const styles = () => ({
         cursor: "pointer",
     },
     bigCard: {
-        margin: 5
+        margin: 5,
+        // height: 620,
+        // width: 800,
     },
     bigImage: {
-        height: 600,
-        width: 4/3*600,
+        // height: 400,
+        // width: 4/3*600,
+        // // width: '100%',
+        // height: '100%',
+        // objectFit: 'contain',
         cursor: "pointer",
     }
 });
@@ -65,7 +70,11 @@ class CameraManager extends Reflux.Component{
         const { device_state, visible, name, preview } = this.state;
         const display = visible ? "block" : "none";
         const { picture } = device_state;
-        const image = "data:image/jpg;base64, " + picture  ;
+        const image = "data:image/jpg;base64, " + picture ;
+        const img = new Image();
+        img.src = image;
+        const naturalWidth = img.naturalWidth;
+        const naturalHeight = img.naturalHeight;
 
         return (
             preview ?
@@ -75,6 +84,7 @@ class CameraManager extends Reflux.Component{
                             { name }
                         </Typography>
                     </div>
+
                     <CardMedia
                         className = { classes.media }
                         image = { image }
@@ -83,7 +93,7 @@ class CameraManager extends Reflux.Component{
                 </Card>
                 :
                 <Zoom in = { ! preview }  >
-                    <Card  style = { {display:display} } className={classes.bigCard}>
+                    <Card style = { {display:display} } className = { classes.bigCard }>
                         <div className = { classes.caption }>
                             <Typography variant = 'subheading' className = { classes.typography }>
                                 { name }
@@ -91,6 +101,7 @@ class CameraManager extends Reflux.Component{
                         </div>
                         <CardMedia
                             className = { classes.bigImage }
+                            style = { {width: naturalWidth, height: naturalHeight} }
                             image = { image }
                             onClick = { this.handleClick.bind(this) }
                         />
