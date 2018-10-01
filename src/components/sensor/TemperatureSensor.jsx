@@ -24,12 +24,14 @@ const styles = () => ({
 class TemperatureSensor extends React.Component {
     render () {
         const {classes, temperature, humidity} = this.props;
+        const temperatureFormatted = temperature.toFixed(1);
+        const humidityFormatted = humidity.toFixed(1);
 
         return (
             <div className = { classes.root }>
                 <div className = { classes.temperature }>
                     <Typography variant = 'display1' align = 'center'>
-                        {temperature}
+                        { temperatureFormatted }
                         <TemperatureSymbol/>
                     </Typography>
                 </div>
@@ -37,7 +39,7 @@ class TemperatureSensor extends React.Component {
                     <Typography variant = 'body1' align = 'center'>
                         Humidity
                         {" "}
-                        {humidity}
+                        {humidityFormatted}
                         %
                     </Typography>
                 </div>

@@ -6,7 +6,7 @@ import {COOKIE_NAME} from "../settings/cookie";
 // STATE_URL
 const service = {
     get:() => {
-        return fetch( STATE_URL, {
+        return fetch(STATE_URL , {
             headers: {
                 "Authorization": Cookie.get(COOKIE_NAME)
             },

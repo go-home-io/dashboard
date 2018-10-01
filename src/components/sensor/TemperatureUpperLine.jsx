@@ -25,13 +25,17 @@ class TemperatureUpperLine extends React.Component {
 
     render () {
         const {classes, temperature, humidity} = this.props;
-
+        const roundedTemp = Math.round(temperature);
+        let humidityFormatted = 0;
+        if ( humidity != null ) {
+            humidityFormatted = humidity.toFixed(1);
+        }
         return (
             <Grid container justify = 'flex-start' className = { classes.root }>
                 { temperature != null ?
                     <Typography variant = 'subheading' align = 'center' className = { classes.temperature }>
                         <strong>
-                            {temperature}
+                            {roundedTemp}
                         </strong>
                         <TemperatureSymbol/>
                     </Typography> : null
@@ -40,7 +44,7 @@ class TemperatureUpperLine extends React.Component {
                     <Typography variant = 'caption' align = 'center' className = { classes.humidity }>
                         Hmd:
                         {" "}
-                        {humidity}
+                        {humidityFormatted}
                         %
                     </Typography> : null
                 }
