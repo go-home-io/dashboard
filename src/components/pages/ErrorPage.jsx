@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon/Icon";
 import AppBarPlaceholder from "../navigation/AppBarPlaceholder";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const styles = {
     root: {
@@ -12,11 +13,7 @@ const styles = {
         marginTop:100,
     },
     icon: {
-        // fontSize: 50,
-        width: 400,
-        height: 400,
-        marginTop: 200,
-        marginLeft: 300,
+        marginTop: 250,
         padding: 10,
         color: "rgba(0,0,0,0.54)"
     }
@@ -32,16 +29,11 @@ class ErrorPage extends React.Component {
                 <AppBarPlaceholder/>
                 { ! loading ?
                     <div >
-
                         <Grid container className = { classes.root } justify = 'center' alignItems = 'center'>
-
-
                             <Typography variant = "display4" gutterBottom>
                                 {status}
                             </Typography>
-
                         </Grid>
-
                         <Grid container justify = 'center'>
                             <Typography variant = "display1" gutterBottom>
                                 { mess }
@@ -50,11 +42,12 @@ class ErrorPage extends React.Component {
                     </div> :
 
                     <Grid container justify = 'center' alignItems = 'center' alignContent = 'center'>
-                        <div >
-                            <Icon className = { classes.icon }>
-                                <i className = "fa fa-refresh fa-spin fa-5x" aria-hidden = "true" />
-                            </Icon>
-                        </div>
+                        <FontAwesomeIcon
+                            className = { classes.icon }
+                            spin
+                            icon="spinner"
+                            size = "6x"
+                        />
                     </Grid>
                 }
             </Grid>
