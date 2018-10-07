@@ -1,5 +1,4 @@
 import React from "react";
-import Icon from "@material-ui/core/Icon/Icon";
 import {
     SWITCH_HEADER_ICON_COLOR_ON,
     SWITCH_HEADER_ICON_COLOR_OFF,
@@ -7,10 +6,12 @@ import {
     LIGHT_HEADER_ICON_COLOR_OFF
 } from "../../settings/colors";
 import PropTypes from "prop-types";
+import WbIncandescentIcon from "@material-ui/icons/WbIncandescent";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 
 const icons = {
-    "light": "wb_incandescent",
-    "switch": "power_settings_new"
+    "light": WbIncandescentIcon,
+    "switch": PowerSettingsNewIcon
 };
 
 const colors = {
@@ -27,17 +28,14 @@ const colors = {
 class IconHeader extends React.Component {
     render () {
         const { component_on, cssClass, variant } = this.props;
-        const icon = icons[variant];
-        // const variant = component_on.toString();
+        const SelectedIcon = icons[variant];
         const iconColor = colors[variant][component_on.toString()];
 
         return (
-            <Icon
+            <SelectedIcon
                 className = { cssClass }
                 style = { {color:iconColor} }
-            >
-                { icon }
-            </Icon>
+            />
         );
     }
 }

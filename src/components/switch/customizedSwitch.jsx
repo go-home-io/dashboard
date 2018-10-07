@@ -2,7 +2,7 @@ import React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch/Switch";
 
-function customizedSwitch(checked, colorThumb, handleChange) {
+const customizedSwitch = (checked, colorThumb, handleChange, disabled) => {
     // Overrides the slider CSS
     const theme = createMuiTheme({
         overrides: {
@@ -19,7 +19,12 @@ function customizedSwitch(checked, colorThumb, handleChange) {
 
     return (
         <MuiThemeProvider theme = { theme }>
-            <Switch checked = { checked } onChange = { handleChange } color = 'primary'/>
+            <Switch
+                disabled = { disabled }
+                checked = { checked }
+                onChange = { handleChange }
+                color = 'primary'
+            />
         </MuiThemeProvider>
     );
 }

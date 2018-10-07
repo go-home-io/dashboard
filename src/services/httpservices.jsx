@@ -6,7 +6,7 @@ const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
 // STATE_URL
 const service = {
     get:() => {
-        return fetch( vlad_url , {
+        return fetch( STATE_URL , {
             headers: {
                 "Authorization": Cookie.get(COOKIE_NAME)
             },

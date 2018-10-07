@@ -10,6 +10,7 @@ import { SUCCESS_BKG_COLOR, ERROR_BKG_COLOR } from "../../settings/colors";
 import IconHeader from "../common/IconHeader";
 import SensorHeaderIcon from "../sensor/SensorHeaderIcon";
 import VacuumStatusIcon from "../vacuum/VacuumStatusIcon";
+import SyncDisabled from "@material-ui/icons/SyncDisabled";
 
 const styles = theme => ({
     paper: {
@@ -102,15 +103,14 @@ class ComponentHeader extends React.Component {
                                 cssClass = { classes.icon }
                             />
                             { read_only ?
-                                <Tooltip title = 'Read only device'
+                                <Tooltip
+                                    title = 'Read only device'
                                     placement = "top"
                                 >
-                                    <Icon
+                                    <SyncDisabled
                                         className = { classes.ro_icon }
                                         style = { {color: iconROColor} }
-                                    >
-                                        sync_disabled
-                                    </Icon>
+                                    />
                                 </Tooltip>
                                 :
                                 null

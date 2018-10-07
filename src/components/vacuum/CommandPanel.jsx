@@ -39,9 +39,7 @@ class CommandPanel extends React.Component {
                         disabled = { start.disabled }
                         onClick = { this.handleClick(start.command) }
                     >
-                        <Icon>
-                            {start.icon}
-                        </Icon>
+                            <start.icon/>
                     </IconButton> :
                     null
                 }
@@ -53,9 +51,7 @@ class CommandPanel extends React.Component {
                         color = "secondary"
                         onClick = { this.handleClick(stop.command) }
                     >
-                        <Icon>
-                            {stop.icon}
-                        </Icon>
+                            <stop.icon/>
                     </IconButton> :
                     null
                 }
@@ -67,9 +63,7 @@ class CommandPanel extends React.Component {
                         disabled = { dock.disabled }
                         onClick = { this.handleClick(dock.command) }
                     >
-                        <Icon>
-                            {dock.icon}
-                        </Icon>
+                            <dock.icon/>
                     </IconButton> :
                     null
                 }
@@ -81,9 +75,7 @@ class CommandPanel extends React.Component {
                         disabled = { find.disabled }
                         onClick = { this.handleClick(find.command) }
                     >
-                        <Icon>
-                            {find.icon}
-                        </Icon>
+                            <find.icon/>
                     </IconButton> :
                     null
                 }

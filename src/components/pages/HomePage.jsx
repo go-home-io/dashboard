@@ -59,7 +59,8 @@ class HomePage extends Reflux.Component {
                 <Grid item md = { 12 } lg = { 10 } >
                     {locations.map( (location) => {
                         return (
-                            <Location key = { location.name }
+                            <Location
+                                key = { location.name }
                                 location = { location }
                                 generalState = { generalState }
                             />

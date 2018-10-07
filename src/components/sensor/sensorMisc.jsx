@@ -1,29 +1,34 @@
 import React from "react";
 import {MOTION_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF, SENSOR_ICON_COLOR_ON} from "../../settings/colors";
+import TransferWithinAStation from "@material-ui/icons/TransferWithinAStation";
+import TouchApp from "@material-ui/icons/TouchApp";
+import DeviceUnknown from "@material-ui/icons/DeviceUnknown";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {DirectionsWalk, Hotel, Lock, LockOpen, ToggleOn, ToggleOff } from "@material-ui/icons";
 
 export const getSensorHeaderIcon = (type) => {
     switch(type) {
     case "motion":
-        return "transfer_within_a_station";
+        return <TransferWithinAStation/>;
     case "button":
-        return "touch_app";
+        return <TouchApp/>;
     case "temperature":
-        return <i className = "fa fa-thermometer-empty" aria-hidden = "true" />;
+        return  <FontAwesomeIcon icon="thermometer-half"/>;
     case "lock":
-        return <i className = "fa fa-lock" aria-hidden = "true" />;
+        return <FontAwesomeIcon icon="lock"/>;
     default:
-        return "device_unknown";
+        return <DeviceUnknown/>;
     }
 };
 
 export const sensorContentIcon = (type, on) => {
     switch (type) {
     case "motion":
-        return on ? "directions_walk" : "hotel";
+        return on ? DirectionsWalk : Hotel;
     case "lock":
-        return on ? "lock_open" : "lock";
+        return on ? LockOpen : Lock;
     default:
-        return on ? "toggle_on" : "toggle_off";
+        return on ? ToggleOn : ToggleOff;
     }
 };
 

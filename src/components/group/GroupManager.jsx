@@ -1,17 +1,15 @@
 import React from "react";
 import Reflux from "reflux";
 import Grid from "@material-ui/core/Grid/Grid";
-import LightManager from "../light/LightManager";
 import getDeviceState from "../utils/getDeviceState";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import GroupStoreFactory from "../../reflux/group/GroupStore";
 import groupActions from "../../reflux/group/groupActions";
-import SensorManager from "../sensor/SensorManager";
 import {GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF} from "../../settings/colors";
 import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
-import SwitchManager from "../switch/SwitchManager";
+import Devices from "../common/Devices";
 
 const styles = () => ({
     root: {
@@ -19,10 +17,8 @@ const styles = () => ({
         borderRadius:5,
         padding:5,
         margin: 5,
-        // backgroundColor: 'white',
     },
     text: {
-        // marginBottom: 5,
         marginLeft: 5,
         cursor: "pointer",
     },
@@ -70,35 +66,18 @@ class GroupManager  extends Reflux.Component {
                     {members.map( (dev_id) => {
                         const device_state = getDeviceState(dev_id, all_device_states);
                         const deviceType = device_state.type;
+
                         return (
-                            deviceType === "light" ?
-                                <LightManager
-                                    key = { dev_id }
-                                    id = { dev_id }
-                                    device_info = { device_state }
-                                    location = { location }
-                                    group_id = { group_id }
-                                /> :
-                                deviceType === "sensor" ?
-                                    <SensorManager
-                                        key = { dev_id }
-                                        location = { location }
-                                        id = { dev_id }
-                                        device_info = { device_state }
-                                        group_id = { group_id }
-                                    /> :
-                                    deviceType === "switch" ?
-                                        <SwitchManager
-                                            key = { dev_id }
-                                            location = { location }
-                                            id = { dev_id }
-                                            device_info = { device_state }
-                                            group_id = { group_id }
-                                        /> :
-                                        null
+                            <Devices
+                                key = { dev_id }
+                                id = { dev_id }
+                                deviceType = { deviceType }
+                                device_info = { device_state }
+                                location = { location }
+                                group_id = { group_id }
+                            />
                         );
                     })}
-
                 </Grid>
             </div>
         );
@@ -107,7 +86,11 @@ class GroupManager  extends Reflux.Component {
 
 GroupManager.propTypes = {
     classes: PropTypes.object.isRequired,
-
+    location: PropTypes.string.isRequired,
+    dev_id: PropTypes.string.isRequired,
+    members: PropTypes.array.isRequired,
+    device_info: PropTypes.object.isRequired,
+    all_device_states: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(GroupManager);

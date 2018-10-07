@@ -3,29 +3,28 @@ import Reflux from "reflux";
 import Grid from "@material-ui/core/Grid/Grid";
 import GroupManager from "../group/GroupManager";
 import getDeviceState from "../utils/getDeviceState";
-import LightManager from "../light/LightManager";
 import LocationStoreFactory from "../../reflux/location/LocationStore";
-import SensorManager from "../sensor/SensorManager";
-import VacuumManager from "../vacuum/VacuumManager";
-import CameraManager from "../camera/CameraManager";
-import SwitchManager from "../switch/SwitchManager";
+import PropTypes from "prop-types";
+import Devices from "../common/Devices";
+
+const groupMemberDevices = (group_id, groups) => {
+    const this_group = groups.find(function (grp) {
+        return grp.id === group_id;
+    });
+    return this_group.devices;
+};
+
 
 class Location extends Reflux.Component {
     constructor(props) {
         super(props);
-        this.store = LocationStoreFactory(props.location.name, props.location.devices);
+        const { name, devices } = props.location;
+        this.store = LocationStoreFactory(name, devices);
     }
 
     render () {
-        const location = this.props.location.name;
-        const devices = this.props.location.devices;
+        const {name: location, devices} = this.props.location;
         const generalState = this.props.generalState;
-        const members = (group_id, groups) => {
-            const this_group = groups.find(function (grp) {
-                return grp.id === group_id;
-            });
-            return this_group.devices;
-        };
 
         return (
             <Grid container justify = 'center' alignItems = 'center'>
@@ -39,56 +38,19 @@ class Location extends Reflux.Component {
                                 key = { device }
                                 location = { location }
                                 dev_id = { device }
-                                members = { members(device, generalState.groups) }
+                                members = { groupMemberDevices(device, generalState.groups) }
                                 device_info = { device_info }
                                 all_device_states = { generalState.devices }
-                            />  :
-                            deviceType === "light" ?
-                                <LightManager
-                                    key = { device }
-                                    location = { location }
-                                    id = { device }
-                                    device_info = { device_info }
-                                    group_id = ""
-                                />
-                                :
-                                deviceType === "sensor" ?
-                                    <SensorManager
-                                        key = { device }
-                                        location = { location }
-                                        id = { device }
-                                        device_info = { device_info }
-                                        group_id = ""
-                                    />
-                                    :
-                                    deviceType === "vacuum" ?
-                                        <VacuumManager
-                                            key = { device }
-                                            location = { location }
-                                            id = { device }
-                                            device_info = { device_info }
-                                            group_id = ""
-                                        />
-                                        :
-                                        deviceType === "camera" ?
-                                            <CameraManager
-                                                key = { device }
-                                                location = { location }
-                                                id = { device }
-                                                device_info = { device_info }
-                                                group_id = ""
-                                            />
-                                            :
-                                            deviceType === "switch" ?
-                                                <SwitchManager
-                                                    key = { device }
-                                                    location = { location }
-                                                    id = { device }
-                                                    device_info = { device_info }
-                                                    group_id = ""
-                                                />
-                                                :
-                                                null
+                            />
+                            :
+                            <Devices
+                                key={device}
+                                deviceType = { deviceType }
+                                location={location}
+                                id={device}
+                                device_info={device_info}
+                                group_id=""
+                            />
                     );})
                 }
             </Grid>
@@ -96,4 +58,9 @@ class Location extends Reflux.Component {
     }
 }
 
-export default Location;
+Location.propTypes = {
+    location: PropTypes.object.isRequired,
+    generalState: PropTypes.object.isRequired
+};
+
+export default (Location);

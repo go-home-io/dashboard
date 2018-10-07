@@ -1,45 +1,51 @@
+import PlayArrow from "@material-ui/icons/PlayArrow";
+import Stop from "@material-ui/icons/Stop";
+import MapPin from "@material-ui/icons/Map";
+import SaveAlt from "@material-ui/icons/SaveAlt";
+import {Pause} from "@material-ui/icons";
+
 export const commandButtonsBehavior = {
     "unknown": {
         "start": {
             "disabled": false,
-            "icon": "play_arrow",
+            "icon": PlayArrow,
             "command": "on"
         },
         "stop": {
             "disabled": false,
-            "icon": "stop",
+            "icon": Stop,
             "command": "off"
         },
         "find": {
             "disabled": false,
-            "icon": "map-pin",
+            "icon": MapPin,
             "command": "findMe"
         },
         "dock": {
             "disabled": false,
-            "icon": "save_alt",
+            "icon": SaveAlt,
             "command": "dock"
         }
     },
     "paused": {
         "start": {
             "disabled": false,
-            "icon": "play_arrow",
+            "icon": PlayArrow,
             "command": "on"
         },
         "stop": {
             "disabled": false,
-            "icon": "stop",
+            "icon": Stop,
             "command": "off"
         },
         "find": {
             "disabled": false,
-            "icon": "map-pin",
+            "icon": MapPin,
             "command": "findMe"
         },
         "dock": {
             "disabled": false,
-            "icon": "save_alt",
+            "icon": SaveAlt,
             "command": "dock"
         }
 
@@ -47,90 +53,89 @@ export const commandButtonsBehavior = {
     "docked":  {
         "start": {
             "disabled": false,
-            "icon": "play_arrow",
+            "icon": PlayArrow,
             "command": "on"
         },
         "stop": {
             "disabled": true,
-            "icon": "stop",
+            "icon": Stop,
             "command": "off"
         },
         "find": {
             "disabled": true,
-            "icon": "map-pin",
+            "icon": MapPin,
             "command": "findMe"
         },
         "dock": {
             "disabled": true,
-            "icon": "save_alt",
+            "icon": SaveAlt,
             "command": "dock"
         }
     },
     "charging":  {
         "start": {
             "disabled": true,
-            "icon": "play_arrow",
+            "icon": PlayArrow,
             "command": "on"
         },
         "stop": {
             "disabled": true,
-            "icon": "stop",
+            "icon": Stop,
             "command": "off"
         },
         "find": {
             "disabled": true,
-            "icon": "map-pin",
+            "icon": MapPin,
             "command": "findMe"
         },
         "dock": {
             "disabled": true,
-            "icon": "save_alt",
+            "icon": SaveAlt,
             "command": "dock"
         }
     },
     "cleaning":  {
         "start": {
             "disabled": false,
-            "icon": "pause",
+            "icon": Pause,
             "command": "pause"
         },
         "stop": {
             "disabled": false,
-            "icon": "stop",
+            "icon": Stop,
             "command": "off"
         },
         "find": {
             "disabled": false,
-            "icon": "map-pin",
+            "icon": MapPin,
             "command": "findMe"
         },
         "dock": {
             "disabled": false,
-            "icon": "save_alt",
+            "icon": SaveAlt,
             "command": "dock"
         }
     },
     "full":  {
         "start": {
             "disabled": true,
-            "icon": "play_arrow",
+            "icon": PlayArrow,
             "command": "on"
         },
         "stop": {
             "disabled": true,
-            "icon": "stop",
+            "icon": Stop,
             "command": "off"
         },
         "find": {
             "disabled": false,
-            "icon": "map-pin",
+            "icon": MapPin,
             "command": "findMe"
         },
         "dock": {
             "disabled": true,
-            "icon": "save_alt",
+            "icon": SaveAlt,
             "command": "dock"
         }
-
     },
 };

@@ -15,6 +15,7 @@ function SwitchStoreFactory(id, device_state, location, group_id) {
                 last_seen: 0,
                 group_id: "",
                 location: "",
+                read_only: false,
                 visible: false,
                 status: "ordinary",
                 loading: false,
@@ -35,10 +36,12 @@ function SwitchStoreFactory(id, device_state, location, group_id) {
 
         setInitialState(device_state, location, group_id) {
             if (device_state) {
+                const {name, state, last_seen, read_only} = device_state;
                 this.setState({
-                    name: device_state.name,
-                    device_state: device_state.state,
-                    last_seen: device_state.last_seen,
+                    name: name,
+                    device_state: state,
+                    last_seen: last_seen,
+                    read_only: read_only,
                 });
             }
             if (location) {

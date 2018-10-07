@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Icon from "@material-ui/core/Icon/Icon";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
 import {SENSOR_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF} from "../../settings/colors";
+import DoneOutline from "@material-ui/icons/DoneOutline";
+import Done from "@material-ui/icons/Done";
+import DoneAll from "@material-ui/icons/DoneAll";
 
 const styles = () => ({
     root: {
@@ -32,28 +34,23 @@ class ButtonIcons extends React.Component {
         return (
             <Grid container justify = 'center' alignItems = 'center' className = { classes.root }>
                 <Tooltip title = { "Click: " + click } placement = "top">
-                    <Icon
+                    <Done
                         className = { classes.icon }
                         style = { {color:color(click)} }
-                    >
-                        done
-                    </Icon>
+                    />
+
                 </Tooltip>
                 <Tooltip title = { "Double click: " + double_click } placement = "top">
-                    <Icon
+                    <DoneAll
                         className = { classes.icon }
                         style = { {color:color(double_click)} }
-                    >
-                        done_all
-                    </Icon>
+                    />
                 </Tooltip>
                 <Tooltip title = { "Press: " + press } placement = "top">
-                    <Icon
+                    <DoneOutline
                         className = { classes.icon }
                         style = { {color:color(press)} }
-                    >
-                            done_outline
-                    </Icon>
+                    />
                 </Tooltip>
             </Grid>
 

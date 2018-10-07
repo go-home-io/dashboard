@@ -11,15 +11,21 @@ import {
 } from "../../settings/colors";
 import PropTypes from "prop-types";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
+import ContactSupport from "@material-ui/icons/ContactSupport";
+import PauseCircleOutline from "@material-ui/icons/PauseCircleOutline";
+import Dock from "@material-ui/icons/Dock";
+import BatteryChargingFull from "@material-ui/icons/BatteryChargingFull";
+import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import RestoreFromTrash from "@material-ui/icons/RestoreFromTrash";
 
 const statusMisc = {
     "icon": {
-        "unknown": "contact_support",
-        "paused": "pause_circle_outline",
-        "docked": "dock",
-        "charging": "battery_charging_full",
-        "cleaning": "play_circle_outline",
-        "full": "restore_from_trash",
+        "unknown": ContactSupport,
+        "paused": PauseCircleOutline,
+        "docked": Dock,
+        "charging": BatteryChargingFull,
+        "cleaning": PlayCircleOutline,
+        "full": RestoreFromTrash,
     },
     "tip": {
         "unknown": "Unknown status",
@@ -42,17 +48,16 @@ const statusMisc = {
 class VacuumStatusIcon extends Reflux.Component {
     render () {
         const { vac_status, cssClass } = this.props;
-        const icon = statusMisc.icon[vac_status];
+        const IconSelected = statusMisc.icon[vac_status];
         const tip = statusMisc.tip[vac_status];
         const color = statusMisc.color[vac_status];
         return (
             <Tooltip title = { tip } placement = "top">
-                <Icon
+                <IconSelected
                     className = { cssClass }
                     style = { {color: color} }
-                >
-                    { icon }
-                </Icon>
+                />
+
             </Tooltip>
         );
     }

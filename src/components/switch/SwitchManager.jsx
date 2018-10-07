@@ -41,8 +41,11 @@ class SwitchManager extends Reflux.Component {
         this.store = SwitchStoreFactory(id, device_info, location, group_id);
     }
     handleChange () {
-        const { id } = this.props;
-        switchActions.toggle( id );
+        // const { id } = this.props;
+        const { id, read_only } = this.state;
+        if ( ! read_only ) {
+            switchActions.toggle(id);
+        }
     }
     render () {
         const { classes, id } = this.props;
@@ -64,6 +67,7 @@ class SwitchManager extends Reflux.Component {
                     read_only = { read_only }
                     iconROColor = { SWITCH_RO_ICON_COLOR }
                 />
+
                 <CardContent>
                     { loading ?
                         <Zoom in = { loading }  >
@@ -79,21 +83,17 @@ class SwitchManager extends Reflux.Component {
                             <div>
                                 <Grid container justify = 'center' >
                                     <Typography variant = 'headline' className = { classes.typography }>
-                                        <strong>
-                                            {power}
-                                            {" "}
-v
-                                        </strong>
+                                        <strong>{power}{" "}v</strong>
                                     </Typography>
                                 </Grid>
                                 <Grid container justify = 'center' >
-                                    { customizedSwitch (on, SWITCH_HEADER_BKG_COLOR, this.handleChange.bind(this)) }
+                                    { customizedSwitch (on, SWITCH_HEADER_BKG_COLOR, this.handleChange.bind(this), read_only) }
                                 </Grid>
+
                             </div>
                         </Zoom>
                     }
                 </CardContent>
-
             </Card>
         );
     }

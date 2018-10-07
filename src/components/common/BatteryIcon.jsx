@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Icon from "@material-ui/core/Icon/Icon";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const icons = (level) => {
     if (level >95) {
-        return <i className="fa fa-battery-full" aria-hidden="true"/>;
+        return "battery-full";
     } else if (level > 50) {
-        return <i className="fa fa-battery-three-quarters" aria-hidden="true"/>;
+        return "battery-three-quarters";
     } else if (level > 25) {
-        return <i className="fa fa-battery-half" aria-hidden="true"/>;
+        return "battery-half";
     } else if (level > 10) {
-        return <i className="fa fa-battery-quarter" aria-hidden="true"/>;
+        return "battery-quarter";
     } else {
-        return <i className="fa fa-battery-empty" aria-hidden="true"/>;
+        return "battery-empty";
     }
 };
 
@@ -28,10 +28,9 @@ class BatteryIcon extends React.Component {
                     { battery_level }
                         %
                 </div>
-                <Icon className = { cssClass.icon }>
-                    { icon }
-                    {/*<i className = "fa fa-battery-three-quarters" aria-hidden = "true" />*/}
-                </Icon>
+                <div className = { cssClass.icon }>
+                    <FontAwesomeIcon icon = {icon} />
+                </div>
             </div>
         );
     }
