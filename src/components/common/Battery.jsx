@@ -40,7 +40,7 @@ class Battery extends React.Component {
                 <div className = { classes.root }>
                     <Typography
                         variant = "caption"
-                        align = "flex-end"
+                        align = "right"
                     >
                         <strong>
                             { battery_level }
