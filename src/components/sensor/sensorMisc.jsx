@@ -3,7 +3,7 @@ import {MOTION_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF, SENSOR_ICON_COLOR_ON} from 
 import TransferWithinAStation from "@material-ui/icons/TransferWithinAStation";
 import TouchApp from "@material-ui/icons/TouchApp";
 import DeviceUnknown from "@material-ui/icons/DeviceUnknown";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {DirectionsWalk, Hotel, Lock, LockOpen, ToggleOn, ToggleOff } from "@material-ui/icons";
 
 export const getSensorHeaderIcon = (type) => {
@@ -13,9 +13,9 @@ export const getSensorHeaderIcon = (type) => {
     case "button":
         return <TouchApp/>;
     case "temperature":
-        return  <FontAwesomeIcon icon="thermometer-half"/>;
+        return  <FontAwesomeIcon icon = "thermometer-half"/>;
     case "lock":
-        return <FontAwesomeIcon icon="lock"/>;
+        return <FontAwesomeIcon icon = "lock"/>;
     default:
         return <DeviceUnknown/>;
     }

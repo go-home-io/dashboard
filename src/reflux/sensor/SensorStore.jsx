@@ -3,7 +3,7 @@ import sensorActions from "./sensorActions";
 // import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Sensor
-function SensorStoreFactory(id,  device_info, location){
+function SensorStoreFactory(id,  device_info, location, group_id){
 
     class SensorStore extends Reflux.Store {
         constructor() {
@@ -16,6 +16,7 @@ function SensorStoreFactory(id,  device_info, location){
                 device_state: device_info.state,
                 last_seen: device_info.last_seen,
                 location: location,
+                group_id: group_id,
                 visible: false,
                 read_only: device_info.read_only,
                 status: "ordinary",

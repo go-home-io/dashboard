@@ -12,7 +12,7 @@ const styles = () => ({
         color: "rgba(0, 0, 0, 0.54)",
     },
     uom: {
-        display: 'inline-block',
+        display: "inline-block",
     }
 });
 
@@ -28,8 +28,10 @@ class Humidity extends React.Component {
                 { humidity != null ?
                     <div>
                         <Typography variant = 'subheading' align = 'center' className = { classes.humidity }>
-                            <strong>{humidityFormatted}</strong>
-                            <Typography variant='caption' className={classes.uom} align="left">
+                            <strong>
+                                {humidityFormatted}
+                            </strong>
+                            <Typography variant = 'caption' className = { classes.uom } align = "left">
                                 {"%"}
                             </Typography>
                         </Typography>

@@ -83,7 +83,11 @@ class SwitchManager extends Reflux.Component {
                             <div>
                                 <Grid container justify = 'center' >
                                     <Typography variant = 'headline' className = { classes.typography }>
-                                        <strong>{power}{" "}v</strong>
+                                        <strong>
+                                            {power}
+                                            {" "}
+v
+                                        </strong>
                                     </Typography>
                                 </Grid>
                                 <Grid container justify = 'center' >

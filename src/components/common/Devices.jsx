@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import SensorManager from "../sensor/SensorManager";
 import VacuumManager from "../vacuum/VacuumManager";
@@ -31,9 +31,9 @@ class Devices extends React.Component {
         const availableDevices = Object.keys(deviceManagers);
         return (
             availableDevices.includes(deviceType) ?
-            <div>
-               <Manager {...this.props}/>
-            </div>
+                <div>
+                    <Manager { ...this.props }/>
+                </div>
                 :
                 null
         );

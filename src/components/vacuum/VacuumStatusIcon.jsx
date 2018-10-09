@@ -1,6 +1,5 @@
 import React from "react";
 import Reflux from "reflux";
-import Icon from "@material-ui/core/Icon/Icon";
 import {
     VACUUM_HEADER_ICON_COLOR_CLEANING,
     VACUUM_HEADER_ICON_COLOR_DOCKED,

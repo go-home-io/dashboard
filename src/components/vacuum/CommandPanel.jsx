@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import vacuumActions from "../../reflux/vacuum/vacuumActions";
 import Grid from "@material-ui/core/Grid/Grid";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import Icon from "@material-ui/core/Icon/Icon";
 import { commandButtonsBehavior } from "./commandButtonsBehavior";
 
 const styles = () => ( {
@@ -39,7 +38,7 @@ class CommandPanel extends React.Component {
                         disabled = { start.disabled }
                         onClick = { this.handleClick(start.command) }
                     >
-                            <start.icon/>
+                        <start.icon/>
                     </IconButton> :
                     null
                 }
@@ -51,7 +50,7 @@ class CommandPanel extends React.Component {
                         color = "secondary"
                         onClick = { this.handleClick(stop.command) }
                     >
-                            <stop.icon/>
+                        <stop.icon/>
                     </IconButton> :
                     null
                 }
@@ -63,7 +62,7 @@ class CommandPanel extends React.Component {
                         disabled = { dock.disabled }
                         onClick = { this.handleClick(dock.command) }
                     >
-                            <dock.icon/>
+                        <dock.icon/>
                     </IconButton> :
                     null
                 }
@@ -75,7 +74,7 @@ class CommandPanel extends React.Component {
                         disabled = { find.disabled }
                         onClick = { this.handleClick(find.command) }
                     >
-                            <find.icon/>
+                        <find.icon/>
                     </IconButton> :
                     null
                 }

@@ -27,6 +27,6 @@ const customizedSwitch = (checked, colorThumb, handleChange, disabled) => {
             />
         </MuiThemeProvider>
     );
-}
+};
 
 export default customizedSwitch;

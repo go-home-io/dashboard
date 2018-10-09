@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Icon from "@material-ui/core/Icon/Icon";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
 import ButtonIcons from "./ButtonIcons";
@@ -32,7 +31,7 @@ class ButtonSensor extends React.Component {
             <div>
                 <ComponentUpperInfo
                     leftField = {
-                        <Temperature temperature={temperature} />
+                        <Temperature temperature = { temperature } />
                     }
                     centerField = {
                         <Humidity humidity =  { humidity } />
@@ -52,7 +51,6 @@ class ButtonSensor extends React.Component {
                             <IconSelected className = { classes.icon }
                                 style = { {color: color} }
                             />
-
                         </Tooltip> : null
                     }
                 </Grid>

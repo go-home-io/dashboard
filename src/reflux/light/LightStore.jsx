@@ -41,7 +41,6 @@ function LightStoreFactory(id,  device_info, location, group_id){
             this.onStatus = this.onStatus.bind(this);
             this.onSetLoading = this.onSetLoading.bind(this);
             this.onSetInitialState = this.onSetInitialState.bind(this);
-            // console.log('dev_id:'+id+'  read_only:'+this.state.read_only);
         }
 
         onSetInitialState (dev_id, device_state, location, group_id) {

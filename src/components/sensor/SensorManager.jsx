@@ -18,7 +18,7 @@ const styles = () => ({
         // height:165,
         // margin: 5,
     },
-  });
+});
 
 class SensorManager extends Reflux.Component {
     constructor(props) {

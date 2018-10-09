@@ -29,7 +29,7 @@ class BatteryIcon extends React.Component {
                         %
                 </div>
                 <div className = { cssClass.icon }>
-                    <FontAwesomeIcon icon = {icon} />
+                    <FontAwesomeIcon icon = { icon } />
                 </div>
             </div>
         );

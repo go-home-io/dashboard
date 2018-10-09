@@ -44,12 +44,12 @@ class Location extends Reflux.Component {
                             />
                             :
                             <Devices
-                                key={device}
+                                key = { device }
                                 deviceType = { deviceType }
-                                location={location}
-                                id={device}
-                                device_info={device_info}
-                                group_id=""
+                                location = { location }
+                                id = { device }
+                                device_info = { device_info }
+                                group_id = ""
                             />
                     );})
                 }

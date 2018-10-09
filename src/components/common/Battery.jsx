@@ -13,7 +13,7 @@ const style = () => ({
         marginTop: 0,
         marginLeft: 4,
     },
- });
+});
 
 const icons = (level) => {
     if (level >95) {

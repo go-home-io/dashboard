@@ -4,15 +4,14 @@ import registerServiceWorker from "./registerServiceWorker";
 import StartPage from "./components/pages/StartPage";
 import "material-design-icons/iconfont/material-icons.css";
 import "typeface-roboto/index.css";
-import { library } from '@fortawesome/fontawesome-svg-core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { faThermometerHalf, faLock, faBatteryThreeQuarters, faBatteryFull, faSpinner,
-         faBatteryHalf, faBatteryQuarter, faBatteryEmpty, faCompass as farCompass,
-       } from '@fortawesome/free-solid-svg-icons'
+    faBatteryHalf, faBatteryQuarter, faBatteryEmpty, faCompass,
+} from "@fortawesome/free-solid-svg-icons";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
-            faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
-            faBatteryThreeQuarters, farCompass );
+    faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
+    faBatteryThreeQuarters, faCompass );
 
 // eslint-disable-next-line
 ReactDOM.render(<StartPage/>, document.getElementById("root"));

@@ -2,7 +2,7 @@ import {STATE_URL} from "../settings/urls";
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from "../settings/cookie";
 
-const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
+// const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
 // STATE_URL
 const service = {
     get:() => {

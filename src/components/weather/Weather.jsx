@@ -1,16 +1,20 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/Typography";
 import Card from "@material-ui/core/Card/Card";
-import Icon8 from "./Icon8";
 import TemperatureSymbol from "../common/TemperatureSymbol";
 import Grid from "@material-ui/core/Grid/Grid";
 import truncateCaption from "../utils/truncate";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import { PartlyCloudyDay, AtmosphericPressure, WindGauge, WindSock} from "./Icon8JPG";
+import { PartlyCloudyDay, AtmosphericPressure,  WindSock} from "./Icon8JPG";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import AppStore from "../../reflux/application/AppStore";
+import WeatherStoreFactory from "../../reflux/weather/WeatherStore";
+import {unitsOfMeasure} from "../../settings/uom";
+
 
 const styles = () => ({
     root: {
@@ -23,6 +27,7 @@ const styles = () => ({
         marginTop: 3,
         marginLeft: 3,
         marginBottom: -12,
+        // cursor: "pointer",
     },
     name: {
         color: "#fff",
@@ -34,12 +39,12 @@ const styles = () => ({
     temperature: {
         color: "white",
         display: "flex",
-        justifyContent: 'center'
+        justifyContent: "center"
     },
     humidity: {
         color:"white",
         display: "flex",
-        justifyContent: 'center',
+        justifyContent: "center",
         marginTop: -2
     },
     container: {
@@ -47,14 +52,14 @@ const styles = () => ({
         marginLeft:5,
     },
     grid_item: {
-        display: 'flex',
-        justifyContent: 'center',
+        display: "flex",
+        justifyContent: "center",
         // marginLeft: 5,
     },
     typography: {
         color: "#ffffff",
         marginLeft: 3,
-        display: 'flex',
+        display: "flex",
         // alignContent: 'center'
     },
     item_icons: {
@@ -62,71 +67,124 @@ const styles = () => ({
         height: 24
     },
     icon_compass: {
-        marginLeft: -11,
+        marginLeft: -10,
         fontSize: 21
     }
 
 });
 
-class Weather extends React.Component {
+class Weather extends Reflux.Component {
+    constructor(props) {
+        super(props);
+        const { id, device_info, location } = props;
+        this.stores = [ AppStore, WeatherStoreFactory(id, device_info, location)];
+    }
+    componentDidMount () {
+        // const {uom} = this.state;
+        // console.log("UOM:" + uom);
+        // console.log(unitsOfMeasure[uom]);
+
+    }
 
     render () {
         const {classes} = this.props;
-        const name = "Test_weather_long";
+        const { name, device_state, visible, uom } = this.state;
+        const { visibility, wind_direction, wind_speed, sunrise, sunset } = device_state;
         const shortName = truncateCaption(name,14);
+        const   { pressureUnits, visibilityUnits, windSpeedUnits } = (uom !== "") ? unitsOfMeasure[uom] : "";
+        const display = visible ? "block" : "none";
+
+        let { humidity, pressure, temperature } = device_state;
+        pressure = (pressure == null) ? null :
+            ( uom === "imperial" ) ? pressure.toFixed(3) : Math.round(pressure);
+        temperature = (temperature != null) ?  temperature.toFixed(1) : null ;
+        humidity = (humidity != null) ? humidity.toFixed(1) : null;
+
+
         return (
-            <Card className = { classes.root }>
-                <Grid container alignItems='flex-start' className = { classes.icon_cloud }>
-                    <Grid item xs={3} >
-                        { PartlyCloudyDay }
+            <Card
+                style = { {display:display} }
+                className = { classes.root }
+            >
+                <Grid container alignItems = 'flex-start' className = { classes.icon_cloud }>
+
+                    <Grid item xs = { 3 } >
+                        <Tooltip
+                            placement = "left-start"
+                            title = { "sunrise " + sunrise +  "   ||   sunset " + sunset }
+                        >
+                            { PartlyCloudyDay }
+                        </Tooltip>
                     </Grid>
-                    <Grid item xs={9} >
-                        <Tooltip  title={ name } placement="top">
-                        <Typography variant="subheading"  className={classes.name}>
-                            {shortName}
-                        </Typography>
+
+                    <Grid item xs = { 9 } >
+                        <Tooltip title = { name } placement = "top">
+                            <Typography variant = "subheading" className = { classes.name }>
+                                {shortName}
+                            </Typography>
                         </Tooltip>
                     </Grid>
                 </Grid>
-                <Typography variant="display1" align='center' className={classes.temperature}>
-                    51.6 <TemperatureSymbol/>
+
+                <Typography variant = "display1" align = 'center' className = { classes.temperature }>
+                    {temperature} 
+                    {" "}
+                    <TemperatureSymbol/>
                 </Typography>
-                <Typography variant="caption" align='center' className={classes.humidity}>
-                    Humidity 77.3%
+                <Typography variant = "caption" align = 'center' className = { classes.humidity }>
+                    Humidity 
+                    {" "}
+                    {humidity}
+%
                 </Typography>
 
-                <Grid container className={classes.container}>
-
-
-                    <Grid item xs={6} className={classes.grid_item}>
-                        {AtmosphericPressure}
-                        <Typography variant="caption" align="flex-start" className={classes.typography}>
-                            1005 mbar
-                        </Typography>
-                    </Grid>
-
-                    <Grid item xs={6} className={classes.grid_item}>
-                        <div className={classes.icon_compass}>
-                            <FontAwesomeIcon icon = "compass"/>
-                        </div>
-                        <Typography variant="caption" align="left" className={classes.typography}>
-                            230 &deg;
-                        </Typography>
-                    </Grid>
-
-
-                    <Grid item xs={6} className={classes.grid_item}>
-                        { WindSock }
-                        <Typography variant="caption" align="center" className={classes.typography}>
-                            14 mph
+                <Grid container className = { classes.container }>
+                    <Grid item xs = { 6 } className = { classes.grid_item }>
+                        <Tooltip title = "pressure" placement = "left-start">
+                            {AtmosphericPressure}
+                        </Tooltip>
+                        <Typography variant = "caption" align = "left" className = { classes.typography }>
+                            { pressure }
+                            {" "}
+                            {pressureUnits}
                         </Typography>
 
                     </Grid>
-                    <Grid item xs={6} className={classes.grid_item}>
-                        <RemoveRedEye/>
-                        <Typography variant="caption" align="center" className={classes.typography}>
+
+                    <Grid item xs = { 6 } className = { classes.grid_item }>
+                        <Tooltip title = "wind direction" placement = "right-start">
+                            <div className = { classes.icon_compass }>
+                                <FontAwesomeIcon icon = "compass"/>
+                            </div>
+                        </Tooltip>
+                        <Typography variant = "caption" align = "left" className = { classes.typography }>
+                            { wind_direction }
+                            {" "}
+&deg;
+                        </Typography>
+                    </Grid>
+
+
+                    <Grid item xs = { 6 } className = { classes.grid_item }>
+                        <Tooltip title = "wind speed" placement = "left-start">
+                            { WindSock }
+                        </Tooltip>
+                        <Typography variant = "caption" align = "center" className = { classes.typography }>
+                            {wind_speed}
+                            {" "}
+                            {windSpeedUnits}
+                        </Typography>
+
+                    </Grid>
+                    <Grid item xs = { 6 } className = { classes.grid_item }>
+                        <Tooltip title = "visibility" placement = "right-start">
+                            <RemoveRedEye/>
+                        </Tooltip>
+                        <Typography variant = "caption" align = "center" className = { classes.typography }>
                             {"  "}
-                            16.1 m
+                            {visibility}
+                            {" "}
+                            {visibilityUnits}
                         </Typography>
                     </Grid>
 

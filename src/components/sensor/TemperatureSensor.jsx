@@ -34,7 +34,7 @@ class TemperatureSensor extends React.Component {
                 <ComponentUpperInfo
                     rightField = {
                         <Battery
-                            battery_level={ battery_level }
+                            battery_level = { battery_level }
                         />
                     }
                 />

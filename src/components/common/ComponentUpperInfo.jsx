@@ -5,21 +5,21 @@ import Grid from "@material-ui/core/Grid/Grid";
 
 const styles = () => ({
     root: {
-        widths: '100%',
+        widths: "100%",
         marginTop: 0,
     },
     left: {
-        widths: '100%',
-        float: 'left',
+        widths: "100%",
+        float: "left",
         marginLeft: 10,
     },
     center: {
-        widths: '100%',
-        backgroundColor: 'green',
+        widths: "100%",
+        backgroundColor: "green",
     },
     right: {
-        widths: '100%',
-        float: 'right',
+        widths: "100%",
+        float: "right",
         marginRight: 3,
     }
 });
@@ -30,18 +30,18 @@ class ComponentUpperInfo extends React.Component {
 
         return (
             <Grid container justify = 'center' className = { classes.root }>
-                <Grid item xs={5} >
-                    <span className={classes.left}>
+                <Grid item xs = { 5 } >
+                    <span className = { classes.left }>
                         { leftField }
                     </span>
                 </Grid>
-                <Grid item xs={3} >
-                    <span className={classes.center}>
+                <Grid item xs = { 3 } >
+                    <span className = { classes.center }>
                         { centerField }
                     </span>
                 </Grid>
-                <Grid item xs={4} >
-                    <span className={classes.right}>
+                <Grid item xs = { 4 } >
+                    <span className = { classes.right }>
                         {rightField}
                     </span>
                 </Grid>

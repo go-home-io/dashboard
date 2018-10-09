@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon/Icon";
 import AppBarPlaceholder from "../navigation/AppBarPlaceholder";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -20,7 +19,6 @@ const styles = {
 };
 
 class ErrorPage extends React.Component {
-
     render () {
         const {classes, status, loading} = this.props;
         const mess = loading ? "Loading ..." : "Connection error";
@@ -45,7 +43,7 @@ class ErrorPage extends React.Component {
                         <FontAwesomeIcon
                             className = { classes.icon }
                             spin
-                            icon="spinner"
+                            icon = "spinner"
                             size = "6x"
                         />
                     </Grid>
