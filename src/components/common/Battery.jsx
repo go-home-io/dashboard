@@ -18,9 +18,9 @@ const style = () => ({
 const icons = (level) => {
     if (level >95) {
         return "battery-full";
-    } else if (level > 50) {
+    } else if (level > 60) {
         return "battery-three-quarters";
-    } else if (level > 25) {
+    } else if (level > 35) {
         return "battery-half";
     } else if (level > 10) {
         return "battery-quarter";
