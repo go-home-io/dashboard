@@ -54,13 +54,11 @@ class SignIn extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
-
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
         });
     };
-
     handleClick (event) {
         const { name, password } = this.state;
         const { getCredentials } = this.props;
@@ -71,7 +69,6 @@ class SignIn extends React.Component {
         event.preventDefault();
         getCredentials(name, password);
     }
-
     render() {
         const {classes, error} = this.props;
         const { name, password } = this.state;

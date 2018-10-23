@@ -10,15 +10,6 @@ import Hidden from "@material-ui/core/Hidden/Hidden";
 import storage from "../../services/storage";
 import appActions from "../../reflux/application/appActions";
 import locationActions from "../../reflux/location/locationActions";
-import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
-
-const styles = () => ({
-    root: {
-        marginTop:69,
-        fontFamily: "\"Roboto\", sans-serif",
-    }
-});
 
 class HomePage extends Reflux.Component {
     constructor(props){
@@ -38,21 +29,31 @@ class HomePage extends Reflux.Component {
     }
 
     render () {
-        const { classes, generalState } = this.props;
+        const { generalState } = this.props;
         const { locations } = generalState;
+        const dropdownInfo = {
+            name: "Locations",
+            icon: "edit_location",
+            items: locations,
+        };
 
         return (
             <Grid container
                 spacing = { 0 }
                 justify = 'flex-start'
-                className = { classes.root }
             >
                 <Grid item xs = { 12 }>
-                    <GoHomeAppBar locations = { locations }/>
+                    <GoHomeAppBar
+                        source = "devices"
+                        dropdown = { dropdownInfo }
+                    />
                 </Grid>
                 <Hidden mdDown>
                     <Grid item md = { 2 }>
-                        <NavBar locations = { locations }/>
+                        <NavBar
+                            source = "devices"
+                            dropdown = { dropdownInfo }
+                        />
                     </Grid>
                 </Hidden>
 
@@ -69,14 +70,13 @@ class HomePage extends Reflux.Component {
                 </Grid>
 
                 <Notification/>
-                <Notification/>
             </Grid>
         );
     }
 }
 
-HomePage.propTypes = {
-    classes: PropTypes.object.isRequired
-};
+// HomePage.propTypes = {
+//     classes: PropTypes.object.isRequired
+// };
 
-export default withStyles(styles)(HomePage);
+export default (HomePage);

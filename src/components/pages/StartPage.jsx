@@ -7,6 +7,7 @@ import Cookie from "js-cookie";
 import {COOKIE_NAME} from "../../settings/cookie";
 import SignIn from "./SignIn";
 import AppBarPlaceholder from "../navigation/AppBarPlaceholder";
+import { STATE_URL } from "../../settings/urls";
 
 class StartPage extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ class StartPage extends Component {
     }
 
     getComponentStateByHTTP () {
-        HTTP.get()
+        // const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
+        HTTP.get(STATE_URL)
             .then((data) => {
                 if (data >= 300) {
                     if (data === 401 || data === 403) {
@@ -77,7 +79,6 @@ class StartPage extends Component {
                             />
                         </div> :
                         <div>
-
                             <ErrorPage
                                 status = { status }
                             />

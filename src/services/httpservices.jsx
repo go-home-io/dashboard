@@ -2,11 +2,9 @@ import {STATE_URL} from "../settings/urls";
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from "../settings/cookie";
 
-// const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
-// STATE_URL
 const service = {
-    get:() => {
-        return fetch( STATE_URL , {
+    get:(url) => {
+        return fetch( url, {
             headers: {
                 "Authorization": Cookie.get(COOKIE_NAME)
             },

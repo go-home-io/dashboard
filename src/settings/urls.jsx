@@ -6,4 +6,5 @@ const BASE_URL = window.location.hostname +
 
 export const STATE_URL = window.location.protocol + "//" + BASE_URL + "/state";
 export const SOCKET_URL = (window.location.protocol === "https:" ? "wss" :"ws")  + "://" + BASE_URL + "/ws";
-
+export const STATUS_URL = window.location.protocol + "//" + BASE_URL + "/status";
+export const WORKER_URL = window.location.protocol + "//" + BASE_URL + "/worker";

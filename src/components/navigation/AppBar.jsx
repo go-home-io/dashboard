@@ -39,14 +39,11 @@ class GoHomeBar extends Reflux.Component {
         super(props);
         this.store = AppStore;
     }
-
     handleClick () {
         appActions.toggleMenu();
     }
-
     render() {
-        const {classes} = this.props;
-        const locations = this.props.locations;
+        const { classes, source, dropdown } = this.props;
 
         return(
             <div>
@@ -55,19 +52,21 @@ class GoHomeBar extends Reflux.Component {
                         <Grid container alignItems = 'center'>
                             <Hidden lgUp>
                                 <Grid item xs = { 2 } sm = { 1 } md = { 1 }>
-                                    <IconButton className = { classes.button }
+                                    <IconButton
+                                        className = { classes.button }
                                         aria-label = "Menu"
-                                        onClick = { this.handleClick.bind(this) }
+                                        onClick = { this.handleClick }
                                     >
                                         <MenuIcon/>
                                     </IconButton>
                                     <Drawer
-                                        anchor = "top"
+                                        anchor = "left"
                                         open = { this.state.openMenu }
                                         onClose = { this.handleClick.bind(this) }
                                     >
                                         <NavBar
-                                            locations = { locations }
+                                            source = { source }
+                                            dropdown = { dropdown }
                                             closable = { true }
                                         />
                                     </Drawer>
@@ -79,17 +78,21 @@ class GoHomeBar extends Reflux.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs = { 1 } sm = { 1 } >
-                                <Icon>
-                                location_on
-                                </Icon>
-                                <Typography variant = 'caption' className = { classes.location }>
-                                    {this.state.active_location}
-                                </Typography>
+                                { source === "devices" ?
+                                    <div>
+                                        <Icon>
+                                        location_on
+                                        </Icon>
+                                        <Typography variant = 'caption' className = { classes.location }>
+                                            {this.state.active_location}
+                                        </Typography>
+                                    </div> : null
+                                }
                             </Grid>
                             <Grid item xs = { 2 } sm = { 1 }>
                                 <Badge className = { classes.margin } badgeContent = { 3 } color = "secondary">
                                     <Icon className = { classes.notificationIcon }>
-                                    notifications
+                                        notifications
                                     </Icon>
                                 </Badge>
                             </Grid>
@@ -103,6 +106,8 @@ class GoHomeBar extends Reflux.Component {
 
 GoHomeBar.propTypes = {
     classes: PropTypes.object.isRequired,
+    source: PropTypes.string.isRequired,
+    dropdown: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(GoHomeBar);

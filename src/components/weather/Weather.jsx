@@ -85,7 +85,6 @@ class Weather extends Reflux.Component {
         // console.log(unitsOfMeasure[uom]);
 
     }
-
     render () {
         const {classes} = this.props;
         const { name, device_state, visible, uom } = this.state;
@@ -140,13 +139,16 @@ class Weather extends Reflux.Component {
 
                 <Grid container className = { classes.container }>
                     <Grid item xs = { 6 } className = { classes.grid_item }>
-                        <Tooltip title = "pressure" placement = "left-start">
+                        <Tooltip
+                            title = { "pressure, " + pressureUnits }
+                            placement = "left-start"
+                        >
                             {AtmosphericPressure}
                         </Tooltip>
                         <Typography variant = "caption" align = "left" className = { classes.typography }>
                             { pressure }
-                            {" "}
-                            {pressureUnits}
+
+
                         </Typography>
 
                     </Grid>

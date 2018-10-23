@@ -7,7 +7,7 @@ import locationActions from "../../reflux/location/locationActions";
 import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
 import storage from "../../services/storage";
-
+import PropTypes from "prop-types";
 
 class ListItemActionWrapper extends Reflux.Component {
     constructor(props) {
@@ -16,29 +16,39 @@ class ListItemActionWrapper extends Reflux.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick () {
-        locationActions.visible(this.props.location);
-        storage.set("location", this.props.location);
-        appActions.setLocation(this.props.location);
+        const { source } = this.props;
+        if ( source === "devices" ) {
+            const { name: location } = this.props;
+            locationActions.visible(location);
+            storage.set("location", location);
+            appActions.setLocation(location);
+        }
         if (this.state.openMenu) {
             appActions.toggleMenu();
         }
     }
-
     render () {
+        const { classes, icon, name } = this.props;
         return (
-            <ListItem button
+            <ListItem
+                button
                 onClick = { this.handleClick }
-                className = { this.props.classes }
+                className = { classes.nested }
             >
-
-                <Icon style = { {color:"gray"} }>
-                    {this.props.icon}
+                <Icon className = { classes.icon }  >
+                    { icon}
                 </Icon>
-                <ListItemText inset primary = { this.props.location } />
+                <ListItemText inset primary = { name } />
             </ListItem>
         );
     }
-
 }
+
+ListItemActionWrapper.propTypes = {
+    classes: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired
+};
 
 export default ListItemActionWrapper;
