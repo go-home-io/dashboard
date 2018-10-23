@@ -2,10 +2,21 @@ import React from "react";
 import MUIDataTable from "mui-datatables";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 const styles = () => ({
     root: {
         marginTop: 10,
+    }
+});
+
+const getMuiTheme = () => createMuiTheme({
+    overrides: {
+        MUIDataTableBodyCell: {
+            root: {
+                cursor: "pointer",
+            }
+        }
     }
 });
 
@@ -66,17 +77,19 @@ class  StatusManager extends React.Component {
             selectableRows: false,
             rowsPerPageOptions: [10, 15, 20],
             viewColumns: false,
+            rowHover: false,
         };
 
         return (
             <div className = { classes.root } >
-                <MUIDataTable
-                    title = { "Known Workers" }
-                    data = { workerData }
-                    columns = { workerColumns }
-                    options = { workerOptions }
-
-                />
+                <MuiThemeProvider theme = { getMuiTheme() }>
+                    <MUIDataTable
+                        title = { "Known Workers" }
+                        data = { workerData }
+                        columns = { workerColumns }
+                        options = { workerOptions }
+                    />
+                </MuiThemeProvider>
                 <br/>
                 <MUIDataTable
                     title = { "Config Entities Status" }
