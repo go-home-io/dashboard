@@ -45,6 +45,8 @@ class  StatusManager extends React.Component {
         const { workerSelected } = this.state;
         const  workerColumns  = ["ID", "Last seen", "Properties", "Max devices"];
         const statusColumns = ["Name", "Status", "Worker", "Type"];
+        const filterList = workerSelected? [[],[],[workerSelected],[]] : null;
+
 
         let workerData = [];
         // eslint-disable-next-line
@@ -56,13 +58,12 @@ class  StatusManager extends React.Component {
         let statusData = [];
         // eslint-disable-next-line
         status.map(item => {
-            if (workerSelected == null || workerSelected === item.worker) {
-                statusData.push([item.name, item.status, item.worker, item.type]);
-            }
+            statusData.push([item.name, item.status, item.worker, item.type]);
         });
 
         const workerOptions = {
-            filterType: "dropdown",
+            filter: false,
+            // filterType: "dropdown",
             responsive: "scroll",
             pagination: false,
             onRowClick: this.handleRowClick,
@@ -73,6 +74,7 @@ class  StatusManager extends React.Component {
         };
         const statusOptions = {
             filterType: "dropdown",
+            filterList: filterList,
             responsive: "scroll",
             selectableRows: false,
             rowsPerPageOptions: [10, 15, 20],
