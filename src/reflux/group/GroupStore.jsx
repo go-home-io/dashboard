@@ -6,23 +6,21 @@ import lightActions from "../light/lightActions";
 
 //  Create unique Store for each Group
 function GroupStoreFactory(id,  members, device_info, location){
-
-    // const visible = (location === "Default");
-
     class GroupStore extends Reflux.Store {
         constructor() {
             super();
-
+            const { state, name, last_seen, commands } = device_info;
             this.state = {
                 id:id,
-                name: device_info.name,
+                name: name,
                 members: members,
-                device_state: device_info.state,
-                last_seen: device_info.last_seen,
-                commands: device_info.commands,
+                device_state: state,
+                last_seen: last_seen,
+                commands: commands,
                 location: location,
                 visible: false,
                 read_only: device_info.read_only,
+                minimized: false,
             };
 
             this.listenables = groupActions;
@@ -34,6 +32,7 @@ function GroupStoreFactory(id,  members, device_info, location){
             this.onToggle = this.onToggle.bind(this);
             this.onOn = this.onOn.bind(this);
             this.onOff = this.onOff.bind(this);
+            this.onToggleWindow = this.onToggleWindow.bind(this);
         }
 
         // WebSocket messenger
@@ -56,24 +55,26 @@ function GroupStoreFactory(id,  members, device_info, location){
                 this.doCommand("on", "");
             }
         }
-
         onOff (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("off", "");
             }
         }
-
         onToggle (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("toggle", "");
-
             }
         }
-
         onVisible(location) {
             this.setState({visible: false});
             if (this.state.location === location) {
                 this.setState({visible: true});
+            }
+        }
+        onToggleWindow(dev_id) {
+            if ( dev_id === id ) {
+                const minimized =  this.state.minimized;
+                this.setState( { minimized: ! minimized} );
             }
         }
     }

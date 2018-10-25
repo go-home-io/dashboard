@@ -1,14 +1,13 @@
 import React from "react";
 import Reflux from "reflux";
 import Grid from "@material-ui/core/Grid/Grid";
-import getDeviceState from "../utils/getDeviceState";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import GroupStoreFactory from "../../reflux/group/GroupStore";
 import groupActions from "../../reflux/group/groupActions";
 import {GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF} from "../../settings/colors";
-import Icon from "@material-ui/core/Icon/Icon";
-import Typography from "@material-ui/core/Typography/Typography";
+import GroupDevices from "./GroupDevices";
+import MaxGroupHeader from "./MaxGroupHeader";
 import Devices from "../common/Devices";
 
 const styles = () => ({
@@ -18,14 +17,6 @@ const styles = () => ({
         padding:5,
         margin: 5,
     },
-    text: {
-        marginLeft: 5,
-        cursor: "pointer",
-    },
-    icon: {
-        marginLeft: 5,
-        cursor: "pointer",
-    }
 });
 
 const groupIcon = "devices_other";
@@ -35,51 +26,54 @@ class GroupManager  extends Reflux.Component {
         super(props);
         const { dev_id, members, device_info, location} = props;
         this.store = GroupStoreFactory(dev_id, members, device_info, location);
+        this.handleClick = this.handleClick.bind(this);
     }
-
     handleClick() {
         const { dev_id } = this.props;
         groupActions.toggle(dev_id);
     }
-
     render () {
-        const {classes,  all_device_states, dev_id, location} = this.props;
-        const { visible, name, device_state, members } = this.state;
+        const { classes,  all_device_states, dev_id, location } = this.props;
+        const { visible, name, device_state, members, minimized } = this.state;
         const group_id = dev_id;
 
-        const display = visible ? "block" : "none";
+        const displayMinimized = visible && minimized  ? "block" : "none";
+        const displayMaximized = visible && ! minimized  ? "block" : "none";
+
         const iconColor = device_state.on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
 
         return (
-            <div className = { classes.root } style = { {display:display} }>
-                <Grid container justify = 'flex-start' onClick = { this.handleClick.bind(this) }>
-                    <Icon className = { classes.icon } style = { {color:iconColor} }>
-                        { groupIcon }
-                    </Icon>
-                    <Typography variant = 'subheading' className = { classes.text }>
-                        {name}
-                    </Typography>
-                </Grid>
+            <div>
+                <div className = { classes.root } style = { {display: displayMaximized} }>
+                    <MaxGroupHeader
+                        iconColor = { iconColor }
+                        groupIcon = { groupIcon }
+                        name = { name }
+                        handleClick = { this.handleClick }
+                        group_id = { group_id }
+                    />
+                    <Grid container justify = 'center' alignItems = 'center'>
+                        <GroupDevices
+                            location = { location }
+                            group_id = { group_id }
+                            all_device_states = { all_device_states }
+                            members = { members }
+                        />
+                    </Grid>
+                </div>
 
-                {/* Render Group members devices */}
-                <Grid container justify = 'center' alignItems = 'center'>
-                    {members.map( (dev_id) => {
-                        const device_state = getDeviceState(dev_id, all_device_states);
-                        const deviceType = device_state.type;
-
-                        return (
-                            <Devices
-                                key = { dev_id }
-                                id = { dev_id }
-                                deviceType = { deviceType }
-                                device_info = { device_state }
-                                location = { location }
-                                group_id = { group_id }
-                            />
-                        );
-                    })}
-                </Grid>
+                <div style = { {display: displayMinimized} }>
+                    <Devices
+                        key = { group_id }
+                        deviceType = "minGroup"
+                        location = { location }
+                        id = { group_id }
+                        device_info = { device_state }
+                        group_id = { group_id }
+                    />
+                </div>
             </div>
+
         );
     }
 }

@@ -14,7 +14,10 @@ const styles = () => ({
         float: "right",
         fontSize: 14,
         marginRight: 15,
-        // color: "#6bc46b",
+        "&:hover": {
+            color: "#6bc46b",
+        },
+        // color: "rgba(0,0,0,0.54)",
     },
     cancel: {
         height: 32,
@@ -22,6 +25,9 @@ const styles = () => ({
         float: "left",
         fontSize: 14,
         marginLeft:15,
+        "&:hover": {
+            color: "red",
+        }
     }
 });
 
@@ -46,7 +52,6 @@ class SliderActions extends React.Component {
                     className = { classes.save }
                     size = "small"
                     onClick = { save }
-                    color = 'primary'
                 >
                     <Icon >
                         {" "}

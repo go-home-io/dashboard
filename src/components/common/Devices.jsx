@@ -6,6 +6,7 @@ import CameraManager from "../camera/CameraManager";
 import SwitchManager from "../switch/SwitchManager";
 import LightManager from "../light/LightManager";
 import Weather from "../weather/Weather";
+import MinimizedGroup from "../group/MinimizedGroup";
 
 const styles = () => ({
     root: {
@@ -22,6 +23,7 @@ const deviceManagers = {
     "camera": CameraManager,
     "switch": SwitchManager,
     "weather": Weather,
+    "minGroup": MinimizedGroup,
 };
 
 class Devices extends React.Component {

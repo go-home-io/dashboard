@@ -42,5 +42,5 @@ export const VACUUM_HEADER_ICON_COLOR_FULL = "#ff9b9b";
 // Switch
 // export const SWITCH_HEADER_ICON_COLOR = "#ffffffe6";
 export const SWITCH_HEADER_ICON_COLOR_ON = "#ffffffe6";
-export const SWITCH_HEADER_ICON_COLOR_OFF = "#ffffffe6"; //"rgba(0,0,0,0.6)";
+export const SWITCH_HEADER_ICON_COLOR_OFF = "rgba(0,0,0,0.4)";
 export const SWITCH_RO_ICON_COLOR = "#f39090";

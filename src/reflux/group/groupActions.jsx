@@ -7,7 +7,7 @@ const groupActions = Reflux.createActions([
     "toggle",
     "visible",
     "message",
-
+    "toggleWindow"
 ]);
 
 export default groupActions;

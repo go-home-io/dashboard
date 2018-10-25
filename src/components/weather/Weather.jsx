@@ -8,12 +8,12 @@ import TemperatureSymbol from "../common/TemperatureSymbol";
 import Grid from "@material-ui/core/Grid/Grid";
 import truncateCaption from "../utils/truncate";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import { PartlyCloudyDay, AtmosphericPressure,  WindSock} from "./Icon8JPG";
+import { PartlyCloudyDay, AtmosphericPressure,  WindSock } from "./Icon8JPG";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AppStore from "../../reflux/application/AppStore";
 import WeatherStoreFactory from "../../reflux/weather/WeatherStore";
-import {unitsOfMeasure} from "../../settings/uom";
+import { unitsOfMeasure } from "../../settings/uom";
 
 
 const styles = () => ({
