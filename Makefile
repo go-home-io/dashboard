@@ -19,13 +19,15 @@ lint:
 	$(ES_LINT) "src/**" --fix
 
 lint-no-fix:
-	$(ES_LINT) "src/**"	
+	$(ES_LINT) "src/**"
 
 run:
 	$(RUN)
 
 build:
 	$(BUILD)
+
+git: lint
 
 build-to-server:
 	rm -rf $(SERVER)/public/*
