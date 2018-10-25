@@ -1,0 +1,18 @@
+language: node_js
+node_js: 
+  - "8.11.4"
+git:
+  depth: 3
+jobs:
+  include: 
+    - stage: ci
+      before_install:
+        - sudo apt-get update
+        - sudo apt-get install -y curl make
+      cache:
+        - directories:
+            - node_modules
+      script: 
+        - make dep 
+        - make lint-no-fix
+        - make build 
