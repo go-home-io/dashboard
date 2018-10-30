@@ -55,7 +55,7 @@ class LightColorPicker extends React.Component {
     }
 
     render () {
-        const { classes, color, read_only, dev_id } = this.props;
+        const { classes, color, read_only, dev_id, doCommand } = this.props;
         const css_color = rgbColor(color);
         const cursor = read_only ? "default" : "pointer";
         const { anchorEl } = this.state;
@@ -93,6 +93,7 @@ class LightColorPicker extends React.Component {
                         color = { color }
                         dev_id = { dev_id }
                         close = { this.handleClose }
+                        doCommand = { doCommand }
                     />
                 </Popover>
             </Grid>
@@ -105,6 +106,7 @@ LightColorPicker.propTypes = {
     color: PropTypes.object.isRequired,
     read_only:  PropTypes.bool,
     dev_id: PropTypes.string.isRequired,
+    doCommand: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(LightColorPicker);

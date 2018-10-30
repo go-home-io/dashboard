@@ -1,7 +1,7 @@
 import React from "react";
 import Reflux from "reflux";
 import PropTypes from "prop-types";
-import {CONNECTION_TIMEOUT} from "../../settings/deviceDelays";
+import { CONNECTION_TIMEOUT } from "../../settings/deviceDelays";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import WebSocketStore from "../../reflux/socket/WebSocketStore";
 import wsActions from "../../reflux/socket/wsActions";
@@ -22,18 +22,16 @@ class WaitingProgress extends Reflux.Component {
         this.progress = this.progress.bind(this);
         this.onComplete = this.onComplete.bind(this);
     }
-
     componentDidMount() {
         this.setState({ completed: 0 });
         this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS);
+        // alert("On mount: "+this.props.dev_id);
     }
-
     componentWillUnmount () {
         this.setState({ completed: 0 });
         clearInterval(this.timer);
         this.timer = null;
     }
-
     onComplete (status) {
         const { dev_id, actions } = this.props;
 
@@ -42,12 +40,10 @@ class WaitingProgress extends Reflux.Component {
         this.setState({ completed: 0 });
         actions.status(dev_id, status);
     }
-
     restart ()  {
         this.setState({ completed: 0 });
         setTimeout(setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),100);
     }
-
     progress ()  {
         let { completed, reset, rejected } = this.state;
 

@@ -6,6 +6,7 @@ export const LIGHT_HEADER_BKG_COLOR = "#0cb2f8";
 export const SENSOR_HEADER_BKG_COLOR = "#1cbbb6";
 export const VACUUM_HEADER_BKG_COLOR = "#3d76df";
 export const SWITCH_HEADER_BKG_COLOR = "#8456f3";
+export const MIN_GROUP_HEADER_BKG_COLOR = "#3f51b5";
 
 //  'success'
 export const SUCCESS_BKG_COLOR = "#4fd795";
@@ -19,6 +20,9 @@ export const ERROR_BKG_COLOR = "#f44336";
 // Group
 export const GROUP_HEADER_ICON_COLOR_ON = "#ffa500b3";
 export const GROUP_HEADER_ICON_COLOR_OFF = "rgb(0,0,0,0.54)";
+export const MIN_GROUP_HEADER_ICON_COLOR_ON = "#f9f7ab";
+export const MIN_GROUP_HEADER_ICON_COLOR_OFF = "#d2d2ca80";
+
 
 // Light
 export const LIGHT_RO_ICON_COLOR = "#ff9b9b";

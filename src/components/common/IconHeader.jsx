@@ -3,15 +3,19 @@ import {
     SWITCH_HEADER_ICON_COLOR_ON,
     SWITCH_HEADER_ICON_COLOR_OFF,
     LIGHT_HEADER_ICON_COLOR_ON,
-    LIGHT_HEADER_ICON_COLOR_OFF
+    LIGHT_HEADER_ICON_COLOR_OFF,
+    MIN_GROUP_HEADER_ICON_COLOR_ON,
+    MIN_GROUP_HEADER_ICON_COLOR_OFF,
 } from "../../settings/colors";
 import PropTypes from "prop-types";
 import WbIncandescentIcon from "@material-ui/icons/WbIncandescent";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import DevicesOtherIcon from "@material-ui/icons/DevicesOther";
 
 const icons = {
     "light": WbIncandescentIcon,
-    "switch": PowerSettingsNewIcon
+    "switch": PowerSettingsNewIcon,
+    "minGroup": DevicesOtherIcon,
 };
 
 const colors = {
@@ -22,6 +26,10 @@ const colors = {
     "switch": {
         "true" : SWITCH_HEADER_ICON_COLOR_ON,
         "false" : SWITCH_HEADER_ICON_COLOR_OFF
+    },
+    "minGroup": {
+        "true" : MIN_GROUP_HEADER_ICON_COLOR_ON,
+        "false" : MIN_GROUP_HEADER_ICON_COLOR_OFF
     }
 };
 

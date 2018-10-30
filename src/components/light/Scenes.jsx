@@ -1,7 +1,6 @@
 import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import lightActions from "../../reflux/light/lightActions";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography/Typography";
@@ -37,9 +36,9 @@ class Scenes extends React.Component {
     }
 
     handleClose (option)  {
-        const { dev_id } = this.props;
+        const { dev_id, doCommand } = this.props;
         if (typeof(option) === "string") {
-            lightActions.setScene(dev_id, option);
+            doCommand(dev_id, "set-scene", option);
         }
         this.setState({ anchorEl: null });
     }
@@ -90,7 +89,8 @@ Scenes.propTypes = {
     classes: PropTypes.object.isRequired,
     scenes: PropTypes.array.isRequired,
     read_only: PropTypes.bool.isRequired,
-    dev_id: PropTypes.string.isRequired
+    dev_id: PropTypes.string.isRequired,
+    doCommand: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Scenes);

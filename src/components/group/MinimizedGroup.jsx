@@ -1,7 +1,19 @@
 import React from "react";
 import Card from "@material-ui/core/Card/Card";
 import withStyles from "@material-ui/core/styles/withStyles";
-import * as PropTypes from "prop-types";
+import  PropTypes from "prop-types";
+import CardContent from "@material-ui/core/CardContent/CardContent";
+import groupActions from "../../reflux/group/groupActions";
+import {
+    MIN_GROUP_HEADER_BKG_COLOR,
+    LIGHT_RO_ICON_COLOR
+} from "../../settings/colors";
+import ComponentHeader from "../common/ComponentHeader";
+import WaitingProgress from "../common/WaitingProgress";
+import ExpandButton from "./ExpandButton";
+import Zoom from "@material-ui/core/Zoom/Zoom";
+import Grid from "@material-ui/core/Grid/Grid";
+import RenderCommandHandlers from "../common/RenderCommandHandlers";
 
 const styles = () => ({
     root: {
@@ -9,21 +21,98 @@ const styles = () => ({
         height: 165,
         margin: 5,
     },
+    content: {
+        marginTop: -27,
+    },
+    expandButton: {
+        position: "relative",
+        top: -73,
+        left: 140,
+
+    }
 });
 
 class MinimizedGroup extends React.Component {
+    expandGroup () {
+        const { group_id } = this.props;
+        groupActions.toggleWindow(group_id);
+    }
     render () {
-        const { classes } = this.props;
+        const {
+            classes,
+            device_state,
+            group_id,
+            commands,
+            name,
+            read_only,
+            loading,
+            status,
+            visible,
+        } = this.props;
         return (
             <Card className = { classes.root }>
-                Minimized Group
+                <ComponentHeader
+                    dev_id = { group_id }
+                    name = { name }
+                    variant = "minGroup"
+                    on = { device_state.on }
+                    status = { status }
+                    read_only = { read_only }
+                    actions = { groupActions }
+                    ordinaryBkgColor = { MIN_GROUP_HEADER_BKG_COLOR }
+                    iconROColor = { LIGHT_RO_ICON_COLOR }
+                />
+                <div className = { classes.expandButton } >
+                    <ExpandButton
+                        expandGroup = { this.expandGroup.bind(this) }
+                        visible = { visible }
+                    />
+                </div>
+                <CardContent >
+                    { loading ?
+                        <Zoom in = { loading } >
+                            <WaitingProgress
+                                dev_id = { group_id }
+                                actions = { groupActions }
+                            />
+                        </Zoom>
+                        :
+                        <Zoom in = { ! loading } >
+                            <Grid
+                                className = { classes.content }
+                                container
+                                justify = 'flex-start'
+                                direction = "column"
+                            >
+                                <RenderCommandHandlers
+                                    commands = { commands }
+                                    dev_id = { group_id }
+                                    doCommand = { groupActions.command }
+                                    read_only = { read_only }
+                                    device_state = { device_state }
+                                />
+                            </Grid>
+                        </Zoom>
+
+                    }
+                </CardContent>
             </Card>
         );
     }
 }
 
 MinimizedGroup.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    // location: PropTypes.string.isRequired,
+    device_state: PropTypes.object.isRequired,
+    group_id: PropTypes.string.isRequired,
+    commands: PropTypes.array.isRequired,
+    // actionOnHeaderClick: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    read_only: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    status: PropTypes.string.isRequired,
+    visible: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(MinimizedGroup);

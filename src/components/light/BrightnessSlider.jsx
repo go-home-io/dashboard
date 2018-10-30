@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import SlidersHeader from "../common/SlidersHeader";
-import lightActions from "../../reflux/light/lightActions";
 import Slider from "@material-ui/lab/Slider/Slider";
 import SliderActions from "../common/SliderActions";
 
@@ -29,19 +28,16 @@ class BrightnessSlider extends React.Component {
         this.setValue = this.setValue.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
     handleChange (event, value) {
         const level = Math.floor(value);
         this.setState({ value:level });
     }
-
     setValue() {
-        const { dev_id, close} = this.props;
+        const { dev_id, close, doCommand } = this.props;
         const { value } = this.state;
-        lightActions.setBrightness(dev_id, value);
+        doCommand(dev_id, "set-brightness", value);
         close();
     }
-
     render () {
         const { classes, close } = this.props;
         const { value } = this.state;
@@ -62,7 +58,6 @@ class BrightnessSlider extends React.Component {
             </div>
         );
     }
-
 }
 
 BrightnessSlider.propTypes = {
@@ -70,7 +65,7 @@ BrightnessSlider.propTypes = {
     dev_id: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
     level: PropTypes.number.isRequired,
-    // actionSetValue: PropTypes.func.isRequired
+    doCommand: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(BrightnessSlider);

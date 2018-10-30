@@ -4,7 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import RGBSlider from "./RGBSlider";
 import rgbColor from "../utils/rgbColor";
 import SlidersHeader from "../common/SlidersHeader";
-import lightActions from "../../reflux/light/lightActions";
 import SliderActions from "../common/SliderActions";
 
 const styles = () => ({
@@ -23,25 +22,23 @@ const styles = () => ({
 class ColorSliders extends React.Component {
     constructor(props) {
         super(props);
+        const { r: red, g: green, b: blue } = props.color;
         this.state = {
-            r: props.color.r,
-            g: props.color.g,
-            b: props.color.b,
+            r: red,
+            g: green,
+            b: blue,
         };
         this.setColor = this.setColor.bind(this);
     }
-
     handleColorChange = colorName => (event, value) => {
         const color = Math.round(value);
         this.setState({ [colorName]: color });
     };
-
     setColor() {
-        const { dev_id, close } = this.props;
-        lightActions.setColor(dev_id, this.state);
+        const { dev_id, close, doCommand } = this.props;
+        doCommand(dev_id, "set-color", this.state);
         close();
     }
-
     render () {
         const { classes, close } = this.props;
         const { r, g, b } = this.state;
@@ -71,6 +68,7 @@ ColorSliders.propTypes = {
     dev_id: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
     color: PropTypes.object.isRequired,
+    doCommand: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ColorSliders);

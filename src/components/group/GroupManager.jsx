@@ -1,23 +1,11 @@
 import React from "react";
 import Reflux from "reflux";
-import Grid from "@material-ui/core/Grid/Grid";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
 import GroupStoreFactory from "../../reflux/group/GroupStore";
 import groupActions from "../../reflux/group/groupActions";
-import {GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF} from "../../settings/colors";
-import GroupDevices from "./GroupDevices";
-import MaxGroupHeader from "./MaxGroupHeader";
-import Devices from "../common/Devices";
-
-const styles = () => ({
-    root: {
-        border:"solid 1px lightgrey",
-        borderRadius:5,
-        padding:5,
-        margin: 5,
-    },
-});
+import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
+import ExpandedGroup from "./ExpandedGroup";
+import MinimizedGroup from "./MinimizedGroup";
 
 const groupIcon = "devices_other";
 
@@ -26,16 +14,17 @@ class GroupManager  extends Reflux.Component {
         super(props);
         const { dev_id, members, device_info, location} = props;
         this.store = GroupStoreFactory(dev_id, members, device_info, location);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleGroupHeaderClick = this.handleGroupHeaderClick.bind(this);
     }
-    handleClick() {
+    handleGroupHeaderClick() {
         const { dev_id } = this.props;
         groupActions.toggle(dev_id);
     }
     render () {
-        const { classes,  all_device_states, dev_id, location } = this.props;
-        const { visible, name, device_state, members, minimized } = this.state;
+        const { all_device_states, dev_id, location } = this.props;
+        const { visible, name, device_state, members, minimized, commands, read_only, loading, status } = this.state;
         const group_id = dev_id;
+        // console.log(commands);
 
         const displayMinimized = visible && minimized  ? "block" : "none";
         const displayMaximized = visible && ! minimized  ? "block" : "none";
@@ -44,42 +33,39 @@ class GroupManager  extends Reflux.Component {
 
         return (
             <div>
-                <div className = { classes.root } style = { {display: displayMaximized} }>
-                    <MaxGroupHeader
+                <div style = { {display: displayMaximized} }>
+                    <ExpandedGroup
                         iconColor = { iconColor }
                         groupIcon = { groupIcon }
                         name = { name }
-                        handleClick = { this.handleClick }
+                        handleClick = { this.handleGroupHeaderClick }
                         group_id = { group_id }
+                        location = { location }
+                        all_device_states = { all_device_states }
+                        members = { members }
+                        visible = { visible && ! minimized }
                     />
-                    <Grid container justify = 'center' alignItems = 'center'>
-                        <GroupDevices
-                            location = { location }
-                            group_id = { group_id }
-                            all_device_states = { all_device_states }
-                            members = { members }
-                        />
-                    </Grid>
                 </div>
 
                 <div style = { {display: displayMinimized} }>
-                    <Devices
-                        key = { group_id }
-                        deviceType = "minGroup"
-                        location = { location }
-                        id = { group_id }
-                        device_info = { device_state }
+                    <MinimizedGroup
                         group_id = { group_id }
+                        device_state = { device_state }
+                        commands = { commands }
+                        actionOnHeaderClick = { this.handleGroupHeaderClick }
+                        name = { name }
+                        read_only = { read_only }
+                        loading = { loading }
+                        status = { status }
+                        visible = { visible && minimized }
                     />
                 </div>
             </div>
-
         );
     }
 }
 
 GroupManager.propTypes = {
-    classes: PropTypes.object.isRequired,
     location: PropTypes.string.isRequired,
     dev_id: PropTypes.string.isRequired,
     members: PropTypes.array.isRequired,
@@ -87,4 +73,4 @@ GroupManager.propTypes = {
     all_device_states: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(GroupManager);
+export default (GroupManager);

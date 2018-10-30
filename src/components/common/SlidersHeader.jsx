@@ -37,13 +37,17 @@ class SlidersHeader extends React.Component {
                     <div
                         className = { classes.colorBox }
                         style = { {backgroundColor: color} }
-                    /> :
-                    <div className = { classes.level } >
-                        <Typography variant = "body1" gutterBottom align = "center">
-                            {level}
-                            %
-                        </Typography>
-                    </div>
+                    />
+                    :
+                    level ?
+                        <div className = { classes.level } >
+                            <Typography variant = "body1" gutterBottom align = "center">
+                                {level}
+                                %
+                            </Typography>
+                        </div>
+                        :
+                        null
                 }
             </Grid>
         );

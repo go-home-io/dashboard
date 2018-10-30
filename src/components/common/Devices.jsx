@@ -28,7 +28,7 @@ const deviceManagers = {
 
 class Devices extends React.Component {
     render () {
-        const {deviceType} = this.props;
+        const { deviceType } = this.props;
         const Manager = deviceManagers[deviceType];
         const availableDevices = Object.keys(deviceManagers);
         return (

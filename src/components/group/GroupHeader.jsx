@@ -29,7 +29,7 @@ const styles = () => ({
     }
 });
 
-class MaxGroupHeader extends React.Component {
+class GroupHeader extends React.Component {
     constructor(props) {
         super(props);
         this.minimizeGroup = this.minimizeGroup.bind(this);
@@ -39,44 +39,48 @@ class MaxGroupHeader extends React.Component {
         groupActions.toggleWindow(group_id);
     }
     render () {
-        const { classes, groupIcon, name, iconColor, handleClick } = this.props;
+        const { classes, groupIcon, name, iconColor, handleClick, visible } = this.props;
         return(
-            <Grid container >
-                <Icon className = { classes.icon } style = { {color: iconColor} }>
-                    { groupIcon }
-                </Icon>
-                <Typography
-                    variant = 'subheading'
-                    className = { classes.text }
-                    onClick = { handleClick }
-                >
-                    {name}
-                </Typography>
-                <Tooltip
-                    title = "Minimize the group window"
-                    placement = "right"
-                >
-                    <IconButton
-                        color = "primary"
-                        className = { classes.iconButton }
-                        onClick = { this.minimizeGroup }
+            visible ?
+                <Grid container >
+                    <Icon className = { classes.icon } style = { {color: iconColor} }>
+                        { groupIcon }
+                    </Icon>
+                    <Typography
+                        variant = 'subheading'
+                        className = { classes.text }
+                        onClick = { handleClick }
                     >
-                        <IconExpandLess/>
-                    </IconButton>
-                </Tooltip>
-            </Grid>
+                        {name}
+                    </Typography>
+                    <Tooltip
+                        title = "Minimize the group window"
+                        placement = "right"
+                    >
+                        <IconButton
+                            color = "primary"
+                            className = { classes.iconButton }
+                            onClick = { this.minimizeGroup }
+                        >
+                            <IconExpandLess/>
+                        </IconButton>
+                    </Tooltip>
+                </Grid>
+                :
+                null
         );
     }
 }
 
-MaxGroupHeader.propTypes = {
+GroupHeader.propTypes = {
     classes: PropTypes.object.isRequired,
     groupIcon: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     iconColor: PropTypes.string.isRequired,
     handleClick: PropTypes.func.isRequired,
     group_id: PropTypes.string.isRequired,
+    visible: PropTypes.bool.isRequired
 };
 
-export default withStyles(styles)(MaxGroupHeader);
+export default withStyles(styles)(GroupHeader);
 

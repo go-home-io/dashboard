@@ -1,5 +1,4 @@
 import React from "react";
-import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
@@ -70,14 +69,12 @@ class ComponentHeader extends React.Component {
             return ordinaryBkgColor;
         }
     }
-
     handleClick () {
         const { read_only, variant, actions, dev_id } = this.props;
         if ( ! read_only && variant !== "sensor" ) {
             actions.toggle(dev_id);
         }
     }
-
     setOrdinaryStatus() {
         const { dev_id, actions } = this.props;
         actions.status(dev_id, "ordinary");
@@ -95,10 +92,10 @@ class ComponentHeader extends React.Component {
         return (
             <Paper className = { classes.paper } elevation = { 0 } style = { {backgroundColor:backgroundColor} }>
                 <div className = { classes.root } >
-                    {variant === "light" ?
+                    { variant === "light" || variant === "minGroup"  || variant === "switch" ?
                         <div>
                             <IconHeader
-                                variant = 'light'
+                                variant = { variant }
                                 component_on = { on }
                                 cssClass = { classes.icon }
                             />
@@ -131,31 +128,7 @@ class ComponentHeader extends React.Component {
                                     />
                                 </div>
                                 :
-                                variant === "switch" ?
-                                    <div>
-                                        <IconHeader
-                                            component_on = { on }
-                                            variant = "switch"
-                                            cssClass = { classes.icon }
-                                        />
-                                        { read_only ?
-                                            <Tooltip title = 'Read only device'
-                                                placement = "top"
-                                            >
-                                                <Icon
-                                                    className = { classes.ro_icon }
-                                                    style = { {color: iconROColor} }
-                                                >
-                                            sync_disabled
-                                                </Icon>
-                                            </Tooltip>
-                                            :
-                                            null
-                                        }
-
-                                    </div>
-                                    :
-                                    null
+                                null
                     }
 
                     <Typography variant = "subheading"
