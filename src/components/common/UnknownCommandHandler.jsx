@@ -4,13 +4,11 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid/Grid";
 import Popover from "@material-ui/core/Popover/Popover";
 import Typography from "@material-ui/core/Typography/Typography";
-import BrightnessSlider from "../light/BrightnessSlider";
 import UnknownCommandDialog from "./UnknownCommandDialog";
 
 const styles = () => ( {
     root: {
         width: "100%",
-        // marginTop: -5,
     },
     text: {
         fontSize:12,

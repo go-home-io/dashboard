@@ -28,6 +28,7 @@ class StartPage extends Component {
 
     getComponentStateByHTTP () {
         // const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
+        // STATE_URL
         HTTP.get(STATE_URL)
             .then((data) => {
                 if (data >= 300) {

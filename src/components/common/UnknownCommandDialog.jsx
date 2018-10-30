@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import SliderActions from "../common/SliderActions";
 import TextField from "@material-ui/core/TextField/TextField";
+// import FormControl from "@material-ui/core/FormControl/FormControl";
 
 const styles = () => ({
     root : {
@@ -31,10 +32,17 @@ class UnknownCommandDialog extends React.Component {
         };
         this.setValue = this.setValue.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange (event) {
         const value = event.target.value;
         this.setState({ value: value });
+    }
+    handleSubmit (evt) {
+        if (evt.keyCode === 13) {
+            evt.preventDefault();
+            this.setValue();
+        }
     }
     setValue() {
         const { dev_id, close, doCommand, command } = this.props;
@@ -49,13 +57,18 @@ class UnknownCommandDialog extends React.Component {
 
         return (
             <div className = { classes.root }>
-                <form className = { classes.container } noValidate autoComplete = "off">
+                <form
+                    className = { classes.container }
+                    noValidate
+                    autoComplete = "off"
+                >
                     <TextField
                         id = "outlined-name"
                         label = "Command value"
                         className = { classes.textField }
                         value = { value }
                         onChange = { this.handleChange }
+                        onKeyDown = { this.handleSubmit }
                     />
                 </form>
                 <SliderActions
