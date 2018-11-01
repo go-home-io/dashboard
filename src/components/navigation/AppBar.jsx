@@ -54,7 +54,7 @@ class GoHomeBar extends Reflux.Component {
         appActions.toggleMenu();
     }
     render() {
-        const { classes, source, dropdown } = this.props;
+        const { classes, dropdown } = this.props;
         const { path } = this.state;
         return(
             <div>

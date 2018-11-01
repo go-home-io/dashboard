@@ -1,5 +1,5 @@
 import Reflux from "reflux";
-import deviceActions from ".deviceActions";
+// import deviceActions from ".deviceActions";
 import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
@@ -24,18 +24,13 @@ function DeviceStoreFactory(id,  device_info, location, group_id){
                 status:"ordinary",
             };
 
-            this.listenables = lightActions;
+            // this.listenables = deviceActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
-            this.onSetColor = this.onSetColor.bind(this);
             this.onVisible = this.onVisible.bind(this);
-            this.onSetBrightness = this.onSetBrightness.bind(this);
             this.onToggle = this.onToggle.bind(this);
-            this.onOn = this.onOn.bind(this);
-            this.onOff = this.onOff.bind(this);
-            this.onSetScene = this.onSetScene.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onSetLoading = this.onSetLoading.bind(this);
             this.onSetInitialState = this.onSetInitialState.bind(this);
