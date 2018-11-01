@@ -1,62 +1,78 @@
 import Reflux from "reflux";
-import groupActions from "./groupActions";
+import deviceActions from ".deviceActions";
 import wsActions from "../socket/wsActions";
-import lightActions from "../light/lightActions";
 import notificationActions from "../notification/notificationActions";
 
-
-//  Create unique Store for each Group
-function GroupStoreFactory(id,  members, device_info, location){
-    class GroupStore extends Reflux.Store {
+//  Create unique Store for each Component
+function DeviceStoreFactory(id,  device_info, location, group_id){
+    class DeviceStore extends Reflux.Store {
         constructor() {
             super();
-            const { state, name, last_seen, commands } = device_info;
+
             this.state = {
                 id:id,
-                name: name,
-                members: members,
-                device_state: state,
-                last_seen: last_seen,
-                commands: commands,
+                name: device_info.name,
+                device_type: device_info.type,
+                device_state: device_info.state,
+                last_seen: device_info.last_seen,
+                commands: device_info.commands,
+                group_id: group_id,
                 location: location,
+                loading:false,
                 visible: false,
                 read_only: device_info.read_only,
-                minimized: true,
                 status:"ordinary",
-                loading: false,
             };
 
-            this.listenables = groupActions;
+            this.listenables = lightActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
+            this.onSetColor = this.onSetColor.bind(this);
             this.onVisible = this.onVisible.bind(this);
+            this.onSetBrightness = this.onSetBrightness.bind(this);
             this.onToggle = this.onToggle.bind(this);
             this.onOn = this.onOn.bind(this);
             this.onOff = this.onOff.bind(this);
-            this.onToggleWindow = this.onToggleWindow.bind(this);
+            this.onSetScene = this.onSetScene.bind(this);
             this.onStatus = this.onStatus.bind(this);
+            this.onSetLoading = this.onSetLoading.bind(this);
+            this.onSetInitialState = this.onSetInitialState.bind(this);
             this.onCommand = this.onCommand.bind(this);
+        }
+
+        onSetInitialState (dev_id, device_state, location, group_id) {
+            if (dev_id === id) {
+                this.setState = ( {
+                    name: device_state.name,
+                    device_state: device_state.state,
+                    last_seen: device_state.last_seen,
+                    commands: device_state.commands,
+                    group_id: group_id,
+                    location: location,
+                    loading:false,
+                    visible: false,
+                    status:"ordinary",
+                });
+            }
         }
 
         // WebSocket messenger
         doCommand(command, value) {
             const mess = {id:id, cmd:command,value: value};
+            this.setState({"loading":true});
             wsActions.doCommand(mess);
-            this.setState({loading: true});
-            if (! this.state.minimized) {
-                lightActions.setLoading(id);
-            }
         }
 
         // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
+                // const state = data.state;
                 this.setState({
                     device_state: data.state,
-                    status:"success",
-                    loading: false
+                    loading:false,
+                    status:"success"
                 });
             }
         }
@@ -70,32 +86,18 @@ function GroupStoreFactory(id,  members, device_info, location){
                 }
             }
         }
-        onOn (dev_id) {
-            if ( dev_id === id ) {
-                this.doCommand("on", "");
-            }
-        }
-        onOff (dev_id) {
-            if ( dev_id === id ) {
-                this.doCommand("off", "");
-            }
-        }
         onToggle (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand("toggle", "");
+                const  command = this.state.on ? "off" : "on";
+                this.doCommand(command, "");
             }
         }
+
+        // Appearance
         onVisible(location) {
             this.setState({visible: false});
             if (this.state.location === location) {
                 this.setState({visible: true});
-            }
-        }
-        onToggleWindow(dev_id) {
-            if ( dev_id === id ) {
-                this.setState( prevState => {
-                    return { minimized: ! prevState.minimized };
-                });
             }
         }
         onStatus(dev_id, status) {
@@ -111,10 +113,16 @@ function GroupStoreFactory(id,  members, device_info, location){
                 }
             }
         }
+        // Group Action
+        onSetLoading (group_id) {
+            if (this.state.group_id === group_id) {
+                this.setState({loading: true});
+            }
+        }
     }
 
-    GroupStore.id = id;
-    return GroupStore;
+    DeviceStore.id = id;
+    return DeviceStore;
 }
 
-export default GroupStoreFactory;
+export default DeviceStoreFactory;

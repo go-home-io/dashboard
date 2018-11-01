@@ -44,14 +44,12 @@ class HomePage extends Reflux.Component {
             >
                 <Grid item xs = { 12 }>
                     <GoHomeAppBar
-                        source = "devices"
                         dropdown = { dropdownInfo }
                     />
                 </Grid>
                 <Hidden mdDown>
                     <Grid item md = { 2 }>
                         <NavBar
-                            source = "devices"
                             dropdown = { dropdownInfo }
                         />
                     </Grid>

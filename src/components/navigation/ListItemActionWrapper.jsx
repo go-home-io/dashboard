@@ -16,13 +16,10 @@ class ListItemActionWrapper extends Reflux.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick () {
-        const { source } = this.props;
-        if ( source === "devices" ) {
-            const { name: location } = this.props;
-            locationActions.visible(location);
-            storage.set("location", location);
-            appActions.setLocation(location);
-        }
+        const { name: location } = this.props;
+        locationActions.visible(location);
+        storage.set("location", location);
+        appActions.setLocation(location);
         if (this.state.openMenu) {
             appActions.toggleMenu();
         }
@@ -48,7 +45,6 @@ ListItemActionWrapper.propTypes = {
     classes: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    source: PropTypes.string.isRequired
 };
 
 export default ListItemActionWrapper;

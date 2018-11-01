@@ -10,11 +10,6 @@ import * as PropTypes from "prop-types";
 class StatusPage extends React.Component {
     render () {
         const { access, status, worker} = this.props;
-        const dropdownInfo =   {
-            name: "Workers",
-            icon: "edit_location",
-            items: [{name:"", icon:""}],
-        } ;
 
         return (
             <Grid
@@ -23,17 +18,11 @@ class StatusPage extends React.Component {
                 justify = 'flex-start'
             >
                 <Grid item xs = { 12 }>
-                    <GoHomeAppBar
-                        source = "status"
-                        dropdown = { dropdownInfo }
-                    />
+                    <GoHomeAppBar  />
                 </Grid>
                 <Hidden mdDown>
                     <Grid item md = { 2 }>
-                        <NavBar
-                            source = "status"
-                            dropdown = { dropdownInfo }
-                        />
+                        <NavBar />
                     </Grid>
                 </Hidden>
                 <Grid item md = { 12 } lg = { 10 } >

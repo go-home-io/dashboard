@@ -15,6 +15,7 @@ import appActions from "../../reflux/application/appActions";
 import Icon from "@material-ui/core/Icon/Icon";
 import Grid from "@material-ui/core/Grid/Grid";
 import Badge from "@material-ui/core/Badge/Badge";
+import {withRouter} from "react-router-dom";
 // import Notification from "../notification/Notification";
 
 const styles = theme => ({
@@ -35,16 +36,26 @@ const styles = theme => ({
 });
 
 class GoHomeBar extends Reflux.Component {
+    static defaultProps = {
+        dropdown: {}
+    };
     constructor(props){
         super(props);
+        this.state = {
+            path: ""
+        };
         this.store = AppStore;
+    }
+    componentDidMount () {
+        this.setState( { path: this.props.location.pathname });
+        // console.log(this.props.location.pathname);
     }
     handleClick () {
         appActions.toggleMenu();
     }
     render() {
         const { classes, source, dropdown } = this.props;
-
+        const { path } = this.state;
         return(
             <div>
                 <AppBar position = "fixed">
@@ -65,7 +76,6 @@ class GoHomeBar extends Reflux.Component {
                                         onClose = { this.handleClick.bind(this) }
                                     >
                                         <NavBar
-                                            source = { source }
                                             dropdown = { dropdown }
                                             closable = { true }
                                         />
@@ -78,7 +88,7 @@ class GoHomeBar extends Reflux.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs = { 1 } sm = { 1 } >
-                                { source === "devices" ?
+                                { path === "/" ?
                                     <div>
                                         <Icon>
                                         location_on
@@ -106,8 +116,7 @@ class GoHomeBar extends Reflux.Component {
 
 GoHomeBar.propTypes = {
     classes: PropTypes.object.isRequired,
-    source: PropTypes.string.isRequired,
     dropdown: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(GoHomeBar);
+export default withStyles(styles)(withRouter(GoHomeBar));

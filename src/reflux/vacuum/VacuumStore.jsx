@@ -72,22 +72,24 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
         onToggle (dev_id) {
             const { vac_status } = this.state.device_state;
             if ( dev_id === id ) {
+                let command = "";
                 switch (vac_status) {
                 case "paused":  // continue
-                    this.onOn(dev_id);
+                    command = "on";
                     break;
                 case "cleaning":  // pause
-                    this.onPause(dev_id);
+                    command = "pause";
                     break;
                 case "docked":  // start
-                    this.onOn(dev_id);
+                    command = "on";
                     break;
                 case "full":  // find me
-                    this.onFindMe(dev_id);
+                    command = "find-me";
                     break;
                 default:
                     break;
                 }
+                this.doCommand(command, "");
             }
         }
 
@@ -95,19 +97,16 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
         onOn (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("on", "");
-                this.setState({"loading":true});
             }
         }
         onOff (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("off", "");
-                this.setState({"loading":true});
             }
         }
         onPause (dev_id) {
             if ( dev_id === id ) {
                 this.doCommand("pause", "");
-                this.setState({"loading":true});
             }
         }
         onDock (dev_id) {
@@ -120,22 +119,18 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
             if ( dev_id === id ) {
                 wsActions.setOneWay();
                 this.doCommand("find-me", "");
-                this.setState({"loading":true});
             }
         }
         onSetFanSpeed (dev_id, value) {
             if ( dev_id === id ) {
                 this.doCommand("set-fan-speed", value);
-                this.setState({"loading":true});
             }
         }
         onDo (dev_id, command) {
             if ( dev_id === id ) {
                 this.doCommand(command, "");
-                this.setState({"loading":true});
             }
         }
-
 
         // Appearance
         onVisible(location) {
@@ -144,7 +139,6 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
                 this.setState({visible: true});
             }
         }
-
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
                 this.setState({status:status});
@@ -158,7 +152,6 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
                 }
             }
         }
-
         onSetLoading (group_id) {
             if (this.state.group_id === group_id) {
                 this.setState({loading: true});

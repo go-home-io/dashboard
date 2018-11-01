@@ -17,8 +17,10 @@ class GroupManager  extends Reflux.Component {
         this.handleGroupHeaderClick = this.handleGroupHeaderClick.bind(this);
     }
     handleGroupHeaderClick() {
-        const { dev_id } = this.props;
-        groupActions.toggle(dev_id);
+        const { dev_id, read_only } = this.props;
+        if ( ! read_only ) {
+            groupActions.toggle(dev_id);
+        }
     }
     render () {
         const { all_device_states, dev_id, location } = this.props;
@@ -44,6 +46,7 @@ class GroupManager  extends Reflux.Component {
                         all_device_states = { all_device_states }
                         members = { members }
                         visible = { visible && ! minimized }
+                        read_only = { read_only }
                     />
                 </div>
 

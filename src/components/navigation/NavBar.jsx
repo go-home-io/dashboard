@@ -6,16 +6,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import DevicesIcon from "@material-ui/icons/Devices";
 import { Link } from "react-router-dom";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import ListItemActionWrapper from "./ListItemActionWrapper";
 import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
-import Icon from "@material-ui/core/Icon/Icon";
+import { withRouter } from "react-router-dom";
+import LocationDropdown from "./LocationDropdown";
+// import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
 
 const styles = theme => ({
     root: {
@@ -38,6 +36,9 @@ const styles = theme => ({
 });
 
 class NavBar extends Reflux.Component {
+    static defaultProps = {
+        dropdown: {}
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -49,7 +50,9 @@ class NavBar extends Reflux.Component {
         this.closeAfterClick = this.closeAfterClick.bind(this);
     }
     handleClick ()  {
-        this.setState(state => ({ open: !state.open }));
+        this.setState(prevState => {
+            return { open: ! prevState.open };
+        });
     }
     closeAfterClick () {
         if (this.state.openMenu) {
@@ -57,21 +60,21 @@ class NavBar extends Reflux.Component {
         }
     }
     render() {
-        const { classes, source, dropdown } = this.props;
+        const { classes, dropdown } = this.props;
         const { name, icon, items } = dropdown;
+        const path = this.props.location.pathname; // Window Location from Router
 
         return (
             <div className = { classes.root } >
                 <List
                     component = "nav"
-                    // subheader = { <ListSubheader component="div">Nested List Items</ListSubheader> }
+                    // subheader = { <ListSubheader component="div"> GO-HOME </ListSubheader> }
                 >
                     <ListItem
                         button
                         onClick = { this.closeAfterClick }
                         component = { Link }
                         to = { "/" }
-
                     >
                         <ListItemIcon>
                             <DevicesIcon />
@@ -90,41 +93,16 @@ class NavBar extends Reflux.Component {
                         </ListItemIcon>
                         <ListItemText inset primary = "Status" />
                     </ListItem>
-                    { source === "devices" ?
-                        <div>
-                            <ListItem
-                                button
-                                onClick = { this.handleClick }
-                            >
-                                <ListItemIcon>
-                                    <Icon>
-                                        { icon }
-                                    </Icon>
-                                </ListItemIcon>
-                                <ListItemText inset primary = { name } />
-                                { this.state.open ?
-                                    <ExpandLess className = { classes.expand }/> :
-                                    <ExpandMore className = { classes.expand }/>
-                                }
-                            </ListItem>
-
-                            <Collapse in = { this.state.open } timeout = "auto" unmountOnExit >
-                                <List component = "nav" disablePadding dense>
-                                    { items.map( item => {
-                                        return (
-                                            <ListItemActionWrapper
-                                                source = { source }
-                                                classes = { classes }
-                                                name = { item.name }
-                                                icon = { item.icon }
-                                                key = { item.name }
-                                            />
-                                        );
-                                    })
-                                    }
-                                </List>
-                            </Collapse>
-                        </div> : null
+                    { path === "/" &&
+                        <LocationDropdown
+                            classes = { classes }
+                            icon = { icon }
+                            handleClick = { this.handleClick }
+                            open = { this.state.open }
+                            name = { name }
+                            items = { items }
+                            path = { path }
+                        />
                     }
                 </List>
             </div>
@@ -135,7 +113,6 @@ class NavBar extends Reflux.Component {
 NavBar.propTypes = {
     classes: PropTypes.object.isRequired,
     dropdown: PropTypes.object.isRequired,
-    source: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(NavBar);
+export default withStyles(styles)(withRouter(NavBar));

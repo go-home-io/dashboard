@@ -12,7 +12,7 @@ import groupActions from "../../reflux/group/groupActions";
 const styles = () => ({
     text: {
         marginLeft: 7,
-        cursor: "pointer",
+        // cursor: "pointer",
     },
     icon: {
         marginLeft: 5,
@@ -39,7 +39,8 @@ class GroupHeader extends React.Component {
         groupActions.toggleWindow(group_id);
     }
     render () {
-        const { classes, groupIcon, name, iconColor, handleClick, visible } = this.props;
+        const { classes, groupIcon, name, iconColor, handleClick, visible, read_only } = this.props;
+        const cursor = read_only ? "default" : "pointer";
         return(
             visible ?
                 <Grid container >
@@ -50,8 +51,11 @@ class GroupHeader extends React.Component {
                         variant = 'subheading'
                         className = { classes.text }
                         onClick = { handleClick }
+
                     >
-                        {name}
+                        <span style = { { cursor: cursor } }>
+                            { name }
+                        </span>
                     </Typography>
                     <Tooltip
                         title = "Minimize the group window"
@@ -79,7 +83,8 @@ GroupHeader.propTypes = {
     iconColor: PropTypes.string.isRequired,
     handleClick: PropTypes.func.isRequired,
     group_id: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired
+    visible: PropTypes.bool.isRequired,
+    read_only: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(GroupHeader);

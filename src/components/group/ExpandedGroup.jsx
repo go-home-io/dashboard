@@ -19,7 +19,7 @@ class ExpandedGroup extends React.Component {
         const {
             classes, iconColor, groupIcon,
             name, group_id, location, handleClick,
-            all_device_states, members, visible } = this.props;
+            all_device_states, members, visible, read_only } = this.props;
 
         return(
             <div className = { classes.root }>
@@ -30,6 +30,7 @@ class ExpandedGroup extends React.Component {
                     handleClick = { handleClick }
                     group_id = { group_id }
                     visible = { visible }
+                    read_only = { read_only }
                 />
                 <Grid container justify = 'center' alignItems = 'center'>
                     <GroupDevices
@@ -55,7 +56,8 @@ ExpandedGroup.propTypes = {
     all_device_states: PropTypes.array.isRequired,
     members: PropTypes.array.isRequired,
     handleClick: PropTypes.func.isRequired,
-    visible: PropTypes.bool.isRequired
+    visible: PropTypes.bool.isRequired,
+    read_only: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(ExpandedGroup);
