@@ -1,5 +1,5 @@
 import Reflux from "reflux";
-// import deviceActions from ".deviceActions";
+import deviceActions from "./deviceActions";
 import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
@@ -8,23 +8,23 @@ function DeviceStoreFactory(id,  device_info, location, group_id){
     class DeviceStore extends Reflux.Store {
         constructor() {
             super();
-
+            const { name, type, state, last_seen, commands, read_only } = device_info;
             this.state = {
                 id:id,
-                name: device_info.name,
-                device_type: device_info.type,
-                device_state: device_info.state,
-                last_seen: device_info.last_seen,
-                commands: device_info.commands,
+                name: name,
+                device_type: type,
+                device_state: state,
+                last_seen: last_seen,
+                commands: commands,
                 group_id: group_id,
                 location: location,
-                loading:false,
+                loading: false,
                 visible: false,
-                read_only: device_info.read_only,
+                read_only: read_only,
                 status:"ordinary",
             };
 
-            // this.listenables = deviceActions;
+            this.listenables = deviceActions;
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
@@ -33,24 +33,10 @@ function DeviceStoreFactory(id,  device_info, location, group_id){
             this.onToggle = this.onToggle.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onSetLoading = this.onSetLoading.bind(this);
-            this.onSetInitialState = this.onSetInitialState.bind(this);
             this.onCommand = this.onCommand.bind(this);
-        }
 
-        onSetInitialState (dev_id, device_state, location, group_id) {
-            if (dev_id === id) {
-                this.setState = ( {
-                    name: device_state.name,
-                    device_state: device_state.state,
-                    last_seen: device_state.last_seen,
-                    commands: device_state.commands,
-                    group_id: group_id,
-                    location: location,
-                    loading:false,
-                    visible: false,
-                    status:"ordinary",
-                });
-            }
+            // console.log("State: "+id);
+            // console.log(this.state);
         }
 
         // WebSocket messenger
@@ -83,7 +69,7 @@ function DeviceStoreFactory(id,  device_info, location, group_id){
         }
         onToggle (dev_id) {
             if ( dev_id === id ) {
-                const  command = this.state.on ? "off" : "on";
+                const  command = this.state.device_state.on ? "off" : "on";
                 this.doCommand(command, "");
             }
         }
@@ -111,7 +97,7 @@ function DeviceStoreFactory(id,  device_info, location, group_id){
         // Group Action
         onSetLoading (group_id) {
             if (this.state.group_id === group_id) {
-                this.setState({loading: true});
+                this.setState( { loading: true } );
             }
         }
     }

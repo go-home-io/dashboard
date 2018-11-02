@@ -1,12 +1,12 @@
 import Reflux from "reflux";
 
-const groupActions = Reflux.createActions([
+const deviceActions = Reflux.createActions([
     "toggle",
     "visible",
     "message",
-    "toggleWindow",
     "status",
+    "setLoading",
     "command"
 ]);
 
-export default groupActions;
+export default deviceActions;

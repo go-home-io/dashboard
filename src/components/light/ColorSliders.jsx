@@ -41,7 +41,7 @@ class ColorSliders extends React.Component {
     }
     render () {
         const { classes, close } = this.props;
-        const { r, g, b } = this.state;
+        const { r: red, g: green, b: blue } = this.state;
         const css_color = rgbColor(this.state);
 
         return (
@@ -50,10 +50,24 @@ class ColorSliders extends React.Component {
                     color = { css_color }
                     caption = 'Set color'
                 />
-                { RGBSlider(r, "#f50057","#e46363", this.handleColorChange("r")) }
-                { RGBSlider(g, "green","lightgreen", this.handleColorChange("g")) }
-                { RGBSlider(b, "blue","lightblue", this.handleColorChange("b")) }
-
+                <RGBSlider
+                    value = { red }
+                    colorThumb = { "#f50057" }
+                    colorTrack = { "#e46363" }
+                    handleChange = { this.handleColorChange("r") }
+                />
+                <RGBSlider
+                    value = { green }
+                    colorThumb = { "green" }
+                    colorTrack = { "lightgreen" }
+                    handleChange = { this.handleColorChange("g") }
+                />
+                <RGBSlider
+                    value = { blue }
+                    colorThumb = { "blue" }
+                    colorTrack = { "lightblue" }
+                    handleChange = { this.handleColorChange("b") }
+                />
                 <SliderActions
                     close = { close }
                     save = { this.setColor }

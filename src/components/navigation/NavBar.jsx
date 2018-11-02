@@ -12,8 +12,7 @@ import { Link } from "react-router-dom";
 import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
 import { withRouter } from "react-router-dom";
-import LocationDropdown from "./LocationDropdown";
-// import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
+import NavBarDropdown from "./NavBarDropdown";
 
 const styles = theme => ({
     root: {
@@ -62,7 +61,7 @@ class NavBar extends Reflux.Component {
     render() {
         const { classes, dropdown } = this.props;
         const { name, icon, items } = dropdown;
-        const path = this.props.location.pathname; // Window Location from Router
+        const path = this.props.location.pathname; // Window Location, Router props
 
         return (
             <div className = { classes.root } >
@@ -94,7 +93,7 @@ class NavBar extends Reflux.Component {
                         <ListItemText inset primary = "Status" />
                     </ListItem>
                     { path === "/" &&
-                        <LocationDropdown
+                        <NavBarDropdown
                             classes = { classes }
                             icon = { icon }
                             handleClick = { this.handleClick }

@@ -1,7 +1,6 @@
 import React from "react";
 import Reflux from "reflux";
 import ComponentHeader from "../common/ComponentHeader";
-import LightStoreFactory from "../../reflux/light/LightStore";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -9,10 +8,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/Grid";
 import WaitingProgress from "../common/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
-import lightActions from "../../reflux/light/lightActions";
 import truncateCaption from "../utils/truncate";
 import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF, LIGHT_RO_ICON_COLOR} from "../../settings/colors";
 import RenderCommandHandlers from "../common/RenderCommandHandlers";
+import DeviceStoreFactory from "../../reflux/devices/DeviceStore";
+import deviceActions from "../../reflux/devices/deviceActions";
 
 const styles = () => ({
     root: {
@@ -28,18 +28,15 @@ const styles = () => ({
     }
 });
 
-const lightIcon = "wb_incandescent";
-
 class LightManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        const {id, device_info, location, group_id} = props;
-        this.store = LightStoreFactory(id, device_info, location, group_id);
+        const { id, device_info, location, group_id } = props;
+        this.store = DeviceStoreFactory(id, device_info, location, group_id);
     }
     render () {
         const { classes }  = this.props;
         const { id, name, device_state, visible, loading, status, read_only, commands } = this.state;
-
         const display = visible ? "block" : "none";
         const caption = truncateCaption(name, 40);
 
@@ -52,8 +49,7 @@ class LightManager extends Reflux.Component{
                     on = { device_state.on }
                     status = { status }
                     read_only = { read_only }
-                    actions = { lightActions }
-                    icon = { lightIcon }
+                    actions = { deviceActions }
                     ordinaryBkgColor = { LIGHT_HEADER_BKG_COLOR }
                     iconColorOn = { LIGHT_HEADER_ICON_COLOR_ON }
                     iconColorOff = { LIGHT_HEADER_ICON_COLOR_OFF }
@@ -65,7 +61,7 @@ class LightManager extends Reflux.Component{
                             <div className = { classes.progress }>
                                 <WaitingProgress
                                     dev_id = { id }
-                                    actions = { lightActions }
+                                    actions = { deviceActions }
                                 />
                             </div>
                         </Zoom>
@@ -75,7 +71,7 @@ class LightManager extends Reflux.Component{
                                 <RenderCommandHandlers
                                     commands = { commands }
                                     dev_id = { id }
-                                    doCommand = { lightActions.command }
+                                    doCommand = { deviceActions.command }
                                     read_only = { read_only }
                                     device_state = { device_state }
                                 />

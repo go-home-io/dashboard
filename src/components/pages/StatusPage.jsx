@@ -1,46 +1,30 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid/Grid";
-import GoHomeAppBar from "../navigation/AppBar";
-import Hidden from "@material-ui/core/Hidden/Hidden";
-import NavBar from "../navigation/NavBar";
 import StatusManager from "../status/StatusManager";
 import Typography from "@material-ui/core/Typography/Typography";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
+import Layout from "./Layout";
 
 class StatusPage extends React.Component {
     render () {
         const { access, status, worker} = this.props;
 
         return (
-            <Grid
-                container
-                spacing = { 0 }
-                justify = 'flex-start'
-            >
-                <Grid item xs = { 12 }>
-                    <GoHomeAppBar  />
-                </Grid>
-                <Hidden mdDown>
-                    <Grid item md = { 2 }>
-                        <NavBar />
-                    </Grid>
-                </Hidden>
-                <Grid item md = { 12 } lg = { 10 } >
-                    { access ?
-                        <StatusManager
-                            status = { status }
-                            worker = { worker }
-                        /> :
-                        <Typography
-                            style = { { marginTop: 100 } }
-                            variant = "display4"
-                            align = "center"
-                        >
-                            Access Denied
-                        </Typography>
-                    }
-                </Grid>
-            </Grid>
+            <Layout>
+                <div />
+                { access ?
+                    <StatusManager
+                        status = { status }
+                        worker = { worker }
+                    /> :
+                    <Typography
+                        style = { { marginTop: 100 } }
+                        variant = "display4"
+                        align = "center"
+                    >
+                        Access Denied
+                    </Typography>
+                }
+            </Layout>
         );
     }
 }

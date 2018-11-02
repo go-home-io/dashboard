@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import HomePage from "./HomePage";
+import HomePage from "./DevicePage";
 import HTTP from "../../services/httpservices";
 import base64 from "base-64";
 import ErrorPage from "./ErrorPage";

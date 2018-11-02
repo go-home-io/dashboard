@@ -1,18 +1,16 @@
-import lightActions from "./light/lightActions";
 import groupActions from "./group/groupActions";
 import sensorActions from "./sensor/sensorActions";
 import vacuumActions from "./vacuum/vacuumActions";
 import cameraActions from "./camera/cameraActions";
-import switchActions from "./switch/switchActions";
 import weatherActions from "./weather/weatherActions";
+import deviceActions from "./devices/deviceActions";
 
 const actionsList = [
-    lightActions,
+    deviceActions,
     groupActions,
     sensorActions,
     vacuumActions,
     cameraActions,
-    switchActions,
     weatherActions,
 ];
 

@@ -10,7 +10,7 @@ import ListItemActionWrapper from "./ListItemActionWrapper";
 import React from "react";
 import PropTypes from "prop-types";
 
-const LocationDropdown = (props) => {
+const NavBarDropdown = (props) => {
     const { classes, icon, handleClick,  open, name, items } = props;
     return (
         <div>
@@ -49,7 +49,7 @@ const LocationDropdown = (props) => {
     );
 };
 
-LocationDropdown.propTypes = {
+NavBarDropdown.propTypes = {
     classes: PropTypes.object.isRequired,
     icon: PropTypes.string.isRequired,
     handleClick: PropTypes.func.isRequired,
@@ -58,4 +58,4 @@ LocationDropdown.propTypes = {
     items: PropTypes.array.isRequired
 };
 
-export default LocationDropdown;
+export default NavBarDropdown;

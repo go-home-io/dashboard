@@ -1,8 +1,11 @@
 import React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Slider from "@material-ui/lab/Slider/Slider";
+import PropTypes from "prop-types";
 
-function RGBSlider(value, colorThumb, colorTrack, handleChange) {
+function RGBSlider(props) {
+    const { value, colorThumb, colorTrack, handleChange } = props;
+
     // Overrides the slider CSS
     const theme = createMuiTheme({
         overrides: {
@@ -25,7 +28,6 @@ function RGBSlider(value, colorThumb, colorTrack, handleChange) {
         },
     });
 
-
     return (
         <MuiThemeProvider theme = { theme }>
             <Slider value = { value } max = { 255 } onChange = { handleChange } />
@@ -33,4 +35,10 @@ function RGBSlider(value, colorThumb, colorTrack, handleChange) {
     );
 }
 
+RGBSlider.propTypes = {
+    value: PropTypes.number.isRequired,
+    colorThumb: PropTypes.string.isRequired,
+    colorTrack: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired
+};
 export default RGBSlider;

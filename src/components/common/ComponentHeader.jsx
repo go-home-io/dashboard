@@ -51,7 +51,6 @@ class ComponentHeader extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.setOrdinaryStatus = this.setOrdinaryStatus.bind(this);
     }
-
     getHeaderBackgroundColor(status) {
         const { ordinaryBkgColor } = this.props;
         let bgColor = null;
@@ -78,6 +77,8 @@ class ComponentHeader extends React.Component {
     setOrdinaryStatus() {
         const { dev_id, actions } = this.props;
         actions.status(dev_id, "ordinary");
+        clearInterval(this.timer);
+        this.timer = null;
     }
 
     render () {
@@ -85,9 +86,7 @@ class ComponentHeader extends React.Component {
             sensor_type, on,  iconROColor, vac_status} = this.props;
 
         const backgroundColor = this.getHeaderBackgroundColor(status);
-        const variantSensor = (variant === "sensor");
-        const cursor = variantSensor ? "default" :
-            read_only ? "default" : "pointer";
+        const cursor = (variant === "sensor") || read_only ? "default" : "pointer";
 
         return (
             <Paper className = { classes.paper } elevation = { 0 } style = { {backgroundColor:backgroundColor} }>

@@ -1,9 +1,8 @@
 import Reflux from "reflux";
 import groupActions from "./groupActions";
 import wsActions from "../socket/wsActions";
-import lightActions from "../light/lightActions";
+import deviceActions from "../devices/deviceActions";
 import notificationActions from "../notification/notificationActions";
-
 
 //  Create unique Store for each Group
 function GroupStoreFactory(id,  members, device_info, location){
@@ -33,8 +32,6 @@ function GroupStoreFactory(id,  members, device_info, location){
             this.doCommand = this.doCommand.bind(this);
             this.onVisible = this.onVisible.bind(this);
             this.onToggle = this.onToggle.bind(this);
-            this.onOn = this.onOn.bind(this);
-            this.onOff = this.onOff.bind(this);
             this.onToggleWindow = this.onToggleWindow.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onCommand = this.onCommand.bind(this);
@@ -46,7 +43,7 @@ function GroupStoreFactory(id,  members, device_info, location){
             wsActions.doCommand(mess);
             this.setState({loading: true});
             if (! this.state.minimized) {
-                lightActions.setLoading(id);
+                deviceActions.setLoading(id);
             }
         }
 
@@ -70,19 +67,10 @@ function GroupStoreFactory(id,  members, device_info, location){
                 }
             }
         }
-        onOn (dev_id) {
-            if ( dev_id === id ) {
-                this.doCommand("on", "");
-            }
-        }
-        onOff (dev_id) {
-            if ( dev_id === id ) {
-                this.doCommand("off", "");
-            }
-        }
         onToggle (dev_id) {
             if ( dev_id === id ) {
-                this.doCommand("toggle", "");
+                const command = this.state.device_state.on ? "off" : "on";
+                this.doCommand(command, "");
             }
         }
         onVisible(location) {
@@ -93,9 +81,8 @@ function GroupStoreFactory(id,  members, device_info, location){
         }
         onToggleWindow(dev_id) {
             if ( dev_id === id ) {
-                this.setState( prevState => {
-                    return { minimized: ! prevState.minimized };
-                });
+                const minimized = this.state.minimized;
+                this.setState( { minimized: ! minimized } );
             }
         }
         onStatus(dev_id, status) {

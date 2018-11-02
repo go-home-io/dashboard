@@ -6,14 +6,14 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import truncateCaption from "../utils/truncate";
 import { SWITCH_HEADER_BKG_COLOR, SWITCH_RO_ICON_COLOR } from "../../settings/colors";
 import ComponentHeader from "../common/ComponentHeader";
-import switchActions from "../../reflux/switch/switchActions";
-import SwitchStoreFactory from "../../reflux/switch/SwitchStore";
+import DeviceStoreFactory from "../../reflux/devices/DeviceStore";
+import deviceActions from "../../reflux/devices/deviceActions";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import WaitingProgress from "../common/WaitingProgress";
 import Grid from "@material-ui/core/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
-import customizedSwitch from "./customizedSwitch";
+import CustomizedSwitch from "./customizedSwitch";
 
 const styles = () => ({
     root: {
@@ -38,18 +38,19 @@ class SwitchManager extends Reflux.Component {
     constructor(props) {
         super(props);
         const { id, device_info, location, group_id } = props;
-        this.store = SwitchStoreFactory(id, device_info, location, group_id);
+        this.store = DeviceStoreFactory(id, device_info, location, group_id);
+
+        this.handleChange = this.handleChange.bind(this);
     }
     handleChange () {
-        // const { id } = this.props;
         const { id, read_only } = this.state;
         if ( ! read_only ) {
-            switchActions.toggle(id);
+            deviceActions.toggle(id);
         }
     }
     render () {
         const { classes, id } = this.props;
-        const {  name: full_name, visible, device_state, status, read_only, loading} = this.state;
+        const {  name: full_name, visible, device_state, status, read_only, loading } = this.state;
         const name = truncateCaption(full_name, 45);
         const display = visible ? "block" : "none";
         const { power, on } = device_state;
@@ -60,7 +61,7 @@ class SwitchManager extends Reflux.Component {
                     dev_id = { id }
                     name = { name }
                     status = { status }
-                    actions = { switchActions }
+                    actions = { deviceActions }
                     ordinaryBkgColor = { SWITCH_HEADER_BKG_COLOR }
                     variant = 'switch'
                     on = { on }
@@ -74,7 +75,7 @@ class SwitchManager extends Reflux.Component {
                             <div className = { classes.progress }>
                                 <WaitingProgress
                                     dev_id = { id }
-                                    actions = { switchActions }
+                                    actions = { deviceActions }
                                 />
                             </div>
                         </Zoom>
@@ -85,15 +86,18 @@ class SwitchManager extends Reflux.Component {
                                     <Typography variant = 'headline' className = { classes.typography }>
                                         <strong>
                                             {power}
-                                            {" "}
-v
+                                            {" v"}
                                         </strong>
                                     </Typography>
                                 </Grid>
                                 <Grid container justify = 'center' >
-                                    { customizedSwitch (on, SWITCH_HEADER_BKG_COLOR, this.handleChange.bind(this), read_only) }
+                                    <CustomizedSwitch
+                                        disabled = { read_only }
+                                        checked = { on }
+                                        colorThumb = { SWITCH_HEADER_BKG_COLOR }
+                                        handleChange = { this.handleChange }
+                                    />
                                 </Grid>
-
                             </div>
                         </Zoom>
                     }

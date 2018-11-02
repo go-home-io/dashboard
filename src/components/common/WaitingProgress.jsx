@@ -62,7 +62,6 @@ class WaitingProgress extends Reflux.Component {
             this.setState({ completed: completed + PROGRESS_INCREMENT });
         }
     }
-
     render () {
         return (
             <LinearProgress variant = "determinate" value = { this.state.completed } />
