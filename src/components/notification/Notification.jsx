@@ -1,76 +1,47 @@
 import React from "react";
 import Reflux from "reflux";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import notificationStore from "../../reflux/notification/notificationStore";
+import NotificationStore from "../../reflux/notification/NotificationStore";
 import notificationActions from "../../reflux/notification/notificationActions";
-
-const styles = theme => ({
-    close: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4
-    }
-});
+import SnackContent from "./SnackContent";
 
 class Notification extends Reflux.Component {
     constructor(props) {
         super(props);
-        this.store = notificationStore;
+        this.store = NotificationStore;
     }
-
-    handleClose (event, reason) {
+    static handleClose (event, reason) {
         if (reason !== "clickaway") {
             notificationActions.close();
         }
     }
-
-    handleExited ()  {
+    static handleExited ()  {
         notificationActions.processQueue();
     }
 
     render() {
-        const { classes } = this.props;
+        const { currentNotification, open } = this.state;
+        const { message, type }  = currentNotification ? currentNotification : "";
+
         return (
-            <div>
-                <Snackbar
-                    anchorOrigin = { {
-                        vertical: "top",
-                        horizontal: "right"
-                    } }
-                    open = { this.state.open }
-                    autoHideDuration = { 6000 }
-                    onClose = { this.handleClose }
-                    onExited = { this.handleExited }
-                    ContentProps = { {
-                        "aria-describedby": "message-id"
-                    } }
-                    message = {
-                        <span id = "message-id">
-                            {this.state.messageInfo}
-                        </span>
-                    }
-                    action = { [
-                        <IconButton
-                            key = "close"
-                            aria-label = "Close"
-                            color = "inherit"
-                            className = { classes.close }
-                            onClick = { this.handleClose }
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                    ] }
+            <Snackbar
+                anchorOrigin = { {
+                    vertical: "top",
+                    horizontal: "right",
+                } }
+                open = { open }
+                autoHideDuration = { 6000 }
+                onClose = { Notification.handleClose }
+                onExited = { Notification.handleExited }
+            >
+                <SnackContent
+                    onClose = { Notification.handleClose }
+                    variant = { type }
+                    message = { message }
                 />
-            </div>
+            </Snackbar>
         );
     }
 }
 
-Notification.propTypes = {
-    classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(Notification);
+export default Notification;

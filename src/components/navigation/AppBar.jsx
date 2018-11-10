@@ -12,13 +12,24 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer/Drawer";
 import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
-import Icon from "@material-ui/core/Icon/Icon";
 import Grid from "@material-ui/core/Grid/Grid";
-import Badge from "@material-ui/core/Badge/Badge";
 import {withRouter} from "react-router-dom";
-// import Notification from "../notification/Notification";
+import NotificationStore from "../../reflux/notification/NotificationStore";
+import NotificationCount from "../notification/NotificationCount";
+import LocationIcon from "@material-ui/icons/LocationOn";
+import NotificationsListView from "../notification/NotificationsListView";
+import notificationActions from "../../reflux/notification/notificationActions";
 
 const styles = theme => ({
+    paper: {
+        float: "right",
+        marginTop: 75,
+        marginRight: 15,
+        width: theme.spacing.unit * 40,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+    },
     button: {
         margin: theme.spacing.unit,
         color: "white",
@@ -31,7 +42,8 @@ const styles = theme => ({
     },
     location: {
         color: "white",
-        marginLeft: -7,
+        display: "flex",
+        alignItems: "center",
     }
 });
 
@@ -42,38 +54,52 @@ class GoHomeBar extends Reflux.Component {
     constructor(props){
         super(props);
         this.state = {
-            path: ""
+            path: "",
+            ntfViewOpen: false,
         };
-        this.store = AppStore;
+        this.stores = [AppStore, NotificationStore];
+
+        this.sideMenuClose = this.sideMenuClose.bind(this);
+        this.ntfViewOpen = this.ntfViewOpen.bind(this);
+        this.ntfViewClose = this.ntfViewClose.bind(this);
     }
     componentDidMount () {
+        // Router props
         this.setState( { path: this.props.location.pathname });
-        // console.log(this.props.location.pathname);
     }
-    handleClick () {
+    sideMenuClose () {
         appActions.toggleMenu();
+    }
+    ntfViewOpen () {
+        this.setState({ ntfViewOpen: true });
+    }
+    ntfViewClose () {
+        this.setState({
+            ntfViewOpen: false,
+        });
     }
     render() {
         const { classes, dropdown } = this.props;
-        const { path } = this.state;
+        const { path, unseenCount, active_location, openMenu } = this.state;
+
         return(
             <div>
-                <AppBar position = "fixed">
+                <AppBar position = "fixed" color = "primary">
                     <Toolbar>
                         <Grid container alignItems = 'center'>
                             <Hidden lgUp>
-                                <Grid item xs = { 2 } sm = { 1 } md = { 1 }>
+                                <Grid item xs = { 2 } sm = { 1 }>
                                     <IconButton
                                         className = { classes.button }
                                         aria-label = "Menu"
-                                        onClick = { this.handleClick }
+                                        onClick = { this.sideMenuClose }
                                     >
                                         <MenuIcon/>
                                     </IconButton>
                                     <Drawer
                                         anchor = "left"
-                                        open = { this.state.openMenu }
-                                        onClose = { this.handleClick.bind(this) }
+                                        open = { openMenu }
+                                        onClose = { this.sideMenuClose }
                                     >
                                         <NavBar
                                             dropdown = { dropdown }
@@ -82,33 +108,41 @@ class GoHomeBar extends Reflux.Component {
                                     </Drawer>
                                 </Grid>
                             </Hidden>
-                            <Grid item xs = { 7 } sm = { 8 } md = { 8 } lg = { 10 } >
+
+                            <Grid item xs = { 7 } sm = { 8 } lg = { 9 } >
                                 <Typography variant = "title" color = "inherit">
-                                GO-HOME DASHBOARD
+                                    GO-HOME DASHBOARD
                                 </Typography>
                             </Grid>
-                            <Grid item xs = { 1 } sm = { 1 } >
+
+                            <Grid item xs = { 2 }  >
                                 { path === "/" ?
                                     <div>
-                                        <Icon>
-                                        location_on
-                                        </Icon>
+                                        <LocationIcon/>
                                         <Typography variant = 'caption' className = { classes.location }>
-                                            {this.state.active_location}
+                                            { active_location }
                                         </Typography>
-                                    </div> : null
+                                    </div>
+                                    :
+                                    null
                                 }
                             </Grid>
-                            <Grid item xs = { 2 } sm = { 1 }>
-                                <Badge className = { classes.margin } badgeContent = { 3 } color = "secondary">
-                                    <Icon className = { classes.notificationIcon }>
-                                        notifications
-                                    </Icon>
-                                </Badge>
+
+                            <Grid item xs = { 1 }>
+                                <div onClick = { this.ntfViewOpen }>
+                                    <NotificationCount
+                                        className = { classes.notificationIcon }
+                                        unseenCount =  { unseenCount }
+                                    />
+                                </div>
                             </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
+                <NotificationsListView
+                    open = { this.state.ntfViewOpen }
+                    onClose = { this.ntfViewClose }
+                />
             </div>
         );
     }

@@ -1,3 +1,7 @@
+import green from "@material-ui/core/colors/green";
+import amber from "@material-ui/core/colors/amber";
+import red from "@material-ui/core/colors/red";
+
 /*----------------------------------------
     Component Header background colors
 ------------------------------------------*/
@@ -9,10 +13,10 @@ export const SWITCH_HEADER_BKG_COLOR = "#8456f3";
 export const MIN_GROUP_HEADER_BKG_COLOR = "#3f51b5";
 
 //  'success'
-export const SUCCESS_BKG_COLOR = "#4fd795";
+export const SUCCESS_BKG_COLOR = green["A700"];
 
 // 'error'
-export const ERROR_BKG_COLOR = "#f44336";
+export const ERROR_BKG_COLOR = red[400];//"#f44336";
 
 /* -----------------------------------------
                  Icon colors
@@ -20,7 +24,7 @@ export const ERROR_BKG_COLOR = "#f44336";
 // Group
 export const GROUP_HEADER_ICON_COLOR_ON = "#ffa500b3";
 export const GROUP_HEADER_ICON_COLOR_OFF = "rgb(0,0,0,0.54)";
-export const MIN_GROUP_HEADER_ICON_COLOR_ON = "#f9f7ab";
+export const MIN_GROUP_HEADER_ICON_COLOR_ON = amber[50];//"#f9f7ab";
 export const MIN_GROUP_HEADER_ICON_COLOR_OFF = "#d2d2ca80";
 
 

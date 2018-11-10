@@ -25,7 +25,8 @@
     "react-transition-group": "^2.5.0",
     "reflux": "^6.4.1",
     "typeface-roboto": "0.0.54",
-    "ws": "^6.1.0"
+    "ws": "^6.1.0",
+    "classnames": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

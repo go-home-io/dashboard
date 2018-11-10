@@ -45,7 +45,7 @@ class  StatusManager extends React.Component {
         const { workerSelected } = this.state;
         const  workerColumns  = ["ID", "Last seen", "Properties", "Max devices"];
         const statusColumns = ["Name", "Status", "Worker", "Type"];
-        const filterList = workerSelected? [[],[],[workerSelected],[]] : null;
+        const filterList = workerSelected ? [ [],[],[workerSelected],[] ] : null;
 
 
         let workerData = [];

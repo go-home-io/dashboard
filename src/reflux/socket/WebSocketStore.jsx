@@ -3,6 +3,7 @@ import {SOCKET_URL} from "../../settings/urls";
 import {CONNECTION_TIMEOUT, PING_INTERVAL, MAX_ATTEMPTS} from "../../settings/websocket";
 import wsActions from "./wsActions";
 import actions from "../actions";
+import notificationActions from "../notification/notificationActions";
 
 let timerCONNECTION_TIMEOUT = null;
 let timerPING_INTERVAL = null;
@@ -91,12 +92,18 @@ class WebSocketStore extends Reflux.Store {
             // Pong handle
             this.pong();
         } else {
-            // Broadcast data to all client stores
+            // Notification
             const data = JSON.parse(evt.data);
-            // eslint-disable-next-line
-            actions.map((action) => {
-                action.message(data);
-            });
+            if ( data.id === "notification") {
+                notificationActions.message(data);
+            } else {
+            // Broadcast data to all client stores
+
+                // eslint-disable-next-line
+                actions.map((action) => {
+                    action.message(data);
+                });
+            }
         }
     }
     oneWayCommandServerResponseEmulation (dev_id) {
