@@ -18,7 +18,6 @@ import NotificationStore from "../../reflux/notification/NotificationStore";
 import NotificationCount from "../notification/NotificationCount";
 import LocationIcon from "@material-ui/icons/LocationOn";
 import NotificationsListView from "../notification/NotificationsListView";
-import notificationActions from "../../reflux/notification/notificationActions";
 
 const styles = theme => ({
     paper: {
