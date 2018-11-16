@@ -2,6 +2,8 @@ import React from "react";
 import {MOTION_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF, SENSOR_ICON_COLOR_ON} from "../../settings/colors";
 import TransferWithinAStation from "@material-ui/icons/TransferWithinAStation";
 import TouchApp from "@material-ui/icons/TouchApp";
+import Face from "@material-ui/icons/Face";
+import TagFaces from "@material-ui/icons/TagFaces";
 import DeviceUnknown from "@material-ui/icons/DeviceUnknown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {DirectionsWalk, Hotel, Lock, LockOpen, ToggleOn, ToggleOff } from "@material-ui/icons";
@@ -16,6 +18,8 @@ export const getSensorHeaderIcon = (type) => {
         return  <FontAwesomeIcon icon = "thermometer-half"/>;
     case "lock":
         return <FontAwesomeIcon icon = "lock"/>;
+    case "presence":
+        return <Face/>;
     default:
         return <DeviceUnknown/>;
     }
@@ -27,6 +31,8 @@ export const sensorContentIcon = (type, on) => {
         return on ? DirectionsWalk : Hotel;
     case "lock":
         return on ? LockOpen : Lock;
+    case "presence":
+        return on ? TagFaces : Face;
     default:
         return on ? ToggleOn : ToggleOff;
     }

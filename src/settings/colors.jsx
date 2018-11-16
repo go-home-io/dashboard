@@ -13,7 +13,7 @@ export const SWITCH_HEADER_BKG_COLOR = "#8456f3";
 export const MIN_GROUP_HEADER_BKG_COLOR = "#3f51b5";
 
 //  'success'
-export const SUCCESS_BKG_COLOR = green["A700"];
+export const SUCCESS_BKG_COLOR = green[500];
 
 // 'error'
 export const ERROR_BKG_COLOR = red[400];//"#f44336";

@@ -71,7 +71,7 @@ class NotificationsListView extends React.Component {
                             }
                         </Button>
                         { show_all ?
-                            <Button onClick = { this.dismissAll } color = "primary" size = "small">
+                            <Button onClick = { this.dismissAll } color = "secondary" size = "small">
                                 Clear all
                             </Button> : null
                         }

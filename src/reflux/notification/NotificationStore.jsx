@@ -68,7 +68,8 @@ class NotificationStore extends Reflux.Store {
             storage.set("notificationsList", ntfList);
 
             // Show notification
-            this.onNotification( state.message, state.status);
+            const mess = state.origin.toUpperCase() + ": " + state.message;
+            this.onNotification( mess, state.status);
         }
     }
 
