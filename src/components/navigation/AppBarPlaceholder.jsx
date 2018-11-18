@@ -8,9 +8,9 @@ class AppBarPlaceholder extends React.Component {
     render() {
         return(
             <div>
-                <AppBar position = "fixed">
+                <AppBar position = "fixed" color = "default">
                     <Toolbar>
-                        <Typography variant = "title" color = "inherit">
+                        <Typography variant = "title" color = "textSecondary">
                             GO-HOME
                         </Typography>
                     </Toolbar>

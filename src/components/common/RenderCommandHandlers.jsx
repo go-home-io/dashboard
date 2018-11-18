@@ -21,9 +21,10 @@ class RenderCommandHandlers extends React.Component{
         const { brightness , color: initColor, scenes, on } = device_state;
         const color = ( on ) ? initColor : {r:100,g:100,b:100};
         const knownCommands = Object.keys(knownCommandHandlers);
+        const commandsSorted = commands.sort();
 
         return (
-            commands.map( command => {
+            commandsSorted.map( command => {
                 const KnownCommandHandler = knownCommandHandlers[command];
                 return (
                     trivialCommands.includes(command) ?

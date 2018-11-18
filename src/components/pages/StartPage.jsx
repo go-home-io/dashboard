@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import HomePage from "./DevicePage";
+import DevicePage from "./DevicePage";
 import HTTP from "../../services/httpservices";
 import base64 from "base-64";
 import ErrorPage from "./ErrorPage";
@@ -53,14 +53,12 @@ class StartPage extends Component {
                 }
             });
     }
-
     getCredentials (user, password) {
         const credentials = "Basic " + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
         this.setState({auth_error: true, loading: true, auth_required: false});
         this.getComponentStateByHTTP();
     }
-
     render () {
         const { authenticated, generalState, auth_required, auth_error, status, loading } = this.state;
         return (
@@ -68,7 +66,7 @@ class StartPage extends Component {
                 <ErrorPage loading = { loading }/>
                 :
                 authenticated ?
-                    <HomePage
+                    <DevicePage
                         generalState = { generalState }
                     /> :
                     auth_required ?
@@ -78,7 +76,8 @@ class StartPage extends Component {
                                 getCredentials = { this.getCredentials.bind(this) }
                                 error = { auth_error }
                             />
-                        </div> :
+                        </div>
+                        :
                         <div>
                             <ErrorPage
                                 status = { status }

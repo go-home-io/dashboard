@@ -31,7 +31,7 @@ class SensorManager extends Reflux.Component {
         const {  name: full_name, visible, device_state, status} = this.state;
         const name = truncateCaption(full_name, 45);
         const display = visible ? "block" : "none";
-        const { sensor_type:type, battery_level, temperature, humidity, on } = device_state;
+        const { sensor_type:type, battery_level, temperature, humidity } = device_state;
 
         return (
             <Card className = { classes.root } style = { {display:display} }>

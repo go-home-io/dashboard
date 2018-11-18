@@ -1,7 +1,6 @@
 import React from "react";
 import Badge from "@material-ui/core/Badge/Badge";
 import NotificationEmptyIcon from "@material-ui/icons/NotificationsNone";
-import NotificationIcon from "@material-ui/icons/Notifications";
 import PropTypes from "prop-types";
 
 const NotificationCount = (props) => {
@@ -15,7 +14,7 @@ const NotificationCount = (props) => {
                 badgeContent = { unseenCount }
                 color = "secondary"
             >
-                <NotificationIcon/>
+                <NotificationEmptyIcon/>
             </Badge>
     );
 };

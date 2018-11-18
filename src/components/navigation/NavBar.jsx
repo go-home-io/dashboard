@@ -13,24 +13,34 @@ import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
 import { withRouter } from "react-router-dom";
 import NavBarDropdown from "./NavBarDropdown";
+import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
+import Typography from "@material-ui/core/Typography/Typography";
+import Divider from "@material-ui/core/Divider/Divider";
+// import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
     root: {
         width: "100%",
-        maxWidth: 195,
-        backgroundColor: theme.palette.background.paper,
+        height: "100%",
+        backgroundColor: "rgb(0,0,0,0.03)", //theme.palette.background.paper,
     },
     nested: {
-        paddingLeft: theme.spacing.unit * 7,
+        paddingLeft: theme.spacing.unit * 8,
     },
     expand: {
         position: "relative",
-        left: 8,
+        left: 0,
         top:1,
         color:"rgba(0, 0, 0, 0.54)",
     },
     icon: {
         color:"rgba(0, 0, 0, 0.54)"
+    },
+    subheading: {
+        height: 46,
+    },
+    typography: {
+        marginTop: 18
     }
 });
 
@@ -67,8 +77,26 @@ class NavBar extends Reflux.Component {
             <div className = { classes.root } >
                 <List
                     component = "nav"
-                    // subheader = { <ListSubheader component="div"> GO-HOME </ListSubheader> }
+                    subheader = {
+                        <ListSubheader
+                            component = "div"
+                            className = { classes.subheading }
+                        >
+                            <Typography
+                                className = { classes.typography }
+                                align = "center"
+                                variant = "title"
+                                color = "textSecondary"
+                            >
+                                {/*<strong>*/}
+                                    GO-HOME
+                                {/*</strong>*/}
+                            </Typography>
+                        </ListSubheader>
+                    }
                 >
+
+                    <Divider/>
                     <ListItem
                         button
                         onClick = { this.closeAfterClick }
@@ -81,6 +109,18 @@ class NavBar extends Reflux.Component {
                         <ListItemText inset primary = "Devices" />
                     </ListItem>
 
+                    { path === "/" &&
+                    <NavBarDropdown
+                        classes = { classes }
+                        icon = { icon }
+                        handleClick = { this.handleClick }
+                        open = { this.state.open }
+                        name = { name }
+                        items = { items }
+                        path = { path }
+                    />
+                    }
+
                     <ListItem
                         button
                         onClick = { this.closeAfterClick }
@@ -92,17 +132,7 @@ class NavBar extends Reflux.Component {
                         </ListItemIcon>
                         <ListItemText inset primary = "Status" />
                     </ListItem>
-                    { path === "/" &&
-                        <NavBarDropdown
-                            classes = { classes }
-                            icon = { icon }
-                            handleClick = { this.handleClick }
-                            open = { this.state.open }
-                            name = { name }
-                            items = { items }
-                            path = { path }
-                        />
-                    }
+
                 </List>
             </div>
         );
