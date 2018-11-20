@@ -12,15 +12,10 @@ import NotificationCount from "../notification/NotificationCount";
 import LocationIcon from "@material-ui/icons/LocationOn";
 import NotificationsListView from "../notification/NotificationsListView";
 
-const colorGrey = "rgb(0,0,0,0.54)";
 const styles = () => ({
     notificationIcon: {
         cursor: "pointer",
-        color: colorGrey,
     },
-    location: {
-        color: colorGrey,
-    }
 });
 
 class ToolbarContent extends Reflux.Component {
@@ -54,7 +49,7 @@ class ToolbarContent extends Reflux.Component {
         return(
             <Grid container justify = "center" alignItems = "center">
 
-                <Grid item xs = { 9 }>
+                <Grid item xs = { 8 } sm = { 9 }>
                     <NotificationsListView
                         open = { this.state.ntfViewOpen }
                         onClose = { this.ntfViewClose }
@@ -63,9 +58,9 @@ class ToolbarContent extends Reflux.Component {
 
                 <Grid item xs = { 2 }>
                     { path === "/" ?
-                        <div className = { classes.location }>
+                        <div>
                             <LocationIcon />
-                            <Typography variant = 'caption'>
+                            <Typography variant = 'caption' color = "inherit">
                                 { active_location }
                             </Typography>
                         </div>
@@ -74,7 +69,7 @@ class ToolbarContent extends Reflux.Component {
                     }
                 </Grid>
 
-                <Grid item xs = { 1 } onClick = { this.ntfViewOpen }>
+                <Grid item xs = { 2 } sm = { 1 } onClick = { this.ntfViewOpen }>
                     <NotificationCount
                         className = { classes.notificationIcon }
                         unseenCount =  { unseenCount }

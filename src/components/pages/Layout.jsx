@@ -7,16 +7,13 @@ const Layout = (props) => {
     const { dropdown, children } = props;
     return (
         <div >
-            <ResponsiveDrawer
-                dropdown = { dropdown }
-            >
+            <ResponsiveDrawer dropdown = { dropdown }>
                 { children }
             </ResponsiveDrawer>
             <Notification/>
         </div>
     );
 };
-
 
 Layout.propTypes = {
     dropdown: PropTypes.object,

@@ -8,23 +8,25 @@ import ListItemActionWrapper from "./ListItemActionWrapper";
 import React from "react";
 import PropTypes from "prop-types";
 import Divider from "@material-ui/core/Divider/Divider";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import Icon from "@material-ui/core/Icon/Icon";
 
 const NavBarDropdown = (props) => {
-    const { classes,  handleClick,  open, name, items } = props;
+    const { classes,  handleClick,  open, name, items, icon } = props;
     // const { icon } = props;
     return (
         <div>
             <ListItem
                 button
                 onClick = { handleClick }
-                style = { {marginLeft: 10} }
+                // style = { {marginLeft: 10} }
             >
-                {/*<ListItemIcon>*/}
-                {/*<Icon>*/}
-                {/*{ icon }*/}
-                {/*</Icon>*/}
-                {/*</ListItemIcon>*/}
-                <ListItemText inset secondary = { name } />
+                <ListItemIcon>
+                    <Icon>
+                        { icon }
+                    </Icon>
+                </ListItemIcon>
+                <ListItemText inset primary = { name } />
                 { open ?
                     <ExpandLess className = { classes.expand }/> :
                     <ExpandMore className = { classes.expand }/>

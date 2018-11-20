@@ -16,7 +16,6 @@ import NavBarDropdown from "./NavBarDropdown";
 import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
 import Typography from "@material-ui/core/Typography/Typography";
 import Divider from "@material-ui/core/Divider/Divider";
-// import rgbColor from "../utils/rgbColor";
 
 const styles = theme => ({
     root: {
@@ -25,11 +24,11 @@ const styles = theme => ({
         backgroundColor: "rgb(0,0,0,0.03)", //theme.palette.background.paper,
     },
     nested: {
-        paddingLeft: theme.spacing.unit * 8,
+        paddingLeft: theme.spacing.unit * 7,
     },
     expand: {
         position: "relative",
-        left: 0,
+        left: 8,
         top:1,
         color:"rgba(0, 0, 0, 0.54)",
     },
@@ -95,19 +94,7 @@ class NavBar extends Reflux.Component {
                         </ListSubheader>
                     }
                 >
-
                     <Divider/>
-                    <ListItem
-                        button
-                        onClick = { this.closeAfterClick }
-                        component = { Link }
-                        to = { "/" }
-                    >
-                        <ListItemIcon>
-                            <DevicesIcon />
-                        </ListItemIcon>
-                        <ListItemText inset primary = "Devices" />
-                    </ListItem>
 
                     { path === "/" &&
                     <NavBarDropdown
@@ -120,6 +107,18 @@ class NavBar extends Reflux.Component {
                         path = { path }
                     />
                     }
+
+                    <ListItem
+                        button
+                        onClick = { this.closeAfterClick }
+                        component = { Link }
+                        to = { "/" }
+                    >
+                        <ListItemIcon>
+                            <DevicesIcon />
+                        </ListItemIcon>
+                        <ListItemText inset primary = "Devices" />
+                    </ListItem>
 
                     <ListItem
                         button

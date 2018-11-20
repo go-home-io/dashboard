@@ -13,6 +13,8 @@ import NavBar from "./NavBar";
 import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
 import ToolbarContent from "./ToolbarContent";
+import Typography from "@material-ui/core/Typography/Typography";
+import classNames from "classnames";
 
 const drawerWidth = 190;
 
@@ -39,6 +41,9 @@ const styles = theme => ({
             display: "none",
         },
     },
+    brand: {
+        width: "30%",
+    },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth,
@@ -62,16 +67,24 @@ class ResponsiveDrawer extends Reflux.Component {
 
         return (
             <div className = { classes.root }>
-                <AppBar position = "fixed" className = { classes.appBar } color = "default">
+                <AppBar position = "fixed" className = { classes.appBar } color = "primary">
                     <Toolbar>
                         <IconButton
-                            color = "default"
+                            color = "inherit"
                             aria-label = "Open drawer"
                             onClick = { this.handleDrawerToggle }
                             className = { classes.menuButton }
                         >
                             <MenuIcon />
                         </IconButton>
+                        <Typography
+                            variant = "title"
+                            color = "inherit"
+                            className = { classNames(classes.menuButton, classes.brand) }
+                            // style = { {width: "30%"} }
+                        >
+                            GO-HOME
+                        </Typography>
 
                         <ToolbarContent/>
 
