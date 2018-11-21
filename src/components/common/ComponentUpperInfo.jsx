@@ -15,7 +15,7 @@ const styles = () => ({
     },
     center: {
         widths: "100%",
-        backgroundColor: "green",
+        float: "left",
     },
     right: {
         widths: "100%",

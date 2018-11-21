@@ -2,11 +2,20 @@ import React from "react";
 import Notification from "../notification/Notification";
 import PropTypes from "prop-types";
 import ResponsiveDrawer from "../navigation/ResposiveDrawer";
+import { withStyles } from "@material-ui/core/styles";
+import "typeface-roboto/index.css";
+
+const style = () => ({
+    body: {
+        marginTop: 65,
+        fontFamily: "\"Roboto\", sans-serif"
+    }
+});
 
 const Layout = (props) => {
-    const { dropdown, children } = props;
+    const { classes, dropdown, children } = props;
     return (
-        <div >
+        <div className = { classes.body }>
             <ResponsiveDrawer dropdown = { dropdown }>
                 { children }
             </ResponsiveDrawer>
@@ -16,8 +25,9 @@ const Layout = (props) => {
 };
 
 Layout.propTypes = {
+    classes: PropTypes.object.isRequired,
     dropdown: PropTypes.object,
     children: PropTypes.array.isRequired
 };
 
-export default (Layout);
+export default withStyles(style)(Layout);

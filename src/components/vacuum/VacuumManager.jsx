@@ -5,17 +5,17 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid/Grid";
 import WaitingProgress from "../common/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import truncateCaption from "../utils/truncate";
 import { VACUUM_HEADER_BKG_COLOR } from "../../settings/colors";
 import VacuumStoreFactory from "../../reflux/vacuum/VacuumStore";
 import vacuumActions from "../../reflux/vacuum/vacuumActions";
-import BatteryIcon from "../common/BatteryIcon";
-import VacuumReportLine from "./VacuumReportLine";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
+import Battery from "../common/Battery";
+import ComponentUpperInfo from "../common/ComponentUpperInfo";
+import VacuumAreaDuration from "./VacuumAreaDuration";
 
 const styles = () => ({
     root: {
@@ -30,9 +30,6 @@ const styles = () => ({
         width: "100%"
     },
     battery_root: {
-        // position: "relative",
-        // top: -12,
-        // left: 30,
         height: 0,
         width: 0
     },
@@ -81,16 +78,18 @@ class VacuumManager extends Reflux.Component{
                     vac_status = { vac_status }
                     ordinaryBkgColor = { VACUUM_HEADER_BKG_COLOR }
                 />
-                <Grid container justify = 'flex-start' alignItems = 'center'>
-                    <VacuumReportLine
-                        area = { area }
-                        duration = { duration }
-                    />
-                    <BatteryIcon
-                        battery_level = { battery_level }
-                        cssClass = { classes }
-                    />
-                </Grid>
+                <ComponentUpperInfo
+                    leftField = {
+                        <VacuumAreaDuration area = { area }/>
+                    }
+                    centerField = {
+                        <VacuumAreaDuration duration = { duration } />
+                    }
+                    rightField = {
+                        <Battery battery_level = { battery_level } />
+                    }
+                />
+
                 <CardContent>
                     {loading ?
                         <Zoom in = { loading }>
