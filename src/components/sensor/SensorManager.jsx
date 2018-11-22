@@ -1,9 +1,7 @@
 import React from "react";
 import Reflux from "reflux";
 import SensorStoreFactory from "../../reflux/sensor/SensorStore";
-import Card from "@material-ui/core/Card/Card";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
 import truncateCaption from "../utils/truncate";
 import TemperatureSensor from "./TemperatureSensor";
 import ButtonSensor from "./ButtonSensor";
@@ -11,14 +9,7 @@ import DefaultSensor from "./DefaultSensor";
 import { SENSOR_HEADER_BKG_COLOR } from "../../settings/colors";
 import ComponentHeader from "../common/ComponentHeader";
 import sensorActions from "../../reflux/sensor/sensorActions";
-
-const styles = () => ({
-    root: {
-        // width:172 ,
-        // height:165,
-        // margin: 5,
-    },
-});
+import DeviceFrame from "../common/DeviceFrame";
 
 class SensorManager extends Reflux.Component {
     constructor(props) {
@@ -27,14 +18,13 @@ class SensorManager extends Reflux.Component {
         this.store = SensorStoreFactory(id, device_info, location);
     }
     render () {
-        const { classes, id } = this.props;
+        const { id } = this.props;
         const {  name: full_name, visible, device_state, status} = this.state;
         const name = truncateCaption(full_name, 45);
-        const display = visible ? "block" : "none";
         const { sensor_type:type, battery_level, temperature, humidity } = device_state;
 
         return (
-            <Card className = { classes.root } style = { {display:display} }>
+            <DeviceFrame visible = { visible } >
                 <ComponentHeader
                     dev_id = { id }
                     name = { name }
@@ -63,17 +53,15 @@ class SensorManager extends Reflux.Component {
                                 battery_level = { battery_level }
                             />
                 }
-
-            </Card>
+            </DeviceFrame>
         );
     }
 }
 
 SensorManager.propTypes = {
-    classes: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(SensorManager);
+export default (SensorManager);
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "@material-ui/core/Card/Card";
 import withStyles from "@material-ui/core/styles/withStyles";
 import  PropTypes from "prop-types";
 import CardContent from "@material-ui/core/CardContent/CardContent";
@@ -14,13 +13,9 @@ import ExpandButton from "./ExpandButton";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import Grid from "@material-ui/core/Grid/Grid";
 import RenderCommandHandlers from "../common/RenderCommandHandlers";
+import DeviceFrame from "../common/DeviceFrame";
 
 const styles = () => ({
-    root: {
-        width: 172,
-        height: 165,
-        margin: 5,
-    },
     content: {
         marginTop: -27,
     },
@@ -50,7 +45,7 @@ class MinimizedGroup extends React.Component {
             visible,
         } = this.props;
         return (
-            <Card className = { classes.root }>
+            <DeviceFrame visible = { true } >
                 <ComponentHeader
                     dev_id = { group_id }
                     name = { name }
@@ -96,7 +91,7 @@ class MinimizedGroup extends React.Component {
 
                     }
                 </CardContent>
-            </Card>
+            </DeviceFrame>
         );
     }
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import Reflux from "reflux";
-import Card from "@material-ui/core/Card/Card";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import truncateCaption from "../utils/truncate";
@@ -14,13 +13,9 @@ import WaitingProgress from "../common/WaitingProgress";
 import Grid from "@material-ui/core/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
 import CustomizedSwitch from "./customizedSwitch";
+import DeviceFrame from "../common/DeviceFrame";
 
 const styles = () => ({
-    root: {
-        width:172,
-        height:165,
-        margin: 5,
-    },
     icon: {
         color: "rgba(0, 0, 0, 0.54)",
         marginTop: 3,
@@ -52,11 +47,10 @@ class SwitchManager extends Reflux.Component {
         const { classes, id } = this.props;
         const {  name: full_name, visible, device_state, status, read_only, loading } = this.state;
         const name = truncateCaption(full_name, 45);
-        const display = visible ? "block" : "none";
         const { power, on } = device_state;
 
         return (
-            <Card className = { classes.root } style = { {display:display} }>
+            <DeviceFrame visible = { visible } >
                 <ComponentHeader
                     dev_id = { id }
                     name = { name }
@@ -102,7 +96,7 @@ class SwitchManager extends Reflux.Component {
                         </Zoom>
                     }
                 </CardContent>
-            </Card>
+            </DeviceFrame>
         );
     }
 }

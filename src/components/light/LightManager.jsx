@@ -3,7 +3,6 @@ import Reflux from "reflux";
 import ComponentHeader from "../common/ComponentHeader";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/Grid";
 import WaitingProgress from "../common/WaitingProgress";
@@ -13,13 +12,14 @@ import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_CO
 import RenderCommandHandlers from "../common/RenderCommandHandlers";
 import DeviceStoreFactory from "../../reflux/devices/DeviceStore";
 import deviceActions from "../../reflux/devices/deviceActions";
+import DeviceFrame from "../common/DeviceFrame";
 
 const styles = () => ({
-    root: {
-        width:172,
-        height:165,
-        margin: 5,
-    },
+    // root: {
+    //     width:172,
+    //     height:165,
+    //     margin: 5,
+    // },
     progress: {
         padding:3,
         marginTop: 25,
@@ -37,11 +37,11 @@ class LightManager extends Reflux.Component{
     render () {
         const { classes }  = this.props;
         const { id, name, device_state, visible, loading, status, read_only, commands } = this.state;
-        const display = visible ? "block" : "none";
+        // const display = visible ? "block" : "none";
         const caption = truncateCaption(name, 40);
 
         return (
-            <Card style = { {display:display} } className = { classes.root }>
+            <DeviceFrame visible = { visible } >
                 <ComponentHeader
                     dev_id = { id }
                     name = { caption }
@@ -79,7 +79,7 @@ class LightManager extends Reflux.Component{
                         </Zoom>
                     }
                 </CardContent>
-            </Card>
+            </DeviceFrame>
         );
     }
 }

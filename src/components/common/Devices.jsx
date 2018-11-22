@@ -1,5 +1,4 @@
 import React from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
 import SensorManager from "../sensor/SensorManager";
 import VacuumManager from "../vacuum/VacuumManager";
 import CameraManager from "../camera/CameraManager";
@@ -7,14 +6,6 @@ import SwitchManager from "../switch/SwitchManager";
 import LightManager from "../light/LightManager";
 import Weather from "../weather/Weather";
 import MinimizedGroup from "../group/MinimizedGroup";
-
-const styles = () => ({
-    root: {
-        width: 172,
-        height: 165,
-        margin: 5,
-    },
-});
 
 const deviceManagers = {
     "light": LightManager,
@@ -28,18 +19,13 @@ const deviceManagers = {
 
 class Devices extends React.Component {
     render () {
-        const { deviceType } = this.props;
+        const {deviceType, ...other } = this.props;
         const Manager = deviceManagers[deviceType];
         const availableDevices = Object.keys(deviceManagers);
         return (
-            availableDevices.includes(deviceType) ?
-                <div>
-                    <Manager { ...this.props }/>
-                </div>
-                :
-                null
+            availableDevices.includes(deviceType) && <Manager { ...other }/>
         );
     }
 }
 
-export default withStyles(styles)(Devices);
+export default (Devices);

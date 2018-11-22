@@ -3,7 +3,6 @@ import Reflux from "reflux";
 import ComponentHeader from "../common/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import WaitingProgress from "../common/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
@@ -16,13 +15,9 @@ import CommandPanel from "./CommandPanel";
 import Battery from "../common/Battery";
 import ComponentUpperInfo from "../common/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
+import DeviceFrame from "../common/DeviceFrame";
 
 const styles = () => ({
-    root: {
-        width: 172,
-        height:165,
-        margin: 5,
-    },
     progress: {
         padding:3,
         marginTop: 5,
@@ -62,13 +57,12 @@ class VacuumManager extends Reflux.Component{
     render () {
         const { classes }  = this.props;
         const { id, name: fullName, device_state, visible, loading, status, commands } = this.state;
-        const display = visible ? "block" : "none";
         const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
         const area = Math.round(raw_area);
         const name = truncateCaption(fullName, 40);
 
         return (
-            <Card style = { {display:display} } className = { classes.root }>
+            <DeviceFrame visible = { visible } >
                 <ComponentHeader
                     dev_id = { id }
                     name = { name }
@@ -78,6 +72,7 @@ class VacuumManager extends Reflux.Component{
                     vac_status = { vac_status }
                     ordinaryBkgColor = { VACUUM_HEADER_BKG_COLOR }
                 />
+
                 <ComponentUpperInfo
                     leftField = {
                         <VacuumAreaDuration area = { area }/>
@@ -116,15 +111,14 @@ class VacuumManager extends Reflux.Component{
                         </Zoom>
                     }
                 </CardContent>
-            </Card>
+            </DeviceFrame>
         );
     }
 }
 
-
 VacuumManager.propTypes = {
     classes: PropTypes.object.isRequired,
-    device_info: PropTypes.object.isRequired ,
+    device_info: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     group_id: PropTypes.string

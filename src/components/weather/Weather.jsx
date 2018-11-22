@@ -15,10 +15,11 @@ import AppStore from "../../reflux/application/AppStore";
 import WeatherStoreFactory from "../../reflux/weather/WeatherStore";
 import { unitsOfMeasure } from "../../settings/uom";
 
-
 const styles = () => ({
     root: {
-        marginTop: 0,
+        width:172,
+        height:165,
+        margin: 5,
         backgroundColor: "#1795df",
         color: "#ffffff",
     },
@@ -27,7 +28,6 @@ const styles = () => ({
         marginTop: 3,
         marginLeft: 3,
         marginBottom: -12,
-        // cursor: "pointer",
     },
     name: {
         color: "#fff",
@@ -54,13 +54,11 @@ const styles = () => ({
     grid_item: {
         display: "flex",
         justifyContent: "center",
-        // marginLeft: 5,
     },
     typography: {
         color: "#ffffff",
         marginLeft: 3,
         display: "flex",
-        // alignContent: 'center'
     },
     item_icons: {
         width: 24,
@@ -79,12 +77,6 @@ class Weather extends Reflux.Component {
         const { id, device_info, location } = props;
         this.stores = [ AppStore, WeatherStoreFactory(id, device_info, location)];
     }
-    componentDidMount () {
-        // const {uom} = this.state;
-        // console.log("UOM:" + uom);
-        // console.log(unitsOfMeasure[uom]);
-
-    }
     render () {
         const {classes} = this.props;
         const { name, device_state, visible, uom } = this.state;
@@ -101,10 +93,8 @@ class Weather extends Reflux.Component {
 
 
         return (
-            <Card
-                style = { {display:display} }
-                className = { classes.root }
-            >
+            <Card style = { { display:display } } className = { classes.root } >
+
                 <Grid container alignItems = 'flex-start' className = { classes.icon_cloud }>
 
                     <Grid item xs = { 3 } >
@@ -126,15 +116,15 @@ class Weather extends Reflux.Component {
                 </Grid>
 
                 <Typography variant = "display1" align = 'center' className = { classes.temperature }>
-                    {temperature} 
+                    {temperature}
                     {" "}
                     <TemperatureSymbol/>
                 </Typography>
                 <Typography variant = "caption" align = 'center' className = { classes.humidity }>
-                    Humidity 
+                    Humidity
                     {" "}
                     {humidity}
-%
+                    %
                 </Typography>
 
                 <Grid container className = { classes.container }>
@@ -162,7 +152,7 @@ class Weather extends Reflux.Component {
                         <Typography variant = "caption" align = "left" className = { classes.typography }>
                             { wind_direction }
                             {" "}
-&deg;
+                            &deg;
                         </Typography>
                     </Grid>
 
@@ -189,10 +179,8 @@ class Weather extends Reflux.Component {
                             {visibilityUnits}
                         </Typography>
                     </Grid>
-
-
-
                 </Grid>
+
             </Card>
         );
     }
@@ -203,4 +191,3 @@ Weather.propTypes = {
 };
 
 export default withStyles(styles)(Weather);
-

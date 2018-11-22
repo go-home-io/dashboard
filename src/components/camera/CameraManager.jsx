@@ -35,17 +35,6 @@ const styles = () => ({
     }
 });
 
-// const imageHTMLString = picture => {
-//     // eslint-disable-next-line
-//     const imageTag = "<img src=" + "\"data:image/jpg;base64, " + picture + "\"" + " />" ;
-//     return {__html: imageTag};
-// };
-//
-// const imgDOMElement = picture => {
-//     // eslint-disable-next-line
-//     return <div dangerouslySetInnerHTML = { imageHTMLString(picture) } />;
-// };
-
 let naturalWidth = 0;
 let naturalHeight = 0;
 

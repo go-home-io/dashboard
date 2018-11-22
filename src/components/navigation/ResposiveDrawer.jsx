@@ -81,7 +81,6 @@ class ResponsiveDrawer extends Reflux.Component {
                             variant = "title"
                             color = "inherit"
                             className = { classNames(classes.menuButton, classes.brand) }
-                            // style = { {width: "30%"} }
                         >
                             GO-HOME
                         </Typography>
