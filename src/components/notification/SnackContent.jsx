@@ -8,7 +8,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import green from "@material-ui/core/colors/green";
 import amber from "@material-ui/core/colors/amber";
 import IconButton from "@material-ui/core/IconButton";
-// import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import WarningIcon from "@material-ui/icons/Warning";
 import { withStyles } from "@material-ui/core/styles";
@@ -35,9 +34,6 @@ const styles = theme => ({
     warning: {
         backgroundColor: amber[700],
     },
-    icon: {
-        fontSize: 20,
-    },
     iconVariant: {
         opacity: 0.9,
         marginRight: theme.spacing.unit,
@@ -46,10 +42,6 @@ const styles = theme => ({
         display: "flex",
         alignItems: "center",
     },
-    close: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4
-    }
 });
 
 class SnackContent extends React.Component {
@@ -72,10 +64,9 @@ class SnackContent extends React.Component {
                         key = "close"
                         aria-label = "Close"
                         color = "inherit"
-                        className = { classes.close }
                         onClick = { onClose }
                     >
-                        <CloseIcon className = { classes.icon }/>
+                        <CloseIcon/>
                     </IconButton>,
                 ] }
                 { ...other }

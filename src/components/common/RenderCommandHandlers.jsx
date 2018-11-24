@@ -1,6 +1,4 @@
 import React from "react";
-// import groupActions from "../../reflux/group/groupActions";
-// import Grid from "@material-ui/core/Grid/Grid";
 import LightBrightness from "../light/LightBrightness";
 import LightColorPicker from "../light/LightColorPicker";
 import Scenes from "../light/Scenes";

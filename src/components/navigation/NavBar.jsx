@@ -84,7 +84,7 @@ class NavBar extends Reflux.Component {
                             <Typography
                                 className = { classes.typography }
                                 align = "center"
-                                variant = "title"
+                                variant = "h6"
                                 color = "textSecondary"
                             >
                                 {/*<strong>*/}

@@ -7,7 +7,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const styles = () => ({
     root: {
         padding:"0 15px",
-        marginTop:5,
+        marginBottom:15,
     },
     colorBox: {
         width: 20,
@@ -30,7 +30,7 @@ class SlidersHeader extends React.Component {
 
         return (
             <Grid container justify = 'center' className = { classes.root }>
-                <Typography variant = "subheading" gutterBottom align = "center">
+                <Typography variant = "subtitle1" gutterBottom align = "center">
                     { caption }
                 </Typography>
                 { color ?
@@ -41,7 +41,7 @@ class SlidersHeader extends React.Component {
                     :
                     level ?
                         <div className = { classes.level } >
-                            <Typography variant = "body1" gutterBottom align = "center">
+                            <Typography variant = "subtitle1" gutterBottom align = "center">
                                 {level}
                                 %
                             </Typography>

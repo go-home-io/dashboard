@@ -7,14 +7,15 @@ import SliderActions from "../common/SliderActions";
 
 const styles = () => ({
     root : {
-        marginTop:20,
+        marginTop: 8,
         width:250,
         height:110,
-        cursor: "default",
     },
     slider: {
         width:"90%",
-        marginLeft:3
+        marginLeft:10,
+        marginTop: 15,
+        marginBottom: 25,
     }
 });
 

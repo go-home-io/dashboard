@@ -52,7 +52,7 @@ class LightBrightness extends React.Component {
                     onClick = { this.handleClick }
                     style = { {cursor:cursor} }
                 >
-                    <Typography variant = 'body1'>
+                    <Typography variant = 'body2'>
                          Brightness: 
                         {" "}
                         { level }

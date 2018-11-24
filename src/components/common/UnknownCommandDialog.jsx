@@ -9,7 +9,7 @@ const styles = () => ({
     root : {
         marginTop:10,
         width:250,
-        height: 90,
+        height: 115,
         cursor: "default",
     },
     container: {
@@ -18,8 +18,8 @@ const styles = () => ({
         justifyContent: "center"
     },
     textField: {
-        marginTop: -5,
-        marginBottom: -3,
+        marginTop: 10,
+        marginBottom: -13,
     },
 });
 
@@ -28,7 +28,7 @@ class UnknownCommandDialog extends React.Component {
         super(props);
 
         this.state = {
-            value: null,
+            value: "",
         };
         this.setValue = this.setValue.bind(this);
         this.handleChange = this.handleChange.bind(this);

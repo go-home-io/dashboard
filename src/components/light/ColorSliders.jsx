@@ -8,9 +8,9 @@ import SliderActions from "../common/SliderActions";
 
 const styles = () => ({
     root : {
-        marginTop:10,
+        marginTop: 8,
         width:250,
-        height:120,
+        height:150,
     },
     color: {
         width: 25,

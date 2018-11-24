@@ -3,21 +3,16 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-class AppBarPlaceholder extends React.Component {
-
-    render() {
-        return(
-            <div>
-                <AppBar position = "fixed" color = "primary">
-                    <Toolbar>
-                        <Typography variant = "title" color = "inherit">
-                            GO-HOME
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </div>
-        );
-    }
-}
+const AppBarPlaceholder = () => {
+    return(
+        <AppBar position = "fixed" color = "primary" style = { { height:64 } }>
+            <Toolbar>
+                <Typography variant = "h6" color = "inherit">
+                    GO-HOME
+                </Typography>
+            </Toolbar>
+        </AppBar>
+    );
+};
 
 export default (AppBarPlaceholder);

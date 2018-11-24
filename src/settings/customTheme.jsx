@@ -9,6 +9,6 @@ export const customTheme = createMuiTheme( {
         secondary: pink,
     },
     typography: {
-        fontFamily: "\"Roboto\", sans-serif"
+        useNextVariants: true,
     },
 });

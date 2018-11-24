@@ -14,16 +14,21 @@ import Zoom from "@material-ui/core/Zoom/Zoom";
 import Grid from "@material-ui/core/Grid/Grid";
 import RenderCommandHandlers from "../common/RenderCommandHandlers";
 import DeviceFrame from "../common/DeviceFrame";
+// import Card from "@material-ui/core/Card/Card";
 
 const styles = () => ({
+    root: {
+        width:172,
+        height:165,
+        margin: 5,
+    },
     content: {
         marginTop: -27,
     },
     expandButton: {
         position: "relative",
-        top: -73,
+        top: -85,
         left: 140,
-
     }
 });
 
@@ -45,7 +50,7 @@ class MinimizedGroup extends React.Component {
             visible,
         } = this.props;
         return (
-            <DeviceFrame visible = { true } >
+            <DeviceFrame visible = { true }>
                 <ComponentHeader
                     dev_id = { group_id }
                     name = { name }
@@ -98,11 +103,9 @@ class MinimizedGroup extends React.Component {
 
 MinimizedGroup.propTypes = {
     classes: PropTypes.object.isRequired,
-    // location: PropTypes.string.isRequired,
     device_state: PropTypes.object.isRequired,
     group_id: PropTypes.string.isRequired,
     commands: PropTypes.array.isRequired,
-    // actionOnHeaderClick: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     read_only: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,

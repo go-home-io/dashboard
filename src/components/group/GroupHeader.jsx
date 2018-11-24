@@ -5,14 +5,13 @@ import Icon from "@material-ui/core/Icon/Icon";
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import IconExpandLess from "@material-ui/icons/ExpandLess";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import groupActions from "../../reflux/group/groupActions";
+import blue from "@material-ui/core/colors/blue";
 
 const styles = () => ({
     text: {
         marginLeft: 7,
-        // cursor: "pointer",
     },
     icon: {
         marginLeft: 5,
@@ -20,11 +19,9 @@ const styles = () => ({
     iconButton: {
         color: "rgba(0,0,0,0.56)",
         cursor: "pointer",
-        height: 25,
-        width: 25,
         marginLeft: 15,
         "&:hover": {
-            color: "blue"
+            color: blue[500],
         },
     }
 });
@@ -48,7 +45,7 @@ class GroupHeader extends React.Component {
                         { groupIcon }
                     </Icon>
                     <Typography
-                        variant = 'subheading'
+                        variant = 'subtitle1'
                         className = { classes.text }
                         onClick = { handleClick }
 
@@ -61,13 +58,12 @@ class GroupHeader extends React.Component {
                         title = "Minimize the group window"
                         placement = "right"
                     >
-                        <IconButton
-                            color = "primary"
+                        <div
                             className = { classes.iconButton }
                             onClick = { this.minimizeGroup }
                         >
                             <IconExpandLess/>
-                        </IconButton>
+                        </div>
                     </Tooltip>
                 </Grid>
                 :

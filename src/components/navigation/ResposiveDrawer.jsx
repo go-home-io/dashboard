@@ -78,7 +78,7 @@ class ResponsiveDrawer extends Reflux.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography
-                            variant = "title"
+                            variant = "h6"
                             color = "inherit"
                             className = { classNames(classes.menuButton, classes.brand) }
                         >

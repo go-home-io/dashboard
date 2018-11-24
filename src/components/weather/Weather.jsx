@@ -78,7 +78,7 @@ class Weather extends Reflux.Component {
         this.stores = [ AppStore, WeatherStoreFactory(id, device_info, location)];
     }
     render () {
-        const {classes} = this.props;
+        const { classes } = this.props;
         const { name, device_state, visible, uom } = this.state;
         const { visibility, wind_direction, wind_speed, sunrise, sunset } = device_state;
         const shortName = truncateCaption(name,14);
@@ -108,14 +108,14 @@ class Weather extends Reflux.Component {
 
                     <Grid item xs = { 9 } >
                         <Tooltip title = { name } placement = "top">
-                            <Typography variant = "subheading" className = { classes.name }>
+                            <Typography variant = "subtitle1" className = { classes.name }>
                                 {shortName}
                             </Typography>
                         </Tooltip>
                     </Grid>
                 </Grid>
 
-                <Typography variant = "display1" align = 'center' className = { classes.temperature }>
+                <Typography variant = "h4" align = 'center' className = { classes.temperature }>
                     {temperature}
                     {" "}
                     <TemperatureSymbol/>
@@ -137,8 +137,6 @@ class Weather extends Reflux.Component {
                         </Tooltip>
                         <Typography variant = "caption" align = "left" className = { classes.typography }>
                             { pressure }
-
-
                         </Typography>
 
                     </Grid>
