@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Icon from "@material-ui/core/Icon/Icon";
 import Grid from "@material-ui/core/Grid/Grid";
 
-const styles = (theme) => ({
+const styles = () => ({
     root: {
         marginTop: 18,
     },
