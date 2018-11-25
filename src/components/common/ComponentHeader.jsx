@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import Paper from "@material-ui/core/Paper/Paper";
@@ -10,6 +9,7 @@ import IconHeader from "../common/IconHeader";
 import SensorHeaderIcon from "../sensor/SensorHeaderIcon";
 import VacuumStatusIcon from "../vacuum/VacuumStatusIcon";
 import SyncDisabled from "@material-ui/icons/SyncDisabled";
+import DeviceName from "./DeviceName";
 
 const styles = theme => ({
     paper: {
@@ -30,11 +30,11 @@ const styles = theme => ({
         padding:3,
         fontSize: 22,
     },
-    typography: {
+    name: {
         position: "relative",
-        left: 10,
-        top: -28,
-        color: "#ffffffff",
+        left: 12,
+        top: -36,
+        color: "#fff",
     },
     ro_icon: {
         position: "relative",
@@ -130,14 +130,13 @@ class ComponentHeader extends React.Component {
                                 null
                     }
 
-                    <Typography
-                        variant = "subtitle1"
-                        className = { classes.typography }
+                    <div
+                        className = { classes.name }
                         onClick = { this.handleClick }
                         style = { {cursor:cursor} }
                     >
-                        { name }
-                    </Typography>
+                        <DeviceName name = { name }/>
+                    </div>
                 </div>
             </Paper>
         );

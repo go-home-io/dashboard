@@ -14,6 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AppStore from "../../reflux/application/AppStore";
 import WeatherStoreFactory from "../../reflux/weather/WeatherStore";
 import { unitsOfMeasure } from "../../settings/uom";
+import DeviceName from "../common/DeviceName";
 
 const styles = () => ({
     root: {
@@ -33,7 +34,7 @@ const styles = () => ({
         color: "#fff",
         marginLeft: 10,
         overflow: "hidden",
-        height: 20,
+        height: 30,
         marginTop: 7
     },
     temperature: {
@@ -108,9 +109,9 @@ class Weather extends Reflux.Component {
 
                     <Grid item xs = { 9 } >
                         <Tooltip title = { name } placement = "top">
-                            <Typography variant = "subtitle1" className = { classes.name }>
-                                {shortName}
-                            </Typography>
+                            <div className = { classes.name }>
+                                <DeviceName name = { shortName } />
+                            </div>
                         </Tooltip>
                     </Grid>
                 </Grid>

@@ -14,7 +14,6 @@ import Zoom from "@material-ui/core/Zoom/Zoom";
 import Grid from "@material-ui/core/Grid/Grid";
 import RenderCommandHandlers from "../common/RenderCommandHandlers";
 import DeviceFrame from "../common/DeviceFrame";
-// import Card from "@material-ui/core/Card/Card";
 
 const styles = () => ({
     root: {

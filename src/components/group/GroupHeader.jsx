@@ -2,16 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon/Icon";
-import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import IconExpandLess from "@material-ui/icons/ExpandLess";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import groupActions from "../../reflux/group/groupActions";
 import blue from "@material-ui/core/colors/blue";
+import DeviceName from "../common/DeviceName";
 
 const styles = () => ({
     text: {
         marginLeft: 7,
+        color: "rgba(0, 0, 0, 0.6)"
     },
     icon: {
         marginLeft: 5,
@@ -44,15 +45,15 @@ class GroupHeader extends React.Component {
                     <Icon className = { classes.icon } style = { {color: iconColor} }>
                         { groupIcon }
                     </Icon>
-                    <Typography
-                        variant = 'subtitle1'
+
+                    <div
                         className = { classes.text }
                         onClick = { handleClick }
+                        style = { { cursor: cursor } }
                     >
-                        <span style = { { cursor: cursor } }>
-                            { name }
-                        </span>
-                    </Typography>
+                        <DeviceName name = { name }/>
+                    </div>
+
                     <Tooltip
                         title = "Minimize the group window"
                         placement = "right"
