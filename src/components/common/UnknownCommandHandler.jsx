@@ -9,7 +9,7 @@ import UnknownCommandDialog from "./UnknownCommandDialog";
 const styles = () => ( {
     root: {
         width: "100%",
-        // height: 110,
+        marginTop: 5,
     },
     text: {
         fontSize:12,
@@ -61,7 +61,7 @@ class UnknownCommandHandler extends React.Component {
                     onClick = { this.handleClick }
                     style = { {cursor:cursor} }
                 >
-                    <Typography variant = 'body2'>
+                    <Typography variant = 'body1'>
                         { commandName }
                     </Typography>
                 </div>

@@ -28,17 +28,19 @@ class ErrorPage extends React.Component {
                 { ! loading ?
                     <div >
                         <Grid container className = { classes.root } justify = 'center' alignItems = 'center'>
-                            <Typography variant = "h1" gutterBottom>
-                                {status}
+                            <Typography variant = "h1" color = "textSecondary">
+                                <strong>
+                                    {status}
+                                </strong>
                             </Typography>
                         </Grid>
                         <Grid container justify = 'center'>
-                            <Typography variant = "h4" gutterBottom>
+                            <Typography variant = "h4" color = "textSecondary">
                                 { mess }
                             </Typography>
                         </Grid>
-                    </div> :
-
+                    </div>
+                    :
                     <Grid container justify = 'center' alignItems = 'center' alignContent = 'center'>
                         <FontAwesomeIcon
                             className = { classes.icon }

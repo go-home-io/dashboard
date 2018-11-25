@@ -19,7 +19,7 @@ const styles = () => ({
         height:15,
         position:"relative",
         top:-20,
-        left:76,
+        left:86,
         cursor: "pointer",
     },
     text: {
@@ -68,7 +68,7 @@ class LightColorPicker extends React.Component {
                     onClick = { this.handleClick }
                     style = { {cursor:cursor} }
                 >
-                    <Typography variant = 'body2'>
+                    <Typography variant = 'body1'>
                              Color:
                     </Typography>
                     <div className = { classes.box }

@@ -14,6 +14,9 @@ const styles = () => ( {
         height:30,
         width: 30,
         margin: "0 auto"
+    },
+    icon: {
+        marginTop: -9,
     }
 });
 
@@ -30,7 +33,7 @@ class CommandPanel extends React.Component {
 
         return (
             <Grid container justify = 'center' className = { classes.root } >
-                { commands.includes("on") ?
+                { commands.includes("on") &&
                     <IconButton
                         className = { classes.button }
                         aria-label = "Start"
@@ -38,11 +41,10 @@ class CommandPanel extends React.Component {
                         disabled = { start.disabled }
                         onClick = { this.handleClick(start.command) }
                     >
-                        <start.icon/>
-                    </IconButton> :
-                    null
+                        <start.icon className = { classes.icon } />
+                    </IconButton>
                 }
-                { commands.includes("off") ?
+                { commands.includes("off") &&
                     <IconButton
                         className = { classes.button }
                         aria-label = "Stop"
@@ -50,11 +52,10 @@ class CommandPanel extends React.Component {
                         color = "secondary"
                         onClick = { this.handleClick(stop.command) }
                     >
-                        <stop.icon/>
-                    </IconButton> :
-                    null
+                        <stop.icon className = { classes.icon } />
+                    </IconButton>
                 }
-                { commands.includes("dock") ?
+                { commands.includes("dock") &&
                     <IconButton
                         className = { classes.button }
                         aria-label = "Dock"
@@ -62,11 +63,10 @@ class CommandPanel extends React.Component {
                         disabled = { dock.disabled }
                         onClick = { this.handleClick(dock.command) }
                     >
-                        <dock.icon/>
-                    </IconButton> :
-                    null
+                        <dock.icon className = { classes.icon } />
+                    </IconButton>
                 }
-                { commands.includes("find-me") ?
+                { commands.includes("find-me") &&
                     <IconButton
                         className = { classes.button }
                         aria-label = "Find me"
@@ -74,9 +74,8 @@ class CommandPanel extends React.Component {
                         disabled = { find.disabled }
                         onClick = { this.handleClick(find.command) }
                     >
-                        <find.icon/>
-                    </IconButton> :
-                    null
+                        <find.icon className = { classes.icon } />
+                    </IconButton>
                 }
             </Grid>
         );

@@ -55,7 +55,7 @@ class Scenes extends React.Component {
                     onClick = { this.handleClick }
                     style = { {cursor:cursor} }
                 >
-                    <Typography variant = 'body2'>
+                    <Typography variant = 'body1'>
                         Select scene
                     </Typography>
                 </div>

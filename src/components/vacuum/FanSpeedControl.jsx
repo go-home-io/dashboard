@@ -8,7 +8,7 @@ import FanSpeedSlider from "./FanSpeedSlider";
 
 const styles = () => ( {
     root: {
-        marginTop: -6,
+        marginTop: -12,
         marginLeft: 2,
     },
     text: {

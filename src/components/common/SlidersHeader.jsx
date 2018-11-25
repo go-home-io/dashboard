@@ -30,7 +30,7 @@ class SlidersHeader extends React.Component {
 
         return (
             <Grid container justify = 'center' className = { classes.root }>
-                <Typography variant = "subtitle1" gutterBottom align = "center">
+                <Typography variant = "subtitle1" align = "center">
                     { caption }
                 </Typography>
                 { color ?

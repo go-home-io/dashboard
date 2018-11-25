@@ -77,7 +77,7 @@ class SwitchManager extends Reflux.Component {
                         <Zoom in = { !loading }>
                             <div>
                                 <Grid container justify = 'center' >
-                                    <Typography variant = 'headline' className = { classes.typography }>
+                                    <Typography variant = 'h5' className = { classes.typography }>
                                         <strong>
                                             {power}
                                             {" v"}

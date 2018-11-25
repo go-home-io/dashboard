@@ -12,6 +12,7 @@ const style = () => ({
         display: "inline-block",
         marginTop: 0,
         marginLeft: 4,
+        color: "rgba(0, 0, 0, 0.54)"
     },
 });
 
@@ -41,6 +42,7 @@ class Battery extends React.Component {
                     <Typography
                         variant = "caption"
                         align = "right"
+                        color = "textSecondary"
                     >
                         <strong>
                             { battery_level }

@@ -13,7 +13,6 @@ import Typography from "@material-ui/core/Typography/Typography";
 import Divider from "@material-ui/core/Divider/Divider";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 
-
 const variantIcon = {
     success: CheckCircleIcon,
     warning: WarningIcon,
@@ -86,20 +85,15 @@ const NotificationTableLine = (props) => {
                     <Icon className = { classNames(classes[status], classes.icon) }/>
                 </Grid>
 
-                <Grid item xs = { 3 } sm = { 2 } >
-                    <Typography variant = "body1">
-                        { origin }
-                    </Typography>
-                </Grid>
-
-                <Grid item xs = { 6 } sm = { 8 } >
-                    <Typography variant = "caption">
+                <Grid item xs = { 9 } sm = { 8 }>
+                    <Typography variant = "body2">
+                        <strong>
+                            { origin }
+                        </strong>
+                        {": "}
                         { message }
                     </Typography>
                 </Grid>
-
-
-
             </Grid>
             <Divider/>
         </div>

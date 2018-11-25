@@ -94,7 +94,8 @@ class VacuumManager extends Reflux.Component{
                                     actions = { vacuumActions }
                                 />
                             </div>
-                        </Zoom> :
+                        </Zoom>
+                        :
                         <Zoom in = { !loading }>
                             <div>
                                 <FanSpeedControl

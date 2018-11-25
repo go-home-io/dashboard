@@ -28,8 +28,8 @@ class VacuumAreaDuration extends Reflux.Component {
 
         return (
             <div>
-                { area &&
-                    <Typography variant = "subheading" align = "left" color = "textSecondary">
+                { area != null &&
+                    <Typography variant = "subtitle1" align = "left" color = "textSecondary">
                         <strong>
                             {area}
                         </strong>
@@ -44,9 +44,9 @@ class VacuumAreaDuration extends Reflux.Component {
                         </Typography>
                     </Typography>
                 }
-                { duration &&
+                { duration != null &&
                     <Typography
-                        variant = "subheading"
+                        variant = "subtitle1"
                         align = "left"
                         color = "textSecondary"
                         className = { classes.duration }

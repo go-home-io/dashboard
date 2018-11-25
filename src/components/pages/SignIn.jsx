@@ -81,7 +81,7 @@ class SignIn extends React.Component {
                         <Avatar className = { classes.avatar }>
                             <LockIcon/>
                         </Avatar>
-                        <Typography variant = "headline">
+                        <Typography variant = "h5">
                             Authentication required
                         </Typography>
                         <form className = { classes.form } >
@@ -111,7 +111,7 @@ class SignIn extends React.Component {
                             <Button
                                 type = "submit"
                                 fullWidth
-                                variant = "raised"
+                                variant = "contained"
                                 color = "primary"
                                 className = { classes.submit }
                                 onClick = { this.handleClick }

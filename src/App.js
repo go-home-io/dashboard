@@ -32,11 +32,12 @@ class App extends React.Component {
                 <Router history = { hist }>
                     <Switch>
                         {indexRoutes.map((prop) => {
+                            const { path, component } = prop;
                             return (
                                 <Route
-                                    exact path = { prop.path }
-                                    component = { prop.component }
-                                    key = { prop.path }
+                                    exact path = { path }
+                                    component = { component }
+                                    key = { path }
                                 />
                             );
                         })}

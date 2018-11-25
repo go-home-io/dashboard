@@ -8,12 +8,12 @@ import Typography from "@material-ui/core/Typography/Typography";
 
 const styles = () => ( {
     root: {
-        width: "100%",
+        // width: "100%",
         marginTop: -5,
     },
     text: {
-        fontSize:12,
-        letterSpacing:1,
+        // fontSize:12,
+        // letterSpacing: 5,
         cursor:"pointer",
     },
 });
@@ -52,9 +52,9 @@ class LightBrightness extends React.Component {
                     onClick = { this.handleClick }
                     style = { {cursor:cursor} }
                 >
-                    <Typography variant = 'body2'>
-                         Brightness: 
-                        {" "}
+                    <Typography variant = 'body1'>
+                        {"Brightness:"}
+                        { level !== 100 && " " }
                         { level }
                         {"%"}
                     </Typography>

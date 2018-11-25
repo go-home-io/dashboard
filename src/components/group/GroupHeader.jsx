@@ -48,7 +48,6 @@ class GroupHeader extends React.Component {
                         variant = 'subtitle1'
                         className = { classes.text }
                         onClick = { handleClick }
-
                     >
                         <span style = { { cursor: cursor } }>
                             { name }

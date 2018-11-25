@@ -130,7 +130,8 @@ class ComponentHeader extends React.Component {
                                 null
                     }
 
-                    <Typography variant = "subtitle1"
+                    <Typography
+                        variant = "subtitle1"
                         className = { classes.typography }
                         onClick = { this.handleClick }
                         style = { {cursor:cursor} }
