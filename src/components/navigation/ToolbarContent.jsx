@@ -13,8 +13,14 @@ import LocationIcon from "@material-ui/icons/LocationOn";
 import NotificationsListView from "../notification/NotificationsListView";
 
 const styles = () => ({
+    notificationContainer: {
+        paddingRight: 50,
+    },
     notificationIcon: {
         cursor: "pointer",
+    },
+    location: {
+        marginRight: 50,
     },
 });
 
@@ -47,35 +53,29 @@ class ToolbarContent extends Reflux.Component {
         const { path, unseenCount, active_location } = this.state;
 
         return(
-            <Grid container justify = "center" alignItems = "center">
-
-                <Grid item xs = { 8 } sm = { 9 }>
-                    <NotificationsListView
-                        open = { this.state.ntfViewOpen }
-                        onClose = { this.ntfViewClose }
-                    />
-                </Grid>
-
-                <Grid item xs = { 2 }>
-                    { path === "/" ?
-                        <div>
-                            <LocationIcon />
-                            <Typography variant = 'caption' color = "inherit">
-                                { active_location }
-                            </Typography>
-                        </div>
-                        :
-                        null
-                    }
-                </Grid>
-
-                <Grid item xs = { 2 } sm = { 1 } onClick = { this.ntfViewOpen }>
+            <Grid container justify = "flex-end" alignItems = "center">
+                <NotificationsListView
+                    open = { this.state.ntfViewOpen }
+                    onClose = { this.ntfViewClose }
+                />
+                { path === "/" &&
+                    <div className = { classes.location }>
+                        <LocationIcon />
+                        <Typography variant = 'caption' color = "inherit">
+                            { active_location }
+                        </Typography>
+                    </div>
+                }
+                <div
+                    className = { classes.notificationContainer }
+                    onClick = { this.ntfViewOpen }
+                >
                     <NotificationCount
                         className = { classes.notificationIcon }
                         unseenCount =  { unseenCount }
-                        color = "default"
+                        color = "inherit"
                     />
-                </Grid>
+                </div>
             </ Grid>
         );
     }

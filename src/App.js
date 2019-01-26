@@ -1,4 +1,5 @@
 import React from "react";
+import "typeface-roboto";
 import "material-design-icons/iconfont/material-icons.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -15,14 +16,27 @@ import {
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import indexRoutes from "../src/routes/indexRoutes";
-import { customTheme } from "./settings/customTheme";
+// import { customTheme } from "./settings/customTheme";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import blue from "@material-ui/core/colors/blue";
+import pink from "@material-ui/core/colors/pink";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
     faBatteryThreeQuarters, faCompass );
 
 const hist = createBrowserHistory();
+
+const customTheme = createMuiTheme( {
+    palette: {
+        primary: blue,
+        secondary: pink,
+    },
+    typography: {
+        useNextVariants: true,
+    },
+});
 
 class App extends React.Component {
     render() {

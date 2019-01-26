@@ -3,12 +3,10 @@ import Notification from "../notification/Notification";
 import PropTypes from "prop-types";
 import ResponsiveDrawer from "../navigation/ResposiveDrawer";
 import { withStyles } from "@material-ui/core/styles";
-import "typeface-roboto/index.css";
 
 const style = () => ({
     body: {
         marginTop: 65,
-        fontFamily: "\"Roboto\", sans-serif"
     }
 });
 

@@ -68,7 +68,7 @@ class ResponsiveDrawer extends Reflux.Component {
         return (
             <div className = { classes.root }>
                 <AppBar position = "fixed" className = { classes.appBar } color = "primary">
-                    <Toolbar>
+                    <Toolbar classes = { {} }>
                         <IconButton
                             color = "inherit"
                             aria-label = "Open drawer"

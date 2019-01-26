@@ -21,12 +21,10 @@ class StartPage extends Component {
             loading: true,
         };
     }
-
     componentDidMount() {
-        this.getComponentStateByHTTP();
+        this.getComponentsStateByHTTP();
     }
-
-    getComponentStateByHTTP () {
+    getComponentsStateByHTTP () {
         // const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
         // STATE_URL
         HTTP.get(STATE_URL)
@@ -57,7 +55,7 @@ class StartPage extends Component {
         const credentials = "Basic " + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
         this.setState({auth_error: true, loading: true, auth_required: false});
-        this.getComponentStateByHTTP();
+        this.getComponentsStateByHTTP();
     }
     render () {
         const { authenticated, generalState, auth_required, auth_error, status, loading } = this.state;

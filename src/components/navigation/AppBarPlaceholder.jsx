@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 const AppBarPlaceholder = () => {
     return(
         <AppBar position = "fixed" color = "primary" style = { { height:64 } }>
-            <Toolbar>
+            <Toolbar classes = { {} }>
                 <Typography variant = "h6" color = "inherit">
                     GO-HOME
                 </Typography>
