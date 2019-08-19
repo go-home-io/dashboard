@@ -18,8 +18,8 @@ class SensorManager extends Reflux.Component {
         this.store = SensorStoreFactory(id, device_info, location);
     }
     render () {
-        const { id } = this.props;
-        const {  name: full_name, visible, device_state, status} = this.state;
+        const { visible, id } = this.props;
+        const {  name: full_name, device_state, status} = this.state;
         const name = truncateCaption(full_name, 45);
         const { sensor_type:type, battery_level, temperature, humidity } = device_state;
 

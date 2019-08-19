@@ -2,19 +2,24 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import IconExpandMore from "@material-ui/icons/ExpandMore";
+import indigo from "@material-ui/core/colors/indigo";
+
 
 const styles = () => ({
     iconButton: {
-        marginTop: 2,
-        marginLeft: 5,
-        color: "#ccc",
+        position: "relative",
+        top: -30,
+        left: 144,
+        borderRadius: "50%",
+        fontSize: 18,
+        color: "#cccccc",
         cursor: "pointer",
         height: 25,
         width: 25,
         "&:hover": {
-            color: "#fff"
+            color: "#ffffff",
+            backgroundColor: indigo[400],
         },
     }
 });
@@ -29,13 +34,13 @@ class ExpandButton extends React.Component {
                         title = "Expand the group window"
                         placement = "bottom-start"
                     >
-                        <IconButton
+                        <div
                             color = "primary"
                             className = { classes.iconButton }
                             onClick = { expandGroup }
                         >
                             <IconExpandMore/>
-                        </IconButton>
+                        </div>
                     </Tooltip>
                 </div>
                 :

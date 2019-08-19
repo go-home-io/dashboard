@@ -79,8 +79,8 @@ class Weather extends Reflux.Component {
         this.stores = [ AppStore, WeatherStoreFactory(id, device_info, location)];
     }
     render () {
-        const { classes } = this.props;
-        const { name, device_state, visible, uom } = this.state;
+        const { visible, classes } = this.props;
+        const { name, device_state, uom } = this.state;
         const { visibility, wind_direction, wind_speed, sunrise, sunset } = device_state;
         const shortName = truncateCaption(name,14);
         const   { pressureUnits, visibilityUnits, windSpeedUnits } = (uom !== "") ? unitsOfMeasure[uom] : "";
@@ -91,7 +91,6 @@ class Weather extends Reflux.Component {
             ( uom === "imperial" ) ? pressure.toFixed(3) : Math.round(pressure);
         temperature = (temperature != null) ?  temperature.toFixed(1) : null ;
         humidity = (humidity != null) ? humidity.toFixed(1) : null;
-
 
         return (
             <Card style = { { display:display } } className = { classes.root } >
@@ -116,12 +115,12 @@ class Weather extends Reflux.Component {
                     </Grid>
                 </Grid>
 
-                <Typography variant = "h4" align = 'center' className = { classes.temperature }>
+                <Typography variant = "h4" className = { classes.temperature }>
                     {temperature}
                     {" "}
                     <TemperatureSymbol/>
                 </Typography>
-                <Typography variant = "caption" align = 'center' className = { classes.humidity }>
+                <Typography variant = "caption" className = { classes.humidity }>
                     Humidity
                     {" "}
                     {humidity}

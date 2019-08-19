@@ -6,6 +6,7 @@ import groupActions from "../../reflux/group/groupActions";
 import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
 import ExpandedGroup from "./ExpandedGroup";
 import MinimizedGroup from "./MinimizedGroup";
+import AppStore from "../../reflux/application/AppStore";
 
 const groupIcon = "devices_other";
 
@@ -13,7 +14,7 @@ class GroupManager  extends Reflux.Component {
     constructor(props) {
         super(props);
         const { dev_id, members, device_info, location} = props;
-        this.store = GroupStoreFactory(dev_id, members, device_info, location);
+        this.stores = [GroupStoreFactory(dev_id, members, device_info, location), AppStore];
         this.handleGroupHeaderClick = this.handleGroupHeaderClick.bind(this);
     }
     handleGroupHeaderClick() {
@@ -24,9 +25,12 @@ class GroupManager  extends Reflux.Component {
     }
     render () {
         const { all_device_states, dev_id, location } = this.props;
-        const { visible, name, device_state, members, minimized, commands, read_only, loading, status } = this.state;
+        const {
+            name, device_state, members, minimized, commands,
+            read_only, loading, status, active_location
+        } = this.state;
         const group_id = dev_id;
-        // console.log(commands);
+        const visible = location === active_location;
 
         const displayMinimized = visible && minimized  ? "block" : "none";
         const displayMaximized = visible && ! minimized  ? "block" : "none";

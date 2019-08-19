@@ -35,8 +35,8 @@ class LightManager extends Reflux.Component{
         this.store = DeviceStoreFactory(id, device_info, location, group_id);
     }
     render () {
-        const { classes }  = this.props;
-        const { id, name, device_state, visible, loading, status, read_only, commands } = this.state;
+        const { visible, classes }  = this.props;
+        const { id, name, device_state, loading, status, read_only, commands } = this.state;
         const caption = truncateCaption(name, 40);
 
         return (

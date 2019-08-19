@@ -39,7 +39,8 @@ const styles = theme => ({
         height: 46,
     },
     typography: {
-        marginTop: 18
+        marginTop: 18,
+        textAlign: "center"
     }
 });
 
@@ -81,15 +82,13 @@ class NavBar extends Reflux.Component {
                             component = "div"
                             className = { classes.subheading }
                         >
+
                             <Typography
                                 className = { classes.typography }
-                                align = "center"
                                 variant = "h6"
                                 color = "textSecondary"
                             >
-                                {/*<strong>*/}
-                                    GO-HOME
-                                {/*</strong>*/}
+                                GO-HOME
                             </Typography>
                         </ListSubheader>
                     }
@@ -107,30 +106,32 @@ class NavBar extends Reflux.Component {
                         path = { path }
                     />
                     }
-
-                    <ListItem
-                        button
-                        onClick = { this.closeAfterClick }
-                        component = { Link }
-                        to = { "/" }
-                    >
-                        <ListItemIcon>
-                            <DevicesIcon />
-                        </ListItemIcon>
-                        <ListItemText inset primary = "Devices" />
-                    </ListItem>
-
-                    <ListItem
-                        button
-                        onClick = { this.closeAfterClick }
-                        component = { Link }
-                        to = { "/status" }
-                    >
-                        <ListItemIcon>
-                            <ViewListIcon />
-                        </ListItemIcon>
-                        <ListItemText inset primary = "Status" />
-                    </ListItem>
+                    {path === "/status" &&
+                        <ListItem
+                            button
+                            onClick = { this.closeAfterClick }
+                            component = { Link }
+                            to = { "/" }
+                        >
+                            <ListItemIcon>
+                                <DevicesIcon/>
+                            </ListItemIcon>
+                            <ListItemText inset primary = "Devices"/>
+                        </ListItem>
+                    }
+                    {path === "/" &&
+                        <ListItem
+                            button
+                            onClick = { this.closeAfterClick }
+                            component = { Link }
+                            to = { "/status" }
+                        >
+                            <ListItemIcon>
+                                <ViewListIcon/>
+                            </ListItemIcon>
+                            <ListItemText inset primary = "Status"/>
+                        </ListItem>
+                    }
 
                 </List>
             </div>

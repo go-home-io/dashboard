@@ -55,8 +55,8 @@ class VacuumManager extends Reflux.Component{
     }
 
     render () {
-        const { classes }  = this.props;
-        const { id, name: fullName, device_state, visible, loading, status, commands } = this.state;
+        const { visible, classes }  = this.props;
+        const { id, name: fullName, device_state, loading, status, commands } = this.state;
         const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
         const area = Math.round(raw_area);
         const name = truncateCaption(fullName, 40);

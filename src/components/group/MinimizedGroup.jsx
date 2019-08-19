@@ -25,9 +25,9 @@ const styles = () => ({
         marginTop: -27,
     },
     expandButton: {
-        position: "relative",
-        top: -85,
-        left: 140,
+        // position: "relative",
+        // top: -70,
+        // left: 140,
     }
 });
 
@@ -61,12 +61,12 @@ class MinimizedGroup extends React.Component {
                     ordinaryBkgColor = { MIN_GROUP_HEADER_BKG_COLOR }
                     iconROColor = { LIGHT_RO_ICON_COLOR }
                 />
-                <div className = { classes.expandButton } >
-                    <ExpandButton
-                        expandGroup = { this.expandGroup.bind(this) }
-                        visible = { visible }
-                    />
-                </div>
+                {/*<div className = { classes.expandButton } >*/}
+                <ExpandButton
+                    expandGroup = { this.expandGroup.bind(this) }
+                    visible = { visible }
+                />
+                {/*</div>*/}
                 <CardContent >
                     { loading ?
                         <Zoom in = { loading } >

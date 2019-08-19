@@ -55,8 +55,8 @@ class CameraManager extends Reflux.Component{
     }
 
     render () {
-        const { classes }  = this.props;
-        const { device_state, visible, name, preview } = this.state;
+        const { visible, classes }  = this.props;
+        const { device_state,  name, preview } = this.state;
         const display = visible ? "block" : "none";
         const { picture } = device_state;
         const image = imageSrc(picture); // "data:image/jpg;base64, " + picture ;

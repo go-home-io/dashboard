@@ -44,8 +44,8 @@ class SwitchManager extends Reflux.Component {
         }
     }
     render () {
-        const { classes, id } = this.props;
-        const {  name: full_name, visible, device_state, status, read_only, loading } = this.state;
+        const { visible, classes, id } = this.props;
+        const {  name: full_name, device_state, status, read_only, loading } = this.state;
         const name = truncateCaption(full_name, 45);
         const { power, on } = device_state;
 

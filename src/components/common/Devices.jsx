@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import SensorManager from "../sensor/SensorManager";
 import VacuumManager from "../vacuum/VacuumManager";
 import CameraManager from "../camera/CameraManager";
@@ -6,6 +7,7 @@ import SwitchManager from "../switch/SwitchManager";
 import LightManager from "../light/LightManager";
 import Weather from "../weather/Weather";
 import MinimizedGroup from "../group/MinimizedGroup";
+import AppStore from "../../reflux/application/AppStore";
 
 const deviceManagers = {
     "light": LightManager,
@@ -17,13 +19,19 @@ const deviceManagers = {
     "minGroup": MinimizedGroup,
 };
 
-class Devices extends React.Component {
+class Devices extends Reflux.Component {
+    constructor(props) {
+        super(props);
+        this.store = AppStore;
+    }
+
     render () {
-        const {deviceType, ...other } = this.props;
+        const {deviceType, location, ...other } = this.props;
         const Manager = deviceManagers[deviceType];
         const availableDevices = Object.keys(deviceManagers);
+        const visible = location === this.state.active_location;
         return (
-            availableDevices.includes(deviceType) && <Manager { ...other }/>
+            availableDevices.includes(deviceType) && <Manager visible = { visible } { ...other }/>
         );
     }
 }
