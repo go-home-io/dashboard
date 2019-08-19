@@ -2,7 +2,7 @@
 
 [go-home](https://go-home.io) web dashboard.
 
-#### Development environemnt
+#### Development environment
 
 Install all dependencies:
 
@@ -27,7 +27,7 @@ make build-to-server
 To run all required validations simply run:
 
 ```bash
-gmake git
+make git
 ```
 
 Which includes: 
