@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/go-home-io/dashboard.svg?branch=master)](https://travis-ci.com/go-home-io/dashboard)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgo-home-io%2Fdashboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgo-home-io%2Fdashboard?ref=badge_shield)
 
 [go-home](https://go-home.io) web dashboard.
 
@@ -32,3 +33,8 @@ make git
 
 Which includes: 
 * `lint` -- running `eslint` with auto-fix enabled
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgo-home-io%2Fdashboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgo-home-io%2Fdashboard?ref=badge_large)
+
