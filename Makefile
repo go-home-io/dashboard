@@ -1,6 +1,6 @@
 RUN=npm start
 BUILD=npm run build
-NPM_INSTALL=npm ci
+NPM_INSTALL=npm install
 NPM_INSTALL_SAVE=$(NPM_INSTALL) --save-dev
 ES_LINT=${CURDIR}/node_modules/.bin/eslint --ext .jsx
 SERVER=$(GOPATH)/src/go-home.io/x/server
