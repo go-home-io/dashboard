@@ -74,9 +74,9 @@ class  StatusManager extends React.Component {
         const statusOptions = {
             filterType: "dropdown",
             filterList: filterList,
-            responsive: "scroll",
+            // responsive: "scroll",
             selectableRows: false,
-            rowsPerPageOptions: [10, 15, 20],
+            rowsPerPageOptions: [10, 20, 100],
             viewColumns: false,
             rowHover: false,
         };
