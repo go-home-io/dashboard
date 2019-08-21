@@ -6,8 +6,8 @@ import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { HEADER_HIGHLIGHT_DURATION } from "../../settings/deviceDelays";
 import { SUCCESS_BKG_COLOR, ERROR_BKG_COLOR } from "../../settings/colors";
 import IconHeader from "../common/IconHeader";
-import SensorHeaderIcon from "../sensor/SensorHeaderIcon";
-import VacuumStatusIcon from "../vacuum/VacuumStatusIcon";
+import SensorHeaderIcon from "../devices/sensor/SensorHeaderIcon";
+import VacuumStatusIcon from "../devices/vacuum/VacuumStatusIcon";
 import SyncDisabled from "@material-ui/icons/SyncDisabled";
 import DeviceName from "./DeviceName";
 

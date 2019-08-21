@@ -7,7 +7,7 @@ import {
     VACUUM_HEADER_ICON_COLOR_UNKNOWN,
     VACUUM_HEADER_ICON_COLOR_PAUSED,
     VACUUM_HEADER_ICON_COLOR_FULL
-} from "../../settings/colors";
+} from "../../../settings/colors";
 import PropTypes from "prop-types";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import ContactSupport from "@material-ui/icons/ContactSupport";

@@ -3,16 +3,21 @@ import Reflux from "reflux";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/Typography";
-import AppStore from "../../reflux/application/AppStore";
+import AppStore from "../../../reflux/application/AppStore";
 
 const styles = () => ({
     uom: {
         marginTop: 5,
         marginLeft: 3,
         display: "inline-block",
+        textAlign:"left"
     },
     duration: {
         marginLeft: -6,
+        textAlign:"left"
+    },
+    area: {
+        textAlign:"left"
     }
 });
 
@@ -29,13 +34,16 @@ class VacuumAreaDuration extends Reflux.Component {
         return (
             <div>
                 { area != null &&
-                    <Typography variant = "subtitle1" align = "left" color = "textSecondary">
+                    <Typography
+                        variant = "subtitle1"
+                        className = { classes.area }
+                        color = "textSecondary"
+                    >
                         <strong>
                             {area}
                         </strong>
                         <Typography
                             variant = "caption"
-                            align = "left"
                             color = "textSecondary"
                             className = { classes.uom }
                         >
@@ -47,7 +55,6 @@ class VacuumAreaDuration extends Reflux.Component {
                 { duration != null &&
                     <Typography
                         variant = "subtitle1"
-                        align = "left"
                         color = "textSecondary"
                         className = { classes.duration }
                     >
@@ -56,7 +63,6 @@ class VacuumAreaDuration extends Reflux.Component {
                         </strong>
                         <Typography
                             variant = "caption"
-                            align = "left"
                             color = "textSecondary"
                             className = { classes.uom }
                         >

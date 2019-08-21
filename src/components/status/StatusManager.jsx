@@ -63,7 +63,6 @@ class  StatusManager extends React.Component {
 
         const workerOptions = {
             filter: false,
-            responsive: "scroll",
             pagination: false,
             onRowClick: this.handleRowClick,
             viewColumns: false,
@@ -74,7 +73,6 @@ class  StatusManager extends React.Component {
         const statusOptions = {
             filterType: "dropdown",
             filterList: filterList,
-            // responsive: "scroll",
             selectableRows: false,
             rowsPerPageOptions: [10, 20, 100],
             viewColumns: false,

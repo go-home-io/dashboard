@@ -1,11 +1,11 @@
 import React from "react";
 import Reflux from "reflux";
-import SensorManager from "../sensor/SensorManager";
-import VacuumManager from "../vacuum/VacuumManager";
-import CameraManager from "../camera/CameraManager";
-import SwitchManager from "../switch/SwitchManager";
-import LightManager from "../light/LightManager";
-import Weather from "../weather/Weather";
+import SensorManager from "../devices/sensor/SensorManager";
+import VacuumManager from "../devices/vacuum/VacuumManager";
+import CameraManager from "../devices/camera/CameraManager";
+import SwitchManager from "../devices/switch/SwitchManager";
+import LightManager from "../devices/light/LightManager";
+import Weather from "../devices/weather/Weather";
 import MinimizedGroup from "../group/MinimizedGroup";
 import AppStore from "../../reflux/application/AppStore";
 

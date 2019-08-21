@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid/Grid";
 import ColorSliders from "./ColorSliders";
 import Popover from "@material-ui/core/Popover/Popover";
-import rgbColor from "../utils/rgbColor";
+import rgbColor from "../../../utils/rgbColor";
 import Typography from "@material-ui/core/Typography/Typography";
 
 const styles = () => ({

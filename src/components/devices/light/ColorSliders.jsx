@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RGBSlider from "./RGBSlider";
-import rgbColor from "../utils/rgbColor";
-import SlidersHeader from "../common/SlidersHeader";
-import SliderActions from "../common/SliderActions";
+import rgbColor from "../../../utils/rgbColor";
+import SlidersHeader from "../../common/SlidersHeader";
+import SliderActions from "../../common/SliderActions";
 
 const styles = () => ({
     root : {

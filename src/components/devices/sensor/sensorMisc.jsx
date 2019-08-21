@@ -1,5 +1,5 @@
 import React from "react";
-import {MOTION_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF, SENSOR_ICON_COLOR_ON} from "../../settings/colors";
+import {MOTION_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF, SENSOR_ICON_COLOR_ON} from "../../../settings/colors";
 import TransferWithinAStation from "@material-ui/icons/TransferWithinAStation";
 import TouchApp from "@material-ui/icons/TouchApp";
 import Face from "@material-ui/icons/Face";

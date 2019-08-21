@@ -3,7 +3,7 @@ import sensorActions from "./sensorActions";
 // import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Sensor
-function SensorStoreFactory(id,  device_info, location, group_id){
+function SensorStoreFactory(id,  device_info, group_id){
 
     class SensorStore extends Reflux.Store {
         constructor() {
@@ -15,9 +15,7 @@ function SensorStoreFactory(id,  device_info, location, group_id){
                 type: device_info.state.sensor_type,
                 device_state: device_info.state,
                 last_seen: device_info.last_seen,
-                location: location,
                 group_id: group_id,
-                visible: false,
                 read_only: device_info.read_only,
                 status: "ordinary",
             };
@@ -25,7 +23,6 @@ function SensorStoreFactory(id,  device_info, location, group_id){
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
-            this.onVisible = this.onVisible.bind(this);
             this.onStatus = this.onStatus.bind(this);
         }
 
@@ -39,13 +36,6 @@ function SensorStoreFactory(id,  device_info, location, group_id){
         }
 
         // Actions
-        onVisible(location) {
-            this.setState({visible: false});
-            if (this.state.location === location) {
-                this.setState({visible: true});
-            }
-        }
-
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
                 this.setState({status:status});

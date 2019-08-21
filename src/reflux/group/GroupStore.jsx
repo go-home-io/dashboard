@@ -5,7 +5,7 @@ import deviceActions from "../devices/deviceActions";
 import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Group
-function GroupStoreFactory(id,  members, device_info, location){
+function GroupStoreFactory(id,  members, device_info){
     class GroupStore extends Reflux.Store {
         constructor() {
             super();
@@ -17,8 +17,6 @@ function GroupStoreFactory(id,  members, device_info, location){
                 device_state: state,
                 last_seen: last_seen,
                 commands: commands,
-                location: location,
-                visible: false,
                 read_only: device_info.read_only,
                 minimized: true,
                 status:"ordinary",
@@ -30,7 +28,6 @@ function GroupStoreFactory(id,  members, device_info, location){
             // Bind it
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
-            this.onVisible = this.onVisible.bind(this);
             this.onToggle = this.onToggle.bind(this);
             this.onToggleWindow = this.onToggleWindow.bind(this);
             this.onStatus = this.onStatus.bind(this);
@@ -71,12 +68,6 @@ function GroupStoreFactory(id,  members, device_info, location){
             if ( dev_id === id ) {
                 const command = this.state.device_state.on ? "off" : "on";
                 this.doCommand(command, "");
-            }
-        }
-        onVisible(location) {
-            this.setState({visible: false});
-            if (this.state.location === location) {
-                this.setState({visible: true});
             }
         }
         onToggleWindow(dev_id) {

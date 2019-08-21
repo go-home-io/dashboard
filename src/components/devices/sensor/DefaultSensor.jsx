@@ -5,10 +5,10 @@ import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
 import ButtonIcons from "./ButtonIcons";
 import {sensorContentIcon, sensorIconColor, sensorTip} from "./sensorMisc";
-import ComponentUpperInfo from "../common/ComponentUpperInfo";
+import ComponentUpperInfo from "../../common/ComponentUpperInfo";
 import Temperature from "./Temperature";
 import Humidity from "./Humidity";
-import Battery from "../common/Battery";
+import Battery from "../../common/Battery";
 
 const styles = () => ({
     icon: {

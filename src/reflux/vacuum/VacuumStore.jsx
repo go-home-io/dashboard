@@ -4,7 +4,7 @@ import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Vacuum
-function VacuumStoreFactory(id, device_state, location, group_id) {
+function VacuumStoreFactory(id, device_state, group_id) {
     class VacuumStore extends Reflux.Store {
         constructor() {
             super();
@@ -15,9 +15,7 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
                 last_seen: device_state.last_seen,
                 commands: device_state.commands,
                 group_id: group_id,
-                location: location,
                 loading:false,
-                visible: false,
                 status:"ordinary",
             };
             this.listenables = vacuumActions;
@@ -26,7 +24,6 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
             this.onPause = this.onPause.bind(this);
-            this.onVisible = this.onVisible.bind(this);
             this.onDock = this.onDock.bind(this);
             this.onFindMe = this.onFindMe.bind(this);
             this.onOn = this.onOn.bind(this);
@@ -133,12 +130,6 @@ function VacuumStoreFactory(id, device_state, location, group_id) {
         }
 
         // Appearance
-        onVisible(location) {
-            this.setState({visible: false});
-            if (this.state.location === location) {
-                this.setState({visible: true});
-            }
-        }
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
                 this.setState({status:status});

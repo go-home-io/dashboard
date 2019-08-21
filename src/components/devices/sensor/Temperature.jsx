@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography/Typography";
-import TemperatureSymbol from "../common/TemperatureSymbol";
+import TemperatureSymbol from "../../common/TemperatureSymbol";
 
 const Temperature = (props) => {
     const { temperature } = props;
@@ -13,7 +13,10 @@ const Temperature = (props) => {
     return (
         <div>
             { temperature != null &&
-                <Typography variant = 'subtitle1' align = 'center' color = "textSecondary">
+                <Typography
+                    variant = 'subtitle1'
+                    color = "textSecondary"
+                >
                     <strong>
                         { temperatureFormatted }
                     </strong>

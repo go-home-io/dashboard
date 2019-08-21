@@ -1,21 +1,21 @@
 import React from "react";
 import Reflux from "reflux";
-import SensorStoreFactory from "../../reflux/sensor/SensorStore";
+import SensorStoreFactory from "../../../reflux/sensor/SensorStore";
 import PropTypes from "prop-types";
-import truncateCaption from "../utils/truncate";
+import truncateCaption from "../../../utils/truncate";
 import TemperatureSensor from "./TemperatureSensor";
 import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
-import { SENSOR_HEADER_BKG_COLOR } from "../../settings/colors";
-import ComponentHeader from "../common/ComponentHeader";
-import sensorActions from "../../reflux/sensor/sensorActions";
-import DeviceFrame from "../common/DeviceFrame";
+import { SENSOR_HEADER_BKG_COLOR } from "../../../settings/colors";
+import ComponentHeader from "../../common/ComponentHeader";
+import sensorActions from "../../../reflux/sensor/sensorActions";
+import DeviceFrame from "../../common/DeviceFrame";
 
 class SensorManager extends Reflux.Component {
     constructor(props) {
         super(props);
-        const { id, device_info, location } = props;
-        this.store = SensorStoreFactory(id, device_info, location);
+        const { id, device_info } = props;
+        this.store = SensorStoreFactory(id, device_info);
     }
     render () {
         const { visible, id } = this.props;

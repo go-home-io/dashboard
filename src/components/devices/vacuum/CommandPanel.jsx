@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import vacuumActions from "../../reflux/vacuum/vacuumActions";
+import vacuumActions from "../../../reflux/vacuum/vacuumActions";
 import Grid from "@material-ui/core/Grid/Grid";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import { commandButtonsBehavior } from "./commandButtonsBehavior";

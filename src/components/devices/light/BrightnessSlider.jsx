@@ -1,47 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import SlidersHeader from "../common/SlidersHeader";
-import vacuumActions from "../../reflux/vacuum/vacuumActions";
+import SlidersHeader from "../../common/SlidersHeader";
 import Slider from "@material-ui/lab/Slider/Slider";
-import SliderActions from "../common/SliderActions";
+import SliderActions from "../../common/SliderActions";
 
 const styles = () => ({
     root : {
-        marginTop:20,
+        marginTop: 8,
         width:250,
         height:110,
-        cursor: "default",
     },
     slider: {
         width:"90%",
-        marginLeft:3
+        marginLeft:10,
+        marginTop: 15,
+        marginBottom: 25,
     }
 });
 
-class FanSpeedSlider extends React.Component {
+class BrightnessSlider extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             value: props.level,
         };
-        this.setFanSpeed = this.setFanSpeed.bind(this);
+        this.setValue = this.setValue.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
     handleChange (event, value) {
         const level = Math.floor(value);
         this.setState({ value:level });
     }
-
-    setFanSpeed() {
-        const { dev_id, close } = this.props;
+    setValue() {
+        const { dev_id, close, doCommand } = this.props;
         const { value } = this.state;
-        vacuumActions.setFanSpeed(dev_id, value);
+        doCommand(dev_id, "set-brightness", value);
         close();
     }
-
     render () {
         const { classes, close } = this.props;
         const { value } = this.state;
@@ -49,27 +46,27 @@ class FanSpeedSlider extends React.Component {
         return (
             <div className = { classes.root }>
                 <SlidersHeader
-                    caption = 'Set Fan Speed'
+                    caption = 'Set brightness'
                     level = { value }
                 />
                 <div className = { classes.slider }>
                     <Slider value = { value } onChange = { this.handleChange } />
                 </div>
                 <SliderActions
-                    save = { this.setFanSpeed }
+                    save = { this.setValue }
                     close = { close }
                 />
             </div>
         );
     }
-
 }
 
-FanSpeedSlider.propTypes = {
+BrightnessSlider.propTypes = {
     classes: PropTypes.object.isRequired,
     dev_id: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
-    level: PropTypes.number.isRequired
+    level: PropTypes.number.isRequired,
+    doCommand: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(FanSpeedSlider);
+export default withStyles(styles)(BrightnessSlider);

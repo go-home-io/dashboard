@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography/Typography";
-import TemperatureSymbol from "../common/TemperatureSymbol";
-import ComponentUpperInfo from "../common/ComponentUpperInfo";
-import Battery from "../common/Battery";
+import TemperatureSymbol from "../../common/TemperatureSymbol";
+import ComponentUpperInfo from "../../common/ComponentUpperInfo";
+import Battery from "../../common/Battery";
+
 
 const TemperatureSensor = (props) => {
     const { temperature, humidity, battery_level } = props;
@@ -20,12 +21,12 @@ const TemperatureSensor = (props) => {
                 }
             />
 
-            <Typography variant = 'h4' align = 'center' color = "textSecondary">
+            <Typography variant = 'h4' color = "textSecondary" style = { {textAlign: "center"} }>
                 { temperatureFormatted }
                 <TemperatureSymbol/>
             </Typography>
 
-            <Typography variant = 'body1' align = 'center' color = "textSecondary">
+            <Typography variant = 'body1' style = { {textAlign: "center"} } color = "textSecondary">
                 Humidity
                 {" "}
                 {humidityFormatted}

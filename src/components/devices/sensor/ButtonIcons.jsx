@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
-import {SENSOR_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF} from "../../settings/colors";
+import {SENSOR_ICON_COLOR_ON, SENSOR_ICON_COLOR_OFF} from "../../../settings/colors";
 import DoneOutline from "@material-ui/icons/DoneOutline";
 import Done from "@material-ui/icons/Done";
 import DoneAll from "@material-ui/icons/DoneAll";

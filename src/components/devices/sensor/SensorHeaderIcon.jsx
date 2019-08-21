@@ -1,5 +1,5 @@
 import React from "react";
-import { SENSOR_HEADER_ICON_COLOR } from "../../settings/colors";
+import { SENSOR_HEADER_ICON_COLOR } from "../../../settings/colors";
 import PropTypes from "prop-types";
 import { getSensorHeaderIcon } from "./sensorMisc";
 

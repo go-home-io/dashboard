@@ -3,7 +3,7 @@ import Reflux from "reflux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CameraStoreFactory from "../../reflux/camera/CameraStore";
+import CameraStoreFactory from "../../../reflux/camera/CameraStore";
 import CardMedia from "@material-ui/core/CardMedia/CardMedia";
 import Typography from "@material-ui/core/Typography/Typography";
 import Zoom from "@material-ui/core/Zoom/Zoom";
@@ -45,9 +45,9 @@ const imageSrc = (picture) => {
 class CameraManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        const { id, device_info, location, group_id } = props;
+        const { id, device_info, group_id } = props;
         this.state = {preview: true};
-        this.store = CameraStoreFactory(id, device_info, location, group_id);
+        this.store = CameraStoreFactory(id, device_info, group_id);
     }
     handleClick () {
         const { preview } = this.state;

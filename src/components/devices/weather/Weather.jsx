@@ -4,17 +4,18 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/Typography";
 import Card from "@material-ui/core/Card/Card";
-import TemperatureSymbol from "../common/TemperatureSymbol";
+import TemperatureSymbol from "../../common/TemperatureSymbol";
 import Grid from "@material-ui/core/Grid/Grid";
-import truncateCaption from "../utils/truncate";
+import truncateCaption from "../../../utils/truncate";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { PartlyCloudyDay, AtmosphericPressure,  WindSock } from "./Icon8JPG";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import AppStore from "../../reflux/application/AppStore";
-import WeatherStoreFactory from "../../reflux/weather/WeatherStore";
-import { unitsOfMeasure } from "../../settings/uom";
-import DeviceName from "../common/DeviceName";
+import AppStore from "../../../reflux/application/AppStore";
+import WeatherStoreFactory from "../../../reflux/weather/WeatherStore";
+import { unitsOfMeasure } from "../../../settings/uom";
+import DeviceName from "../../common/DeviceName";
+import classNames from "classnames";
 
 const styles = () => ({
     root: {
@@ -68,6 +69,12 @@ const styles = () => ({
     icon_compass: {
         marginLeft: -10,
         fontSize: 21
+    },
+    textLeft: {
+        textAlign: "left"
+    },
+    textCenter: {
+        textAlign: "center"
     }
 
 });
@@ -75,8 +82,8 @@ const styles = () => ({
 class Weather extends Reflux.Component {
     constructor(props) {
         super(props);
-        const { id, device_info, location } = props;
-        this.stores = [ AppStore, WeatherStoreFactory(id, device_info, location)];
+        const { id, device_info } = props;
+        this.stores = [ AppStore, WeatherStoreFactory(id, device_info)];
     }
     render () {
         const { visible, classes } = this.props;
@@ -135,7 +142,10 @@ class Weather extends Reflux.Component {
                         >
                             {AtmosphericPressure}
                         </Tooltip>
-                        <Typography variant = "caption" align = "left" className = { classes.typography }>
+                        <Typography
+                            variant = "caption"
+                            className = { classNames(classes.typography, classes.textLeft) }
+                        >
                             { pressure }
                         </Typography>
 
@@ -147,7 +157,10 @@ class Weather extends Reflux.Component {
                                 <FontAwesomeIcon icon = "compass"/>
                             </div>
                         </Tooltip>
-                        <Typography variant = "caption" align = "left" className = { classes.typography }>
+                        <Typography
+                            variant = "caption"
+                            className = { classNames(classes.typography, classes.textLeft) }
+                        >
                             { wind_direction }
                             {" "}
                             &deg;
@@ -159,7 +172,10 @@ class Weather extends Reflux.Component {
                         <Tooltip title = "wind speed" placement = "left-start">
                             { WindSock }
                         </Tooltip>
-                        <Typography variant = "caption" align = "center" className = { classes.typography }>
+                        <Typography
+                            variant = "caption"
+                            className = { classNames(classes.typography, classes.textCenter) }
+                        >
                             {wind_speed}
                             {" "}
                             {windSpeedUnits}
@@ -170,7 +186,10 @@ class Weather extends Reflux.Component {
                         <Tooltip title = "visibility" placement = "right-start">
                             <RemoveRedEye/>
                         </Tooltip>
-                        <Typography variant = "caption" align = "center" className = { classes.typography }>
+                        <Typography
+                            variant = "caption"
+                            className = { classNames(classes.typography, classes.textCenter) }
+                        >
                             {"  "}
                             {visibility}
                             {" "}

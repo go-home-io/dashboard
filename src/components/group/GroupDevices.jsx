@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import getDeviceState from "../utils/getDeviceState";
+import getDeviceState from "../../utils/getDeviceState";
 import Devices from "../common/Devices";
 
 class GroupDevices extends React.Component {

@@ -38,16 +38,8 @@ class MinimizedGroup extends React.Component {
     }
     render () {
         const {
-            classes,
-            device_state,
-            group_id,
-            commands,
-            name,
-            read_only,
-            loading,
-            status,
-            visible,
-        } = this.props;
+            classes, device_state, group_id, commands,
+            name, read_only, loading, status, visible } = this.props;
         return (
             <DeviceFrame visible = { true }>
                 <ComponentHeader
@@ -61,12 +53,12 @@ class MinimizedGroup extends React.Component {
                     ordinaryBkgColor = { MIN_GROUP_HEADER_BKG_COLOR }
                     iconROColor = { LIGHT_RO_ICON_COLOR }
                 />
-                {/*<div className = { classes.expandButton } >*/}
+
                 <ExpandButton
                     expandGroup = { this.expandGroup.bind(this) }
                     visible = { visible }
                 />
-                {/*</div>*/}
+
                 <CardContent >
                     { loading ?
                         <Zoom in = { loading } >

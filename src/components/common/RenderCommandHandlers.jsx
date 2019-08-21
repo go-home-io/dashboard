@@ -1,7 +1,7 @@
 import React from "react";
-import LightBrightness from "../light/LightBrightness";
-import LightColorPicker from "../light/LightColorPicker";
-import Scenes from "../light/Scenes";
+import LightBrightness from "../devices/light/LightBrightness";
+import LightColorPicker from "../devices/light/LightColorPicker";
+import Scenes from "../devices/light/Scenes";
 import PropTypes from "prop-types";
 import UnknownCommandHandler from "./UnknownCommandHandler";
 

@@ -1,18 +1,18 @@
 import React from "react";
 import Reflux from "reflux";
-import ComponentHeader from "../common/ComponentHeader";
+import ComponentHeader from "../../common/ComponentHeader";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/Grid";
-import WaitingProgress from "../common/WaitingProgress";
+import WaitingProgress from "../../common/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
-import truncateCaption from "../utils/truncate";
-import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF, LIGHT_RO_ICON_COLOR} from "../../settings/colors";
-import RenderCommandHandlers from "../common/RenderCommandHandlers";
-import DeviceStoreFactory from "../../reflux/devices/DeviceStore";
-import deviceActions from "../../reflux/devices/deviceActions";
-import DeviceFrame from "../common/DeviceFrame";
+import truncateCaption from "../../../utils/truncate";
+import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF, LIGHT_RO_ICON_COLOR} from "../../../settings/colors";
+import RenderCommandHandlers from "../../common/RenderCommandHandlers";
+import DeviceStoreFactory from "../../../reflux/devices/DeviceStore";
+import deviceActions from "../../../reflux/devices/deviceActions";
+import DeviceFrame from "../../common/DeviceFrame";
 
 const styles = () => ({
     // root: {

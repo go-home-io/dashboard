@@ -21,11 +21,11 @@ const Humidity = (props) => {
         <Grid container justify = 'flex-start'>
             { humidity != null &&
                 <div>
-                    <Typography variant = 'subtitle1' align = 'center' color = "textSecondary">
+                    <Typography variant = 'subtitle1' color = "textSecondary">
                         <strong>
                             {humidityFormatted}
                         </strong>
-                        <Typography variant = 'caption' className = { classes.uom } align = "left">
+                        <Typography variant = 'caption' className = { classes.uom } style = { {textJustify:"left"} }>
                             {"%"}
                         </Typography>
                     </Typography>

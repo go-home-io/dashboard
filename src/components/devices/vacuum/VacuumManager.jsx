@@ -1,21 +1,21 @@
 import React from "react";
 import Reflux from "reflux";
-import ComponentHeader from "../common/ComponentHeader";
+import ComponentHeader from "../../common/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
-import WaitingProgress from "../common/WaitingProgress";
+import WaitingProgress from "../../common/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
-import truncateCaption from "../utils/truncate";
-import { VACUUM_HEADER_BKG_COLOR } from "../../settings/colors";
-import VacuumStoreFactory from "../../reflux/vacuum/VacuumStore";
-import vacuumActions from "../../reflux/vacuum/vacuumActions";
+import truncateCaption from "../../../utils/truncate";
+import { VACUUM_HEADER_BKG_COLOR } from "../../../settings/colors";
+import VacuumStoreFactory from "../../../reflux/vacuum/VacuumStore";
+import vacuumActions from "../../../reflux/vacuum/vacuumActions";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
-import Battery from "../common/Battery";
-import ComponentUpperInfo from "../common/ComponentUpperInfo";
+import Battery from "../../common/Battery";
+import ComponentUpperInfo from "../../common/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
-import DeviceFrame from "../common/DeviceFrame";
+import DeviceFrame from "../../common/DeviceFrame";
 
 const styles = () => ({
     progress: {
@@ -50,8 +50,8 @@ const styles = () => ({
 class VacuumManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        const { id, device_info, location, group_id } = props;
-        this.store = VacuumStoreFactory(id, device_info, location, group_id);
+        const { id, device_info, group_id } = props;
+        this.store = VacuumStoreFactory(id, device_info, group_id);
     }
 
     render () {

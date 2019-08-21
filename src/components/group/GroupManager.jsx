@@ -13,8 +13,8 @@ const groupIcon = "devices_other";
 class GroupManager  extends Reflux.Component {
     constructor(props) {
         super(props);
-        const { dev_id, members, device_info, location} = props;
-        this.stores = [GroupStoreFactory(dev_id, members, device_info, location), AppStore];
+        const { dev_id, members, device_info } = props;
+        this.stores = [GroupStoreFactory(dev_id, members, device_info), AppStore];
         this.handleGroupHeaderClick = this.handleGroupHeaderClick.bind(this);
     }
     handleGroupHeaderClick() {

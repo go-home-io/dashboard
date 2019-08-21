@@ -2,7 +2,7 @@ import React from "react";
 import Reflux from "reflux";
 import Grid from "@material-ui/core/Grid/Grid";
 import GroupManager from "../group/GroupManager";
-import getDeviceState from "../utils/getDeviceState";
+import getDeviceState from "../../utils/getDeviceState";
 import LocationStoreFactory from "../../reflux/location/LocationStore";
 import PropTypes from "prop-types";
 import Devices from "../common/Devices";

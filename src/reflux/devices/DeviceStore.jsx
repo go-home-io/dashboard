@@ -17,9 +17,7 @@ function DeviceStoreFactory(id,  device_info, group_id){
                 last_seen: last_seen,
                 commands: commands,
                 group_id: group_id,
-                // location: location,
                 loading: false,
-                // visible: false,
                 read_only: read_only,
                 status:"ordinary",
             };
@@ -29,7 +27,6 @@ function DeviceStoreFactory(id,  device_info, group_id){
             // Bind it
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
-            // this.onVisible = this.onVisible.bind(this);
             this.onToggle = this.onToggle.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onSetLoading = this.onSetLoading.bind(this);
@@ -49,7 +46,6 @@ function DeviceStoreFactory(id,  device_info, group_id){
         // WebSocket listener
         onMessage (data) {
             if (data.id === id) {
-                // const state = data.state;
                 this.setState({
                     device_state: data.state,
                     loading:false,
@@ -74,13 +70,6 @@ function DeviceStoreFactory(id,  device_info, group_id){
             }
         }
 
-        // Appearance
-        // onVisible(location) {
-        //     this.setState({visible: false});
-        //     if (this.state.location === location) {
-        //         this.setState({visible: true});
-        //     }
-        // }
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
                 this.setState({status:status});

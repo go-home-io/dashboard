@@ -1,6 +1,6 @@
 import React from "react";
 import Icon from "@material-ui/core/Icon/Icon";
-import { LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
+import { LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF } from "../../../settings/colors";
 import PropTypes from "prop-types";
 
 const lightIcon = "wb_incandescent";
