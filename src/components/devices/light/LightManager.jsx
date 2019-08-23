@@ -33,6 +33,7 @@ class LightManager extends Reflux.Component{
         super(props);
         const { id, device_info, location, group_id } = props;
         this.store = DeviceStoreFactory(id, device_info, location, group_id);
+        deviceActions.setInitialState(device_info);
     }
     render () {
         const { visible, classes }  = this.props;
@@ -87,7 +88,6 @@ LightManager.propTypes = {
     classes: PropTypes.object.isRequired,
     device_info: PropTypes.object.isRequired ,
     id: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
     group_id: PropTypes.string
 };
 

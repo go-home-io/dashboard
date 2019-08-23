@@ -16,6 +16,9 @@ import WeatherStoreFactory from "../../../reflux/weather/WeatherStore";
 import { unitsOfMeasure } from "../../../settings/uom";
 import DeviceName from "../../common/DeviceName";
 import classNames from "classnames";
+import {formatNumericProp} from "../../../settings/formatNumericProp";
+import weatherActions from "../../../reflux/weather/weatherActions";
+
 
 const styles = () => ({
     root: {
@@ -50,7 +53,7 @@ const styles = () => ({
         marginTop: -2
     },
     container: {
-        marginTop: 10,
+        marginTop: 5,
         marginLeft:5,
     },
     grid_item: {
@@ -82,22 +85,29 @@ const styles = () => ({
 class Weather extends Reflux.Component {
     constructor(props) {
         super(props);
-        const { id, device_info } = props;
-        this.stores = [ AppStore, WeatherStoreFactory(id, device_info)];
+        const { id } = props;
+        this.stores = [ AppStore, WeatherStoreFactory(id)];
     }
+
+    componentDidMount() {
+        weatherActions.setInitialState(this.props.device_info);
+    }
+
     render () {
         const { visible, classes } = this.props;
         const { name, device_state, uom } = this.state;
-        const { visibility, wind_direction, wind_speed, sunrise, sunset } = device_state;
+        const { sunrise, sunset, description } = device_state;
         const shortName = truncateCaption(name,14);
-        const   { pressureUnits, visibilityUnits, windSpeedUnits } = (uom !== "") ? unitsOfMeasure[uom] : "";
+        const { pressureUnits, visibilityUnits, windSpeedUnits } = (uom !== "") ? unitsOfMeasure[uom] : "";
         const display = visible ? "block" : "none";
 
-        let { humidity, pressure, temperature } = device_state;
-        pressure = (pressure == null) ? null :
-            ( uom === "imperial" ) ? pressure.toFixed(3) : Math.round(pressure);
-        temperature = (temperature != null) ?  temperature.toFixed(1) : null ;
-        humidity = (humidity != null) ? humidity.toFixed(1) : null;
+        let { humidity, pressure, wind_speed, temperature, visibility, wind_direction  } = device_state;
+        pressure = formatNumericProp(uom, "pressure", pressure);
+        temperature = formatNumericProp(uom, "temperature", temperature);
+        humidity = formatNumericProp(uom, "humidity", humidity);
+        wind_speed = formatNumericProp(uom, "wind_speed", wind_speed);
+        visibility = formatNumericProp(uom, "visibility", visibility);
+        wind_direction = formatNumericProp(uom, "wind_direction", wind_direction);
 
         return (
             <Card style = { { display:display } } className = { classes.root } >
@@ -122,7 +132,7 @@ class Weather extends Reflux.Component {
                     </Grid>
                 </Grid>
 
-                <Typography variant = "h4" className = { classes.temperature }>
+                <Typography variant = "h5" className = { classes.temperature }>
                     {temperature}
                     {" "}
                     <TemperatureSymbol/>
@@ -133,6 +143,11 @@ class Weather extends Reflux.Component {
                     {humidity}
                     %
                 </Typography>
+
+                <Typography variant = "body2" className = { classes.humidity }>
+                    {description}
+                </Typography>
+
 
                 <Grid container className = { classes.container }>
                     <Grid item xs = { 6 } className = { classes.grid_item }>

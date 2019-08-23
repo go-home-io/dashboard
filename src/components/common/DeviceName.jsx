@@ -3,7 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/Typography";
 import  PropTypes from "prop-types";
 import truncateCaption from "../../utils/truncate";
-import {maxSymbolsInDeviceName} from "../../settings/caption";
+// import {maxSymbolsInDeviceName} from "../../settings/caption";
 import {Tooltip} from "@material-ui/core";
 
 const style = () => ({
@@ -13,10 +13,11 @@ const style = () => ({
     }
 });
 
+const maxSymbolsInDeviceName = 20;
+
 const DeviceName = (props) => {
     const { classes, name } = props;
     const nameTrunc = truncateCaption(name, maxSymbolsInDeviceName);
-
 
     return (
         <Tooltip title = { name } placement = "top">

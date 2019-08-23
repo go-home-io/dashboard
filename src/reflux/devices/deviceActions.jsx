@@ -6,7 +6,8 @@ const deviceActions = Reflux.createActions([
     "message",
     "status",
     "setLoading",
-    "command"
+    "command",
+    "setInitialState"
 ]);
 
 export default deviceActions;

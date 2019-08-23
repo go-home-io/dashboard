@@ -33,10 +33,17 @@ class StartPage extends Component {
                     if (data === 401 || data === 403) {
                         // Authentication required
                         Cookie.remove(COOKIE_NAME);
-                        this.setState({authenticated:false, auth_required: true, loading: false});
+                        this.setState({
+                            authenticated:false,
+                            auth_required: true,
+                            loading: false
+                        });
                     } else {
                         // Other connection errors
-                        this.setState({status:data, loading: false});
+                        this.setState({
+                            status:data,
+                            loading: false
+                        });
                     }
                 } else {
                     // Success
@@ -54,7 +61,11 @@ class StartPage extends Component {
     getCredentials (user, password) {
         const credentials = "Basic " + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
-        this.setState({auth_error: true, loading: true, auth_required: false});
+        this.setState({
+            auth_error: true,
+            loading: true,
+            auth_required: false
+        });
         this.getComponentsStateByHTTP();
     }
     render () {

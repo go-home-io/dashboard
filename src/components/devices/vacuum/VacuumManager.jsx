@@ -50,8 +50,13 @@ const styles = () => ({
 class VacuumManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        const { id, device_info, group_id } = props;
+        const { id, device_info, group_id} = props;
         this.store = VacuumStoreFactory(id, device_info, group_id);
+    }
+
+    componentDidMount() {
+        const { device_info, group_id } = this.props;
+        vacuumActions.setInitialState(device_info, group_id);
     }
 
     render () {
@@ -62,7 +67,7 @@ class VacuumManager extends Reflux.Component{
         const name = truncateCaption(fullName, 40);
 
         return (
-            <DeviceFrame visible = { visible } >
+            <DeviceFrame visible = { visible }>
                 <ComponentHeader
                     dev_id = { id }
                     name = { name }
@@ -78,10 +83,10 @@ class VacuumManager extends Reflux.Component{
                         <VacuumAreaDuration area = { area }/>
                     }
                     centerField = {
-                        <VacuumAreaDuration duration = { duration } />
+                        <VacuumAreaDuration duration = { duration }/>
                     }
                     rightField = {
-                        <Battery battery_level = { battery_level } />
+                        <Battery battery_level = { battery_level }/>
                     }
                 />
 
@@ -121,7 +126,6 @@ VacuumManager.propTypes = {
     classes: PropTypes.object.isRequired,
     device_info: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
     group_id: PropTypes.string
 };
 

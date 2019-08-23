@@ -2,7 +2,7 @@ import Reflux from "reflux";
 import weatherActions from "../weather/weatherActions";
 
 //  Create unique Store for each Weather sensor
-function WeatherStoreFactory(id, device_info){
+function WeatherStoreFactory(id){
     class WeatherStore extends Reflux.Store {
         constructor() {
             super();
@@ -19,11 +19,11 @@ function WeatherStoreFactory(id, device_info){
 
             // Bind it
             this.onMessage = this.onMessage.bind(this);
-
-            this.setInitialState(device_info);
+            this.onSetInitialState = this.onSetInitialState.bind(this);
         }
 
-        setInitialState(device_state) {
+        // Actions
+        onSetInitialState(device_state) {
             if (device_state) {
                 const {name, state, last_seen} = device_state;
                 this.setState({

@@ -42,7 +42,7 @@ class WaitingProgress extends Reflux.Component {
     }
     restart ()  {
         this.setState({ completed: 0 });
-        setTimeout(setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),100);
+        setTimeout(()=>setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),100);
     }
     progress ()  {
         let { completed, reset, rejected } = this.state;

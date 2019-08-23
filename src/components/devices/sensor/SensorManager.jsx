@@ -60,7 +60,6 @@ class SensorManager extends Reflux.Component {
 
 SensorManager.propTypes = {
     id: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
 };
 
 export default (SensorManager);

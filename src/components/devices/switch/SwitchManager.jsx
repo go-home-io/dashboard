@@ -104,7 +104,6 @@ class SwitchManager extends Reflux.Component {
 SwitchManager.propTypes = {
     classes: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(SwitchManager);

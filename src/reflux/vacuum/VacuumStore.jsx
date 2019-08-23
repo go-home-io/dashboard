@@ -21,6 +21,7 @@ function VacuumStoreFactory(id, device_state, group_id) {
             this.listenables = vacuumActions;
 
             // Bind it
+            // this.onSetInitialState = this.onSetInitialState.bind(this);
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
             this.onPause = this.onPause.bind(this);
@@ -64,6 +65,16 @@ function VacuumStoreFactory(id, device_state, group_id) {
         /* -----------------------------
                   Actions
         --------------------------------- */
+
+        // onSetInitialState(device_info, group_id){
+        //     this.setState({
+        //         name: device_.name,
+        //         device_state: device_state.state,
+        //         last_seen: device_state.last_seen,
+        //         commands: device_state.commands,
+        //         group_id: group_id,
+        //     });
+        // };
 
         // Command "toggle" emulation
         onToggle (dev_id) {
