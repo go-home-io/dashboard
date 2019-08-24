@@ -11,15 +11,15 @@ const styles = () => ({
         borderRadius:5,
         padding:5,
         margin: 5,
+        backgroundColor: "rgba(0, 0, 0, 0.05)"
     },
 });
 
 class ExpandedGroup extends React.Component {
     render () {
         const {
-            classes, iconColor, groupIcon,
-            name, group_id, location, handleClick,
-            all_device_states, members, visible, read_only } = this.props;
+            classes, iconColor, groupIcon, name, group_id,
+            handleClick, all_device_states, members, visible, read_only } = this.props;
 
         return(
             <div className = { classes.root }>
@@ -34,15 +34,14 @@ class ExpandedGroup extends React.Component {
                 />
                 <Grid container justify = 'center' alignItems = 'center'>
                     <GroupDevices
-                        location = { location }
                         group_id = { group_id }
                         all_device_states = { all_device_states }
                         members = { members }
+                        visible = { visible }
                     />
                 </Grid>
             </div>
         );
-
     }
 }
 
@@ -52,7 +51,6 @@ ExpandedGroup.propTypes = {
     groupIcon: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     group_id: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
     all_device_states: PropTypes.array.isRequired,
     members: PropTypes.array.isRequired,
     handleClick: PropTypes.func.isRequired,

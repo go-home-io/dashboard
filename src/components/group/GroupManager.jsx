@@ -24,13 +24,12 @@ class GroupManager  extends Reflux.Component {
         }
     }
     render () {
-        const { all_device_states, dev_id, location } = this.props;
+        const { all_device_states, dev_id, visible } = this.props;
         const {
-            name, device_state, members, minimized, commands,
-            read_only, loading, status, active_location
+            name, device_state, members, minimized,
+            commands, read_only, loading, status
         } = this.state;
         const group_id = dev_id;
-        const visible = location === active_location;
 
         const displayMinimized = visible && minimized  ? "block" : "none";
         const displayMaximized = visible && ! minimized  ? "block" : "none";
@@ -46,7 +45,6 @@ class GroupManager  extends Reflux.Component {
                         name = { name }
                         handleClick = { this.handleGroupHeaderClick }
                         group_id = { group_id }
-                        location = { location }
                         all_device_states = { all_device_states }
                         members = { members }
                         visible = { visible && ! minimized }
@@ -73,7 +71,7 @@ class GroupManager  extends Reflux.Component {
 }
 
 GroupManager.propTypes = {
-    location: PropTypes.string.isRequired,
+    visible: PropTypes.bool.isRequired,
     dev_id: PropTypes.string.isRequired,
     members: PropTypes.array.isRequired,
     device_info: PropTypes.object.isRequired,

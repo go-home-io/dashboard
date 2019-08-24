@@ -16,6 +16,7 @@ import Battery from "../../common/Battery";
 import ComponentUpperInfo from "../../common/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
 import DeviceFrame from "../../common/DeviceFrame";
+import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
 
 const styles = () => ({
     progress: {
@@ -50,13 +51,8 @@ const styles = () => ({
 class VacuumManager extends Reflux.Component{
     constructor(props) {
         super(props);
-        const { id, device_info, group_id} = props;
-        this.store = VacuumStoreFactory(id, device_info, group_id);
-    }
-
-    componentDidMount() {
-        const { device_info, group_id } = this.props;
-        vacuumActions.setInitialState(device_info, group_id);
+        const { id, device_info } = props;
+        this.store = VacuumStoreFactory(id, device_info);
     }
 
     render () {
@@ -64,7 +60,7 @@ class VacuumManager extends Reflux.Component{
         const { id, name: fullName, device_state, loading, status, commands } = this.state;
         const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
         const area = Math.round(raw_area);
-        const name = truncateCaption(fullName, 40);
+        const name = truncateCaption(fullName, maxSymbolsInNamePerLine );
 
         return (
             <DeviceFrame visible = { visible }>
@@ -126,7 +122,7 @@ VacuumManager.propTypes = {
     classes: PropTypes.object.isRequired,
     device_info: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    group_id: PropTypes.string
+    visible: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(VacuumManager);

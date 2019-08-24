@@ -9,12 +9,16 @@ class AppStore extends Reflux.Store {
             active_location: "Default",
             uom: "",
             openMenu: false,
+            // generalState: {},
+            // workerLoaded: false,
+            statusLoaded: false
         };
 
         this.listenables = appActions;
         this.onToggleMenu = this.onToggleMenu.bind(this);
         this.onSetLocation = this.onSetLocation.bind(this);
         this.onSetUOM = this.onSetUOM.bind(this);
+        // this.onWorkerSuccessfullyLoaded = this.onWorkerSuccessfullyLoaded.bind(this);
     }
 
     // Actions
@@ -28,6 +32,9 @@ class AppStore extends Reflux.Store {
     onSetUOM(unit_scheme) {
         this.setState({uom: unit_scheme});
     }
+    // onWorkerSuccessfullyLoaded () {
+    //     this.setState({workerLoaded: true});
+    // }
 }
 
 export default AppStore;

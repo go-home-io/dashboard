@@ -11,6 +11,7 @@ import ComponentHeader from "../../common/ComponentHeader";
 import sensorActions from "../../../reflux/sensor/sensorActions";
 import DeviceFrame from "../../common/DeviceFrame";
 
+
 class SensorManager extends Reflux.Component {
     constructor(props) {
         super(props);
@@ -60,6 +61,8 @@ class SensorManager extends Reflux.Component {
 
 SensorManager.propTypes = {
     id: PropTypes.string.isRequired,
+    device_info: PropTypes.object.isRequired,
+    visible: PropTypes.bool.isRequired
 };
 
 export default (SensorManager);

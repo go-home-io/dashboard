@@ -5,7 +5,7 @@ import Devices from "../common/Devices";
 
 class GroupDevices extends React.Component {
     render () {
-        const { members, all_device_states, location, group_id } = this.props;
+        const { members, all_device_states, visible, group_id } = this.props;
         return (
             members.map( (dev_id) => {
                 const device_state = getDeviceState(dev_id, all_device_states);
@@ -16,7 +16,7 @@ class GroupDevices extends React.Component {
                         id = { dev_id }
                         deviceType = { deviceType }
                         device_info = { device_state }
-                        location = { location }
+                        visible = { visible }
                         group_id = { group_id }
                     />
                 );
@@ -26,7 +26,7 @@ class GroupDevices extends React.Component {
 }
 
 GroupDevices.propTypes = {
-    location: PropTypes.string.isRequired,
+    visible: PropTypes.bool.isRequired,
     members: PropTypes.array.isRequired,
     all_device_states: PropTypes.array.isRequired,
     group_id: PropTypes.string.isRequired,

@@ -7,7 +7,7 @@ import {Tooltip} from "@material-ui/core";
 
 const style = () => ({
     font: {
-        // letterSpacing: 1,
+        letterSpacing: 1,
         fontSize: 18,
     }
 });

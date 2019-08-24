@@ -10,7 +10,6 @@ class StatusPage extends React.Component {
 
         return (
             <Layout>
-                <div />
                 { access ?
                     <StatusManager
                         status = { status }

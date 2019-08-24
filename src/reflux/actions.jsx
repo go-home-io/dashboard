@@ -7,7 +7,6 @@ import deviceActions from "./devices/deviceActions";
 // import notificationActions from "./notification/notificationActions";
 
 const actionsList = [
-
     deviceActions,
     groupActions,
     sensorActions,

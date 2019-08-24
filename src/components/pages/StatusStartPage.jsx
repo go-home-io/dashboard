@@ -4,6 +4,7 @@ import HTTP from "../../services/httpservices";
 import { STATUS_URL, WORKER_URL} from "../../settings/urls";
 import ErrorPage from "./ErrorPage";
 import StatusPagejsx from "./StatusPage";
+import appActions from "../../reflux/application/appActions";
 
 class StatusStartPage extends Reflux.Component {
     constructor(props) {
@@ -32,8 +33,8 @@ class StatusStartPage extends Reflux.Component {
                     this.setState({
                         worker: response,
                         IO_status: 200,
-                        // loading: false
                     });
+                    appActions.workerSuccessfullyLoaded();
                 }
             });
         // Get Status

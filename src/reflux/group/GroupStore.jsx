@@ -39,8 +39,11 @@ function GroupStoreFactory(id,  members, device_info){
             const mess = {id:id, cmd:command,value: value};
             wsActions.doCommand(mess);
             this.setState({loading: true});
-            if (! this.state.minimized) {
-                deviceActions.setLoading(id);
+            const { minimized, members } = this.state;
+            if (! minimized) {
+                members.map( member => {
+                    deviceActions.setLoading(member);
+                });
             }
         }
 

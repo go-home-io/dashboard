@@ -26,14 +26,19 @@ const styles = () => ({
     },
     progress: {
         marginTop: 28,
+    },
+    container: {
+        display: "flex",
+        alignContent: "center",
+        // margin: "0 auto"
     }
 });
 
 class SwitchManager extends Reflux.Component {
     constructor(props) {
         super(props);
-        const { id, device_info, group_id } = props;
-        this.store = DeviceStoreFactory(id, device_info, group_id);
+        const { id, device_info } = props;
+        this.store = DeviceStoreFactory(id, device_info);
 
         this.handleChange = this.handleChange.bind(this);
     }
@@ -76,15 +81,15 @@ class SwitchManager extends Reflux.Component {
                         :
                         <Zoom in = { !loading }>
                             <div>
-                                <Grid container justify = 'center' >
+                                <div className = { classes.container }>
                                     <Typography variant = 'h5' className = { classes.typography }>
                                         <strong>
                                             {power}
                                             {" v"}
                                         </strong>
                                     </Typography>
-                                </Grid>
-                                <Grid container justify = 'center' >
+                                </div>
+                                <Grid container justify = "center">
                                     <CustomizedSwitch
                                         disabled = { read_only }
                                         checked = { on }
@@ -104,6 +109,8 @@ class SwitchManager extends Reflux.Component {
 SwitchManager.propTypes = {
     classes: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
+    visible: PropTypes.bool.isRequired,
+    device_info: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SwitchManager);

@@ -4,7 +4,7 @@ import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Vacuum
-function VacuumStoreFactory(id, device_state, group_id) {
+function VacuumStoreFactory(id, device_state) {
     class VacuumStore extends Reflux.Store {
         constructor() {
             super();
@@ -14,14 +14,12 @@ function VacuumStoreFactory(id, device_state, group_id) {
                 device_state: device_state.state,
                 last_seen: device_state.last_seen,
                 commands: device_state.commands,
-                group_id: group_id,
                 loading:false,
                 status:"ordinary",
             };
             this.listenables = vacuumActions;
 
             // Bind it
-            // this.onSetInitialState = this.onSetInitialState.bind(this);
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
             this.onPause = this.onPause.bind(this);

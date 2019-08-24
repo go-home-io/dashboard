@@ -4,7 +4,7 @@ import wsActions from "../socket/wsActions";
 import notificationActions from "../notification/notificationActions";
 
 //  Create unique Store for each Component
-function DeviceStoreFactory(id,  device_info, group_id){
+function DeviceStoreFactory(id,  device_info){
     class DeviceStore extends Reflux.Store {
         constructor() {
             super();
@@ -16,7 +16,6 @@ function DeviceStoreFactory(id,  device_info, group_id){
                 device_state: state,
                 last_seen: last_seen,
                 commands: commands,
-                group_id: group_id,
                 loading: false,
                 read_only: read_only,
                 status:"ordinary",
@@ -31,9 +30,6 @@ function DeviceStoreFactory(id,  device_info, group_id){
             this.onStatus = this.onStatus.bind(this);
             this.onSetLoading = this.onSetLoading.bind(this);
             this.onCommand = this.onCommand.bind(this);
-
-            // console.log("State: "+id);
-            // console.log(this.state);
         }
 
         // WebSocket messenger
@@ -63,6 +59,7 @@ function DeviceStoreFactory(id,  device_info, group_id){
                 }
             }
         }
+
         onToggle (dev_id) {
             if ( dev_id === id ) {
                 const  command = this.state.device_state.on ? "off" : "on";
@@ -83,9 +80,9 @@ function DeviceStoreFactory(id,  device_info, group_id){
                 }
             }
         }
-        // Group Action
-        onSetLoading (group_id) {
-            if (this.state.group_id === group_id) {
+
+        onSetLoading (dev_id) {
+            if ( id === dev_id) {
                 this.setState( { loading: true } );
             }
         }
