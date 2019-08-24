@@ -29,7 +29,7 @@ build:
 
 git: lint
 
-build-to-server:
+build-to-server: build
 	rm -rf $(SERVER)/public/*
 	cp -R build/* $(SERVER)/public/
-	@$(MAKE) -f $(SERVER)/Makefile -C $(SERVER) generate
+	@$(MAKE) -f $(SERVER)/Makefile -C $(SERVER) generate-local
