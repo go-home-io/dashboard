@@ -61,10 +61,7 @@ function DeviceStoreFactory(id,  device_info){
         }
 
         onToggle (dev_id) {
-            if ( dev_id === id ) {
-                const  command = this.state.device_state.on ? "off" : "on";
-                this.doCommand(command, "");
-            }
+            this.onCommand(dev_id, "toggle", "");
         }
 
         onStatus(dev_id, status) {

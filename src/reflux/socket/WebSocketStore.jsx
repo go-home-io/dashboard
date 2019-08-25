@@ -106,6 +106,7 @@ class WebSocketStore extends Reflux.Store {
             }
         }
     }
+    //
     oneWayCommandServerResponseEmulation (dev_id) {
         this.setState({oneWay: false});
         const data = {"id":dev_id, "state":"oneWayResponse"};
@@ -120,6 +121,7 @@ class WebSocketStore extends Reflux.Store {
 
     // Actions
     onDoCommand(data) {
+        // console.log("Socket", data);
         // Try to send command to server if socket ready
         // up to MAX_ATTEMPTS times. If not, set the state {rejected:true}
         if (connAlive()) {

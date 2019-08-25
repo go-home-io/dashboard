@@ -25,7 +25,7 @@ const Layout = (props) => {
 Layout.propTypes = {
     classes: PropTypes.object.isRequired,
     dropdown: PropTypes.object,
-    children: PropTypes.array.isRequired
+    children: PropTypes.object.isRequired
 };
 
 export default withStyles(style)(Layout);

@@ -3,12 +3,8 @@ import Reflux from "reflux";
 import PropTypes from "prop-types";
 import GroupStoreFactory from "../../reflux/group/GroupStore";
 import groupActions from "../../reflux/group/groupActions";
-import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
-import ExpandedGroup from "./ExpandedGroup";
 import MinimizedGroup from "./MinimizedGroup";
 import AppStore from "../../reflux/application/AppStore";
-
-const groupIcon = "devices_other";
 
 class GroupManager  extends Reflux.Component {
     constructor(props) {
@@ -24,34 +20,17 @@ class GroupManager  extends Reflux.Component {
         }
     }
     render () {
-        const { all_device_states, dev_id, visible } = this.props;
+        const { dev_id, visible } = this.props;
         const {
-            name, device_state, members, minimized,
-            commands, read_only, loading, status
+            name, device_state, minimized,
+            commands, read_only, loading, status, active_group,
         } = this.state;
         const group_id = dev_id;
 
-        const displayMinimized = visible && minimized  ? "block" : "none";
-        const displayMaximized = visible && ! minimized  ? "block" : "none";
-
-        const iconColor = device_state.on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
+        const displayMinimized = visible && minimized ? "block" : "none";
 
         return (
-            <div>
-                <div style = { {display: displayMaximized} }>
-                    <ExpandedGroup
-                        iconColor = { iconColor }
-                        groupIcon = { groupIcon }
-                        name = { name }
-                        handleClick = { this.handleGroupHeaderClick }
-                        group_id = { group_id }
-                        all_device_states = { all_device_states }
-                        members = { members }
-                        visible = { visible && ! minimized }
-                        read_only = { read_only }
-                    />
-                </div>
-
+            ! active_group &&
                 <div style = { {display: displayMinimized} }>
                     <MinimizedGroup
                         group_id = { group_id }
@@ -65,7 +44,6 @@ class GroupManager  extends Reflux.Component {
                         visible = { visible && minimized }
                     />
                 </div>
-            </div>
         );
     }
 }

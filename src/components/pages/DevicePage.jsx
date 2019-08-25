@@ -10,6 +10,8 @@ import Grid from "@material-ui/core/Grid";
 import GroupManager from "../group/GroupManager";
 import Devices from "../common/Devices";
 import AppStore from "../../reflux/application/AppStore";
+import {Collapse} from "@material-ui/core";
+import ExpandedGroupHeader from "../group/ExpandedGroupHeader";
 
 
 const groupMemberDevices = (group_id, groups) => {
@@ -36,27 +38,24 @@ class DevicePage extends Reflux.Component {
         appActions.setUOM(this.props.generalState.uom);
     }
 
+    getActiveGroupObject = (devices, activeGroupId) => (
+        devices.find( dev => (dev.id === activeGroupId))
+    );
+
     isDeviceInActiveLocation = (activeLocationName, locations, dev_id) => {
-        const activeLocation = locations.find( location => {
-            return location.name === activeLocationName;
-        });
+        const activeLocation = locations.find( location => (location.name === activeLocationName));
         return activeLocation.devices.includes(dev_id);
     };
 
-    // isDeviceGroupMember = (groups, dev_id) => {
-    //     groups.map( group => {
-    //         console.log(group.devices.includes(dev_id))
-    //         if (group.devices.includes(dev_id)) {
-    //             return true;
-    //         }
-    //     });
-    //     return false;
-    // };
+    isDeviceInActiveGroup = (groups, activeGroupId, dev_id) => {
+        const activeGroup = groups.find( grp => ( grp.id === activeGroupId));
+        return activeGroup.devices.includes(dev_id);
+    };
 
     render () {
         const { generalState } = this.props;
         const { devices, locations, groups } = generalState;
-        const { active_location } = this.state;
+        const { active_location, active_group, active_group_on } = this.state;
 
         const dropdownInfo = {
             name: "Locations",
@@ -64,13 +63,29 @@ class DevicePage extends Reflux.Component {
             items: locations,
         };
 
+        const isComponentVisible = (dev_id) => {
+            if (active_group) {
+                return this.isDeviceInActiveGroup(groups, active_group, dev_id);
+            } else {
+                return this.isDeviceInActiveLocation(active_location, locations, dev_id);
+            }
+        };
+
         return (
             <Layout dropdown = { dropdownInfo }>
+                <Collapse in = { active_group }>
+                    { active_group &&
+                        <ExpandedGroupHeader
+                            id = { active_group }
+                            groupObj = { this.getActiveGroupObject(devices, active_group) }
+                            on = { active_group_on }
+                        />
+                    }
+                </Collapse>
                 <Grid container justify = 'center' alignItems = 'center'>
                     { devices.map( (device) => {
                         const deviceType = device.type;
-                        const visible = this.isDeviceInActiveLocation(active_location, locations, device.id);
-                        // const notInGroup = ! this.isDeviceGroupMember(groups, device.id);
+                        const visible = isComponentVisible(device.id);
 
                         return(
                             deviceType === "group" ?
@@ -89,7 +104,6 @@ class DevicePage extends Reflux.Component {
                                     visible = { visible }
                                     id = { device.id }
                                     device_info = { device }
-                                    // group_id = ""
                                 />
                         );})
                     }

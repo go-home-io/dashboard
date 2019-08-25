@@ -3,6 +3,7 @@ import groupActions from "./groupActions";
 import wsActions from "../socket/wsActions";
 import deviceActions from "../devices/deviceActions";
 import notificationActions from "../notification/notificationActions";
+import appActions from "../application/appActions";
 
 //  Create unique Store for each Group
 function GroupStoreFactory(id,  members, device_info){
@@ -32,6 +33,7 @@ function GroupStoreFactory(id,  members, device_info){
             this.onToggleWindow = this.onToggleWindow.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onCommand = this.onCommand.bind(this);
+            this.onSetMinimized = this.onSetMinimized.bind(this);
         }
 
         // WebSocket messenger
@@ -41,6 +43,7 @@ function GroupStoreFactory(id,  members, device_info){
             this.setState({loading: true});
             const { minimized, members } = this.state;
             if (! minimized) {
+                // eslint-disable-next-line
                 members.map( member => {
                     deviceActions.setLoading(member);
                 });
@@ -55,6 +58,7 @@ function GroupStoreFactory(id,  members, device_info){
                     status:"success",
                     loading: false
                 });
+                appActions.setActiveGroupOn(id, data.state.on);
             }
         }
 
@@ -68,16 +72,20 @@ function GroupStoreFactory(id,  members, device_info){
             }
         }
         onToggle (dev_id) {
-            if ( dev_id === id ) {
-                const command = this.state.device_state.on ? "off" : "on";
-                this.doCommand(command, "");
+            if (dev_id === id) {
+                this.doCommand("toggle", "");
             }
         }
         onToggleWindow(dev_id) {
             if ( dev_id === id ) {
-                const minimized = this.state.minimized;
-                this.setState( { minimized: ! minimized } );
+                const  minimized = this.state.minimized;
+                const on = this.state.device_state.on;
+                this.setState({minimized: !minimized});
+                appActions.setActiveGroup(dev_id, on);
             }
+        }
+        onSetMinimized() {
+            this.setState({minimized: true});
         }
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
