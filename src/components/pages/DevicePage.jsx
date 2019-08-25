@@ -73,7 +73,7 @@ class DevicePage extends Reflux.Component {
 
         return (
             <Layout dropdown = { dropdownInfo }>
-                <Collapse in = { active_group }>
+                <Collapse in = { Boolean(active_group) }>
                     { active_group &&
                         <ExpandedGroupHeader
                             id = { active_group }

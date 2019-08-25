@@ -30,10 +30,11 @@ function GroupStoreFactory(id,  members, device_info){
             this.onMessage = this.onMessage.bind(this);
             this.doCommand = this.doCommand.bind(this);
             this.onToggle = this.onToggle.bind(this);
-            this.onToggleWindow = this.onToggleWindow.bind(this);
+            // this.onToggleWindow = this.onToggleWindow.bind(this);
             this.onStatus = this.onStatus.bind(this);
             this.onCommand = this.onCommand.bind(this);
             this.onSetMinimized = this.onSetMinimized.bind(this);
+            this.onExpandWindow = this.onExpandWindow.bind(this);
         }
 
         // WebSocket messenger
@@ -76,17 +77,23 @@ function GroupStoreFactory(id,  members, device_info){
                 this.doCommand("toggle", "");
             }
         }
-        onToggleWindow(dev_id) {
-            if ( dev_id === id ) {
-                const  minimized = this.state.minimized;
-                const on = this.state.device_state.on;
-                this.setState({minimized: !minimized});
-                appActions.setActiveGroup(dev_id, on);
-            }
-        }
+        // onToggleWindow(dev_id) {
+        //     if ( dev_id === id ) {
+        //         alert("Toggle window id: "+dev_id);
+        //
+        //         const  minimized = this.state.minimized;
+        //         const on = this.state.device_state.on;
+        //         this.setState({minimized: !minimized});
+        //         appActions.setActiveGroup(dev_id, on);
+        //     }
+        // }
         onSetMinimized() {
             this.setState({minimized: true});
         }
+        onExpandWindow() {
+            this.setState({minimized: false});
+        }
+
         onStatus(dev_id, status) {
             if ( dev_id === id ) {
                 this.setState({status:status});

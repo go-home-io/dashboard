@@ -7,7 +7,8 @@ const groupActions = Reflux.createActions([
     "toggleWindow",
     "status",
     "command",
-    "setMinimized"
+    "setMinimized",
+    "expandWindow"
 ]);
 
 export default groupActions;

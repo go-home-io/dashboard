@@ -14,6 +14,7 @@ import Zoom from "@material-ui/core/Zoom/Zoom";
 import Grid from "@material-ui/core/Grid/Grid";
 import RenderCommandHandlers from "../common/RenderCommandHandlers";
 import DeviceFrame from "../common/DeviceFrame";
+import appActions from "../../reflux/application/appActions";
 
 const styles = () => ({
     root: {
@@ -33,8 +34,9 @@ const styles = () => ({
 
 class MinimizedGroup extends React.Component {
     expandGroup () {
-        const { group_id } = this.props;
-        groupActions.toggleWindow(group_id);
+        const { group_id, device_state } = this.props;
+        groupActions.expandWindow(group_id);
+        appActions.setActiveGroup(group_id, device_state.on);
     }
     render () {
         const {

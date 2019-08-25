@@ -8,6 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import groupActions from "../../reflux/group/groupActions";
 import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
 import {IconButton, Paper, Typography} from "@material-ui/core";
+import appActions from "../../reflux/application/appActions";
 
 
 const styles = () => ({
@@ -47,7 +48,8 @@ const ExpandedGroupHeader = props => {
     const cursor = readOnly ? "default" : "pointer";
 
     const  minimizeGroup = () => {
-        groupActions.toggleWindow(id);
+        groupActions.setMinimized();
+        appActions.setActiveGroup();
     };
 
     const handleGroupHeaderClick = () => {
@@ -78,7 +80,10 @@ const ExpandedGroupHeader = props => {
                     title = "Minimize the group window"
                     placement = "right"
                 >
-                    <IconButton onClick = { minimizeGroup } className = { classes.iconButton }>
+                    <IconButton
+                        onClick = { minimizeGroup }
+                        className = { classes.iconButton }
+                    >
                         <IconExpandLess/>
                     </IconButton>
                 </Tooltip>

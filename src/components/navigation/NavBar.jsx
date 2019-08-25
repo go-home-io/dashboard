@@ -16,6 +16,7 @@ import NavBarDropdown from "./NavBarDropdown";
 import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
 import Typography from "@material-ui/core/Typography/Typography";
 import Divider from "@material-ui/core/Divider/Divider";
+import groupActions from "../../reflux/group/groupActions";
 
 const styles = theme => ({
     root: {
@@ -64,6 +65,8 @@ class NavBar extends Reflux.Component {
         });
     }
     closeAfterClick () {
+        appActions.setActiveGroup();
+        groupActions.setMinimized();
         if (this.state.openMenu) {
             appActions.toggleMenu();
         }
