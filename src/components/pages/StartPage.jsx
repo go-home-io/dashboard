@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import DevicePage from "./DevicePage";
 import HTTP from "../../services/httpservices";
 import base64 from "base-64";
 import ErrorPage from "./ErrorPage";
@@ -8,6 +7,7 @@ import {COOKIE_NAME} from "../../settings/cookie";
 import SignIn from "./SignIn";
 import AppBarPlaceholder from "../navigation/AppBarPlaceholder";
 import { STATE_URL } from "../../settings/urls";
+import RouterPage from "./RouterPage";
 
 class StartPage extends Component {
     constructor(props) {
@@ -75,9 +75,8 @@ class StartPage extends Component {
                 <ErrorPage loading = { loading }/>
                 :
                 authenticated ?
-                    <DevicePage
-                        generalState = { generalState }
-                    /> :
+                    generalState && <RouterPage generalState = { generalState }/>
+                    :
                     auth_required ?
                         <div>
                             <AppBarPlaceholder/>
@@ -87,11 +86,8 @@ class StartPage extends Component {
                             />
                         </div>
                         :
-                        <div>
-                            <ErrorPage
-                                status = { status }
-                            />
-                        </div>
+                        <ErrorPage status = { status }/>
+
         );
     }
 }

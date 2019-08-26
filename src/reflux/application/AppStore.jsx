@@ -6,6 +6,7 @@ class AppStore extends Reflux.Store {
         super();
 
         this.state = {
+            active_page: "devices",
             active_location: "Default",
             active_group: null,
             active_group_on: false,
@@ -13,7 +14,7 @@ class AppStore extends Reflux.Store {
             openMenu: false,
             // generalState: {},
             // workerLoaded: false,
-            statusLoaded: false
+            statusLoaded: false,
         };
 
         this.listenables = appActions;
@@ -22,6 +23,7 @@ class AppStore extends Reflux.Store {
         this.onSetUOM = this.onSetUOM.bind(this);
         this.onSetActiveGroup = this.onSetActiveGroup.bind(this);
         this.onSetActiveGroupOn = this.onSetActiveGroupOn.bind(this);
+        this.onSetActivePage = this.onSetActivePage.bind(this);
         // this.onWorkerSuccessfullyLoaded = this.onWorkerSuccessfullyLoaded.bind(this);
     }
 
@@ -48,6 +50,9 @@ class AppStore extends Reflux.Store {
         if ( dev_id === this.state.active_group ) {
             this.setState({active_group_on: on});
         }
+    }
+    onSetActivePage(page) {
+        this.setState({active_page: page});
     }
     // onWorkerSuccessfullyLoaded () {
     //     this.setState({workerLoaded: true});

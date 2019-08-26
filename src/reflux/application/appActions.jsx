@@ -7,7 +7,8 @@ const appActions = Reflux.createActions([
     "workerSuccessfullyLoaded",
     "statusSuccessfullyLoaded",
     "setActiveGroup",
-    "setActiveGroupOn"
+    "setActiveGroupOn",
+    "setActivePage"
 ]);
 
 export default appActions;

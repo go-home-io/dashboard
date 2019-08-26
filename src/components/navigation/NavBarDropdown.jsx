@@ -19,7 +19,6 @@ const NavBarDropdown = (props) => {
             <ListItem
                 button
                 onClick = { handleClick }
-                // style = { {marginLeft: 10} }
             >
                 <ListItemIcon>
                     <Icon>
@@ -49,8 +48,7 @@ const NavBarDropdown = (props) => {
                                 icon = "" //{ item.icon }
                             />
                         );
-                    })
-                    }
+                    })}
                 </List>
             </Collapse>
             <Divider/>

@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import AppStore from "../../reflux/application/AppStore";
 import Grid from "@material-ui/core/Grid/Grid";
-import {withRouter} from "react-router-dom";
 import NotificationStore from "../../reflux/notification/NotificationStore";
 import NotificationCount from "../notification/NotificationCount";
 import LocationIcon from "@material-ui/icons/LocationOn";
@@ -36,10 +35,10 @@ class ToolbarContent extends Reflux.Component {
         this.ntfViewOpen = this.ntfViewOpen.bind(this);
         this.ntfViewClose = this.ntfViewClose.bind(this);
     }
-    componentDidMount () {
-        // Router props
-        this.setState( { path: this.props.location.pathname });
-    }
+    // componentDidMount () {
+    //     // Router props
+    //     this.setState( { path: this.props.location.pathname });
+    // }
     ntfViewOpen () {
         this.setState({ ntfViewOpen: true });
     }
@@ -50,7 +49,7 @@ class ToolbarContent extends Reflux.Component {
     }
     render() {
         const { classes } = this.props;
-        const { path, unseenCount, active_location } = this.state;
+        const { active_page: page, unseenCount, active_location } = this.state;
 
         return(
             <Grid container justify = "flex-end" alignItems = "center">
@@ -58,7 +57,7 @@ class ToolbarContent extends Reflux.Component {
                     open = { this.state.ntfViewOpen }
                     onClose = { this.ntfViewClose }
                 />
-                { path === "/" &&
+                { page === "devices" &&
                     <div className = { classes.location }>
                         <LocationIcon />
                         <Typography variant = 'caption' color = "inherit">
@@ -85,4 +84,4 @@ Toolbar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withRouter(ToolbarContent));
+export default withStyles(styles)(ToolbarContent);
