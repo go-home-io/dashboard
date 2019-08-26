@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import SlidersHeader from "../../common/SlidersHeader";
+import SlidersHeader from "../../common/slider/SlidersHeader";
 import vacuumActions from "../../../reflux/vacuum/vacuumActions";
-import Slider from "@material-ui/lab/Slider/Slider";
-import SliderActions from "../../common/SliderActions";
+import Slider from "@material-ui/core/Slider";
+import SliderActions from "../../common/slider/SliderActions";
 
 const styles = () => ({
     root : {
         marginTop:20,
         width:250,
-        height:110,
+        height:120,
         cursor: "default",
     },
     slider: {
-        width:"90%",
-        marginLeft:3
+        width:"86%",
+        marginLeft: "7%"
     }
 });
 

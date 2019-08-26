@@ -1,21 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import SlidersHeader from "../../common/SlidersHeader";
-import Slider from "@material-ui/lab/Slider/Slider";
-import SliderActions from "../../common/SliderActions";
+import SlidersHeader from "../../common/slider/SlidersHeader";
+import Slider from "@material-ui/core/Slider";
+import SliderActions from "../../common/slider/SliderActions";
 
 const styles = () => ({
     root : {
         marginTop: 8,
         width:250,
-        height:110,
+        height:125,
+
     },
     slider: {
-        width:"90%",
-        marginLeft:10,
+        width:"80%",
+        marginLeft: "10%",
         marginTop: 15,
-        marginBottom: 25,
+        marginBottom: 5,
     }
 });
 

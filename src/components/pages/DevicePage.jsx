@@ -44,8 +44,7 @@ class DevicePage extends Reflux.Component {
 
     isDeviceInActiveLocation = (activeLocationName, locations, dev_id) => {
         const activeLocation = locations.find( location => (location.name === activeLocationName));
-        console.log("active loc name =", activeLocationName, " active loc: ", activeLocation);
-        return activeLocation.devices.includes(dev_id);
+        return activeLocation ? activeLocation.devices.includes(dev_id) : false;
     };
 
     isDeviceInActiveGroup = (groups, activeGroupId, dev_id) => {
@@ -57,8 +56,6 @@ class DevicePage extends Reflux.Component {
         const { generalState } = this.props;
         const { devices, locations, groups } = generalState;
         const { active_location, active_group, active_group_on } = this.state;
-
-        console.log("Dev page, locations", locations);
 
         const dropdownInfo = {
             name: "Locations",

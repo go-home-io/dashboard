@@ -55,7 +55,7 @@ function DeviceStoreFactory(id,  device_info){
             if ( dev_id === id ) {
                 const { commands } = this.state;
                 if ( commands.includes(command) ) {
-                    this.doCommand( command, value);
+                    this.doCommand(command, value);
                 }
             }
         }
@@ -79,7 +79,8 @@ function DeviceStoreFactory(id,  device_info){
                 this.setState({status:status});
                 if (status === "error") {
                     this.setState({loading: false});
-                    notificationActions.notification(this.state.name + ": Connection timeout , the command may not be completed");
+                    notificationActions.notification(
+                        this.state.name + ": Connection timeout , the command may not be completed");
                 } else if (status === "rejected") {
                     this.setState({loading: false, status:"error"});
                     notificationActions.notification(this.state.name + ": Command aborted due to connection problems");

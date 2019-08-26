@@ -25,7 +25,7 @@ const NavBarDropdown = (props) => {
                         { icon }
                     </Icon>
                 </ListItemIcon>
-                <ListItemText inset primary = { name } />
+                <ListItemText primary = { name } />
                 { open ?
                     <ExpandLess className = { classes.expand }/> :
                     <ExpandMore className = { classes.expand }/>

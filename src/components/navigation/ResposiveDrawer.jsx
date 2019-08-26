@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-// import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -15,8 +14,9 @@ import appActions from "../../reflux/application/appActions";
 import ToolbarContent from "./ToolbarContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import classNames from "classnames";
+import {blue} from "@material-ui/core/colors";
 
-const drawerWidth = 190;
+const drawerWidth = 220;
 
 const styles = theme => ({
     root: {
@@ -67,8 +67,8 @@ class ResponsiveDrawer extends Reflux.Component {
 
         return (
             <div className = { classes.root }>
-                <AppBar position = "fixed" className = { classes.appBar } color = "primary">
-                    <Toolbar classes = { {} }>
+                <AppBar className = { classes.appBar } style = { {color: "#ffffff", backgroundColor: blue[500] } }>
+                    <Toolbar>
                         <IconButton
                             color = "inherit"
                             aria-label = "Open drawer"

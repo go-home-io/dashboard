@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RGBSlider from "./RGBSlider";
 import rgbColor from "../../../utils/rgbColor";
-import SlidersHeader from "../../common/SlidersHeader";
-import SliderActions from "../../common/SliderActions";
+import SlidersHeader from "../../common/slider/SlidersHeader";
+import SliderActions from "../../common/slider/SliderActions";
 
 const styles = () => ({
     root : {
@@ -14,9 +14,8 @@ const styles = () => ({
         height:150,
     },
     color: {
-        width: 25,
-        height: 25,
-        float: "right",
+        width: "80%",
+        marginLeft: "10%",
     },
 });
 

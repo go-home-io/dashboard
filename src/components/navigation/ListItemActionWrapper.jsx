@@ -37,7 +37,7 @@ class ListItemActionWrapper extends Reflux.Component {
                 <Icon className = { classes.icon }  >
                     { icon}
                 </Icon>
-                <ListItemText inset secondary = { name } />
+                <ListItemText secondary = { name } />
             </ListItem>
         );
     }

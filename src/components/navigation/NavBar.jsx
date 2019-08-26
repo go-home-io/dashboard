@@ -17,10 +17,11 @@ import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
 import Typography from "@material-ui/core/Typography/Typography";
 import Divider from "@material-ui/core/Divider/Divider";
 import groupActions from "../../reflux/group/groupActions";
+import {blue} from "@material-ui/core/colors";
 
 const styles = theme => ({
     root: {
-        width: "100%",
+        // width: "100%",
         height: "100%",
         backgroundColor: "rgb(0,0,0,0.03)", //theme.palette.background.paper,
     },
@@ -37,10 +38,12 @@ const styles = theme => ({
         color:"rgba(0, 0, 0, 0.54)"
     },
     subheading: {
-        height: 46,
+        height: 64,
+        backgroundColor: blue[500],
+        color: "#ffffff",
     },
     typography: {
-        marginTop: 18,
+        paddingTop: 18,
         textAlign: "center"
     }
 });
@@ -90,7 +93,7 @@ class NavBar extends Reflux.Component {
                             <Typography
                                 className = { classes.typography }
                                 variant = "h6"
-                                color = "textSecondary"
+                                color = "inherit"
                             >
                                 GO-HOME
                             </Typography>
@@ -119,7 +122,7 @@ class NavBar extends Reflux.Component {
                             <ListItemIcon>
                                 <DevicesIcon/>
                             </ListItemIcon>
-                            <ListItemText inset primary = "Devices"/>
+                            <ListItemText primary = "Devices"/>
                         </ListItem>
                     }
                     {page === "devices" &&
@@ -132,7 +135,7 @@ class NavBar extends Reflux.Component {
                             <ListItemIcon>
                                 <ViewListIcon/>
                             </ListItemIcon>
-                            <ListItemText inset primary = "Status"/>
+                            <ListItemText primary = "Status"/>
                         </ListItem>
                     }
                 </List>
