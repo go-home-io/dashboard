@@ -1,33 +1,32 @@
 import React from "react";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch/Switch";
+import Switch from "@material-ui/core/Switch";
 import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+
 
 const customizedSwitch = (props) => {
     const { checked, colorThumb, handleChange, disabled } = props;
 
-    // Overrides the slider CSS
-    const theme = createMuiTheme({
-        overrides: {
-            // Name of the component ⚛️ / style sheet
-            MuiSwitch: {
-                // Name of the rule
-                iconChecked : {
-                    backgroundColor: colorThumb,
-                },
+    const PurpleSwitch = withStyles({
+        switchBase: {
+            color: "#cccccc",
+            "&$checked": {
+                color: colorThumb,
+            },
+            "&$checked + $track": {
+                backgroundColor: colorThumb,
             },
         },
-    });
+        checked: {},
+        track: {},
+    })(Switch);
 
     return (
-        <MuiThemeProvider theme = { theme }>
-            <Switch
-                disabled = { disabled }
-                checked = { checked }
-                onChange = { handleChange }
-                color = 'primary'
-            />
-        </MuiThemeProvider>
+        <PurpleSwitch
+            disabled = { disabled }
+            checked = { checked }
+            onChange = { handleChange }
+        />
     );
 };
 

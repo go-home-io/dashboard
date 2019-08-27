@@ -3,6 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
+
 const AppBarPlaceholder = () => {
     return(
         <AppBar position = "fixed" color = "primary" style = { { height:64 } }>

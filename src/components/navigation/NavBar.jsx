@@ -21,12 +21,11 @@ import {blue} from "@material-ui/core/colors";
 
 const styles = theme => ({
     root: {
-        // width: "100%",
         height: "100%",
-        backgroundColor: "rgb(0,0,0,0.03)", //theme.palette.background.paper,
+        backgroundColor: "rgb(0,0,0,0.02)" //theme.palette.background.paper, //"rgb(0,0,0,0.03)",
     },
     nested: {
-        paddingLeft: theme.spacing.unit * 7,
+        paddingLeft: theme.spacing(7),
     },
     expand: {
         position: "relative",

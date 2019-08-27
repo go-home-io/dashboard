@@ -14,7 +14,6 @@ import appActions from "../../reflux/application/appActions";
 import ToolbarContent from "./ToolbarContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import classNames from "classnames";
-import {blue} from "@material-ui/core/colors";
 
 const drawerWidth = 220;
 
@@ -50,7 +49,7 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing.unit * 3,
+        padding: theme.spacing(3),
     },
 });
 
@@ -63,11 +62,11 @@ class ResponsiveDrawer extends Reflux.Component {
         appActions.toggleMenu();
     };
     render() {
-        const { classes, children, dropdown } = this.props;
+        const { classes, children, dropdown, ...other } = this.props;
 
         return (
             <div className = { classes.root }>
-                <AppBar className = { classes.appBar } style = { {color: "#ffffff", backgroundColor: blue[500] } }>
+                <AppBar className = { classes.appBar } >
                     <Toolbar>
                         <IconButton
                             color = "inherit"
@@ -119,7 +118,7 @@ class ResponsiveDrawer extends Reflux.Component {
                         </Drawer>
                     </Hidden>
                 </nav>
-                <main className = { classes.content }>
+                <main className = { classes.content } { ...other }>
                     { children }
                 </main>
             </div>
@@ -128,8 +127,7 @@ class ResponsiveDrawer extends Reflux.Component {
 }
 
 ResponsiveDrawer.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
+    classes: PropTypes.object,
 };
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles)(ResponsiveDrawer);

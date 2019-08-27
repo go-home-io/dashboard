@@ -71,23 +71,25 @@ class StartPage extends Component {
     render () {
         const { authenticated, generalState, auth_required, auth_error, status, loading } = this.state;
         return (
-            loading ?
-                <ErrorPage loading = { loading }/>
-                :
-                authenticated ?
-                    generalState && <RouterPage generalState = { generalState }/>
+            <>
+                {loading ?
+                    <ErrorPage loading = { loading }/>
                     :
-                    auth_required ?
-                        <div>
-                            <AppBarPlaceholder/>
-                            <SignIn
-                                getCredentials = { this.getCredentials.bind(this) }
-                                error = { auth_error }
-                            />
-                        </div>
+                    authenticated ?
+                        generalState && <RouterPage generalState = { generalState }/>
                         :
-                        <ErrorPage status = { status }/>
-
+                        auth_required ?
+                            <div>
+                                <AppBarPlaceholder/>
+                                <SignIn
+                                    getCredentials = { this.getCredentials }
+                                    error = { auth_error }
+                                />
+                            </div>
+                            :
+                            <ErrorPage status = { status }/>
+                }
+            </>
         );
     }
 }

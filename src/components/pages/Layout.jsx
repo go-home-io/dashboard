@@ -11,10 +11,10 @@ const style = () => ({
 });
 
 const Layout = (props) => {
-    const { classes, dropdown, children } = props;
+    const { classes, dropdown, children, ...other } = props;
     return (
         <div className = { classes.body }>
-            <ResponsiveDrawer dropdown = { dropdown }>
+            <ResponsiveDrawer dropdown = { dropdown } { ...other }>
                 { children }
             </ResponsiveDrawer>
             <Notification/>

@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import AppStore from "../../reflux/application/AppStore";
 import DevicePage from "./DevicePage";
 import StatusStartPage from "./StatusStartPage";
+import {customTheme} from "../../settings/customTheme";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
+
 
 class RouterPage extends Reflux.Component {
     constructor(props) {
@@ -19,21 +22,22 @@ class RouterPage extends Reflux.Component {
         const displayDevices = page === "devices" ? "block" : "none";
         // const displayStatus = page === "status" ? "block" : "none";
         return (
-            <>
+            <ThemeProvider theme = { customTheme }>
                 <div style = { {display: displayDevices} }>
                     <DevicePage
                         generalState = { generalState }
                     />
                 </div>
 
-                { page === "status" ? <StatusStartPage/> : null }
-             </>
+                { page === "status" && <StatusStartPage/> }
+
+            </ThemeProvider>
         );
     }
 }
 
 RouterPage.propTypes = {
-    generalState: PropTypes.array.isRequired
+    generalState: PropTypes.object.isRequired
 };
 
 export default RouterPage;
