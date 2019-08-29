@@ -4,16 +4,16 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import truncateCaption from "../../../utils/truncate";
 import { SWITCH_HEADER_BKG_COLOR, SWITCH_RO_ICON_COLOR } from "../../../settings/colors";
-import ComponentHeader from "../../common/ComponentHeader";
+import ComponentHeader from "../../common/component/ComponentHeader";
 import DeviceStoreFactory from "../../../reflux/devices/DeviceStore";
 import deviceActions from "../../../reflux/devices/deviceActions";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Zoom from "@material-ui/core/Zoom/Zoom";
-import WaitingProgress from "../../common/WaitingProgress";
+import WaitingProgress from "../../common/elements/WaitingProgress";
 import Grid from "@material-ui/core/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
 import CustomizedSwitch from "./customizedSwitch";
-import DeviceFrame from "../../common/DeviceFrame";
+import DeviceFrame from "../../common/elements/DeviceFrame";
 
 const styles = () => ({
     icon: {

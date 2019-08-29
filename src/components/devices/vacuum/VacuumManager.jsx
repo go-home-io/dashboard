@@ -1,10 +1,10 @@
 import React from "react";
 import Reflux from "reflux";
-import ComponentHeader from "../../common/ComponentHeader";
+import ComponentHeader from "../../common/component/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
-import WaitingProgress from "../../common/WaitingProgress";
+import WaitingProgress from "../../common/elements/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import truncateCaption from "../../../utils/truncate";
 import { VACUUM_HEADER_BKG_COLOR } from "../../../settings/colors";
@@ -12,10 +12,10 @@ import VacuumStoreFactory from "../../../reflux/vacuum/VacuumStore";
 import vacuumActions from "../../../reflux/vacuum/vacuumActions";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
-import Battery from "../../common/Battery";
-import ComponentUpperInfo from "../../common/ComponentUpperInfo";
+import Battery from "../../common/elements/Battery";
+import ComponentUpperInfo from "../../common/component/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
-import DeviceFrame from "../../common/DeviceFrame";
+import DeviceFrame from "../../common/elements/DeviceFrame";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
 
 const styles = () => ({

@@ -8,16 +8,15 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import DevicesIcon from "@material-ui/icons/Devices";
-// import { Link } from "react-router-dom";
 import AppStore from "../../reflux/application/AppStore";
 import appActions from "../../reflux/application/appActions";
-// import { withRouter } from "react-router-dom";
 import NavBarDropdown from "./NavBarDropdown";
 import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
 import Typography from "@material-ui/core/Typography/Typography";
 import Divider from "@material-ui/core/Divider/Divider";
 import groupActions from "../../reflux/group/groupActions";
 import {blue} from "@material-ui/core/colors";
+import storage from "../../services/storage";
 
 const styles = theme => ({
     root: {
@@ -70,6 +69,7 @@ class NavBar extends Reflux.Component {
         appActions.setActiveGroup();
         appActions.setActivePage(page);
         groupActions.setMinimized();
+        storage.set("page", page);
         if (this.state.openMenu) {
             appActions.toggleMenu();
         }

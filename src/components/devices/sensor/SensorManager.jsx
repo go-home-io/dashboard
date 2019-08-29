@@ -7,9 +7,9 @@ import TemperatureSensor from "./TemperatureSensor";
 import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
 import { SENSOR_HEADER_BKG_COLOR } from "../../../settings/colors";
-import ComponentHeader from "../../common/ComponentHeader";
+import ComponentHeader from "../../common/component/ComponentHeader";
 import sensorActions from "../../../reflux/sensor/sensorActions";
-import DeviceFrame from "../../common/DeviceFrame";
+import DeviceFrame from "../../common/elements/DeviceFrame";
 
 
 class SensorManager extends Reflux.Component {

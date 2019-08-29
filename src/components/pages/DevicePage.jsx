@@ -1,18 +1,16 @@
 import React from "react";
 import Reflux from "reflux";
 import WebSocketStore from "../../reflux/socket/WebSocketStore";
-import storage from "../../services/storage";
 import appActions from "../../reflux/application/appActions";
 import PropTypes from "prop-types";
 import Layout from "./Layout";
 import Grid from "@material-ui/core/Grid";
-// import getDeviceState from "../../utils/getDeviceState";
 import GroupManager from "../group/GroupManager";
 import Devices from "../common/Devices";
 import AppStore from "../../reflux/application/AppStore";
-import {Collapse} from "@material-ui/core";
+import {Collapse, Slide} from "@material-ui/core";
 import ExpandedGroupHeader from "../group/ExpandedGroupHeader";
-
+import {AppContext} from "../../contex/AppContext";
 
 const groupMemberDevices = (group_id, groups) => {
     // console.log('group Members', group_id, groups);
@@ -29,11 +27,6 @@ class DevicePage extends Reflux.Component {
         this.stores = [AppStore, WebSocketStore];
     }
     componentDidMount () {
-        // Restore active location from local storage
-        let active_location = storage.get("location");
-        active_location = active_location ? active_location : "Default";
-        appActions.setLocation(active_location);
-
         // Set UOM scheme to AppStore
         appActions.setUOM(this.props.generalState.uom);
     }
@@ -53,7 +46,7 @@ class DevicePage extends Reflux.Component {
     };
 
     render () {
-        const { generalState } = this.props;
+        const { generalState, pageVisible } = this.props;
         const { devices, locations, groups } = generalState;
         const { active_location, active_group, active_group_on } = this.state;
 
@@ -82,32 +75,36 @@ class DevicePage extends Reflux.Component {
                         />
                     }
                 </Collapse>
-                <Grid container justify = 'center' alignItems = 'center'>
-                    { devices.map( (device) => {
-                        const deviceType = device.type;
-                        const visible = isComponentVisible(device.id);
+                <Slide in = { pageVisible } direction = "up" timeout = { {enter: 1500} }>
+                    <Grid container justify = 'center' alignItems = 'center'>
+                        { devices.map( (device) => {
+                            const deviceType = device.type;
+                            const visible = isComponentVisible(device.id);
 
-                        return(
-                            deviceType === "group" ?
-                                <GroupManager
-                                    key = { device.id }
-                                    visible = { visible }
-                                    dev_id = { device.id }
-                                    members = { groupMemberDevices(device.id, groups) }
-                                    device_info = { device }
-                                    all_device_states = { devices }
-                                />
-                                :
-                                <Devices
-                                    key = { device.id }
-                                    deviceType = { deviceType }
-                                    visible = { visible }
-                                    id = { device.id }
-                                    device_info = { device }
-                                />
-                        );})
-                    }
-                </Grid>
+                            // value.setDeviceState(device.id, device.state)
+
+                            return(
+                                deviceType === "group" ?
+                                    <GroupManager
+                                        key = { device.id }
+                                        visible = { visible }
+                                        dev_id = { device.id }
+                                        members = { groupMemberDevices(device.id, groups) }
+                                        device_info = { device }
+                                        all_device_states = { devices }
+                                    />
+                                    :
+                                    <Devices
+                                        key = { device.id }
+                                        deviceType = { deviceType }
+                                        visible = { visible }
+                                        id = { device.id }
+                                        device_info = { device }
+                                    />
+                            );})
+                        }
+                    </Grid>
+                </Slide>
             </Layout>
         );
     }
@@ -116,5 +113,7 @@ class DevicePage extends Reflux.Component {
 DevicePage.propTypes = {
     generalState: PropTypes.object.isRequired
 };
+
+DevicePage.contextType = AppContext;
 
 export default (DevicePage);

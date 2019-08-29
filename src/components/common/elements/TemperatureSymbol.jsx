@@ -1,6 +1,6 @@
 import React from "react";
 import Reflux from "reflux";
-import AppStore from "../../reflux/application/AppStore";
+import AppStore from "../../../reflux/application/AppStore";
 
 class TemperatureSymbol extends Reflux.Component {
     constructor(props) {

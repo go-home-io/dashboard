@@ -1,10 +1,10 @@
 import React from "react";
 import Reflux from "reflux";
 import PropTypes from "prop-types";
-import { CONNECTION_TIMEOUT } from "../../settings/deviceDelays";
+import { CONNECTION_TIMEOUT } from "../../../settings/deviceDelays";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
-import WebSocketStore from "../../reflux/socket/WebSocketStore";
-import wsActions from "../../reflux/socket/wsActions";
+import WebSocketStore from "../../../reflux/socket/WebSocketStore";
+import wsActions from "../../../reflux/socket/wsActions";
 
 const PROGRESS_INCREMENT = 1;
 const INTERVALS = 100 / PROGRESS_INCREMENT;

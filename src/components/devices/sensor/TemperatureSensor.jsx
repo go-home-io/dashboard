@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography/Typography";
-import TemperatureSymbol from "../../common/TemperatureSymbol";
-import ComponentUpperInfo from "../../common/ComponentUpperInfo";
-import Battery from "../../common/Battery";
+import TemperatureSymbol from "../../common/elements/TemperatureSymbol";
+import ComponentUpperInfo from "../../common/component/ComponentUpperInfo";
+import Battery from "../../common/elements/Battery";
 
 
 const TemperatureSensor = (props) => {

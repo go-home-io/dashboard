@@ -3,19 +3,19 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import Paper from "@material-ui/core/Paper/Paper";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import { HEADER_HIGHLIGHT_DURATION } from "../../settings/deviceDelays";
-import { SUCCESS_BKG_COLOR, ERROR_BKG_COLOR } from "../../settings/colors";
-import IconHeader from "../common/IconHeader";
-import SensorHeaderIcon from "../devices/sensor/SensorHeaderIcon";
-import VacuumStatusIcon from "../devices/vacuum/VacuumStatusIcon";
+import { HEADER_HIGHLIGHT_DURATION } from "../../../settings/deviceDelays";
+import { SUCCESS_BKG_COLOR, ERROR_BKG_COLOR } from "../../../settings/colors";
+import IconHeader from "../elements/IconHeader";
+import SensorHeaderIcon from "../../devices/sensor/SensorHeaderIcon";
+import VacuumStatusIcon from "../../devices/vacuum/VacuumStatusIcon";
 import SyncDisabled from "@material-ui/icons/SyncDisabled";
-import DeviceName from "./DeviceName";
+import DeviceName from "../elements/DeviceName";
 
 const styles = theme => ({
     paper: {
         ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
         height: 38,
     },
     root: {

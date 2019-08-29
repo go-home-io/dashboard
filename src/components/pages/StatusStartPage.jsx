@@ -5,6 +5,7 @@ import { STATUS_URL, WORKER_URL} from "../../settings/urls";
 import ErrorPage from "./ErrorPage";
 import StatusPagejsx from "./StatusPage";
 import appActions from "../../reflux/application/appActions";
+import storage from "../../services/storage";
 
 class StatusStartPage extends Reflux.Component {
     constructor(props) {
@@ -58,6 +59,7 @@ class StatusStartPage extends Reflux.Component {
         const { loading, IO_status, status, worker} = this.state;
         const success = IO_status === 200;
         const accessDenied = IO_status === 403;
+        storage.set("page", "status");
 
         return (
             loading ?

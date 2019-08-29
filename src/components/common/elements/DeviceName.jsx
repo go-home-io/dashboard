@@ -2,7 +2,7 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/Typography";
 import  PropTypes from "prop-types";
-import truncateCaption from "../../utils/truncate";
+import truncateCaption from "../../../utils/truncate";
 import {Tooltip} from "@material-ui/core";
 
 const style = () => ({

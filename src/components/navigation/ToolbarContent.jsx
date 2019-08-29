@@ -35,10 +35,6 @@ class ToolbarContent extends Reflux.Component {
         this.ntfViewOpen = this.ntfViewOpen.bind(this);
         this.ntfViewClose = this.ntfViewClose.bind(this);
     }
-    // componentDidMount () {
-    //     // Router props
-    //     this.setState( { path: this.props.location.pathname });
-    // }
     ntfViewOpen () {
         this.setState({ ntfViewOpen: true });
     }
@@ -81,7 +77,7 @@ class ToolbarContent extends Reflux.Component {
 }
 
 Toolbar.propTypes = {
-    classes: PropTypes.object.isRequired,
+    classes: PropTypes.object,
 };
 
 export default withStyles(styles)(ToolbarContent);

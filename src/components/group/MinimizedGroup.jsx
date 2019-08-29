@@ -7,13 +7,13 @@ import {
     MIN_GROUP_HEADER_BKG_COLOR,
     LIGHT_RO_ICON_COLOR
 } from "../../settings/colors";
-import ComponentHeader from "../common/ComponentHeader";
-import WaitingProgress from "../common/WaitingProgress";
+import ComponentHeader from "../common/component/ComponentHeader";
+import WaitingProgress from "../common/elements/WaitingProgress";
 import ExpandButton from "./ExpandButton";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import Grid from "@material-ui/core/Grid/Grid";
-import RenderCommandHandlers from "../common/RenderCommandHandlers";
-import DeviceFrame from "../common/DeviceFrame";
+import RenderCommandHandlers from "../common/comand/RenderCommandHandlers";
+import DeviceFrame from "../common/elements/DeviceFrame";
 import appActions from "../../reflux/application/appActions";
 
 const styles = () => ({

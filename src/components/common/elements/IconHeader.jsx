@@ -6,7 +6,7 @@ import {
     LIGHT_HEADER_ICON_COLOR_OFF,
     MIN_GROUP_HEADER_ICON_COLOR_ON,
     MIN_GROUP_HEADER_ICON_COLOR_OFF,
-} from "../../settings/colors";
+} from "../../../settings/colors";
 import PropTypes from "prop-types";
 import WbIncandescentIcon from "@material-ui/icons/WbIncandescent";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography/Typography";
-import TemperatureSymbol from "../../common/TemperatureSymbol";
+import TemperatureSymbol from "../../common/elements/TemperatureSymbol";
 
 const Temperature = (props) => {
     const { temperature } = props;

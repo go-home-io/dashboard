@@ -75,7 +75,7 @@ class LightBrightness extends React.Component {
                 >
                     <BrightnessSlider
                         level = { level }
-                        close = { this.handleClose.bind(this) }
+                        close = { this.handleClose }
                         dev_id = { dev_id }
                         doCommand = { doCommand }
                     />
