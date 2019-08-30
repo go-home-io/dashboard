@@ -8,6 +8,7 @@ export const AppContext = React.createContext({
     setDeviceState: () => {}
 });
 
+
 class AppContextProvider extends React.Component {
     constructor(props) {
         super(props);
@@ -26,17 +27,12 @@ class AppContextProvider extends React.Component {
     setDevState = (data) => {
         const { id, state } = data;
         let { devices } = this.state;
-        let dev_updated = [];
-        // let thisDevice = devices.find( dev => dev.id === id );
+
         if (devices) {
-            devices.map( dev => {
-                if (dev.id === id) {
-                    dev.state = state;
-                }
-                dev_updated.push(dev);
-            });
+            const index = devices.findIndex( dev => (dev.id === id));
+            devices[index].state = state;
         }
-        this.setState({devices: dev_updated});
+        this.setState({devices: devices});
     };
 
 

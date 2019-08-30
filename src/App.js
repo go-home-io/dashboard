@@ -20,7 +20,7 @@ import {
 import StartPage from "./components/pages/StartPage";
 import { ThemeProvider } from "@material-ui/styles";
 import {customTheme} from "./settings/customTheme";
-import AppContextProvider from "./contex/AppContextProvider";
+import AppContextProvider from "./context/AppContextProvider";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,

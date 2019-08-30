@@ -4,7 +4,7 @@ import {CONNECTION_TIMEOUT, PING_INTERVAL, MAX_ATTEMPTS} from "../settings/webso
 // import wsActions from "./wsActions";
 // import actions from "../actions";
 // import notificationActions from "../notification/notificationActions";
-// import {AppContext} from "../../contex/AppContext";
+// import {AppContext} from "../../context/AppContext";
 
 let timerCONNECTION_TIMEOUT = null;
 let timerPING_INTERVAL = null;
@@ -14,6 +14,7 @@ let attempts = 0;
 
 let connectingState = false;
 let pongReceived = false;
+
 const connAlive = () => {
     return pongReceived && !connectingState;
 };
@@ -25,17 +26,17 @@ class WebSocket extends Reflux.Store {
             rejected: false,
             reset: false,
             oneWay: false,
+            setSocketState: (obj) => this.setState(obj),
+            doCommand: (data) => this.onDoCommand(data),
+            reconnect: () => this.reopenSocket()
         };
         this.socket = null;
         this.createSocket();
 
         this.onDoCommand = this.onDoCommand.bind(this);
-        this.onReconnect = this.onReconnect.bind(this);
-        this.onClear = this.onClear.bind(this);
         this.ping = this.ping.bind(this);
         this.pong = this.pong.bind(this);
         this.reopenSocket = this.reopenSocket.bind(this);
-        this.onSetOneWay = this.onSetOneWay.bind(this);
     }
     componentDidMount() {
 
@@ -76,7 +77,7 @@ class WebSocket extends Reflux.Store {
         connectingState = false;
         pongReceived = false;
         if (!timerPING_INTERVAL) {
-            timerPING_INTERVAL = setInterval(this.ping.bind(this), PING_INTERVAL);
+            timerPING_INTERVAL = setInterval(this.ping, PING_INTERVAL);
         }
         this.ping();
     }
@@ -99,7 +100,6 @@ class WebSocket extends Reflux.Store {
             const data = JSON.parse(evt.data);
             if ( data.id === "notification") {
                 // notificationActions.message(data);
-
             } else {
                 // Broadcast data to all client stores
 
@@ -125,7 +125,6 @@ class WebSocket extends Reflux.Store {
 
     // Actions
     onDoCommand(data) {
-        // console.log("Socket", data);
         // Try to send command to server if socket ready
         // up to MAX_ATTEMPTS times. If not, set the state {rejected:true}
         if (connAlive()) {
@@ -151,21 +150,18 @@ class WebSocket extends Reflux.Store {
                 // Try to send command once more
                 timerAttempts = setTimeout( () => {
                     attempts = attempts + 1;
-                    // wsActions.doCommand(data);
+                    this.onDoCommand(data);
                 }, 500);
             }
         }
     }
-    onClear() {
-        this.setState({rejected: false, reset: false});
-    }
-    onReconnect() {
-        this.reopenSocket();
-    }
-    onSetOneWay () {
-        this.setState({oneWay: true});
-    }
-
+    // onReconnect() {
+    //     this.reopenSocket();
+    // }
+    // onSetOneWay () {
+    //     this.setState({oneWay: true});
+    // }
+    //
 }
 
 export default WebSocket;

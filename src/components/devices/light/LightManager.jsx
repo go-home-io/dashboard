@@ -13,7 +13,7 @@ import RenderCommandHandlers from "../../common/comand/RenderCommandHandlers";
 import DeviceStoreFactory from "../../../reflux/devices/DeviceStore";
 import deviceActions from "../../../reflux/devices/deviceActions";
 import DeviceFrame from "../../common/elements/DeviceFrame";
-import {AppContext} from "../../../contex/AppContext";
+import {AppContext} from "../../../context/AppContextProvider";
 
 const styles = () => ({
     // root: {
@@ -30,16 +30,11 @@ const styles = () => ({
 });
 
 class LightManager extends Reflux.Component{
-    state = {};
     constructor(props) {
         super(props);
         const { id, device_info } = props;
 
         this.store = DeviceStoreFactory(id, device_info);
-    }
-    componentDidMount() {
-        const { device_info } = this.props;
-        this.setState({ device_info });
     }
 
     render () {

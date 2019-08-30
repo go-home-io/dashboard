@@ -10,7 +10,7 @@ import Devices from "../common/Devices";
 import AppStore from "../../reflux/application/AppStore";
 import {Collapse, Slide} from "@material-ui/core";
 import ExpandedGroupHeader from "../group/ExpandedGroupHeader";
-import {AppContext} from "../../contex/AppContext";
+import {AppContext} from "../../context/AppContextProvider";
 
 const groupMemberDevices = (group_id, groups) => {
     // console.log('group Members', group_id, groups);

@@ -8,7 +8,7 @@ import {customTheme} from "../../settings/customTheme";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import storage from "../../services/storage";
 import appActions from "../../reflux/application/appActions";
-import { AppContext } from "../../contex/AppContextProvider";
+import { AppContext } from "../../context/AppContextProvider";
 
 
 class RouterPage extends Reflux.Component {
