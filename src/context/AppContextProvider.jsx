@@ -1,52 +1,57 @@
-import React from "react";
+import React, {useState} from "react";
 
 export const AppContext = React.createContext({
     active_location: "TestPage",
     active_group: null,
     active_page: "devices",
+    active_group_on: false,
+    uom: "",
+    openMenu: false,
+    statusLoaded: false,
     setContextState: () => {},
-    setDeviceState: () => {}
 });
 
 
-class AppContextProvider extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            active_location: "Default",
-            active_group: null,
-            active_page: "devices",
-            devices: [],
-            groups: [],
-            locations: [],
-            uom: "",
-            setStoreState: (data) => this.setState(data),
-            setDeviceState: (data) => (this.setDevState(data)),
-        };
-    }
-    setDevState = (data) => {
-        const { id, state } = data;
-        let { devices } = this.state;
+const AppContextProvider = props => {
+    const { children, ...other } = props;
+    const [activeLocation, setActiveLocation ] = useState("Defualt");
+    const [activePage, setActivePage ] = useState("devices");
+    const [activeGroup, setActiveGroup ] = useState(null);
+    const [activeGroupOn, setActiveGroupOn] = useState(false);
+    const [uom, setUom] = useState("");
+    const [openMenu, setOpenMenu] = useState(false);
+    const [statusLoaded, setStatusLoaded] = useState(false);
 
-        if (devices) {
-            const index = devices.findIndex( dev => (dev.id === id));
-            devices[index].state = state;
-        }
-        this.setState({devices: devices});
+    const appContext = {
+        active_location: activeLocation,
+        active_page: activePage,
+        active_group: activeGroup,
+        active_group_on: activeGroupOn,
+        uom: uom,
+        openMenu: openMenu,
+        statusLoaded: statusLoaded,
+        setLocation: location => setActiveLocation(location),
+        setPage: page => setActivePage(page),
+        setGroup: group => setActiveGroup(group),
+        setGroupOn: status => setActiveGroupOn(status),
+        setUOM: units => setUom(units),
+        toggleMenu: () => {
+            const open = !openMenu;
+            setOpenMenu(open);
+        },
+        setMenuStatus: (status) => setOpenMenu(status),
+        setLoaded: loaded => setStatusLoaded(loaded)
     };
 
 
-    render() {
-        const { children, ...other } = this.props;
-        return (
-            <AppContext.Provider value = { this.state } >
-                <div { ...other }>
-                    { children }
-                </div>
-            </AppContext.Provider>
-        );
-    }
+    return(
+        <AppContext.Provider value = { appContext } >
+            <div { ...other }>
+                { children }
+            </div>
+        </AppContext.Provider>
+    );
 
-}
+};
 
 export default AppContextProvider;

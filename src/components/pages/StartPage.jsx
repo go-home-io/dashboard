@@ -10,21 +10,19 @@ import { STATE_URL } from "../../settings/urls";
 import RouterPage from "./RouterPage";
 
 class StartPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            generalState:{},
-            authenticated: false,
-            auth_error: false,
-            auth_required: false,
-            status: null,
-            loading: true,
-        };
-    }
+    state = {
+        generalState:{},
+        authenticated: false,
+        auth_error: false,
+        auth_required: false,
+        status: null,
+        loading: true,
+    };
+
     componentDidMount() {
         this.getComponentsStateByHTTP();
     }
-    getComponentsStateByHTTP () {
+    getComponentsStateByHTTP = () => {
         // const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
         // STATE_URL
         HTTP.get(STATE_URL)
@@ -34,14 +32,14 @@ class StartPage extends Component {
                         // Authentication required
                         Cookie.remove(COOKIE_NAME);
                         this.setState({
-                            authenticated:false,
+                            authenticated: false,
                             auth_required: true,
                             loading: false
                         });
                     } else {
                         // Other connection errors
                         this.setState({
-                            status:data,
+                            status: data,
                             loading: false
                         });
                     }
@@ -57,8 +55,8 @@ class StartPage extends Component {
                     });
                 }
             });
-    }
-    getCredentials (user, password) {
+    };
+    getCredentials = (user, password) => {
         const credentials = "Basic " + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
         this.setState({
@@ -67,7 +65,7 @@ class StartPage extends Component {
             auth_required: false
         });
         this.getComponentsStateByHTTP();
-    }
+    };
     render () {
         const { authenticated, generalState, auth_required, auth_error, status, loading } = this.state;
         return (

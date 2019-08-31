@@ -1,12 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import  PropTypes from "prop-types";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import groupActions from "../../reflux/group/groupActions";
-import {
-    MIN_GROUP_HEADER_BKG_COLOR,
-    LIGHT_RO_ICON_COLOR
-} from "../../settings/colors";
+import { MIN_GROUP_HEADER_BKG_COLOR, LIGHT_RO_ICON_COLOR } from "../../settings/colors";
 import ComponentHeader from "../common/component/ComponentHeader";
 import WaitingProgress from "../common/elements/WaitingProgress";
 import ExpandButton from "./ExpandButton";
@@ -14,7 +11,7 @@ import Zoom from "@material-ui/core/Zoom/Zoom";
 import Grid from "@material-ui/core/Grid/Grid";
 import RenderCommandHandlers from "../common/comand/RenderCommandHandlers";
 import DeviceFrame from "../common/elements/DeviceFrame";
-import appActions from "../../reflux/application/appActions";
+import {AppContext} from "../../context/AppContextProvider";
 
 const styles = () => ({
     root: {
@@ -32,67 +29,68 @@ const styles = () => ({
     }
 });
 
-class MinimizedGroup extends React.Component {
-    expandGroup () {
-        const { group_id, device_state } = this.props;
-        groupActions.expandWindow(group_id);
-        appActions.setActiveGroup(group_id, device_state.on);
-    }
-    render () {
-        const {
-            classes, device_state, group_id, commands,
-            name, read_only, loading, status, visible } = this.props;
-        return (
-            <DeviceFrame visible = { true }>
-                <ComponentHeader
-                    dev_id = { group_id }
-                    name = { name }
-                    variant = "minGroup"
-                    on = { device_state.on }
-                    status = { status }
-                    read_only = { read_only }
-                    actions = { groupActions }
-                    ordinaryBkgColor = { MIN_GROUP_HEADER_BKG_COLOR }
-                    iconROColor = { LIGHT_RO_ICON_COLOR }
-                />
 
-                <ExpandButton
-                    expandGroup = { this.expandGroup.bind(this) }
-                    visible = { visible }
-                />
 
-                <CardContent >
-                    { loading ?
-                        <Zoom in = { loading } >
-                            <WaitingProgress
+const MinimizedGroup = props => {
+    const {classes, device_state, group_id, commands,
+        name, read_only, loading, status, visible } = props;
+
+    const { setGroup, setGroupOn } = useContext(AppContext);
+
+    const expandGroup = () => {
+        setGroup(group_id);
+        setGroupOn(device_state.on);
+    };
+
+    return (
+        <DeviceFrame visible = { true }>
+            <ComponentHeader
+                dev_id = { group_id }
+                name = { name }
+                variant = "minGroup"
+                on = { device_state.on }
+                status = { status }
+                read_only = { read_only }
+                actions = { groupActions }
+                ordinaryBkgColor = { MIN_GROUP_HEADER_BKG_COLOR }
+                iconROColor = { LIGHT_RO_ICON_COLOR }
+            />
+
+            <ExpandButton
+                expandGroup = { expandGroup }
+                visible = { visible }
+            />
+
+            <CardContent >
+                { loading ?
+                    <Zoom in = { loading } >
+                        <WaitingProgress
+                            dev_id = { group_id }
+                            actions = { groupActions }
+                        />
+                    </Zoom>
+                    :
+                    <Zoom in = { ! loading } >
+                        <Grid
+                            className = { classes.content }
+                            container
+                            justify = 'flex-start'
+                            direction = "column"
+                        >
+                            <RenderCommandHandlers
+                                commands = { commands }
                                 dev_id = { group_id }
-                                actions = { groupActions }
+                                doCommand = { groupActions.command }
+                                read_only = { read_only }
+                                device_state = { device_state }
                             />
-                        </Zoom>
-                        :
-                        <Zoom in = { ! loading } >
-                            <Grid
-                                className = { classes.content }
-                                container
-                                justify = 'flex-start'
-                                direction = "column"
-                            >
-                                <RenderCommandHandlers
-                                    commands = { commands }
-                                    dev_id = { group_id }
-                                    doCommand = { groupActions.command }
-                                    read_only = { read_only }
-                                    device_state = { device_state }
-                                />
-                            </Grid>
-                        </Zoom>
-
-                    }
-                </CardContent>
-            </DeviceFrame>
-        );
-    }
-}
+                        </Grid>
+                    </Zoom>
+                }
+            </CardContent>
+        </DeviceFrame>
+    );
+};
 
 MinimizedGroup.propTypes = {
     classes: PropTypes.object.isRequired,

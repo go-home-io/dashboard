@@ -5,6 +5,7 @@ import GroupStoreFactory from "../../reflux/group/GroupStore";
 import groupActions from "../../reflux/group/groupActions";
 import MinimizedGroup from "./MinimizedGroup";
 import AppStore from "../../reflux/application/AppStore";
+import {AppContext} from "../../context/AppContextProvider";
 
 class GroupManager  extends Reflux.Component {
     constructor(props) {
@@ -20,12 +21,14 @@ class GroupManager  extends Reflux.Component {
         }
     }
     render () {
+        const value = this.context;
         const { dev_id, visible } = this.props;
         const {
-            name, device_state, minimized,
-            commands, read_only, loading, status, active_group,
+            name, device_state, commands, read_only,
+            loading, status, active_group,
         } = this.state;
         const group_id = dev_id;
+        const minimized = ! value.active_group;
 
         const displayMinimized = visible && minimized ? "block" : "none";
 
@@ -55,5 +58,7 @@ GroupManager.propTypes = {
     device_info: PropTypes.object.isRequired,
     all_device_states: PropTypes.array.isRequired
 };
+
+GroupManager.contextType = AppContext;
 
 export default (GroupManager);

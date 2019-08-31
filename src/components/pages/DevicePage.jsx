@@ -46,9 +46,10 @@ class DevicePage extends Reflux.Component {
     };
 
     render () {
+        const value = this.context;
         const { generalState, pageVisible } = this.props;
         const { devices, locations, groups } = generalState;
-        const { active_location, active_group, active_group_on } = this.state;
+        const { active_location, active_group, active_group_on } = value; // this.state
 
         const dropdownInfo = {
             name: "Locations",

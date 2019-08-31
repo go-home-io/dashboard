@@ -13,47 +13,25 @@ import {
     faBatteryEmpty,
     faCompass,
 } from "@fortawesome/free-solid-svg-icons";
-// import { createBrowserHistory } from "history";
-// import { Router, Route, Switch } from "react-router-dom";
-// import indexRoutes from "../src/routes/indexRoutes";
-// import { customTheme } from "./settings/customTheme";
+
 import StartPage from "./components/pages/StartPage";
 import { ThemeProvider } from "@material-ui/styles";
-import {customTheme} from "./settings/customTheme";
+import { customTheme } from "./settings/customTheme";
 import AppContextProvider from "./context/AppContextProvider";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
     faBatteryThreeQuarters, faCompass );
 
-// const hist = createBrowserHistory();
-
-class App extends React.Component {
-    render() {
-        return (
-            // eslint-disable-next-line
-            <ThemeProvider theme = { customTheme } >
-                <AppContextProvider>
-                    <StartPage/>
-                </AppContextProvider>
-            </ThemeProvider>
-            // {/*<Router history = { hist }>*/}
-            // {/*    <Switch>*/}
-            // {/*        {indexRoutes.map((prop) => {*/}
-            // {/*            const { path, component } = prop;*/}
-            // {/*            return (*/}
-            // {/*                <Route*/}
-            // {/*                    exact path = { path }*/}
-            // {/*                    component = { component }*/}
-            // {/*                    key = { path }*/}
-            // {/*                />*/}
-            // {/*            );*/}
-            // {/*        })}*/}
-            // {/*    </Switch>*/}
-            // {/*</Router>*/}
-
-        );
-    }
-}
+const App = () =>{
+    return (
+        // eslint-disable-next-line
+        <ThemeProvider theme = { customTheme } >
+            <AppContextProvider>
+                <StartPage/>
+            </AppContextProvider>
+        </ThemeProvider>
+    );
+};
 
 export default App;

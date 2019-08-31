@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import PropTypes from "prop-types";
 import Icon from "@material-ui/core/Icon";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -8,7 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import groupActions from "../../reflux/group/groupActions";
 import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
 import {IconButton, Paper, Typography} from "@material-ui/core";
-import appActions from "../../reflux/application/appActions";
+import {AppContext} from "../../context/AppContextProvider";
 
 
 const styles = () => ({
@@ -42,14 +42,15 @@ const styles = () => ({
 const groupIcon = "devices_other";
 
 const ExpandedGroupHeader = props => {
+
     const { classes, id, groupObj, on } = props;
     const { read_only: readOnly, name} = groupObj;
+    const { setGroup } = useContext(AppContext);
     const iconColor = on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
     const cursor = readOnly ? "default" : "pointer";
 
     const  minimizeGroup = () => {
-        groupActions.setMinimized();
-        appActions.setActiveGroup();
+        setGroup(null);
     };
 
     const handleGroupHeaderClick = () => {
@@ -90,7 +91,6 @@ const ExpandedGroupHeader = props => {
             </div>
 
         </Paper>
-        // </Grid>
     );
 };
 

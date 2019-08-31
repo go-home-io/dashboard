@@ -1,5 +1,4 @@
-import React from "react";
-import Reflux from "reflux";
+import React, {useContext} from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -9,11 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavBar from "./NavBar";
-import AppStore from "../../reflux/application/AppStore";
-import appActions from "../../reflux/application/appActions";
 import ToolbarContent from "./ToolbarContent";
 import Typography from "@material-ui/core/Typography/Typography";
 import classNames from "classnames";
+import {AppContext} from "../../context/AppContextProvider";
 
 const drawerWidth = 220;
 
@@ -53,78 +51,73 @@ const styles = theme => ({
     },
 });
 
-class ResponsiveDrawer extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        this.store = AppStore;
-    }
-    handleDrawerToggle = () => {
-        appActions.toggleMenu();
-    };
-    render() {
-        const { classes, children, dropdown, ...other } = this.props;
+const ResponsiveDrawer = props =>  {
 
-        return (
-            <div className = { classes.root }>
-                <AppBar className = { classes.appBar } >
-                    <Toolbar>
-                        <IconButton
-                            color = "inherit"
-                            aria-label = "Open drawer"
-                            onClick = { this.handleDrawerToggle }
-                            className = { classes.menuButton }
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography
-                            variant = "h6"
-                            color = "inherit"
-                            className = { classNames(classes.menuButton, classes.brand) }
-                        >
-                            GO-HOME
-                        </Typography>
+    const { classes, children, dropdown, container, ...other } = props;
+    const { toggleMenu, openMenu} = useContext(AppContext);
+    // console.log("Dropdown", dropdown);
+    // console.log("Toggle Menu", toggleMenu, " openMenu ", openMenu);
 
-                        <ToolbarContent/>
+    return (
+        <div className = { classes.root }>
+            <AppBar className = { classes.appBar } >
+                <Toolbar>
+                    <IconButton
+                        color = "inherit"
+                        aria-label = "Open drawer"
+                        onClick = { () => toggleMenu() }
+                        className = { classes.menuButton }
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography
+                        variant = "h6"
+                        color = "inherit"
+                        className = { classNames(classes.menuButton, classes.brand) }
+                    >
+                        GO-HOME
+                    </Typography>
 
-                    </Toolbar>
-                </AppBar>
-                <nav className = { classes.drawer } >
-                    <Hidden mdUp implementation = "css">
-                        <Drawer
-                            container = { this.props.container }
-                            variant = "temporary"
-                            anchor = "left"
-                            open = { this.state.openMenu }
-                            onClose = { this.handleDrawerToggle }
-                            classes = { {
-                                paper: classes.drawerPaper,
-                            } }
-                            ModalProps = { {
-                                keepMounted: true, // Better open performance on mobile.
-                            } }
-                        >
-                            <NavBar dropdown = { dropdown }/>
-                        </Drawer>
-                    </Hidden>
-                    <Hidden smDown implementation = "css">
-                        <Drawer
-                            classes = { {
-                                paper: classes.drawerPaper,
-                            } }
-                            variant = "permanent"
-                            open
-                        >
-                            <NavBar dropdown = { dropdown }/>
-                        </Drawer>
-                    </Hidden>
-                </nav>
-                <main className = { classes.content } { ...other }>
-                    { children }
-                </main>
-            </div>
-        );
-    }
-}
+                    <ToolbarContent/>
+
+                </Toolbar>
+            </AppBar>
+            <nav className = { classes.drawer } >
+                <Hidden mdUp implementation = "css">
+                    <Drawer
+                        container = { container }
+                        variant = "temporary"
+                        anchor = "left"
+                        open = { openMenu }
+                        onClose = { () => toggleMenu() }
+                        classes = { {
+                            paper: classes.drawerPaper,
+                        } }
+                        ModalProps = { {
+                            keepMounted: true, // Better open performance on mobile.
+                        } }
+                    >
+                        <NavBar dropdown = { dropdown }/>
+                    </Drawer>
+                </Hidden>
+                <Hidden smDown implementation = "css">
+                    <Drawer
+                        classes = { {
+                            paper: classes.drawerPaper,
+                        } }
+                        variant = "permanent"
+                        open
+                    >
+                        <NavBar dropdown = { dropdown }/>
+                    </Drawer>
+                </Hidden>
+            </nav>
+            <main className = { classes.content } { ...other }>
+                { children }
+            </main>
+        </div>
+    );
+};
 
 ResponsiveDrawer.propTypes = {
     classes: PropTypes.object,

@@ -4,10 +4,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon/Icon";
 import AppStore from "../../reflux/application/AppStore";
-import appActions from "../../reflux/application/appActions";
 import storage from "../../services/storage";
 import PropTypes from "prop-types";
-import groupActions from "../../reflux/group/groupActions";
+import {AppContext} from "../../context/AppContextProvider";
 
 class ListItemActionWrapper extends Reflux.Component {
     constructor(props) {
@@ -17,14 +16,12 @@ class ListItemActionWrapper extends Reflux.Component {
     }
     handleClick () {
         const { name: location } = this.props;
-        // locationActions.visible(location);
+        const { openMenu, setGroup, setLocation, toggleMenu } = this.context;
         storage.set("location", location);
-        appActions.setLocation(location);
-        appActions.setActiveGroup();
-        groupActions.setMinimized();
-        if (this.state.openMenu) {
-            appActions.toggleMenu();
-        }
+
+        setGroup(null);
+        setLocation(location);
+        if (openMenu) toggleMenu();
     }
     render () {
         const { classes, icon, name } = this.props;
@@ -48,5 +45,7 @@ ListItemActionWrapper.propTypes = {
     name: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
 };
+
+ListItemActionWrapper.contextType = AppContext;
 
 export default ListItemActionWrapper;

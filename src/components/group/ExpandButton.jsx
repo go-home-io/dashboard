@@ -24,30 +24,28 @@ const styles = () => ({
     }
 });
 
-class ExpandButton extends React.Component {
-    render () {
-        const { classes, expandGroup, visible } = this.props;
-        return (
-            visible ?
-                <div>
-                    <Tooltip
-                        title = "Expand the group window"
-                        placement = "bottom-start"
+const ExpandButton = props => {
+    const { classes, expandGroup, visible } = props;
+    return (
+        visible ?
+            <div>
+                <Tooltip
+                    title = "Expand the group window"
+                    placement = "bottom-start"
+                >
+                    <div
+                        color = "primary"
+                        className = { classes.iconButton }
+                        onClick = { expandGroup }
                     >
-                        <div
-                            color = "primary"
-                            className = { classes.iconButton }
-                            onClick = { expandGroup }
-                        >
-                            <IconExpandMore/>
-                        </div>
-                    </Tooltip>
-                </div>
-                :
-                null
-        );
-    }
-}
+                        <IconExpandMore/>
+                    </div>
+                </Tooltip>
+            </div>
+            :
+            null
+    );
+};
 
 ExpandButton.propTypes = {
     classes: PropTypes.object.isRequired,

@@ -13,7 +13,6 @@ import RenderCommandHandlers from "../../common/comand/RenderCommandHandlers";
 import DeviceStoreFactory from "../../../reflux/devices/DeviceStore";
 import deviceActions from "../../../reflux/devices/deviceActions";
 import DeviceFrame from "../../common/elements/DeviceFrame";
-import {AppContext} from "../../../context/AppContextProvider";
 
 const styles = () => ({
     // root: {
@@ -76,7 +75,6 @@ class LightManager extends Reflux.Component{
                                     commands = { commands }
                                     dev_id = { id }
                                     doCommand = { deviceActions.command }
-                                    // doCommand = {  }
                                     read_only = { read_only }
                                     device_state = { device_state }
                                 />
@@ -96,6 +94,6 @@ LightManager.propTypes = {
     visible: PropTypes.bool.isRequired
 };
 
-LightManager.contextType = AppContext;
+// LightManager.contextType = AppContext;
 
 export default withStyles(styles)(LightManager);

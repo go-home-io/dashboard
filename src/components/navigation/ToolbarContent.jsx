@@ -1,15 +1,14 @@
 import React from "react";
 import Reflux from "reflux";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import AppStore from "../../reflux/application/AppStore";
 import Grid from "@material-ui/core/Grid/Grid";
 import NotificationStore from "../../reflux/notification/NotificationStore";
 import NotificationCount from "../notification/NotificationCount";
 import LocationIcon from "@material-ui/icons/LocationOn";
 import NotificationsListView from "../notification/NotificationsListView";
+import {AppContext} from "../../context/AppContextProvider";
 
 const styles = () => ({
     notificationContainer: {
@@ -30,7 +29,7 @@ class ToolbarContent extends Reflux.Component {
             path: "",
             ntfViewOpen: false,
         };
-        this.stores = [AppStore, NotificationStore];
+        this.store = NotificationStore;
 
         this.ntfViewOpen = this.ntfViewOpen.bind(this);
         this.ntfViewClose = this.ntfViewClose.bind(this);
@@ -45,7 +44,8 @@ class ToolbarContent extends Reflux.Component {
     }
     render() {
         const { classes } = this.props;
-        const { active_page: page, unseenCount, active_location } = this.state;
+        const { unseenCount } = this.state;
+        const {  active_page: page, active_location } = this.context;
 
         return(
             <Grid container justify = "flex-end" alignItems = "center">
@@ -76,8 +76,10 @@ class ToolbarContent extends Reflux.Component {
     }
 }
 
-Toolbar.propTypes = {
+ToolbarContent.propTypes = {
     classes: PropTypes.object,
 };
+
+ToolbarContent.contextType = AppContext;
 
 export default withStyles(styles)(ToolbarContent);

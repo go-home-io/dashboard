@@ -1,66 +1,54 @@
-import React from "react";
-import Reflux from "reflux";
+import React, {useContext, useEffect} from "react";
 import PropTypes from "prop-types";
-import AppStore from "../../reflux/application/AppStore";
 import DevicePage from "./DevicePage";
 import StatusStartPage from "./StatusStartPage";
 import {customTheme} from "../../settings/customTheme";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import storage from "../../services/storage";
-import appActions from "../../reflux/application/appActions";
-import { AppContext } from "../../context/AppContextProvider";
+import {AppContext} from "../../context/AppContextProvider";
 
+const RouterPage = props => {
+    const { generalState } = props;
+    let { active_page: page, setLocation, setPage, setUOM } = useContext(AppContext);
+    const displayDevices = page === "devices" ? "block" : "none";
 
-class RouterPage extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            generalState: props.generalState,
-        };
-        this.store = AppStore;
-    }
-    componentDidMount () {
-        // Restore active location and active page from local storage
-        let active_location = storage.get("location");
-        let active_page = storage.get("page");
-        active_location = active_location ? active_location : "Default";
-        active_page = active_page ? active_page : "devices";
-        appActions.setLocation(active_location);
-        appActions.setActivePage(active_page);
+    // Will affect only when Component did mount
+    let active_location = storage.get("location");
+    let active_page = storage.get("page");
+    active_location = active_location ? active_location : "Default";
+    active_page = active_page ? active_page : "devices";
 
-        let value = this.context;
-        const { generalState } = this.props;
-        value.setStoreState(generalState);
-    }
-    render() {
-        const { active_page: page, generalState  } = this.state;
-        const displayDevices = page === "devices" ? "block" : "none";
-        let value = this.context;
+    useEffect(() => {
+        setLocation(active_location);
+        setPage(active_page);
+        setUOM(generalState.uom);
+    },
+    // eslint-disable-next-line
+   []);
 
+    return (
 
-        console.log(value);
+        <ThemeProvider theme = { customTheme }>
 
-        return (
+            <div style = { {display: displayDevices} }>
+                { generalState &&
+                <DevicePage
+                    generalState = { generalState }
+                    pageVisible = { page === "devices" }
+                />
+                }
+            </div>
 
-            <ThemeProvider theme = { customTheme }>
+            { page === "status" && <StatusStartPage/> }
 
-                <div style = { {display: displayDevices} }>
-                    { generalState &&
-                    <DevicePage generalState = { generalState } pageVisible = { page === "devices" }/>
-                    }
-                </div>
-
-                { page === "status" && <StatusStartPage/> }
-
-            </ThemeProvider>
-        );
-    }
-}
+        </ThemeProvider>
+    );
+};
 
 RouterPage.propTypes = {
     generalState: PropTypes.object.isRequired
 };
 
-RouterPage.contextType = AppContext;
+// RouterPage.contextType = AppContext;
 
 export default RouterPage;
