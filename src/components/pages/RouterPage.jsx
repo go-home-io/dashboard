@@ -49,6 +49,4 @@ RouterPage.propTypes = {
     generalState: PropTypes.object.isRequired
 };
 
-// RouterPage.contextType = AppContext;
-
 export default RouterPage;

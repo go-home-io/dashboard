@@ -1,13 +1,11 @@
 import React from "react";
-import Reflux from "reflux";
 import HTTP from "../../services/httpservices";
 import { STATUS_URL, WORKER_URL} from "../../settings/urls";
 import ErrorPage from "./ErrorPage";
-import StatusPagejsx from "./StatusPage";
-import appActions from "../../reflux/application/appActions";
+import StatusPage from "./StatusPage";
 import storage from "../../services/storage";
 
-class StatusStartPage extends Reflux.Component {
+class StatusStartPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +33,7 @@ class StatusStartPage extends Reflux.Component {
                         worker: response,
                         IO_status: 200,
                     });
-                    appActions.workerSuccessfullyLoaded();
+                    // appActions.workerSuccessfullyLoaded();
                 }
             });
         // Get Status
@@ -65,7 +63,7 @@ class StatusStartPage extends Reflux.Component {
             loading ?
                 <ErrorPage loading = { true }/> :
                 success || accessDenied ?
-                    <StatusPagejsx
+                    <StatusPage
                         status = { status }
                         worker = { worker }
                         access = { ! accessDenied }

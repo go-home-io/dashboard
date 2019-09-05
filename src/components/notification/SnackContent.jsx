@@ -44,36 +44,34 @@ const styles = theme => ({
     },
 });
 
-class SnackContent extends React.Component {
-    render () {
-        const { classes, message, onClose, variant, ...other } = this.props;
-        const Icon = variantIcon[variant];
+const SnackContent = props => {
+    const { classes, message, onClose, variant, ...other } = props;
+    const Icon = variantIcon[variant];
 
-        return (
-            <SnackbarContent
-                className = { classes[variant] }
-                aria-describedby = "client-snackbar"
-                message = {
-                    <span id = "client-snackbar" className = { classes.message }>
-                        <Icon className = { classNames(classes.icon, classes.iconVariant) }/>
-                        {message}
-                    </span>
-                }
-                action = { [
-                    <IconButton
-                        key = "close"
-                        aria-label = "Close"
-                        color = "inherit"
-                        onClick = { onClose }
-                    >
-                        <CloseIcon/>
-                    </IconButton>,
-                ] }
-                { ...other }
-            />
-        );
-    }
-}
+    return (
+        <SnackbarContent
+            className = { classes[variant] }
+            aria-describedby = "client-snackbar"
+            message = {
+                <span id = "client-snackbar" className = { classes.message }>
+                    <Icon className = { classNames(classes.icon, classes.iconVariant) }/>
+                    {message}
+                </span>
+            }
+            action = { [
+                <IconButton
+                    key = "close"
+                    aria-label = "Close"
+                    color = "inherit"
+                    onClick = { onClose }
+                >
+                    <CloseIcon/>
+                </IconButton>,
+            ] }
+            { ...other }
+        />
+    );
+};
 
 SnackContent.propTypes = {
     classes: PropTypes.object.isRequired,

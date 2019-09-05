@@ -19,7 +19,7 @@ export const commandButtonsBehavior = {
         "find": {
             "disabled": false,
             "icon": MapPin,
-            "command": "findMe"
+            "command": "find-me"
         },
         "dock": {
             "disabled": false,
@@ -41,7 +41,7 @@ export const commandButtonsBehavior = {
         "find": {
             "disabled": false,
             "icon": MapPin,
-            "command": "findMe"
+            "command": "find-me"
         },
         "dock": {
             "disabled": false,
@@ -64,7 +64,7 @@ export const commandButtonsBehavior = {
         "find": {
             "disabled": true,
             "icon": MapPin,
-            "command": "findMe"
+            "command": "find-me"
         },
         "dock": {
             "disabled": true,
@@ -86,7 +86,7 @@ export const commandButtonsBehavior = {
         "find": {
             "disabled": true,
             "icon": MapPin,
-            "command": "findMe"
+            "command": "find-me"
         },
         "dock": {
             "disabled": true,
@@ -108,7 +108,7 @@ export const commandButtonsBehavior = {
         "find": {
             "disabled": false,
             "icon": MapPin,
-            "command": "findMe"
+            "command": "find-me"
         },
         "dock": {
             "disabled": false,
@@ -130,7 +130,7 @@ export const commandButtonsBehavior = {
         "find": {
             "disabled": false,
             "icon": MapPin,
-            "command": "findMe"
+            "command": "find-me"
         },
         "dock": {
             "disabled": true,

@@ -1,25 +1,17 @@
-import React from "react";
-import Reflux from "reflux";
-import AppStore from "../../../reflux/application/AppStore";
+import React, {useContext} from "react";
+import {AppContext} from "../../../context/AppContextProvider";
 
-class TemperatureSymbol extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        this.store = AppStore;
-    }
-
-    render () {
-        const { uom } = this.state;
-        return (
-            uom === "imperial"  ?
-                <div style = { {display:"inline-block"} }>
-                    &deg;F
-                </div> :
-                <div style = { {display:"inline-block"} }>
-                    &deg;C
-                </div>
-        );
-    }
-}
+const TemperatureSymbol = () => {
+    const { uom } = useContext(AppContext);
+    return (
+        uom === "imperial"  ?
+            <div style = { {display:"inline-block"} }>
+                &deg;F
+            </div> :
+            <div style = { {display:"inline-block"} }>
+                &deg;C
+            </div>
+    );
+};
 
 export default TemperatureSymbol;

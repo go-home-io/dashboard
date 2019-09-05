@@ -1,27 +1,15 @@
 import React from "react";
-import Reflux from "reflux";
 import PropTypes from "prop-types";
 import { CONNECTION_TIMEOUT } from "../../../settings/deviceDelays";
-import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
-import WebSocketStore from "../../../reflux/socket/WebSocketStore";
-import wsActions from "../../../reflux/socket/wsActions";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import {EventEmitter} from "../../../context/EventEmitter";
 
 const PROGRESS_INCREMENT = 1;
 const INTERVALS = 100 / PROGRESS_INCREMENT;
 
-class WaitingProgress extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            completed: 0,
-        };
-        this.store = WebSocketStore;
-        this.timer = null;
-
-        this.restart = this.restart.bind(this);
-        this.progress = this.progress.bind(this);
-        this.onComplete = this.onComplete.bind(this);
-    }
+class WaitingProgress extends React.Component {
+    static contextType = EventEmitter;
+    state = { completed: 0};
     componentDidMount() {
         this.setState({ completed: 0 });
         this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS);
@@ -32,46 +20,79 @@ class WaitingProgress extends Reflux.Component {
         clearInterval(this.timer);
         this.timer = null;
     }
-    onComplete (status) {
-        const { dev_id, actions } = this.props;
+
+    // Listeners
+    onMessage = (mess) => {
+        const { dev_id } = this.props;
+        if ( mess.id === dev_id ) this.finish("success");
+    };
+
+    onReject = (mess) => {
+        const { dev_id } = this.props;
+        if ( mess.id === dev_id ) this.finish("rejected");
+    };
+
+    onReset = (mess) => {
+        const { dev_id } = this.props;
+        if ( mess.id === dev_id ) this.restart();
+    };
+
+    // -----------------------------------------------------------------
+
+    finish = (status) => {
+        const { raiseEvent } = this.context;
+        const { dev_id } = this.props;
+
 
         clearInterval(this.timer);
         this.timer = null;
-        this.setState({ completed: 0 });
-        actions.status(dev_id, status);
-    }
-    restart ()  {
-        this.setState({ completed: 0 });
-        setTimeout(()=>setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),100);
-    }
-    progress ()  {
-        let { completed, reset, rejected } = this.state;
+        if ( status === "success")  {
+            raiseEvent("status", {id: dev_id, status: "success"});
+        }
+        setTimeout(()=>{
+            raiseEvent("loading", {id: dev_id, loading: false});
+            if ( status !== "success")  {
+                raiseEvent("status", {id: dev_id, status: "error"});
+                raiseEvent("ws_error", {id: dev_id, status: status});
+            }
+        }, 400);
+        // this.setState({completed: 0});
+    };
 
-        if (rejected ) {
-            this.onComplete("rejected");
-        }
-        if (reset) {
-            clearInterval(this.timer);
-            this.timer = null;
-            wsActions.clear();
-            this.restart();
-        }
+
+    restart = () => {
+        this.setState({completed:0});
+        setTimeout(()=>setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS),100);
+    };
+
+    progress = () => {
+        const { completed } = this.state;
         if (completed === 100) {
-            this.onComplete("error");
+            this.finish("timeout");
         } else {
-            this.setState({ completed: completed + PROGRESS_INCREMENT });
+            const newValue = completed + PROGRESS_INCREMENT;
+            this.setState( {completed: newValue} );
         }
-    }
-    render () {
+    };
+
+    render() {
+        const { subscribe } = this.context;
+        const { completed } = this.state;
+
+        subscribe("rejected", this.onReject);
+        subscribe("reset", this.onReset);
+        subscribe("message", this.onMessage);
+
         return (
-            <LinearProgress variant = "determinate" value = { this.state.completed } />
+            <LinearProgress variant = "determinate" value = { completed } />
         );
     }
 }
 
+// WaitingProgress.contextType = EventEmitter;
+
 WaitingProgress.propTypes = {
     dev_id: PropTypes.string.isRequired,
-    actions: PropTypes.object.isRequired
 };
 
 export default (WaitingProgress);

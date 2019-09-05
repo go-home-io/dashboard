@@ -1,5 +1,4 @@
-import React from "react";
-import Reflux from "reflux";
+import React, {useContext, useEffect, useState} from "react";
 import ComponentHeader from "../../common/component/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -8,15 +7,13 @@ import WaitingProgress from "../../common/elements/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import truncateCaption from "../../../utils/truncate";
 import { VACUUM_HEADER_BKG_COLOR } from "../../../settings/colors";
-import VacuumStoreFactory from "../../../reflux/vacuum/VacuumStore";
-import vacuumActions from "../../../reflux/vacuum/vacuumActions";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
 import Battery from "../../common/elements/Battery";
 import ComponentUpperInfo from "../../common/component/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
-import DeviceFrame from "../../common/elements/DeviceFrame";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
+import {EventEmitter} from "../../../context/EventEmitter";
 
 const styles = () => ({
     progress: {
@@ -48,81 +45,87 @@ const styles = () => ({
     }
 });
 
-class VacuumManager extends Reflux.Component{
-    constructor(props) {
-        super(props);
-        const { id, device_info } = props;
-        this.store = VacuumStoreFactory(id, device_info);
-    }
+const VacuumManager = props =>{
+    // constructor(props) {
+    //     super(props);
+    //     const { id, device_info } = props;
+    //     this.store = VacuumStoreFactory(id, device_info);
+    // }
 
-    render () {
-        const { visible, classes }  = this.props;
-        const { id, name: fullName, device_state, loading, status, commands } = this.state;
-        const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
-        const area = Math.round(raw_area);
-        const name = truncateCaption(fullName, maxSymbolsInNamePerLine );
+    const onLoadingUpdate = data => {
+        if ( data.id !== id ) return;
+        setLoading(data.loading);
+    };
 
-        return (
-            <DeviceFrame visible = { visible }>
-                <ComponentHeader
-                    dev_id = { id }
-                    name = { name }
-                    variant = "vacuum"
-                    status = { status }
-                    actions = { vacuumActions }
-                    vac_status = { vac_status }
-                    ordinaryBkgColor = { VACUUM_HEADER_BKG_COLOR }
-                />
+    const [loading, setLoading] = useState(false);
+    const { subscribe } = useContext(EventEmitter);
+    const { classes, id, device_info, device_state, doCommand }  = props;
+    const { name: fullName, commands } = device_info;
+    const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
+    const area = Math.round(raw_area);
+    const name = truncateCaption(fullName, maxSymbolsInNamePerLine );
+    useEffect( () => subscribe("loading", onLoadingUpdate),
+        // eslint-disable-next-line
+        []);
 
-                <ComponentUpperInfo
-                    leftField = {
-                        <VacuumAreaDuration area = { area }/>
-                    }
-                    centerField = {
-                        <VacuumAreaDuration duration = { duration }/>
-                    }
-                    rightField = {
-                        <Battery battery_level = { battery_level }/>
-                    }
-                />
 
-                <CardContent>
-                    {loading ?
-                        <Zoom in = { loading }>
-                            <div className = { classes.progress }>
-                                <WaitingProgress
-                                    dev_id = { id }
-                                    actions = { vacuumActions }
-                                />
-                            </div>
-                        </Zoom>
-                        :
-                        <Zoom in = { !loading }>
-                            <div>
-                                <FanSpeedControl
-                                    dev_id = { id }
-                                    level = { fan_speed }
-                                    commands = { commands }
-                                />
-                                <CommandPanel
-                                    dev_id = { id }
-                                    vac_status = { vac_status }
-                                    commands = { commands }
-                                />
-                            </div>
-                        </Zoom>
-                    }
-                </CardContent>
-            </DeviceFrame>
-        );
-    }
-}
+    return (
+        <>
+            <ComponentHeader
+                dev_id = { id }
+                name = { name }
+                doCommand = { doCommand }
+                variant = "vacuum"
+                vac_status = { vac_status }
+                ordinaryBkgColor = { VACUUM_HEADER_BKG_COLOR }
+            />
+
+            <ComponentUpperInfo
+                leftField = {
+                    <VacuumAreaDuration area = { area }/>
+                }
+                centerField = {
+                    <VacuumAreaDuration duration = { duration }/>
+                }
+                rightField = {
+                    <Battery battery_level = { battery_level }/>
+                }
+            />
+
+            <CardContent>
+                {loading ?
+                    <Zoom in = { loading }>
+                        <div className = { classes.progress }>
+                            <WaitingProgress dev_id = { id }/>
+                        </div>
+                    </Zoom>
+                    :
+                    <Zoom in = { !loading }>
+                        <div>
+                            <FanSpeedControl
+                                dev_id = { id }
+                                level = { fan_speed }
+                                commands = { commands }
+                                doCommand = { doCommand }
+                            />
+                            <CommandPanel
+                                dev_id = { id }
+                                vac_status = { vac_status }
+                                commands = { commands }
+                                doCommand = { doCommand }
+                            />
+                        </div>
+                    </Zoom>
+                }
+            </CardContent>
+        </>
+    );
+};
 
 VacuumManager.propTypes = {
     classes: PropTypes.object.isRequired,
     device_info: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(VacuumManager);

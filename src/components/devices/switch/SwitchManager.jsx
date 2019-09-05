@@ -1,19 +1,17 @@
-import React from "react";
-import Reflux from "reflux";
+import React, {useContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import truncateCaption from "../../../utils/truncate";
 import { SWITCH_HEADER_BKG_COLOR, SWITCH_RO_ICON_COLOR } from "../../../settings/colors";
 import ComponentHeader from "../../common/component/ComponentHeader";
-import DeviceStoreFactory from "../../../reflux/devices/DeviceStore";
-import deviceActions from "../../../reflux/devices/deviceActions";
+// import deviceActions from "../../../reflux/devices/deviceActions";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import WaitingProgress from "../../common/elements/WaitingProgress";
 import Grid from "@material-ui/core/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
 import CustomizedSwitch from "./customizedSwitch";
-import DeviceFrame from "../../common/elements/DeviceFrame";
+import {EventEmitter} from "../../../context/EventEmitter";
 
 const styles = () => ({
     icon: {
@@ -30,87 +28,88 @@ const styles = () => ({
     container: {
         display: "flex",
         alignContent: "center",
-        // margin: "0 auto"
     }
 });
 
-class SwitchManager extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        const { id, device_info } = props;
-        this.store = DeviceStoreFactory(id, device_info);
+const SwitchManager = props => {
+    const onLoadingUpdate = data => {
+        if ( data.id !== id ) return;
+        setLoading(data.loading);
+    };
 
-        this.handleChange = this.handleChange.bind(this);
-    }
-    handleChange () {
-        const { id, read_only } = this.state;
+    const handleChange = () => {
         if ( ! read_only ) {
-            deviceActions.toggle(id);
+            const command = on ? "off" : "on";
+            doCommand(id, command, "");
         }
-    }
-    render () {
-        const { visible, classes, id } = this.props;
-        const {  name: full_name, device_state, status, read_only, loading } = this.state;
-        const name = truncateCaption(full_name, 45);
-        const { power, on } = device_state;
+    };
 
-        return (
-            <DeviceFrame visible = { visible } >
-                <ComponentHeader
-                    dev_id = { id }
-                    name = { name }
-                    status = { status }
-                    actions = { deviceActions }
-                    ordinaryBkgColor = { SWITCH_HEADER_BKG_COLOR }
-                    variant = 'switch'
-                    on = { on }
-                    read_only = { read_only }
-                    iconROColor = { SWITCH_RO_ICON_COLOR }
-                />
+    const [loading, setLoading] = useState(false);
+    const { subscribe } = useContext(EventEmitter);
 
-                <CardContent>
-                    { loading ?
-                        <Zoom in = { loading }  >
-                            <div className = { classes.progress }>
-                                <WaitingProgress
-                                    dev_id = { id }
-                                    actions = { deviceActions }
+    const { classes, id, device_state, device_info, doCommand, status } = props;
+    const {  name: full_name, read_only  } = device_info;
+    const name = truncateCaption(full_name, 45);
+    const { power, on } = device_state;
+
+    useEffect( () => subscribe("loading", onLoadingUpdate),
+        // eslint-disable-next-line
+        []);
+
+    return (
+        <>
+            <ComponentHeader
+                dev_id = { id }
+                name = { name }
+                status = { status }
+                doCommand = { doCommand }
+                ordinaryBkgColor = { SWITCH_HEADER_BKG_COLOR }
+                variant = 'switch'
+                on = { on }
+                read_only = { read_only }
+                iconROColor = { SWITCH_RO_ICON_COLOR }
+            />
+
+            <CardContent>
+                { loading ?
+                    <Zoom in = { loading }  >
+                        <div className = { classes.progress }>
+                            <WaitingProgress dev_id = { id }/>
+                        </div>
+                    </Zoom>
+                    :
+                    <Zoom in = { !loading }>
+                        <div>
+                            <div className = { classes.container }>
+                                <Typography variant = 'h5' className = { classes.typography }>
+                                    <strong>
+                                        {power}
+                                        {" v"}
+                                    </strong>
+                                </Typography>
+                            </div>
+                            <Grid container justify = "center">
+                                <CustomizedSwitch
+                                    disabled = { read_only }
+                                    checked = { on }
+                                    colorThumb = { SWITCH_HEADER_BKG_COLOR }
+                                    handleChange = { handleChange }
                                 />
-                            </div>
-                        </Zoom>
-                        :
-                        <Zoom in = { !loading }>
-                            <div>
-                                <div className = { classes.container }>
-                                    <Typography variant = 'h5' className = { classes.typography }>
-                                        <strong>
-                                            {power}
-                                            {" v"}
-                                        </strong>
-                                    </Typography>
-                                </div>
-                                <Grid container justify = "center">
-                                    <CustomizedSwitch
-                                        disabled = { read_only }
-                                        checked = { on }
-                                        colorThumb = { SWITCH_HEADER_BKG_COLOR }
-                                        handleChange = { this.handleChange }
-                                    />
-                                </Grid>
-                            </div>
-                        </Zoom>
-                    }
-                </CardContent>
-            </DeviceFrame>
-        );
-    }
-}
+                            </Grid>
+                        </div>
+                    </Zoom>
+                }
+            </CardContent>
+        </>
+    );
+};
 
 SwitchManager.propTypes = {
     classes: PropTypes.object.isRequired,
+    device_info: PropTypes.object.isRequired ,
     id: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired,
-    device_info: PropTypes.object.isRequired
+    device_state: PropTypes.object.isRequired,
+    doCommand: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SwitchManager);

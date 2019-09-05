@@ -1,15 +1,15 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Icon from "@material-ui/core/Icon";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconExpandLess from "@material-ui/icons/ExpandLess";
 import blue from "@material-ui/core/colors/blue";
 import withStyles from "@material-ui/core/styles/withStyles";
-import groupActions from "../../reflux/group/groupActions";
 import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
 import {IconButton, Paper, Typography} from "@material-ui/core";
 import {AppContext} from "../../context/AppContextProvider";
-
+import {oneWayCommands} from "../../settings/oneWayCommands";
+import {EventEmitter} from "../../context/EventEmitter";
 
 const styles = () => ({
     root: {
@@ -43,11 +43,22 @@ const groupIcon = "devices_other";
 
 const ExpandedGroupHeader = props => {
 
-    const { classes, id, groupObj, on } = props;
-    const { read_only: readOnly, name} = groupObj;
-    const { setGroup } = useContext(AppContext);
-    const iconColor = on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
-    const cursor = readOnly ? "default" : "pointer";
+    const doCommand = (id, command, value) => {
+        const mess = {
+            id:id,
+            cmd:command,
+            value: value,
+            oneWay: oneWayCommands.includes(command)
+        };
+        raiseEvent("command", mess); // Send command to socket
+        // eslint-disable-next-line
+        members.map( (member) => raiseEvent("loading", { id: member, loading: true })); // Update loading status to group members
+    };
+
+    const onMessage = (mess) => {
+        if ( mess.id !== id ) return;
+        setOn(mess.state.on);
+    };
 
     const  minimizeGroup = () => {
         setGroup(null);
@@ -55,9 +66,25 @@ const ExpandedGroupHeader = props => {
 
     const handleGroupHeaderClick = () => {
         if ( ! readOnly ) {
-            groupActions.toggle(id);
+            doCommand(id, "toggle", "");
         }
     };
+
+    const { classes, id, groupObj, on: groupOn, members } = props;
+    const { read_only: readOnly, name } = groupObj;
+    const [on, setOn] = useState(groupOn);
+
+    const { setGroup } = useContext(AppContext);
+    const { raiseEvent, subscribe } = useContext(EventEmitter);
+
+    const iconColor = on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
+    const cursor = readOnly ? "default" : "pointer";
+
+    useEffect( () => {
+        subscribe("message", onMessage );
+    },
+    // eslint-disable-next-line
+        []);
 
     return (
         <Paper elevation = { 4 } className = { classes.root }>
@@ -98,7 +125,8 @@ ExpandedGroupHeader.propTypes = {
     classes: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
     groupObj: PropTypes.object.isRequired,
-    on: PropTypes.bool.isRequired
+    on: PropTypes.bool.isRequired,
+    members: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(ExpandedGroupHeader);

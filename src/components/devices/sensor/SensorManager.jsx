@@ -1,6 +1,4 @@
 import React from "react";
-import Reflux from "reflux";
-import SensorStoreFactory from "../../../reflux/sensor/SensorStore";
 import PropTypes from "prop-types";
 import truncateCaption from "../../../utils/truncate";
 import TemperatureSensor from "./TemperatureSensor";
@@ -8,61 +6,50 @@ import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
 import { SENSOR_HEADER_BKG_COLOR } from "../../../settings/colors";
 import ComponentHeader from "../../common/component/ComponentHeader";
-import sensorActions from "../../../reflux/sensor/sensorActions";
-import DeviceFrame from "../../common/elements/DeviceFrame";
+import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
 
+const SensorManager = props => {
+    const { id, device_state, status, device_info } = props;
+    const {  name: full_name } = device_info;
+    const name = truncateCaption(full_name, maxSymbolsInNamePerLine );
+    const { sensor_type:type, battery_level, temperature, humidity } = device_state;
 
-class SensorManager extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        const { id, device_info } = props;
-        this.store = SensorStoreFactory(id, device_info);
-    }
-    render () {
-        const { visible, id } = this.props;
-        const {  name: full_name, device_state, status} = this.state;
-        const name = truncateCaption(full_name, 45);
-        const { sensor_type:type, battery_level, temperature, humidity } = device_state;
-
-        return (
-            <DeviceFrame visible = { visible } >
-                <ComponentHeader
-                    dev_id = { id }
-                    name = { name }
-                    status = { status }
-                    actions = { sensorActions }
-                    ordinaryBkgColor = { SENSOR_HEADER_BKG_COLOR }
-                    variant = 'sensor'
-                    sensor_type = { type }
-                />
-                {
-                    type === "temperature" ?
-                        <TemperatureSensor
-                            temperature = { temperature }
-                            humidity = { humidity }
+    return (
+        <>
+            <ComponentHeader
+                dev_id = { id }
+                name = { name }
+                status = { status }
+                ordinaryBkgColor = { SENSOR_HEADER_BKG_COLOR }
+                variant = 'sensor'
+                sensor_type = { type }
+            />
+            {
+                type === "temperature" ?
+                    <TemperatureSensor
+                        temperature = { temperature }
+                        humidity = { humidity }
+                        battery_level = { battery_level }
+                    />
+                    :
+                    type === "button" ?
+                        <ButtonSensor
+                            state = { device_state }
                             battery_level = { battery_level }
                         />
                         :
-                        type === "button" ?
-                            <ButtonSensor
-                                state = { device_state }
-                                battery_level = { battery_level }
-                            />
-                            :
-                            <DefaultSensor
-                                state = { device_state }
-                                battery_level = { battery_level }
-                            />
-                }
-            </DeviceFrame>
-        );
-    }
-}
+                        <DefaultSensor
+                            state = { device_state }
+                            battery_level = { battery_level }
+                        />
+            }
+        </>
+    );
+};
 
 SensorManager.propTypes = {
     id: PropTypes.string.isRequired,
     device_info: PropTypes.object.isRequired,
-    visible: PropTypes.bool.isRequired
 };
 
 export default (SensorManager);

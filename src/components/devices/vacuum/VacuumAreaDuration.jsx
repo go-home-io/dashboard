@@ -1,9 +1,8 @@
-import React from "react";
-import Reflux from "reflux";
+import React, {useContext} from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/Typography";
-import AppStore from "../../../reflux/application/AppStore";
+import {AppContext} from "../../../context/AppContextProvider";
 
 const styles = () => ({
     uom: {
@@ -21,59 +20,53 @@ const styles = () => ({
     }
 });
 
-class VacuumAreaDuration extends Reflux.Component {
-    constructor(props) {
-        super(props);
-        this.store = AppStore;
-    }
-    render () {
-        const { uom } = this.state;
-        const { classes, area, duration } = this.props;
-        const squareUnit = uom === "imperial" ? "ft" : "m";
+const VacuumAreaDuration = props => {
+    const { uom } = useContext(AppContext);
+    const { classes, area, duration } = props;
+    const squareUnit = uom === "imperial" ? "ft" : "m";
 
-        return (
-            <div>
-                { area != null &&
+    return (
+        <div>
+            { area != null &&
+                <Typography
+                    variant = "subtitle1"
+                    className = { classes.area }
+                    color = "textSecondary"
+                >
+                    <strong>
+                        {area}
+                    </strong>
                     <Typography
-                        variant = "subtitle1"
-                        className = { classes.area }
+                        variant = "caption"
                         color = "textSecondary"
+                        className = { classes.uom }
                     >
-                        <strong>
-                            {area}
-                        </strong>
-                        <Typography
-                            variant = "caption"
-                            color = "textSecondary"
-                            className = { classes.uom }
-                        >
-                            {squareUnit}
-                            &sup2;
-                        </Typography>
+                        {squareUnit}
+                        &sup2;
                     </Typography>
-                }
-                { duration != null &&
+                </Typography>
+            }
+            { duration != null &&
+                <Typography
+                    variant = "subtitle1"
+                    color = "textSecondary"
+                    className = { classes.duration }
+                >
+                    <strong>
+                        {duration}
+                    </strong>
                     <Typography
-                        variant = "subtitle1"
+                        variant = "caption"
                         color = "textSecondary"
-                        className = { classes.duration }
+                        className = { classes.uom }
                     >
-                        <strong>
-                            {duration}
-                        </strong>
-                        <Typography
-                            variant = "caption"
-                            color = "textSecondary"
-                            className = { classes.uom }
-                        >
-                            { "min" }
-                        </Typography>
+                        { "min" }
                     </Typography>
-                }
-            </div>
-        );
-    }
-}
+                </Typography>
+            }
+        </div>
+    );
+};
 
 VacuumAreaDuration.propTypes = {
     classes: PropTypes.object.isRequired,

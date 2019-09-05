@@ -22,6 +22,9 @@ const variantIcon = {
 };
 
 const styles = theme => ({
+    root: {
+        width: 500
+    },
     success: {
         color: green[600],
     },
@@ -67,7 +70,7 @@ const NotificationTableLine = (props) => {
     const intervalAgo = timeAgo(now - date);
 
     return (
-        <div>
+        <div className = { classes.root }>
             <Grid container alignItems = "flex-start">
 
                 <Grid item xs = { 2 } sm = { 1 } className = { classes.time }>

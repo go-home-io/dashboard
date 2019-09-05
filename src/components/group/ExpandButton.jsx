@@ -25,32 +25,28 @@ const styles = () => ({
 });
 
 const ExpandButton = props => {
-    const { classes, expandGroup, visible } = props;
+    const { classes, expandGroup } = props;
     return (
-        visible ?
-            <div>
-                <Tooltip
-                    title = "Expand the group window"
-                    placement = "bottom-start"
+        <div>
+            <Tooltip
+                title = "Expand the group window"
+                placement = "bottom-start"
+            >
+                <div
+                    color = "primary"
+                    className = { classes.iconButton }
+                    onClick = { expandGroup }
                 >
-                    <div
-                        color = "primary"
-                        className = { classes.iconButton }
-                        onClick = { expandGroup }
-                    >
-                        <IconExpandMore/>
-                    </div>
-                </Tooltip>
-            </div>
-            :
-            null
+                    <IconExpandMore/>
+                </div>
+            </Tooltip>
+        </div>
     );
 };
 
 ExpandButton.propTypes = {
     classes: PropTypes.object.isRequired,
     expandGroup: PropTypes.func.isRequired,
-    visible: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(ExpandButton);

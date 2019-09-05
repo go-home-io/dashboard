@@ -1,5 +1,4 @@
 import React from "react";
-import Notification from "../notification/Notification";
 import PropTypes from "prop-types";
 import ResponsiveDrawer from "../navigation/ResposiveDrawer";
 import { withStyles } from "@material-ui/core/styles";
@@ -17,7 +16,6 @@ const Layout = (props) => {
             <ResponsiveDrawer { ...other }>
                 { children }
             </ResponsiveDrawer>
-            <Notification/>
         </div>
     );
 };

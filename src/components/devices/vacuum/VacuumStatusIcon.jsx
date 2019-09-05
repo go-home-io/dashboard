@@ -1,5 +1,4 @@
 import React from "react";
-import Reflux from "reflux";
 import {
     VACUUM_HEADER_ICON_COLOR_CLEANING,
     VACUUM_HEADER_ICON_COLOR_DOCKED,
@@ -44,23 +43,21 @@ const statusMisc = {
     }
 };
 
-class VacuumStatusIcon extends Reflux.Component {
-    render () {
-        const { vac_status, cssClass } = this.props;
-        const IconSelected = statusMisc.icon[vac_status];
-        const tip = statusMisc.tip[vac_status];
-        const color = statusMisc.color[vac_status];
-        return (
-            <Tooltip title = { tip } placement = "top">
-                <IconSelected
-                    className = { cssClass }
-                    style = { {color: color} }
-                />
+const VacuumStatusIcon = props => {
+    const { vac_status, cssClass } = props;
+    const IconSelected = statusMisc.icon[vac_status];
+    const tip = statusMisc.tip[vac_status];
+    const color = statusMisc.color[vac_status];
+    return (
+        <Tooltip title = { tip } placement = "top">
+            <IconSelected
+                className = { cssClass }
+                style = { {color: color} }
+            />
 
-            </Tooltip>
-        );
-    }
-}
+        </Tooltip>
+    );
+};
 
 VacuumStatusIcon.propTypes = {
     vac_status: PropTypes.string.isRequired,

@@ -12,10 +12,11 @@ const style = () => ({
 });
 
 const DeviceFrame = (props) => {
-    const { classes, children, visible } = props;
+    const { classes, children, visible, ...other } = props;
     const display = visible ? "block" : "none";
     return (
         <Card
+            { ...other }
             className = { classes.root }
             style = { { display: display} }
         >

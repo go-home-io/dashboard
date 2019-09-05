@@ -18,6 +18,9 @@ import StartPage from "./components/pages/StartPage";
 import { ThemeProvider } from "@material-ui/styles";
 import { customTheme } from "./settings/customTheme";
 import AppContextProvider from "./context/AppContextProvider";
+import EventEmitterProvider from "./context/EventEmitter";
+import WebSocketComponent from "./websocket/WebSocketComponent";
+import Notification from "./components/notification/Notification";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
@@ -28,7 +31,11 @@ const App = () =>{
         // eslint-disable-next-line
         <ThemeProvider theme = { customTheme } >
             <AppContextProvider>
-                <StartPage/>
+                <EventEmitterProvider>
+                    <WebSocketComponent/>
+                    <Notification/>
+                    <StartPage/>
+                </EventEmitterProvider>
             </AppContextProvider>
         </ThemeProvider>
     );

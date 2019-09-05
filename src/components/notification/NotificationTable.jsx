@@ -1,44 +1,41 @@
 import React from "react";
-import Reflux from "reflux";
-import NotificationStore from "../../reflux/notification/NotificationStore";
+import PropTypes from "prop-types";
 import NotificationTableLine from "./NotificationTableLine";
 
-class  NotificationTable extends Reflux.Component {
-    constructor (props) {
-        super(props);
-        this.store = NotificationStore;
+const  NotificationTable = props => {
+
+    const { show_all, ntfList } = props;
+
+    // Sort notification list descending
+    if (ntfList) {
+        ntfList.sort( (a,b) => { return (b.created - a.created); });
     }
-    render () {
-        const { show_all } = this.props;
-        const { ntfList } = this.state;
 
-        // Sort notification list descending
-        if (ntfList) {
-            ntfList.sort( (a,b) => { return (b.created - a.created); });
-        }
+    return (
+        ntfList &&
+            <React.Fragment>
+                {
+                    ntfList.map( (item)  => {
+                        const { created, origin, message, status, seen } = item;
 
-        return (
-            ntfList ?
-                <div>
-                    {
-                        ntfList.map( (item)  => {
-                            const { created, origin, message, status, seen } = item;
+                        return(
+                            ( show_all || ! seen ) &&
+                                <NotificationTableLine
+                                    key = { message + created }
+                                    created = { created }
+                                    origin = { origin }
+                                    message = { message }
+                                    status = { status }
+                                />
+                        );
+                    })
+                }
+            </React.Fragment>
+    );
+};
 
-                            return(
-                                show_all || ! seen ?
-                                    <NotificationTableLine
-                                        key = { message + created }
-                                        created = { created }
-                                        origin = { origin }
-                                        message = { message }
-                                        status = { status }
-                                    /> : null
-                            );
-                        })
-                    }
-                </div> : null
-        );
-    }
-}
-
+NotificationTable.propTypes = {
+    show_all: PropTypes.bool.isRequired,
+    ntfList: PropTypes.array.isRequired
+};
 export default NotificationTable;

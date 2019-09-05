@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import Paper from "@material-ui/core/Paper/Paper";
@@ -10,6 +10,7 @@ import SensorHeaderIcon from "../../devices/sensor/SensorHeaderIcon";
 import VacuumStatusIcon from "../../devices/vacuum/VacuumStatusIcon";
 import SyncDisabled from "@material-ui/icons/SyncDisabled";
 import DeviceName from "../elements/DeviceName";
+import {EventEmitter} from "../../../context/EventEmitter";
 
 const styles = theme => ({
     paper: {
@@ -44,15 +45,23 @@ const styles = theme => ({
     }
 });
 
-class ComponentHeader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.timer = null;
-        this.handleClick = this.handleClick.bind(this);
-        this.setOrdinaryStatus = this.setOrdinaryStatus.bind(this);
+const doVacuumCommand = (dev_id, doCommand, vac_status) => {
+    let cmd = "";
+    switch (vac_status) {
+    case "cleaning":
+        cmd = "pause";
+        break;
+    case "paused":
+        cmd = "on";
+        break;
+    default:
     }
-    getHeaderBackgroundColor(status) {
-        const { ordinaryBkgColor } = this.props;
+    if ( cmd ) doCommand(dev_id, cmd, "");
+};
+
+const ComponentHeader = (props) => {
+    const getHeaderBackgroundColor = (status) => {
+        const { ordinaryBkgColor } = props;
         let bgColor = null;
 
         if ((status === "success")) {
@@ -61,101 +70,114 @@ class ComponentHeader extends React.Component {
             bgColor = ERROR_BKG_COLOR;
         }
         if (bgColor) {
-            clearInterval(this.timer);
-            this.timer = setInterval(this.setOrdinaryStatus, HEADER_HIGHLIGHT_DURATION);
+            clearInterval(timer);
+            timer = setInterval(setOrdinaryStatus, HEADER_HIGHLIGHT_DURATION);
             return bgColor;
         } else {
             return ordinaryBkgColor;
         }
-    }
-    handleClick () {
-        const { read_only, variant, actions, dev_id } = this.props;
-        if ( ! read_only && variant !== "sensor" ) {
-            actions.toggle(dev_id);
-        }
-    }
-    setOrdinaryStatus() {
-        const { dev_id, actions } = this.props;
-        actions.status(dev_id, "ordinary");
-        clearInterval(this.timer);
-        this.timer = null;
-    }
+    };
 
-    render () {
-        const { classes, status, read_only, variant, name,
-            sensor_type, on,  iconROColor, vac_status} = this.props;
+    const handleClick = () => {
+        if ( read_only || variant === "sensor") return;
+        const command = variant === "switch" ? ( on ? "off" : "on" ) : "toggle";
+        if  ( variant === "vacuum" ) doVacuumCommand(dev_id, doCommand, vac_status);
+        else  doCommand(dev_id, command, "");
+    };
 
-        const backgroundColor = this.getHeaderBackgroundColor(status);
-        const cursor = (variant === "sensor") || read_only ? "default" : "pointer";
+    const setOrdinaryStatus = () => {
+        setStatus("ordinary");
+        clearInterval(timer);
+        timer = null;
+    };
 
-        return (
-            <Paper className = { classes.paper } elevation = { 0 } style = { {backgroundColor:backgroundColor} }>
-                <div className = { classes.root } >
-                    { variant === "light" || variant === "minGroup"  || variant === "switch" ?
-                        <div>
-                            <IconHeader
-                                variant = { variant }
-                                component_on = { on }
-                                cssClass = { classes.icon }
-                            />
-                            { read_only ?
-                                <Tooltip
-                                    title = 'Read only device'
-                                    placement = "top"
-                                >
-                                    <SyncDisabled
-                                        className = { classes.ro_icon }
-                                        style = { {color: iconROColor} }
-                                    />
-                                </Tooltip>
-                                :
-                                null
-                            }
-                        </div>
-                        :
-                        variant === "sensor" ?
-                            <SensorHeaderIcon
-                                sensor_type = { sensor_type }
-                                cssClass = { classes.icon }
-                            />
+    const onStatusUpdate = data => {
+        if ( data.id !== dev_id ) return;
+        setStatus(data.status);
+    };
+
+    // -------------------------------------------------------------
+
+    const { classes, dev_id, read_only, variant, name, doCommand,
+        sensor_type, on,  iconROColor, vac_status} = props;
+    const [status, setStatus] = useState("ordinary");
+    const { subscribe } = useContext(EventEmitter);
+
+    let timer = null;
+    const backgroundColor = getHeaderBackgroundColor(status);
+    const cursor = (variant === "sensor") || read_only ? "default" : "pointer";
+    useEffect( () => {
+        subscribe("status", onStatusUpdate);
+    },
+    // eslint-disable-next-line
+    []);
+
+    return (
+        <Paper className = { classes.paper } elevation = { 0 } style = { {backgroundColor:backgroundColor} }>
+            <div className = { classes.root } >
+                { variant === "light" || variant === "minGroup"  || variant === "switch" ?
+                    <div>
+                        <IconHeader
+                            variant = { variant }
+                            component_on = { on }
+                            cssClass = { classes.icon }
+                        />
+                        { read_only ?
+                            <Tooltip
+                                title = 'Read only device'
+                                placement = "top"
+                            >
+                                <SyncDisabled
+                                    className = { classes.ro_icon }
+                                    style = { {color: iconROColor} }
+                                />
+                            </Tooltip>
                             :
-                            variant === "vacuum" ?
-                                <div>
-                                    <VacuumStatusIcon
-                                        vac_status = { vac_status }
-                                        cssClass = { classes.icon }
-                                    />
-                                </div>
-                                :
-                                null
-                    }
-
-                    <div
-                        className = { classes.name }
-                        onClick = { this.handleClick }
-                        style = { {cursor:cursor} }
-                    >
-                        <DeviceName name = { name }/>
+                            null
+                        }
                     </div>
+                    :
+                    variant === "sensor" ?
+                        <SensorHeaderIcon
+                            sensor_type = { sensor_type }
+                            cssClass = { classes.icon }
+                        />
+                        :
+                        variant === "vacuum" ?
+                            <div>
+                                <VacuumStatusIcon
+                                    vac_status = { vac_status }
+                                    cssClass = { classes.icon }
+                                />
+                            </div>
+                            :
+                            null
+                }
+
+                <div
+                    className = { classes.name }
+                    onClick = { handleClick }
+                    style = { {cursor:cursor} }
+                >
+                    <DeviceName name = { name }/>
                 </div>
-            </Paper>
-        );
-    }
-}
+            </div>
+        </Paper>
+    );
+};
 
 ComponentHeader.propTypes = {
     classes: PropTypes.object.isRequired,
     ordinaryBkgColor: PropTypes.string.isRequired,
     read_only: PropTypes.bool,
     variant: PropTypes.string,
-    actions: PropTypes.object.isRequired,
     dev_id: PropTypes.string.isRequired,
     iconROColor: PropTypes.string,
     name: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
     on: PropTypes.bool,
     vac_status: PropTypes.string,
-    sensor_type: PropTypes.string
+    sensor_type: PropTypes.string,
+    doCommand: PropTypes.func
 };
 
 export default withStyles(styles)(ComponentHeader);
