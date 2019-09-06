@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import ComponentHeader from "../../common/component/ComponentHeader";
+import ComponentHeader from "../header/ComponentHeader";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,7 +10,7 @@ import { VACUUM_HEADER_BKG_COLOR } from "../../../settings/colors";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
 import Battery from "../../common/elements/Battery";
-import ComponentUpperInfo from "../../common/component/ComponentUpperInfo";
+import ComponentUpperInfo from "../../common/elements/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
 import {EventEmitter} from "../../../context/EventEmitter";

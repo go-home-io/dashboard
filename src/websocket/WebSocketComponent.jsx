@@ -12,6 +12,7 @@ let attempts = 0;
 
 let connectingState = false;
 let pongReceived = false;
+let error = false;
 
 const createSocket =(onMessage, onClose, onError, onOpen) => {
     const socket = new WebSocket(SOCKET_URL);
@@ -25,15 +26,30 @@ const createSocket =(onMessage, onClose, onError, onOpen) => {
 
 const WebSocketComponent = () => {
 
+    // ------------------- Fire message event ------------------------------
+
+    const notificationSend = (mess, status) => {
+        const state = {
+            created: Date.now(),
+            message: mess,
+            origin: "socket",
+            status: status,
+        };
+        const data = { id: "notification", state: state };
+        raiseEvent("message", data);
+    };
+
     // ------------------- Socket callbacks --------------------------------
 
     const onOpen = () => {
+        if ( error ) notificationSend("Сonnection restored", "success");
         connectingState = false;
         pongReceived = false;
+        error = false;
         if (! timerPING_INTERVAL) {
             timerPING_INTERVAL = setInterval(ping, PING_INTERVAL);
         }
-        ping();
+        // ping();
     };
 
     const onMessage = (evt) => {
@@ -54,6 +70,9 @@ const WebSocketComponent = () => {
 
     const onError = (evt) => {
         console.log("websocket error:", evt);
+        if ( ! error ) notificationSend("Connection lost", "error");
+        connectingState = true;
+        error = true;
         socket.close();
     };
 
@@ -75,8 +94,13 @@ const WebSocketComponent = () => {
     const ping = () => {
         if (!connectingState) {
             pongReceived = false;
-            socket.send("ping");
-            timerCONNECTION_TIMEOUT = setTimeout(reopenSocket, CONNECTION_TIMEOUT);
+            try {
+                socket.send("ping");
+                timerCONNECTION_TIMEOUT = setTimeout(reopenSocket, CONNECTION_TIMEOUT);
+            }
+            catch (err) {
+                socket.close();
+            }
         }
     };
 

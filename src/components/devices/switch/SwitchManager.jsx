@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import truncateCaption from "../../../utils/truncate";
 import { SWITCH_HEADER_BKG_COLOR, SWITCH_RO_ICON_COLOR } from "../../../settings/colors";
-import ComponentHeader from "../../common/component/ComponentHeader";
+import ComponentHeader from "../header/ComponentHeader";
 // import deviceActions from "../../../reflux/devices/deviceActions";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import Zoom from "@material-ui/core/Zoom/Zoom";

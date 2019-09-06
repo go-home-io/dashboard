@@ -13,13 +13,34 @@ class WaitingProgress extends React.Component {
     componentDidMount() {
         this.setState({ completed: 0 });
         this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS);
+        const { subscribe } = this.context;
+
+        subscribe("rejected", this.onReject);
+        subscribe("reset", this.onReset);
+        subscribe("message", this.onMessage);
         // alert("On mount: "+this.props.dev_id);
     }
     componentWillUnmount () {
         this.setState({ completed: 0 });
         clearInterval(this.timer);
         this.timer = null;
+
+        const { unsubscribe } = this.context;
+        unsubscribe("rejected", this.onReject);
+        unsubscribe("reset", this.onReset);
+        unsubscribe("message", this.onMessage);
     }
+
+    createNotificationBody = (dev_id, mess, status) => {
+        const state = {
+            created: Date.now(),
+            message: mess,
+            origin: dev_id,
+            status: status,
+        };
+        return  { id: "notification", state: state };
+    };
+
 
     // Listeners
     onMessage = (mess) => {
@@ -29,7 +50,7 @@ class WaitingProgress extends React.Component {
 
     onReject = (mess) => {
         const { dev_id } = this.props;
-        if ( mess.id === dev_id ) this.finish("rejected");
+        if ( mess === dev_id ) this.finish("rejected");
     };
 
     onReset = (mess) => {
@@ -42,23 +63,38 @@ class WaitingProgress extends React.Component {
     finish = (status) => {
         const { raiseEvent } = this.context;
         const { dev_id } = this.props;
-
+        let message = "";
+        let messStatus = "";
 
         clearInterval(this.timer);
         this.timer = null;
+
         if ( status === "success")  {
             raiseEvent("status", {id: dev_id, status: "success"});
+        } else {
+            setTimeout( () => {
+                raiseEvent("status", {id: dev_id, status: "error"});
+                switch (status) {
+                case "rejected":
+                    message = "Socket reject the command due to connection problems";
+                    messStatus = "error";
+                    break;
+                case "timeout":
+                    message = "Server timeout, command may not be executed";
+                    messStatus = "info";
+                    break;
+                default:
+                }
+                raiseEvent("message", this.createNotificationBody(dev_id, message, messStatus));
+            }, 365);
         }
+
         setTimeout(()=>{
             raiseEvent("loading", {id: dev_id, loading: false});
-            if ( status !== "success")  {
-                raiseEvent("status", {id: dev_id, status: "error"});
-                raiseEvent("ws_error", {id: dev_id, status: status});
-            }
-        }, 400);
-        // this.setState({completed: 0});
-    };
+        }, 385);
 
+
+    };
 
     restart = () => {
         this.setState({completed:0});
@@ -76,20 +112,13 @@ class WaitingProgress extends React.Component {
     };
 
     render() {
-        const { subscribe } = this.context;
         const { completed } = this.state;
-
-        subscribe("rejected", this.onReject);
-        subscribe("reset", this.onReset);
-        subscribe("message", this.onMessage);
 
         return (
             <LinearProgress variant = "determinate" value = { completed } />
         );
     }
 }
-
-// WaitingProgress.contextType = EventEmitter;
 
 WaitingProgress.propTypes = {
     dev_id: PropTypes.string.isRequired,

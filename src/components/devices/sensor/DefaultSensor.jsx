@@ -5,7 +5,7 @@ import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import Grid from "@material-ui/core/Grid/Grid";
 import ButtonIcons from "./ButtonIcons";
 import {sensorContentIcon, sensorIconColor, sensorTip} from "./sensorMisc";
-import ComponentUpperInfo from "../../common/component/ComponentUpperInfo";
+import ComponentUpperInfo from "../../common/elements/ComponentUpperInfo";
 import Temperature from "./Temperature";
 import Humidity from "./Humidity";
 import Battery from "../../common/elements/Battery";

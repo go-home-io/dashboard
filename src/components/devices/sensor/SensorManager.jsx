@@ -5,7 +5,7 @@ import TemperatureSensor from "./TemperatureSensor";
 import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
 import { SENSOR_HEADER_BKG_COLOR } from "../../../settings/colors";
-import ComponentHeader from "../../common/component/ComponentHeader";
+import ComponentHeader from "../header/ComponentHeader";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
 
 const SensorManager = props => {

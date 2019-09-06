@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from "react";
-// import Button from '@material-ui/core/Button';
 import { SnackbarProvider, useSnackbar } from "notistack";
 import storage from "../../services/storage";
 import {EventEmitter} from "../../context/EventEmitter";
 import {AppContext} from "../../context/AppContextProvider";
+
 
 function NotificationListener() {
     const { enqueueSnackbar } = useSnackbar();
@@ -39,8 +39,6 @@ function NotificationListener() {
             showNotification(message, state.status);
         }
     };
-
-    // const { ntfList, setNtfList } = useContext(NotificationContext);
 
     const { subscribe } = useContext(EventEmitter);
     useEffect( () => subscribe("message", onMessage),

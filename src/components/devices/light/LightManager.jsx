@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import ComponentHeader from "../../common/component/ComponentHeader";
+import ComponentHeader from "../header/ComponentHeader";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CardContent from "@material-ui/core/CardContent";

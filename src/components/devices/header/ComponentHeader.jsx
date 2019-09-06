@@ -5,11 +5,11 @@ import Paper from "@material-ui/core/Paper/Paper";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { HEADER_HIGHLIGHT_DURATION } from "../../../settings/deviceDelays";
 import { SUCCESS_BKG_COLOR, ERROR_BKG_COLOR } from "../../../settings/colors";
-import IconHeader from "../elements/IconHeader";
-import SensorHeaderIcon from "../../devices/sensor/SensorHeaderIcon";
-import VacuumStatusIcon from "../../devices/vacuum/VacuumStatusIcon";
+import IconHeader from "../../common/elements/IconHeader";
+import SensorHeaderIcon from "../sensor/SensorHeaderIcon";
+import VacuumStatusIcon from "../vacuum/VacuumStatusIcon";
 import SyncDisabled from "@material-ui/icons/SyncDisabled";
-import DeviceName from "../elements/DeviceName";
+import DeviceName from "../../common/elements/DeviceName";
 import {EventEmitter} from "../../../context/EventEmitter";
 
 const styles = theme => ({

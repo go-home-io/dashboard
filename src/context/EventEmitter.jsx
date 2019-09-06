@@ -44,6 +44,7 @@ import React, {useState} from "react";
 
 export const EventEmitter = React.createContext({
     subscribe: () => {},
+    unsubscribe: () => {},
     raiseEvent: () => {}
 });
 
@@ -68,8 +69,22 @@ const EventEmitterProvider = (props) => {
         setEvents(eventsDict);
     };
 
+    const unsubscribe = (event, callback) => {
+        if (! events) return;
+
+        let newEvents = events;
+        const callbacks = events[event];
+        let newCallbacks = [];
+        callbacks.forEach(item => {
+            if (item !== callback ) newCallbacks.push(item);
+        });
+        newEvents[event] = newCallbacks;
+        setEvents(newEvents);
+    };
+
     const eventEmitter = {
         subscribe: (event, callback) => subscribe(event, callback),
+        unsubscribe: (event, callback) => unsubscribe(event, callback),
         raiseEvent: (event, data) => raiseEvent(event, data)
     };
 

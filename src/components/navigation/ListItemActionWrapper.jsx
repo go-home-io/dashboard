@@ -38,6 +38,4 @@ ListItemActionWrapper.propTypes = {
     icon: PropTypes.string.isRequired,
 };
 
-ListItemActionWrapper.contextType = AppContext;
-
 export default ListItemActionWrapper;

@@ -4,7 +4,7 @@ import  PropTypes from "prop-types";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 // import groupActions from "../../reflux/group/groupActions";
 import { MIN_GROUP_HEADER_BKG_COLOR, LIGHT_RO_ICON_COLOR } from "../../settings/colors";
-import ComponentHeader from "../common/component/ComponentHeader";
+import ComponentHeader from "../devices/header/ComponentHeader";
 import WaitingProgress from "../common/elements/WaitingProgress";
 import ExpandButton from "./ExpandButton";
 import Zoom from "@material-ui/core/Zoom/Zoom";
