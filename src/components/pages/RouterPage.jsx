@@ -6,6 +6,7 @@ import {customTheme} from "../../settings/customTheme";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import storage from "../../services/storage";
 import {AppContext} from "../../context/AppContextProvider";
+import LogsPage from "../logs/LogsPage";
 
 const RouterPage = props => {
     const { generalState } = props;
@@ -40,6 +41,7 @@ const RouterPage = props => {
             </div>
 
             { page === "status" && <StatusStartPage/> }
+            { page === "logs" && <LogsPage/> }
 
         </ThemeProvider>
     );

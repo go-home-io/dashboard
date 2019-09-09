@@ -1,5 +1,5 @@
 import React from "react";
-import HTTP from "../../services/httpservices";
+import fetchHTTP from "../../services/httpservices";
 import { STATUS_URL, WORKER_URL} from "../../settings/urls";
 import ErrorPage from "./ErrorPage";
 import StatusPage from "./StatusPage";
@@ -21,7 +21,7 @@ class StatusStartPage extends React.Component {
     }
     getStatusAndWorkers() {
         // Get Workers
-        HTTP.get(WORKER_URL)
+        fetchHTTP.get(WORKER_URL)
             .then( response => {
                 if ( typeof(response) === "number" ) {
                     this.setState({
@@ -37,7 +37,7 @@ class StatusStartPage extends React.Component {
                 }
             });
         // Get Status
-        HTTP.get(STATUS_URL)
+        fetchHTTP.get(STATUS_URL)
             .then( response => {
                 if ( typeof(response) === "number" ) {
                     this.setState({

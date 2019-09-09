@@ -7,6 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import DevicesIcon from "@material-ui/icons/Devices";
+import CreateIcon from "@material-ui/icons/Create";
 import NavBarDropdown from "./NavBarDropdown";
 import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
 import Typography from "@material-ui/core/Typography/Typography";
@@ -14,8 +15,8 @@ import Divider from "@material-ui/core/Divider/Divider";
 import {blue} from "@material-ui/core/colors";
 import storage from "../../services/storage";
 import {AppContext} from "../../context/AppContextProvider";
-
-const GREY_COLOR = "rgba(0, 0, 0, 0.54)";
+import Filters from "../logs/Filters";
+import {GREY_COLOR} from "../../settings/colors";
 
 const styles = theme => ({
     root: {
@@ -93,7 +94,7 @@ const NavBar = props => {
                     items = { items }
                 />
                 }
-                {page === "status" &&
+                {page !== "devices" &&
                     <ListItem
                         button
                         onClick = { () => closeAfterClick("devices") }
@@ -104,7 +105,7 @@ const NavBar = props => {
                         <ListItemText primary = "Devices"/>
                     </ListItem>
                 }
-                {page === "devices" &&
+                {page !== "status" &&
                     <ListItem
                         button
                         onClick = { () => closeAfterClick("status") }
@@ -115,14 +116,38 @@ const NavBar = props => {
                         <ListItemText primary = "Status"/>
                     </ListItem>
                 }
+                {page !== "logs" &&
+                <ListItem
+                    button
+                    onClick = { () => closeAfterClick("logs") }
+                >
+                    <ListItemIcon>
+                        <CreateIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary = "Logs"/>
+                </ListItem>
+                }
+                {page === "logs" &&
+                    <div>
+                        <Divider/>
+                        <Filters
+                            classExpand = { classes.expand }
+                            icon = { icon }
+                            handleClick = { handleClick }
+                            open = { open }
+                            // name = { name }
+                            // items = { items }
+                        />
+                    </div>
+                }
             </List>
         </div>
     );
 };
 
 NavBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-    dropdown: PropTypes.object.isRequired,
+    classes: PropTypes.any.isRequired,
+    dropdown: PropTypes.object,
 };
 
 export default withStyles(styles)(NavBar);

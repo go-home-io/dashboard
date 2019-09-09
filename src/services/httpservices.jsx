@@ -1,4 +1,3 @@
-import {STATE_URL} from "../settings/urls";
 import Cookie from "js-cookie";
 import {COOKIE_NAME} from "../settings/cookie";
 
@@ -24,15 +23,16 @@ const service = {
             });
     },
     post:(url, data) => {
-        return fetch(STATE_URL + url, {
+        return fetch(url, {
             headers: {
+                "Authorization": Cookie.get(COOKIE_NAME),
                 "Accept": "text/plain",
                 "Content-Type": "application/json"
             },
             method: "post",
             body: JSON.stringify(data)
         }).then( (response) => {
-            return response;
+            return response.json();
         });
     }
 };

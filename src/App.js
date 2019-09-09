@@ -21,6 +21,7 @@ import AppContextProvider from "./context/AppContextProvider";
 import EventEmitterProvider from "./context/EventEmitter";
 import WebSocketComponent from "./websocket/WebSocketComponent";
 import Notification from "./components/notification/Notification";
+import LogsContextProvider from "./context/LogsContext";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
@@ -34,7 +35,9 @@ const App = () =>{
                 <EventEmitterProvider>
                     <WebSocketComponent/>
                     <Notification/>
-                    <StartPage/>
+                    <LogsContextProvider>
+                        <StartPage/>
+                    </LogsContextProvider>
                 </EventEmitterProvider>
             </AppContextProvider>
         </ThemeProvider>

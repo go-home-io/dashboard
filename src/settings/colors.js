@@ -2,6 +2,8 @@ import green from "@material-ui/core/colors/green";
 import amber from "@material-ui/core/colors/amber";
 import red from "@material-ui/core/colors/red";
 
+export const GREY_COLOR = "rgba(0, 0, 0, 0.54)";
+
 /*----------------------------------------
     Component Header background colors
 ------------------------------------------*/

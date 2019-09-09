@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography/Typography";
 import classNames from "classnames";
 import {AppContext} from "../../context/AppContextProvider";
 
-const drawerWidth = 220;
+const drawerWidth = 250;
 
 const styles = theme => ({
     root: {

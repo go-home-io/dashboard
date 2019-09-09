@@ -2,8 +2,8 @@ import React from "react";
 import MUIDataTable from "mui-datatables";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { createMuiTheme } from "@material-ui/core/styles";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+
 
 const styles = () => ({
     root: {
@@ -109,14 +109,14 @@ class  StatusManager extends React.Component {
 
         return (
             <div className = { classes.root } >
-                <ThemeProvider theme = { getMuiTheme() }>
+                <MuiThemeProvider theme = { getMuiTheme() }>
                     <MUIDataTable
                         title = { "Known Workers" }
                         data = { workerData }
                         columns = { workerColumns }
                         options = { workerOptions }
                     />
-                </ThemeProvider>
+                </MuiThemeProvider>
                 <br/>
                 <MUIDataTable
                     title = { "Config Entities Status" }
