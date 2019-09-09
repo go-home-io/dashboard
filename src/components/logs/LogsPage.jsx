@@ -9,7 +9,7 @@ import {LogsContext} from "../../context/LogsContext";
 
 
 const LogsPage = (props) => {
-
+    // ------------------------------------------------------
     const [logs, setLogs] = useState([]);
     const { filter } = useContext(LogsContext);
     const { raiseEvent } = useContext(EventEmitter);
