@@ -22,7 +22,8 @@ const LogsContextProvider = (props) => {
 
     const logsState = {
         filter: filter,
-        setFilter: (item, value) => setFilter({...filter, [item]: value})
+        setFilter: (item, value) => setFilter({...filter, [item]: value}),
+        // getFilters: () => filter
     };
     console.log("Log Context", filter);
     return (

@@ -1,21 +1,18 @@
 import React, {useContext, useEffect, useState} from "react";
-// import PropTypes from "prop-types";
 import Layout from "../pages/Layout";
 import fetchHTTP from "../../services/httpservices";
 import {LOGS_URL} from "../../settings/urls";
 import {EventEmitter} from "../../context/EventEmitter";
 import LogsManager from "./LogsManager";
-import {LogsContext} from "../../context/LogsContext";
-
 
 const LogsPage = (props) => {
-    // ------------------------------------------------------
     const [logs, setLogs] = useState([]);
-    const { filter } = useContext(LogsContext);
-    const { raiseEvent } = useContext(EventEmitter);
+    const { raiseEvent, subscribe, unsubscribe } = useContext(EventEmitter);
 
-    const getLogs = () => {
-        fetchHTTP.post(LOGS_URL, filter)
+    // ---------------------Data Loader ---------------------------------
+
+    const getLogs = (filters) => {
+        fetchHTTP.post(LOGS_URL, filters)
             .then((data) => {
                 if ( data ) setLogs(data);
                 else raiseEvent("notification", {
@@ -27,20 +24,23 @@ const LogsPage = (props) => {
             });
     };
 
-    const apply = () => getLogs();
+    const onApply = (filters) => getLogs(filters);
 
-    useEffect( () => getLogs(),
-        // eslint-disable-next-line
+    useEffect( () => {
+        getLogs();
+        subscribe("apply", onApply);
+
+        return () => unsubscribe("apply", onApply);
+    },
+    // eslint-disable-next-line
         [] );
+
 
     return (
         <Layout { ...props }>
             { logs &&
-            <LogsManager
-                logs = { logs }
-                apply = { apply }
-                appliedFilters = { filter }
-            /> }
+                <LogsManager logs = { logs }/>
+            }
         </Layout>
     );
 };

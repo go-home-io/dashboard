@@ -6,7 +6,6 @@ import LogStateView from "./LogStateView";
 import { formatTimeDate } from "../../utils/formatTimeDate";
 import {LogsContext} from "../../context/LogsContext";
 import FilterInput from "./FilterInput";
-import Button from "@material-ui/core/Button";
 
 const getMuiTheme = () => createMuiTheme({
     overrides: {
@@ -38,7 +37,7 @@ const logIncludesProperties = device => {
 // -------------------------------------------------------------------------------
 
 const LogsManager = props => {
-    const { logs, apply } = props;
+    const { logs } = props;
     const { filter, setFilter } = useContext(LogsContext);
 
     const [open, setOpen] = useState(false);
@@ -68,9 +67,6 @@ const LogsManager = props => {
             setTableFieldValue(colData);
         }
     };
-
-
-
 
     // ------------------  Mui-datatable -------------------------------
 
@@ -111,14 +107,6 @@ const LogsManager = props => {
     return (
         logs &&
             <div>
-                <Button
-                    variant = "outlined"
-                    onClick = { () => apply() }
-                    color = "primary"
-                    style = { {marginBottom: 10} }
-                >
-                    apply
-                </Button>
                 <MuiThemeProvider theme = { getMuiTheme() }>
                     <MUIDataTable
                         title = { "Logs from " + fromUTC + " to " +  toUTC }
@@ -146,8 +134,6 @@ const LogsManager = props => {
 
 LogsManager.propTypes = {
     logs: PropTypes.array.isRequired,
-    apply: PropTypes.func.isRequired,
-    appliedFilters: PropTypes.object.isRequired
 };
 
 export default LogsManager;
