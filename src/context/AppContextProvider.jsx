@@ -43,6 +43,7 @@ const AppContextProvider = props => {
     const [statusLoaded, setStatusLoaded] = useState(false);
     const [notiList, setNotiList] = useState(storage.get("notificationsList"));
     const [unseenNotiCount, setUnseenNotiCount] = useState(initialUnseenCount());
+    const [logsAvailable, setLogsAvailable] = useState(false);
 
     const appContext = {
         active_location: activeLocation,
@@ -50,6 +51,7 @@ const AppContextProvider = props => {
         active_group: activeGroup,
         active_group_on: activeGroupOn,
         uom: uom,
+        logs_available: logsAvailable,
         openMenu: openMenu,
         statusLoaded: statusLoaded,
         notiList: notiList,
@@ -59,6 +61,7 @@ const AppContextProvider = props => {
         setGroup: group => setActiveGroup(group),
         setGroupOn: status => setActiveGroupOn(status),
         setUOM: units => setUom(units),
+        setLogsAvailable: val => setLogsAvailable(val),
         toggleMenu: () => setOpenMenu(oldValue => ! oldValue),
         setMenuStatus: status => setOpenMenu(status),
         setLoaded: loaded => setStatusLoaded(loaded),

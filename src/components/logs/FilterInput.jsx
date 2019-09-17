@@ -9,6 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import DateTimePicker from "./DateTimePicker";
+import LogLevel from "./LogLevel";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction = "down" ref = { ref } { ...props } />;
@@ -18,16 +19,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const FilterInput = props => {
     const { variant, initialValue, setFilterValue, cancelInput, open, filterKey } = props;
     const [value, setValue] = useState(initialValue);
-    // const [selectedDate, setSelectedDate]
 
-    const handleChange = event => {
-        if ( event.target.value ) setValue(event.target.value);
-        console.log("value:", value);
-    };
+    const handleChange = event => { if ( event.target.value ) setValue(event.target.value); };
 
     useEffect( () => setValue(initialValue),
         // eslint-disable-next-line
-        [filterKey] );
+        [initialValue] );
     
     return (
         <div>
@@ -68,7 +65,11 @@ const FilterInput = props => {
                                 value = { value }
                                 setValue = { (value) => setValue(value) }
                             />
-                            : null
+                            :
+                            <LogLevel
+                                value = { value }
+                                setValue = { (value) => setValue(value) }
+                            />
                     }
                 </DialogContent>
 

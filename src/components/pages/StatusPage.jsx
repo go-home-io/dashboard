@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 import Layout from "./Layout";
 
 const StatusPage = props => {
-    const { access, status, worker} = props;
+    const { access, status, worker, ...other } = props;
 
     return (
-        <Layout>
+        <Layout { ...other }>
             { access ?
                 <StatusManager
                     status = { status }
@@ -16,7 +16,7 @@ const StatusPage = props => {
                 /> :
                 <Typography
                     style = { { marginTop: 100 } }
-                    variant = "display4"
+                    variant = "h3"
                     align = "center"
                 >
                     Access Denied

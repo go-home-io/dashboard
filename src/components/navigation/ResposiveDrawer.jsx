@@ -53,10 +53,8 @@ const styles = theme => ({
 
 const ResponsiveDrawer = props =>  {
 
-    const { classes, children, dropdown, container, ...other } = props;
-    const { toggleMenu, openMenu} = useContext(AppContext);
-    // console.log("Dropdown", dropdown);
-    // console.log("Toggle Menu", toggleMenu, " openMenu ", openMenu);
+    const { classes, children, container, logsAvailable, ...other } = props;
+    const { toggleMenu, openMenu } = useContext(AppContext);
 
     return (
         <div className = { classes.root }>
@@ -97,7 +95,7 @@ const ResponsiveDrawer = props =>  {
                             keepMounted: true, // Better open performance on mobile.
                         } }
                     >
-                        <NavBar dropdown = { dropdown }/>
+                        <NavBar logsAvailable = { logsAvailable } { ...other }/>
                     </Drawer>
                 </Hidden>
                 <Hidden smDown implementation = "css">
@@ -108,7 +106,7 @@ const ResponsiveDrawer = props =>  {
                         variant = "permanent"
                         open
                     >
-                        <NavBar dropdown = { dropdown }/>
+                        <NavBar { ...other }/>
                     </Drawer>
                 </Hidden>
             </nav>

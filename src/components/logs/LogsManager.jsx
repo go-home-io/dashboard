@@ -21,12 +21,12 @@ const getMuiTheme = () => createMuiTheme({
 });
 
 const filterFields = [
-    "ToUTC",
-    "LogLevel",
-    "System",
-    "DeviceID",
-    "Provider",
-    "WorkerID"
+    "to_utc",
+    "log_level",
+    "system",
+    "provider",
+    "device_id",
+    "worker_id"
 ];
 
 const logIncludesProperties = device => {
@@ -37,8 +37,8 @@ const logIncludesProperties = device => {
 // -------------------------------------------------------------------------------
 
 const LogsManager = props => {
-    const { logs } = props;
-    const { filter, setFilter } = useContext(LogsContext);
+    const { logs, appliedFilters } = props;
+    const { setFilter } = useContext(LogsContext);
 
     const [open, setOpen] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -71,8 +71,8 @@ const LogsManager = props => {
     // ------------------  Mui-datatable -------------------------------
 
     const logsColumns = [
-        "Time", "LogLevel", "System", "DeviceID", "Provider",
-        "WorkerID ", "Message", "Has Properties"
+        "Time", "Log Level", "System", "Provider", "Device ID",
+        "Worker ID ", "Message", "Has Properties"
     ];
 
     const logsOptions = {
@@ -92,18 +92,16 @@ const LogsManager = props => {
     logs.map(item => {
         const { timestamp, log_level, system,  provider, device_id, worker, message } = item;
         logsData.push([
-            formatTimeDate(timestamp), log_level, system, device_id,
-            provider, worker, message, logIncludesProperties(item) ? "+" : "-"
+            formatTimeDate(timestamp), log_level, system,
+            provider, device_id, worker, message, logIncludesProperties(item) ? "+" : "-"
         ]);
     });
 
     // ------------------------------------------------------------------------------------------
 
-    const fromUTC = formatTimeDate(filter.FromUTC);
-    const toUTC = formatTimeDate(filter.ToUTC);
+    const fromUTC = appliedFilters ? formatTimeDate(appliedFilters.from_utc) : null;
+    const toUTC = appliedFilters ? formatTimeDate(appliedFilters.to_utc) : null;
 
-    // console.log("Logs Manager, logs: ", logs);
-    // console.log("Logs Manager, filters: ", filter);
     return (
         logs &&
             <div>
@@ -122,7 +120,7 @@ const LogsManager = props => {
                 />
                 <FilterInput
                     open = { dialogOpen }
-                    variant = "text"
+                    variant = { filterKey === "log_level" ? "radio" : "text" }
                     setFilterValue = { (value) => setFilterValue(value) }
                     cancelInput = { () => setDialogOpen(false) }
                     initialValue = { tableFieldValue }
@@ -134,6 +132,7 @@ const LogsManager = props => {
 
 LogsManager.propTypes = {
     logs: PropTypes.array.isRequired,
+    appliedFilters: PropTypes.object.isRequired
 };
 
 export default LogsManager;

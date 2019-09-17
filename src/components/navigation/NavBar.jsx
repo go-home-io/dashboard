@@ -50,7 +50,7 @@ const NavBar = props => {
     const [open, setOpen] = useState(false);
     const { classes, dropdown } = props;
     const { name, icon, items } = dropdown ? dropdown :  [];
-    const { active_page: page, openMenu, setPage, setGroup, toggleMenu } = useContext(AppContext);
+    const { active_page: page, openMenu, setPage, setGroup, toggleMenu, logs_available } = useContext(AppContext);
 
     const handleClick = ()  => {
         setOpen(!open);
@@ -116,7 +116,7 @@ const NavBar = props => {
                         <ListItemText primary = "Status"/>
                     </ListItem>
                 }
-                {page !== "logs" &&
+                {page !== "logs" && logs_available &&
                 <ListItem
                     button
                     onClick = { () => closeAfterClick("logs") }
@@ -135,8 +135,6 @@ const NavBar = props => {
                             icon = { icon }
                             handleClick = { handleClick }
                             open = { open }
-                            // name = { name }
-                            // items = { items }
                         />
                     </div>
                 }

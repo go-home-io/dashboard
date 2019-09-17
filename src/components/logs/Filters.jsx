@@ -23,22 +23,23 @@ const useStyles = makeStyles({
     },
     button: {
         marginTop: 10,
+        marginBottom: 10
     }
 });
 
 const variant = {
-    FromUTC: "time",
-    ToUTC: "time",
-    LogLevel: "select",
-    System: "text",
-    Provider: "text",
-    DeviceID: "text",
-    WorkerID: "text"
+    from_utc: "time",
+    to_utc: "time",
+    log_level: "select",
+    system: "text",
+    provider: "text",
+    device_id: "text",
+    worker_id: "text"
 };
 
 const Filters = () => {
     const classes = useStyles();
-    const { filter, setFilter } = useContext(LogsContext);
+    const { filter, setFilter, reset, previous } = useContext(LogsContext);
     const { raiseEvent } = useContext(EventEmitter);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [filterKey, setFilterKey] = useState("");
@@ -51,7 +52,6 @@ const Filters = () => {
     const setFilterValue = value => {
         setFilter(filterKey, value);
         setDialogOpen(false);
-        // console.log(filter);
     };
 
     return (
@@ -86,15 +86,28 @@ const Filters = () => {
                 );
             })}
             <Divider/>
-            <Grid container justify = "center">
+            <Grid container justify = "space-around">
                 <Button
                     className = { classes.button }
-                    variant = "outlined"
+                    // variant = "outlined"
+                    onClick = { () => reset() }
+                    color = "secondary"
+                >
+                    reset
+                </Button>
+                <Button
+                    className = { classes.button }
+                    onClick = { () => previous() }
+                    color = "default"
+                >
+                    back
+                </Button>
+                <Button
+                    className = { classes.button }
                     onClick = { () => raiseEvent("apply", filter) }
                     color = "primary"
-                    style = { {marginBottom: 10} }
                 >
-                    apply filters
+                    apply
                 </Button>
             </Grid>
 
@@ -107,7 +120,6 @@ const Filters = () => {
                 filterKey = { filterKey }
             />
         </div>
-
     );
 };
 

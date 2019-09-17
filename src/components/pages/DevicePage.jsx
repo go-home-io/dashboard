@@ -15,14 +15,6 @@ const groupMemberDevices = (group_id, groups) => {
 };
 
 const DevicePage = props =>{
-    // constructor(props){
-    //     super(props);
-    //     this.stores = [AppStore, WebSocketStore];
-    // }
-    // componentDidMount () {
-    //     // Set UOM scheme to AppStore
-    //     appActions.setUOM(this.props.generalState.uom);
-    // }
 
     const getActiveGroupObject = (devices, activeGroupId) => (
         devices.find( dev => (dev.id === activeGroupId))
@@ -38,7 +30,7 @@ const DevicePage = props =>{
         return activeGroup.devices.includes(dev_id);
     };
 
-    const { generalState, pageVisible } = props;
+    const { generalState, pageVisible, ...other } = props;
     const { devices, locations, groups } = generalState;
     const { active_location, active_group, active_group_on } = useContext(AppContext);
 
@@ -57,7 +49,7 @@ const DevicePage = props =>{
     };
 
     return (
-        <Layout dropdown = { dropdownInfo }>
+        <Layout dropdown = { dropdownInfo } { ...other }>
             <Collapse in = { Boolean(active_group) }>
                 { active_group &&
                     <ExpandedGroupHeader

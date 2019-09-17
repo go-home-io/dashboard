@@ -33,7 +33,6 @@ class StatusStartPage extends React.Component {
                         worker: response,
                         IO_status: 200,
                     });
-                    // appActions.workerSuccessfullyLoaded();
                 }
             });
         // Get Status
@@ -54,7 +53,8 @@ class StatusStartPage extends React.Component {
             });
     }
     render () {
-        const { loading, IO_status, status, worker} = this.state;
+        const { ...other } = this.props;
+        const { loading, IO_status, status, worker } = this.state;
         const success = IO_status === 200;
         const accessDenied = IO_status === 403;
         storage.set("page", "status");
@@ -67,6 +67,7 @@ class StatusStartPage extends React.Component {
                         status = { status }
                         worker = { worker }
                         access = { ! accessDenied }
+                        { ...other }
                     /> :
                     <ErrorPage
                         loading = { false }
