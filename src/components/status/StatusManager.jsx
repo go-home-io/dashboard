@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import {Slide} from "@material-ui/core";
 
 
 const styles = () => ({
@@ -87,7 +88,6 @@ class  StatusManager extends React.Component {
                 options: {
                     filter: true,
                     filterList: workerSelected ? [workerSelected] : null,
-                    customFilterListRender: v => `Filtered by worker: ${v}`,
                 }
             },
             {
@@ -100,30 +100,40 @@ class  StatusManager extends React.Component {
         ];
 
         const statusOptions = {
-            filterType: "dropdown",
-            selectableRows: "none",
-            rowsPerPageOptions: [10, 20, 100],
+            filter: true,
+            pagination: false,
             viewColumns: false,
             rowHover: false,
+            print: false,
+            download: true,
+            selectableRows: "none",
         };
 
         return (
             <div className = { classes.root } >
-                <MuiThemeProvider theme = { getMuiTheme() }>
-                    <MUIDataTable
-                        title = { "Known Workers" }
-                        data = { workerData }
-                        columns = { workerColumns }
-                        options = { workerOptions }
-                    />
-                </MuiThemeProvider>
+                <Slide direction = "down" in = { true } timeout = { { enter: 1000 } }>
+                    <div>
+                        <MuiThemeProvider theme = { getMuiTheme() }>
+                            <MUIDataTable
+                                title = { "Known Workers" }
+                                data = { workerData }
+                                columns = { workerColumns }
+                                options = { workerOptions }
+                            />
+                        </MuiThemeProvider>
+                    </div>
+                </Slide>
                 <br/>
-                <MUIDataTable
-                    title = { "Config Entities Status" }
-                    data = { statusData }
-                    columns = { statusColumns }
-                    options = { statusOptions }
-                />
+                <Slide direction = "up" in = { true } timeout = { { enter: 1000 } }>
+                    <div>
+                        <MUIDataTable
+                            title = { "Config Entities Status" }
+                            data = { statusData }
+                            columns = { statusColumns }
+                            options = { statusOptions }
+                        />
+                    </div>
+                </Slide>
             </div>
         );
     }

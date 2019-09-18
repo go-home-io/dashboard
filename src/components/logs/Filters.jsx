@@ -27,15 +27,46 @@ const useStyles = makeStyles({
     }
 });
 
-const variant = {
-    from_utc: "time",
-    to_utc: "time",
-    log_level: "select",
-    system: "text",
-    provider: "text",
-    device_id: "text",
-    worker_id: "text"
+const filterNfo = {
+    from_utc: {
+        name: "from Time",
+        variant: "time"
+    },
+    to_utc: {
+        name: "to Time",
+        variant: "time"
+    },
+    log_level: {
+        name: "Log Level",
+        variant: "radio"
+    },
+    system: {
+        name: "System",
+        variant: "text"
+    },
+    provider: {
+        name: "Provider",
+        variant: "text"
+    },
+    device_id: {
+        name: "Device ID",
+        variant: "text"
+    },
+    worker_id: {
+        name: "Worker ID",
+        variant: "text"
+    },
 };
+
+// const variant = {
+//     from_utc: "time",
+//     to_utc: "time",
+//     log_level: "radio",
+//     system: "text",
+//     provider: "text",
+//     device_id: "text",
+//     worker_id: "text"
+// };
 
 const Filters = () => {
     const classes = useStyles();
@@ -43,6 +74,7 @@ const Filters = () => {
     const { raiseEvent } = useContext(EventEmitter);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [filterKey, setFilterKey] = useState("");
+    const variant = filterKey ? filterNfo[filterKey].variant : null;
 
     const openFilterInputDailog = (filterKey) => {
         setFilterKey(filterKey);
@@ -56,6 +88,7 @@ const Filters = () => {
 
     return (
         <div>
+            <Divider/>
             <ListItem>
                 <ListItemIcon>
                     <FilterListIcon/>
@@ -67,6 +100,8 @@ const Filters = () => {
 
             { Object.keys(filter).map( (filterKey, index) => {
                 const value = index < 2 ? formatTimeDate(filter[filterKey]) : filter[filterKey];
+                const name = filterKey ? filterNfo[filterKey].name : null;
+
                 return (
                     <ListItem
                         key = { filterKey }
@@ -75,7 +110,7 @@ const Filters = () => {
                         onClick = { () => openFilterInputDailog(filterKey) }
                     >
                         <Typography variant = "body1" color = "inherit">
-                            { filterKey + ":  "}
+                            { name + ":  "}
                             <small>
                                 {" "}
                                 { value }
@@ -89,7 +124,6 @@ const Filters = () => {
             <Grid container justify = "space-around">
                 <Button
                     className = { classes.button }
-                    // variant = "outlined"
                     onClick = { () => reset() }
                     color = "secondary"
                 >
@@ -113,7 +147,7 @@ const Filters = () => {
 
             <FilterInput
                 open = { dialogOpen }
-                variant = { variant[filterKey] }
+                variant = { variant }
                 setFilterValue = { (value) => setFilterValue(value) }
                 cancelInput = { () => setDialogOpen(false) }
                 initialValue = { filter[filterKey] }

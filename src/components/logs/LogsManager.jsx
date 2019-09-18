@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import PropTypes from "prop-types";
-import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+import {createMuiTheme, Fade, MuiThemeProvider} from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import LogStateView from "./LogStateView";
 import { formatTimeDate } from "../../utils/formatTimeDate";
@@ -105,19 +105,25 @@ const LogsManager = props => {
     return (
         logs &&
             <div>
-                <MuiThemeProvider theme = { getMuiTheme() }>
-                    <MUIDataTable
-                        title = { "Logs from " + fromUTC + " to " +  toUTC }
-                        data = { logsData }
-                        columns = { logsColumns }
-                        options = { logsOptions }
-                    />
-                </MuiThemeProvider>
+                <Fade in = { true } direction = "left" timeout = { {enter: 2000} }>
+                    <div>
+                        <MuiThemeProvider theme = { getMuiTheme() }>
+                            <MUIDataTable
+                                title = { "Logs from " + fromUTC + " to " +  toUTC }
+                                data = { logsData }
+                                columns = { logsColumns }
+                                options = { logsOptions }
+                            />
+                        </MuiThemeProvider>
+                    </div>
+                </Fade>
+
                 <LogStateView
                     open = { open }
                     properties = { properties }
                     handleClose = { () => setOpen(false) }
                 />
+
                 <FilterInput
                     open = { dialogOpen }
                     variant = { filterKey === "log_level" ? "radio" : "text" }

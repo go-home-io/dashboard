@@ -128,15 +128,12 @@ const NavBar = props => {
                 </ListItem>
                 }
                 {page === "logs" &&
-                    <div>
-                        <Divider/>
-                        <Filters
-                            classExpand = { classes.expand }
-                            icon = { icon }
-                            handleClick = { handleClick }
-                            open = { open }
-                        />
-                    </div>
+                <Filters
+                    classExpand = { classes.expand }
+                    icon = { icon }
+                    handleClick = { handleClick }
+                    open = { open }
+                />
                 }
             </List>
         </div>

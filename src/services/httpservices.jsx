@@ -31,9 +31,19 @@ const service = {
             },
             method: "post",
             body: JSON.stringify(data)
-        }).then( (response) => {
-            return response.json();
-        });
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.status;
+                }
+            })
+            .catch(err => {
+                // eslint-disable-next-line
+                console.error("Error during server connection:", err.messageInfo);
+                return 404;
+            });
     }
 };
 

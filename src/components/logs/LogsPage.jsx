@@ -5,47 +5,59 @@ import {LOGS_URL} from "../../settings/urls";
 import {EventEmitter} from "../../context/EventEmitter";
 import LogsManager from "./LogsManager";
 import {LogsContext} from "../../context/LogsContext";
+import ErrorPage from "../pages/ErrorPage";
 
 const LogsPage = (props) => {
     const [logs, setLogs] = useState([]);
     const { raiseEvent, subscribe, unsubscribe } = useContext(EventEmitter);
     const { filter, appliedFilters, setAppliedFilters } = useContext(LogsContext);
-    // const [appliedFilters, setAppliedFilters] = useState({});
+    const [loading, setLoading] = useState(false);
 
     // ---------------------Data Loader ---------------------------------
 
     const getLogs = (filters) => {
         fetchHTTP.post(LOGS_URL, filters)
             .then((data) => {
-                setAppliedFilters(filters);
-                if ( data ) setLogs(data);
-                else raiseEvent("notification", {
-                    created: Date.now(),
-                    message: "Can't load logs, HTML error:" + data.status,
-                    origin: "LOGS_LOADER",
-                    status: "error",
-                });
+                if ( typeof(data) === "number" || ! data) {
+                    raiseEvent("notification", {
+                        created: Date.now(),
+                        message: "Can't load logs, HTML error: " + data,
+                        origin: "LOGS_LOADER",
+                        status: "error",
+                    });
+                } else {
+                    setLogs(data);
+                    setAppliedFilters(filters);
+                    setLoading(false);
+                }
             });
     };
 
-    const onApply = (filters) => getLogs(filters);
+    const onApply = (filters) => {
+        setLoading(true);
+        getLogs(filters);
+    };
 
     useEffect( () => {
-        getLogs(filter);
         subscribe("apply", onApply);
+
+        setLoading(true);
+        getLogs(filter);
 
         return () => unsubscribe("apply", onApply);
     },
     // eslint-disable-next-line
         [] );
 
-
     return (
-        <Layout { ...props }>
-            { logs &&
+        loading ?
+            <ErrorPage loading = { true }/>
+            :
+            <Layout { ...props }>
+                { logs &&
                 <LogsManager logs = { logs } appliedFilters = { appliedFilters }/>
-            }
-        </Layout>
+                }
+            </Layout>
     );
 };
 
