@@ -58,10 +58,12 @@ const RouterPage = props => {
 
             { page === "status" &&
                 <Layout>
-                    <StatusManager
-                        status = { status }
-                        worker = { worker }
-                    />
+                    { isStatusPageAvailable() &&
+                        <StatusManager
+                            status = { status }
+                            worker = { worker }
+                        />
+                    }
                 </Layout>
             }
 
