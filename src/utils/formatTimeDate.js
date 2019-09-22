@@ -1,4 +1,5 @@
 export const formatTimeDate = timestamp => {
+    if (! timestamp ) return "";
     let timeInt = parseInt(timestamp)/1e6;
     let d = new Date(timeInt);
     if ( d.getFullYear() < 2019 ) d = new Date(timeInt*1e6);

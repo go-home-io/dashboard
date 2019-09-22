@@ -1,11 +1,12 @@
 import React, {useContext, useState} from "react";
 import PropTypes from "prop-types";
-import {createMuiTheme, Fade, MuiThemeProvider} from "@material-ui/core";
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import LogStateView from "./LogStateView";
 import { formatTimeDate } from "../../utils/formatTimeDate";
 import {LogsContext} from "../../context/LogsContext";
 import FilterInput from "./FilterInput";
+import Slide from "@material-ui/core/Slide";
 
 const getMuiTheme = () => createMuiTheme({
     overrides: {
@@ -31,7 +32,7 @@ const filterFields = [
 
 const logIncludesProperties = device => {
     const { properties } = device;
-    return Object.keys(properties).length > 0;
+    return properties && Object.keys(properties).length > 0;
 };
 
 // -------------------------------------------------------------------------------
@@ -83,7 +84,8 @@ const LogsManager = props => {
         print: false,
         download: false,
         selectableRows: "none",
-        rowHover: false
+        rowHover: false,
+        rowsPerPageOptions: [10, 20, 100]
     };
 
     // Prepare data for mui-datatable
@@ -105,7 +107,7 @@ const LogsManager = props => {
     return (
         logs &&
             <div>
-                <Fade in = { true } direction = "left" timeout = { {enter: 2000} }>
+                <Slide in = { true } direction = "up" timeout = { {enter: 1500} }>
                     <div>
                         <MuiThemeProvider theme = { getMuiTheme() }>
                             <MUIDataTable
@@ -116,7 +118,7 @@ const LogsManager = props => {
                             />
                         </MuiThemeProvider>
                     </div>
-                </Fade>
+                </Slide>
 
                 <LogStateView
                     open = { open }
@@ -133,6 +135,7 @@ const LogsManager = props => {
                     filterKey = { filterKey }
                 />
             </div>
+
     );
 };
 

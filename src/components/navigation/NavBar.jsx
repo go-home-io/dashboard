@@ -50,7 +50,8 @@ const NavBar = props => {
     const [open, setOpen] = useState(false);
     const { classes, dropdown } = props;
     const { name, icon, items } = dropdown ? dropdown :  [];
-    const { active_page: page, openMenu, setPage, setGroup, toggleMenu, logs_available } = useContext(AppContext);
+    const { active_page: page, openMenu, setPage, setGroup,
+        toggleMenu, logs_available, statusPageAvailable } = useContext(AppContext);
 
     const handleClick = ()  => {
         setOpen(!open);
@@ -105,7 +106,7 @@ const NavBar = props => {
                         <ListItemText primary = "Devices"/>
                     </ListItem>
                 }
-                {page !== "status" &&
+                {page !== "status" && statusPageAvailable &&
                     <ListItem
                         button
                         onClick = { () => closeAfterClick("status") }

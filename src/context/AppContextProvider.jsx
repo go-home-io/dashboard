@@ -44,6 +44,7 @@ const AppContextProvider = props => {
     const [notiList, setNotiList] = useState(storage.get("notificationsList"));
     const [unseenNotiCount, setUnseenNotiCount] = useState(initialUnseenCount());
     const [logsAvailable, setLogsAvailable] = useState(false);
+    const [statusPageAvialable, setStatusPageAvialable] = useState(false);
 
     const appContext = {
         active_location: activeLocation,
@@ -56,6 +57,7 @@ const AppContextProvider = props => {
         statusLoaded: statusLoaded,
         notiList: notiList,
         unseenNotiCount: unseenNotiCount,
+        statusPageAvailable: statusPageAvialable,
         setLocation: location => setActiveLocation(location),
         setPage: page => setActivePage(page),
         setGroup: group => setActiveGroup(group),
@@ -66,7 +68,8 @@ const AppContextProvider = props => {
         setMenuStatus: status => setOpenMenu(status),
         setLoaded: loaded => setStatusLoaded(loaded),
         setUnseenCount: val => setUnseenNotiCount(val),
-        setNotiList: list => setNotiList(list)
+        setNotiList: list => setNotiList(list),
+        setStatusPageAvailable: val => setStatusPageAvialable(val)
     };
 
     return(

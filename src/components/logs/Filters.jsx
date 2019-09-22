@@ -121,11 +121,13 @@ const Filters = () => {
                 );
             })}
             <Divider/>
+            <Divider/>
             <Grid container justify = "space-around">
                 <Button
                     className = { classes.button }
                     onClick = { () => reset() }
                     color = "secondary"
+                    variant = "outlined"
                 >
                     reset
                 </Button>
@@ -133,6 +135,7 @@ const Filters = () => {
                     className = { classes.button }
                     onClick = { () => previous() }
                     color = "default"
+                    variant = "outlined"
                 >
                     back
                 </Button>
@@ -140,6 +143,7 @@ const Filters = () => {
                     className = { classes.button }
                     onClick = { () => raiseEvent("apply", filter) }
                     color = "primary"
+                    variant = "outlined"
                 >
                     apply
                 </Button>

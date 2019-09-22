@@ -28,7 +28,7 @@ function NotificationListener() {
         if ( id === "notification") {
             // Save notification to state context and to storage
             state.seen = false;
-            let newNtfList = storage.get("notificationsList");
+            let newNtfList = storage.get("notificationsList") ? storage.get("notificationsList") : [];
             newNtfList.push(state);
             storage.set("notificationsList", newNtfList);
             setUnseenCount(unseenCount(newNtfList));

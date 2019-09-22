@@ -20,14 +20,14 @@ class StartPage extends Component {
     };
 
     componentDidMount() {
-        this.getComponentsStateByHTTP();
+        this.getDevicesStateByHTTP();
     }
-    getComponentsStateByHTTP = () => {
+    getDevicesStateByHTTP = () => {
         // const vlad_url = "https://home.v-home.duckdns.org/api/v1/state";
         // STATE_URL
         HTTP.get(STATE_URL)
             .then((data) => {
-                if (data >= 300) {
+                if (data >= 400) {
                     if (data === 401 || data === 403) {
                         // Authentication required
                         Cookie.remove(COOKIE_NAME);
@@ -64,7 +64,7 @@ class StartPage extends Component {
             loading: true,
             auth_required: false
         });
-        this.getComponentsStateByHTTP();
+        this.getDevicesStateByHTTP();
     };
     render () {
         const { authenticated, generalState, auth_required, auth_error, status, loading } = this.state;
@@ -74,7 +74,8 @@ class StartPage extends Component {
                     <ErrorPage loading = { loading }/>
                     :
                     authenticated ?
-                        generalState && <RouterPage generalState = { generalState }/>
+                        generalState &&
+                            <RouterPage generalState = { generalState }/>
                         :
                         auth_required ?
                             <div>

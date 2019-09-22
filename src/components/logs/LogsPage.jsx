@@ -13,23 +13,30 @@ const LogsPage = (props) => {
     const { filter, appliedFilters, setAppliedFilters } = useContext(LogsContext);
     const [loading, setLoading] = useState(false);
 
-    // ---------------------Data Loader ---------------------------------
+    // --------------------------------------------------------------------
+
+    const raiseNoti = () =>  {
+        const state = {
+            created: Date.now(),
+            message: "Can't load the logs due to connection problems",
+            origin: "LOGS LOADER",
+            status: "error",
+        };
+        const data = { id: "notification", state: state };
+        raiseEvent("message", data);
+    };
 
     const getLogs = (filters) => {
         fetchHTTP.post(LOGS_URL, filters)
             .then((data) => {
                 if ( typeof(data) === "number" || ! data) {
-                    raiseEvent("notification", {
-                        created: Date.now(),
-                        message: "Can't load logs, HTML error: " + data,
-                        origin: "LOGS_LOADER",
-                        status: "error",
-                    });
+                    setLogs([{}]);
+                    raiseNoti();
                 } else {
                     setLogs(data);
                     setAppliedFilters(filters);
-                    setLoading(false);
                 }
+                setLoading(false);
             });
     };
 
@@ -40,7 +47,6 @@ const LogsPage = (props) => {
 
     useEffect( () => {
         subscribe("apply", onApply);
-
         setLoading(true);
         getLogs(filter);
 

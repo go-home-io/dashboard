@@ -45,13 +45,14 @@ class  StatusManager extends React.Component {
         const { workerSelected } = this.state;
         const  workerColumns  = ["ID", "Last seen", "Properties", "Max devices"];
 
-        // Worker Table
+        // Worker Table Data
         let workerData = [];
+        if ( worker )
         // eslint-disable-next-line
-        worker.map(item => {
-            const { id, last_seen, worker_properties, max_devices } = item;
-            workerData.push([id, last_seen, properties(worker_properties), max_devices]);
-        });
+            worker.map(item => {
+                const { id, last_seen, worker_properties, max_devices } = item;
+                workerData.push([id, last_seen, properties(worker_properties), max_devices]);
+            });
 
         const workerOptions = {
             filter: true,
@@ -63,12 +64,13 @@ class  StatusManager extends React.Component {
             selectableRows: "none",
         };
 
-        // Status Table
+        // Status Table Data
         let statusData = [];
+        if ( status )
         // eslint-disable-next-line
-        status.map(item => {
-            statusData.push([item.name, item.status, item.worker, item.type]);
-        });
+            status.map(item => {
+                statusData.push([item.name, item.status, item.worker, item.type]);
+            });
 
         const statusColumns = [
             {
@@ -111,29 +113,33 @@ class  StatusManager extends React.Component {
 
         return (
             <div className = { classes.root } >
-                <Slide direction = "down" in = { true } timeout = { { enter: 1000 } }>
-                    <div>
-                        <MuiThemeProvider theme = { getMuiTheme() }>
-                            <MUIDataTable
-                                title = { "Known Workers" }
-                                data = { workerData }
-                                columns = { workerColumns }
-                                options = { workerOptions }
-                            />
-                        </MuiThemeProvider>
-                    </div>
-                </Slide>
+                { workerData.length > 0 &&
+                    <Slide direction = "down" in = { true } timeout = { { enter: 1000 } }>
+                        <div>
+                            <MuiThemeProvider theme = { getMuiTheme() }>
+                                <MUIDataTable
+                                    title = { "Known Workers" }
+                                    data = { workerData }
+                                    columns = { workerColumns }
+                                    options = { workerOptions }
+                                />
+                            </MuiThemeProvider>
+                        </div>
+                    </Slide>
+                }
                 <br/>
-                <Slide direction = "up" in = { true } timeout = { { enter: 1000 } }>
-                    <div>
-                        <MUIDataTable
-                            title = { "Config Entities Status" }
-                            data = { statusData }
-                            columns = { statusColumns }
-                            options = { statusOptions }
-                        />
-                    </div>
-                </Slide>
+                { statusData.length > 0 &&
+                    <Slide direction = "up" in = { true } timeout = { {enter: 1000} }>
+                        <div>
+                            <MUIDataTable
+                                title = { "Config Entities Status" }
+                                data = { statusData }
+                                columns = { statusColumns }
+                                options = { statusOptions }
+                            />
+                        </div>
+                    </Slide>
+                }
             </div>
         );
     }
@@ -141,8 +147,8 @@ class  StatusManager extends React.Component {
 
 StatusManager.propTypes = {
     classes: PropTypes.object.isRequired,
-    status: PropTypes.array.isRequired,
-    worker: PropTypes.array.isRequired
+    status: PropTypes.array,
+    worker: PropTypes.array
 };
 
 export default withStyles(styles)(StatusManager);
