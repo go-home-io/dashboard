@@ -65,8 +65,8 @@ const RouterPage = props => {
                 </Layout>
             }
 
-            { page === "logs" && logs_available &&
-                <LogsPage/>
+            { page === "logs" &&
+              ( logs_available ? <LogsPage/> : setPage("devices")  )
             }
 
         </ThemeProvider>
