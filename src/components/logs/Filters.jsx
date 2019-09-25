@@ -120,8 +120,7 @@ const Filters = () => {
                     </ListItem>
                 );
             })}
-            <Divider/>
-            <Divider/>
+
             <Grid container justify = "space-around">
                 <Button
                     className = { classes.button }

@@ -6,15 +6,13 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import storage from "../../services/storage";
 import {AppContext} from "../../context/AppContextProvider";
 import LogsPage from "../logs/LogsPage";
-// import fetchHTTP from "../../services/httpservices";
-// import {STATUS_URL, WORKER_URL} from "../../settings/urls";
 import StatusManager from "../status/StatusManager";
 import Layout from "./Layout";
-import useStatusAndWorkerLoader from "./useStatusAndWorkerLoader";
+import useFetchStatusAndWorker from "../status/useFetchStatusAndWorker";
 
 const RouterPage = props => {
     const { generalState } = props;
-    const { status, worker } = useStatusAndWorkerLoader();
+    const { status, worker } = useFetchStatusAndWorker();
     let { active_page: page, setLocation, setPage, setUOM,
         setLogsAvailable, setStatusPageAvailable } = useContext(AppContext);
     const { logs_available } = generalState;
