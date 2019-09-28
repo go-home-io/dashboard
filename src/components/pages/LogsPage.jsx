@@ -1,13 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
-import Layout from "../pages/Layout";
 import fetchHTTP from "../../services/httpservices";
 import {LOGS_URL} from "../../settings/urls";
 import {EventEmitter} from "../../context/EventEmitter";
-import LogsManager from "./LogsManager";
+import LogsManager from "../logs/LogsManager";
 import {LogsContext} from "../../context/LogsContext";
-import ErrorPage from "../pages/ErrorPage";
+import ErrorPage from "./ErrorPage";
 
-const LogsPage = (props) => {
+const LogsPage = () => {
     const [logs, setLogs] = useState([]);
     const { raiseEvent, subscribe, unsubscribe } = useContext(EventEmitter);
     const { filter, appliedFilters, setAppliedFilters } = useContext(LogsContext);
@@ -27,6 +26,7 @@ const LogsPage = (props) => {
     };
 
     const getLogs = (filters) => {
+        setLoading(true);
         fetchHTTP.post(LOGS_URL, filters)
             .then((data) => {
                 if ( typeof(data) === "number" || ! data) {
@@ -40,10 +40,7 @@ const LogsPage = (props) => {
             });
     };
 
-    const onApply = (filters) => {
-        setLoading(true);
-        getLogs(filters);
-    };
+    const onApply = (filters) => getLogs(filters);
 
     useEffect( () => {
         subscribe("apply", onApply);
@@ -55,16 +52,9 @@ const LogsPage = (props) => {
     // eslint-disable-next-line
         [] );
 
-    return (
-        loading ?
-            <ErrorPage loading = { true }/>
-            :
-            <Layout { ...props }>
-                { logs &&
-                <LogsManager logs = { logs } appliedFilters = { appliedFilters }/>
-                }
-            </Layout>
-    );
+    if (loading ) return <ErrorPage loading = { true }/>;
+    else return <LogsManager logs = { logs } appliedFilters = { appliedFilters }/>;
+
 };
 
 export default LogsPage;

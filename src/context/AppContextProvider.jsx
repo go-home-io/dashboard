@@ -10,16 +10,18 @@ export const AppContext = React.createContext({
     openMenu: false,
     statusLoaded: false,
     notiList: [],
-    setContextState: () => {},
     setLocation: () => {},
     setPage: () => {},
     setGroup: () => {},
     setGroupOn: () => {},
     setUOM: () => {},
+    setLogsAvailable: () => {},
     toggleMenu: () => {},
     setMenuStatus: () => {},
     setLoaded: () => {},
-    setUnseenCount: () => {}
+    setUnseenCount: () => {},
+    setNotiList: () => {},
+    setStatusPageAvailable: () => {},
 });
 
 const initialUnseenCount = () => {

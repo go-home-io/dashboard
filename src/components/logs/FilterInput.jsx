@@ -69,6 +69,7 @@ const FilterInput = props => {
                             <LogLevel
                                 value = { value }
                                 setValue = { (value) => setValue(value) }
+                                onEnterPress = { val => setFilterValue(val) }
                             />
                     }
                 </DialogContent>

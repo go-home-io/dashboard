@@ -14,7 +14,6 @@ import {
     faCompass,
 } from "@fortawesome/free-solid-svg-icons";
 
-import StartPage from "./components/pages/StartPage";
 import { ThemeProvider } from "@material-ui/styles";
 import { customTheme } from "./settings/customTheme";
 import AppContextProvider from "./context/AppContextProvider";
@@ -22,6 +21,7 @@ import EventEmitterProvider from "./context/EventEmitter";
 import WebSocketComponent from "./websocket/WebSocketComponent";
 import Notification from "./components/notification/Notification";
 import LogsContextProvider from "./context/LogsContext";
+import Start from "./components/pages/Start";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
@@ -36,7 +36,7 @@ const App = () =>{
                     <WebSocketComponent/>
                     <Notification/>
                     <LogsContextProvider>
-                        <StartPage/>
+                        <Start/>
                     </LogsContextProvider>
                 </EventEmitterProvider>
             </AppContextProvider>

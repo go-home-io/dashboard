@@ -6,19 +6,25 @@ import FormControl from "@material-ui/core/FormControl";
 import PropTypes from "prop-types";
 
 export default function LogLevel(props) {
-    const { value, setValue } = props;
+    const { value, setValue, onEnterPress } = props;
     const [currValue, setCurrValue] = useState(value);
 
     function handleChange(event) {
         const val = event.target.value;
         setCurrValue(val);
         setValue(val);
-        console.log("Log level: ", val);
     }
 
     return (
         <FormControl component = "fieldset">
-            <RadioGroup aria-label = "position" name = "logLevel" value = { currValue } onChange = { handleChange } row>
+            <RadioGroup
+                aria-label = "position"
+                name = "logLevel"
+                value = { currValue }
+                onChange = { handleChange }
+                onKeyPress = { (e) => { if (e.key === "Enter") onEnterPress(currValue); } }
+                row
+            >
                 <FormControlLabel
                     value = "debug"
                     control = { <Radio color = "primary" /> }
@@ -50,5 +56,6 @@ export default function LogLevel(props) {
 
 LogLevel.propTypes = {
     value: PropTypes.string,
-    setValue: PropTypes.func.isRequired
+    setValue: PropTypes.func.isRequired,
+    onEnterPress: PropTypes.func.isRequired
 };

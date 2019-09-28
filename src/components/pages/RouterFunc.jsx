@@ -5,28 +5,26 @@ import {customTheme} from "../../settings/customTheme";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import storage from "../../services/storage";
 import {AppContext} from "../../context/AppContextProvider";
-import LogsPage from "../logs/LogsPage";
+import LogsPage from "./LogsPage";
 import StatusManager from "../status/StatusManager";
 import Layout from "./Layout";
-import useFetchStatusAndWorker from "../status/useFetchStatusAndWorker";
+// import useFetchStatusAndWorker from "../status/useFetchStatusAndWorker";
 
-const RouterPage = props => {
-    const { generalState } = props;
-    const { status, worker } = useFetchStatusAndWorker();
+const RouterFunc = props => {
+    const { generalState, status, worker } = props;
     let { active_page: page, setLocation, setPage, setUOM,
-        setLogsAvailable, setStatusPageAvailable } = useContext(AppContext);
+        setLogsAvailable, statusPageAvailable } = useContext(AppContext);
     const { logs_available } = generalState;
 
     const displayDevices = () => ( page === "devices" ? "block" : "none" );
 
-    const isStatusPageAvailable = () =>  ( Boolean(worker) || Boolean(status) );
+    // const isStatusPageAvailable = () =>  ( Boolean(worker) || Boolean(status) );
 
 
-    // -----   Set active_page, active_location and uom to AppContext when Component did mount -------
+    // -----   Set active_page, active_location and uom to AppContext when Component did mount ------
     let active_location = storage.get("location") ? storage.get("location") : "Default";
     let active_page = storage.get("page") ? storage.get("page") : "devices";
-    // active_page =  ( ! statusPageAvailable && active_page === "status") ? "devices" : active_page;
-
+    active_page =  ( ! logs_available && active_page === "logs") ? "devices" : active_page;
 
     useEffect(() => {
         const { logs_available, uom } = generalState;
@@ -38,9 +36,9 @@ const RouterPage = props => {
     // eslint-disable-next-line
    []);
 
-    useEffect( () =>  setStatusPageAvailable( isStatusPageAvailable() ),
-        // eslint-disable-next-line
-        [status, worker]);
+    // useEffect( () =>  setStatusPageAvailable( isStatusPageAvailable() ),
+    //     // eslint-disable-next-line
+    //     [status, worker]);
 
     return (
         <ThemeProvider theme = { customTheme }>
@@ -54,27 +52,30 @@ const RouterPage = props => {
                 }
             </div>
 
-            { page === "status" &&
+
+            { page === "status" && statusPageAvailable &&
                 <Layout>
-                    { isStatusPageAvailable() &&
-                        <StatusManager
-                            status = { status }
-                            worker = { worker }
-                        />
-                    }
+                    <StatusManager
+                        status = { status }
+                        worker = { worker }
+                    />
                 </Layout>
             }
 
-            { page === "logs" &&
-              ( logs_available ? <LogsPage/> : setPage("devices")  )
+            { page === "logs" && logs_available &&
+                <Layout>
+                    <LogsPage/>
+                </Layout>
             }
 
         </ThemeProvider>
     );
 };
 
-RouterPage.propTypes = {
-    generalState: PropTypes.object.isRequired
+RouterFunc.propTypes = {
+    generalState: PropTypes.object.isRequired,
+    status: PropTypes.array,
+    worker: PropTypes.array
 };
 
-export default RouterPage;
+export default RouterFunc;

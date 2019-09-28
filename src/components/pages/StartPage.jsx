@@ -7,11 +7,11 @@ import {COOKIE_NAME} from "../../settings/cookie";
 import SignIn from "./SignIn";
 import AppBarPlaceholder from "../navigation/AppBarPlaceholder";
 import { STATE_URL } from "../../settings/urls";
-import RouterPage from "./RouterPage";
+import RouterFunc from "./RouterFunc";
 
 class StartPage extends Component {
     state = {
-        generalState:{},
+        generalState: null,
         authenticated: false,
         auth_error: false,
         auth_required: false,
@@ -27,10 +27,9 @@ class StartPage extends Component {
         // STATE_URL
         HTTP.get(STATE_URL)
             .then((data) => {
-                if (data >= 400) {
+                if (typeof(data) === "number" || !data) {
                     if (data === 401 || data === 403) {
                         // Authentication required
-                        Cookie.remove(COOKIE_NAME);
                         this.setState({
                             authenticated: false,
                             auth_required: true,
@@ -48,15 +47,14 @@ class StartPage extends Component {
                     this.setState({
                         generalState:data,
                         authenticated: true,
-                        auth_error: false,
-                        auth_required: false,
-                        status: null,
                         loading: false
                     });
                 }
             });
     };
+
     getCredentials = (user, password) => {
+
         const credentials = "Basic " + base64.encode(user + ":" + password);
         Cookie.set(COOKIE_NAME, credentials);
         this.setState({
@@ -68,6 +66,8 @@ class StartPage extends Component {
     };
     render () {
         const { authenticated, generalState, auth_required, auth_error, status, loading } = this.state;
+        if ( auth_required ) Cookie.remove(COOKIE_NAME);
+
         return (
             <>
                 {loading ?
@@ -75,7 +75,7 @@ class StartPage extends Component {
                     :
                     authenticated ?
                         generalState &&
-                            <RouterPage generalState = { generalState }/>
+                            <RouterFunc generalState = { generalState }/>
                         :
                         auth_required ?
                             <div>
