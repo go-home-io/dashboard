@@ -40,7 +40,11 @@ const LockManager = props => {
     const { classes, id, device_info, device_state, doCommand }  = props;
     const { name, read_only, commands } = device_info;
     const { on, input, battery_level } = device_state;
-    const { title, params } = input;
+    let title, params;
+    if ( input ) {
+        title = input.title;
+        params = input.params;
+    }
 
     const [loading, setLoading] = useState(false);
     const { subscribe, unsubscribe } = useContext(EventEmitter);
