@@ -10,6 +10,7 @@ import {EventEmitter} from "../../context/EventEmitter";
 import {withStyles} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import {oneWayCommands} from "../../settings/oneWayCommands";
+import LockManager from "./lock/LockManager";
 
 const styles = () => ({
     root: {
@@ -26,6 +27,7 @@ const deviceManagers = {
     "switch": SwitchManager,
     "weather": Weather,
     "group": MinimizedGroup,
+    "lock": LockManager
 };
 
 const Devices = props => {

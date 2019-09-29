@@ -8,18 +8,14 @@ import {AppContext} from "../../context/AppContextProvider";
 import LogsPage from "./LogsPage";
 import StatusManager from "../status/StatusManager";
 import Layout from "./Layout";
-// import useFetchStatusAndWorker from "../status/useFetchStatusAndWorker";
 
 const RouterFunc = props => {
     const { generalState, status, worker } = props;
-    let { active_page: page, setLocation, setPage, setUOM,
-        setLogsAvailable, statusPageAvailable } = useContext(AppContext);
+    let { active_page: page, setLocation, setPage,
+        setUOM, setLogsAvailable, statusPageAvailable } = useContext(AppContext);
     const { logs_available } = generalState;
 
     const displayDevices = () => ( page === "devices" ? "block" : "none" );
-
-    // const isStatusPageAvailable = () =>  ( Boolean(worker) || Boolean(status) );
-
 
     // -----   Set active_page, active_location and uom to AppContext when Component did mount ------
     let active_location = storage.get("location") ? storage.get("location") : "Default";
@@ -36,10 +32,6 @@ const RouterFunc = props => {
     // eslint-disable-next-line
    []);
 
-    // useEffect( () =>  setStatusPageAvailable( isStatusPageAvailable() ),
-    //     // eslint-disable-next-line
-    //     [status, worker]);
-
     return (
         <ThemeProvider theme = { customTheme }>
 
@@ -51,7 +43,6 @@ const RouterFunc = props => {
                     />
                 }
             </div>
-
 
             { page === "status" && statusPageAvailable &&
                 <Layout>

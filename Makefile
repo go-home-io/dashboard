@@ -8,7 +8,7 @@ SERVER=$(GOPATH)/src/go-home.io/x/server
 .PHONY: utilities-ci dep lint run build build-to-server
 
 utilities-ci:
-	$(NPM_INSTALL) eslint@6.2.0
+	$(NPM_INSTALL) eslint@6.4.0
 	$(NPM_INSTALL) eslint-plugin-react@7.11.1
 	$(NPM_INSTALL) babel-eslint@10.0.2
 

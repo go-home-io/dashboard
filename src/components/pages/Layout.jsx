@@ -22,7 +22,6 @@ const Layout = (props) => {
 
 Layout.propTypes = {
     classes: PropTypes.object.isRequired,
-    dropdown: PropTypes.object,
     children: PropTypes.any.isRequired
 };
 

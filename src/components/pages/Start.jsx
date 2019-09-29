@@ -53,7 +53,7 @@ const Start = () => {
     else if ( data )
         return <StatusLoader generalState = { data } />;
 
-    else if (authRequierd) {
+    else if ( authRequierd ) {
         Cookie.remove(COOKIE_NAME);
         return (
             <>

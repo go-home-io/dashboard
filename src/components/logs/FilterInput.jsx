@@ -7,20 +7,20 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Slide from "@material-ui/core/Slide";
 import DateTimePicker from "./DateTimePicker";
 import LogLevel from "./LogLevel";
+import { Transition } from "../../utils/Transition";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction = "down" ref = { ref } { ...props } />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//     return <Slide direction = "down" ref = { ref } { ...props } />;
+// });
 
 
 const FilterInput = props => {
     const { variant, initialValue, setFilterValue, cancelInput, open, filterKey } = props;
     const [value, setValue] = useState(initialValue);
 
-    const handleChange = event => { if ( event.target.value ) setValue(event.target.value); };
+    const handleChange = event => setValue(event.target.value);
 
     useEffect( () => setValue(initialValue),
         // eslint-disable-next-line
@@ -57,7 +57,9 @@ const FilterInput = props => {
                             fullWidth
                             value = { value }
                             onChange = { handleChange }
-                            onKeyPress = { (e) => { if (e.key === "Enter") setFilterValue(value); } }
+                            onKeyPress = { (e) => {
+                                if (e.key === "Enter") setFilterValue(value);
+                            } }
                         />
                         :
                         variant === "time" ?
@@ -69,7 +71,7 @@ const FilterInput = props => {
                             <LogLevel
                                 value = { value }
                                 setValue = { (value) => setValue(value) }
-                                onEnterPress = { val => setFilterValue(val) }
+                                setAndExit = { val => setFilterValue(val) }
                             />
                     }
                 </DialogContent>
@@ -78,7 +80,10 @@ const FilterInput = props => {
                     <Button onClick = { cancelInput } color = "primary">
                         Cancel
                     </Button>
-                    <Button onClick = { () => setFilterValue(value) } color = "primary">
+                    <Button onClick = { () => setFilterValue("") } color = "secondary">
+                        Reset
+                    </Button>
+                    <Button onClick = { () => {setFilterValue(value); setValue(""); } } color = "primary">
                         Set it
                     </Button>
                 </DialogActions>

@@ -41,6 +41,7 @@
 
 
 import React, {useState} from "react";
+import PropTypes from "prop-types";
 
 export const EventEmitter = React.createContext({
     subscribe: () => {},
@@ -89,12 +90,14 @@ const EventEmitterProvider = (props) => {
     };
 
     return (
-        <EventEmitter.Provider value = { eventEmitter } >
-            <div { ...other }>
-                { children }
-            </div>
+        <EventEmitter.Provider value = { eventEmitter } { ...other }>
+            { children }
         </EventEmitter.Provider>
     );
+};
+
+EventEmitter.propTypes = {
+    children: PropTypes.object.isRequired
 };
 
 export default EventEmitterProvider;

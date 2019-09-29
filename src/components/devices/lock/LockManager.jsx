@@ -1,16 +1,24 @@
 import React, {useContext, useEffect, useState} from "react";
-import ComponentHeader from "../header/ComponentHeader";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
+import ComponentHeader from "../header/ComponentHeader";
+import {
+    // LIGHT_HEADER_BKG_COLOR,
+    LIGHT_HEADER_ICON_COLOR_OFF,
+    LIGHT_HEADER_ICON_COLOR_ON, LIGHT_RO_ICON_COLOR
+} from "../../../settings/colors";
 import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid/Grid";
+import Zoom from "@material-ui/core/Zoom";
 import WaitingProgress from "../../common/elements/WaitingProgress";
-import Zoom from "@material-ui/core/Zoom/Zoom";
-import truncateCaption from "../../../utils/truncate";
-import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF, LIGHT_RO_ICON_COLOR} from "../../../settings/colors";
+import Grid from "@material-ui/core/Grid";
 import RenderCommandHandlers from "../../common/comand/RenderCommandHandlers";
 import {EventEmitter} from "../../../context/EventEmitter";
+import truncateCaption from "../../../utils/truncate";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
+import ComponentUpperInfo from "../../common/elements/ComponentUpperInfo";
+import Battery from "../../common/elements/Battery";
+import InputManager from "../../common/input/InputManager";
+import withStyles from "@material-ui/core/styles/withStyles";
+
 
 const styles = () => ({
     progress: {
@@ -21,16 +29,21 @@ const styles = () => ({
     }
 });
 
-const LightManager = props => {
+
+const LockManager = props => {
+
     const onLoadingUpdate = data => {
         if ( data.id !== id ) return;
         setLoading(data.loading);
     };
 
-    const [loading, setLoading] = useState(false);
-    const { subscribe, unsubscribe } = useContext(EventEmitter);
     const { classes, id, device_info, device_state, doCommand }  = props;
     const { name, read_only, commands } = device_info;
+    const { on, input, battery_level } = device_state;
+    const { title, params } = input;
+
+    const [loading, setLoading] = useState(false);
+    const { subscribe, unsubscribe } = useContext(EventEmitter);
     const caption = truncateCaption(name, maxSymbolsInNamePerLine );
 
     useEffect( () => {
@@ -46,14 +59,17 @@ const LightManager = props => {
                 dev_id = { id }
                 name = { caption }
                 variant = "light"
-                on = { device_state.on }
+                on = { on }
                 doCommand = { doCommand }
                 read_only = { read_only }
-                ordinaryBkgColor = { LIGHT_HEADER_BKG_COLOR }
+                ordinaryBkgColor = { "#ca8de8" }
                 iconColorOn = { LIGHT_HEADER_ICON_COLOR_ON }
                 iconColorOff = { LIGHT_HEADER_ICON_COLOR_OFF }
                 iconROColor = { LIGHT_RO_ICON_COLOR }
             />
+
+            <ComponentUpperInfo rightField = { <Battery battery_level = { battery_level }/> }/>
+
             <CardContent>
                 {loading ?
                     <Zoom in = { loading } >
@@ -64,27 +80,38 @@ const LightManager = props => {
                     :
                     <Zoom in = { !loading }>
                         <Grid container justify = 'flex-start' direction = "column">
-                            <RenderCommandHandlers
-                                commands = { commands }
-                                dev_id = { id }
-                                doCommand = { doCommand }
-                                read_only = { read_only }
-                                device_state = { device_state }
-                            />
+                            { input ?
+                                params &&
+                                <InputManager
+                                    dev_id = { id }
+                                    params = { params }
+                                    title = { title }
+                                    doCommand = { doCommand }
+                                />
+                                :
+                                <RenderCommandHandlers
+                                    commands = { commands }
+                                    dev_id = { id }
+                                    doCommand = { doCommand }
+                                    read_only = { read_only }
+                                    device_state = { device_state }
+                                />
+                            }
                         </Grid>
                     </Zoom>
                 }
             </CardContent>
         </>
+
     );
 };
 
-LightManager.propTypes = {
+LockManager.propTypes = {
     classes: PropTypes.object.isRequired,
-    device_info: PropTypes.object.isRequired ,
     id: PropTypes.string.isRequired,
+    device_info: PropTypes.object.isRequired,
     device_state: PropTypes.object.isRequired,
-    doCommand: PropTypes.func.isRequired,
+    doCommand: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(LightManager);
+export default withStyles(styles)(LockManager);

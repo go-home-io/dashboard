@@ -46,11 +46,6 @@ const styles = () => ({
 });
 
 const VacuumManager = props =>{
-    // constructor(props) {
-    //     super(props);
-    //     const { id, device_info } = props;
-    //     this.store = VacuumStoreFactory(id, device_info);
-    // }
 
     const onLoadingUpdate = data => {
         if ( data.id !== id ) return;
@@ -58,14 +53,18 @@ const VacuumManager = props =>{
     };
 
     const [loading, setLoading] = useState(false);
-    const { subscribe } = useContext(EventEmitter);
+    const { subscribe, unsubscribe } = useContext(EventEmitter);
     const { classes, id, device_info, device_state, doCommand }  = props;
     const { name: fullName, commands } = device_info;
     const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
     const area = Math.round(raw_area);
     const name = truncateCaption(fullName, maxSymbolsInNamePerLine );
-    useEffect( () => subscribe("loading", onLoadingUpdate),
-        // eslint-disable-next-line
+
+    useEffect( () => {
+        subscribe("loading", onLoadingUpdate);
+        return () => unsubscribe("loading", onLoadingUpdate);
+    },
+    // eslint-disable-next-line
         []);
 
 
