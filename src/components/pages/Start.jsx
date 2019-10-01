@@ -7,7 +7,7 @@ import Cookie from "js-cookie";
 import {COOKIE_NAME} from "../../settings/cookie";
 import fetchHTTP from "../../services/httpservices";
 import {STATE_URL} from "../../settings/urls";
-import StatusLoader from "./StatusLoader";
+import StatusLoader from "../status/StatusLoader";
 
 const Start = () => {
     const [loading, setLoading] = useState(true);

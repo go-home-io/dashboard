@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import PropTypes from "prop-types";
-import useFetchStatusAndWorker from "../status/useFetchStatusAndWorker";
-import RouterFunc from "./RouterFunc";
+import useFetchStatusAndWorker from "./useFetchStatusAndWorker";
+import RouterFunc from "../pages/RouterFunc";
 import {AppContext} from "../../context/AppContextProvider";
 
 const StatusLoader = (props) => {
@@ -15,7 +15,7 @@ const StatusLoader = (props) => {
 };
 
 StatusLoader.propTypes = {
-    generalState: PropTypes.array.isRequired
+    generalState: PropTypes.object.isRequired
 };
 
 export default StatusLoader;

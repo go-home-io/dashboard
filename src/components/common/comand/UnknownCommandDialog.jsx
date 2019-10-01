@@ -19,7 +19,7 @@ const styles = () => ({
     },
     textField: {
         marginTop: 10,
-        marginBottom: -13,
+        marginBottom: 10,
     },
 });
 

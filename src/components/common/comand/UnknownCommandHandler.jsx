@@ -49,7 +49,6 @@ class UnknownCommandHandler extends React.Component {
     render() {
         const { classes, dev_id, read_only, command, doCommand } = this.props;
         const { anchorEl } = this.state;
-        const open = Boolean(anchorEl);
         const cursor = read_only ? "default" : "pointer";
         const commandName = (beautifyCommand(command));
 
@@ -66,8 +65,8 @@ class UnknownCommandHandler extends React.Component {
                     </Typography>
                 </div>
                 <Popover
-                    id = "brightness-popper"
-                    open = { open }
+                    id = "unknown-cmd-popper"
+                    open = { Boolean(anchorEl) }
                     anchorEl = { anchorEl }
                     onClose = { this.handleClose }
                     anchorOrigin = { {
@@ -81,7 +80,7 @@ class UnknownCommandHandler extends React.Component {
                 >
                     <UnknownCommandDialog
                         // level = { level }
-                        close = { this.handleClose.bind(this) }
+                        close = { this.handleClose }
                         dev_id = { dev_id }
                         doCommand = { doCommand }
                         command = { command }

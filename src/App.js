@@ -12,6 +12,8 @@ import {
     faBatteryQuarter,
     faBatteryEmpty,
     faCompass,
+    faDoorClosed,
+    faDoorOpen
 } from "@fortawesome/free-solid-svg-icons";
 
 import { ThemeProvider } from "@material-ui/styles";
@@ -25,7 +27,7 @@ import Start from "./components/pages/Start";
 
 library.add(faThermometerHalf, faBatteryEmpty, faSpinner,
     faLock, faBatteryFull, faBatteryHalf, faBatteryQuarter,
-    faBatteryThreeQuarters, faCompass );
+    faBatteryThreeQuarters, faCompass, faDoorClosed,  faDoorOpen);
 
 const App = () =>{
     return (

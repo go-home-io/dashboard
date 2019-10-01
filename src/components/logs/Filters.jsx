@@ -29,11 +29,11 @@ const useStyles = makeStyles({
 
 const filterNfo = {
     from_utc: {
-        name: "from Time",
+        name: "From",
         variant: "time"
     },
     to_utc: {
-        name: "to Time",
+        name: "To",
         variant: "time"
     },
     log_level: {

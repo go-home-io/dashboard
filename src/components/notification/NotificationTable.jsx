@@ -13,7 +13,7 @@ const  NotificationTable = props => {
 
     return (
         ntfList &&
-            <React.Fragment>
+            <>
                 {
                     ntfList.map( (item)  => {
                         const { created, origin, message, status, seen } = item;
@@ -21,7 +21,7 @@ const  NotificationTable = props => {
                         return(
                             ( show_all || ! seen ) &&
                                 <NotificationTableLine
-                                    key = { message + created }
+                                    key = { created + Date.now() }
                                     created = { created }
                                     origin = { origin }
                                     message = { message }
@@ -30,7 +30,7 @@ const  NotificationTable = props => {
                         );
                     })
                 }
-            </React.Fragment>
+            </>
     );
 };
 

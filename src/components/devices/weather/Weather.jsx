@@ -10,7 +10,7 @@ import { PartlyCloudyDay, AtmosphericPressure,  WindSock } from "./Icon8JPG";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { unitsOfMeasure } from "../../../settings/uom";
-import DeviceName from "../../common/elements/DeviceName";
+import DeviceName from "../header/DeviceName";
 import classNames from "classnames";
 import {formatNumericProp} from "../../../settings/formatNumericProp";
 import {AppContext} from "../../../context/AppContextProvider";
@@ -79,15 +79,6 @@ const styles = () => ({
 });
 
 const Weather = props =>{
-    // constructor(props) {
-    //     super(props);
-    //     const { id } = props;
-    //     this.stores = [ AppStore, WeatherStoreFactory(id)];
-    // }
-    //
-    // componentDidMount() {
-    //     weatherActions.setInitialState(this.props.device_info);
-    // }
 
     const { classes, device_info, device_state } = props;
     const { name } = device_info;

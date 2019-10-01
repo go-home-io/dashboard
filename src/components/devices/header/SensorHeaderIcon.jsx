@@ -1,7 +1,7 @@
 import React from "react";
 import { SENSOR_HEADER_ICON_COLOR } from "../../../settings/colors";
 import PropTypes from "prop-types";
-import { getSensorHeaderIcon } from "./sensorMisc";
+import { getSensorHeaderIcon } from "../sensor/sensorMisc";
 
 class SensorHeaderIcon extends React.Component {
     render () {

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import UnknownCommandHandler from "./UnknownCommandHandler";
 
 
-const trivialCommands = ["on", "off", "toggle"];
+const trivialCommands = ["on", "off", "toggle", "input"];
 const knownCommandHandlers = {
     "set-brightness": LightBrightness,
     "set-color": LightColorPicker,

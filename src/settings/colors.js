@@ -13,6 +13,7 @@ export const SENSOR_HEADER_BKG_COLOR = "#1cbbb6";
 export const VACUUM_HEADER_BKG_COLOR = "#3d76df";
 export const SWITCH_HEADER_BKG_COLOR = "#8456f3";
 export const MIN_GROUP_HEADER_BKG_COLOR = "#3f51b5";
+export const LOCK_HEADER_BKG_COLOR = "#ca8de8";
 
 //  'success'
 export const SUCCESS_BKG_COLOR = green[500];
@@ -54,3 +55,11 @@ export const VACUUM_HEADER_ICON_COLOR_FULL = "#ff9b9b";
 export const SWITCH_HEADER_ICON_COLOR_ON = "#ffffffe6";
 export const SWITCH_HEADER_ICON_COLOR_OFF = "rgba(0,0,0,0.4)";
 export const SWITCH_RO_ICON_COLOR = "#f39090";
+
+// Lock
+export const LOCK_HEADER_ICON_COLOR_ON = "#ffffffe6";
+export const LOCK_HEADER_ICON_COLOR_OFF = "#dddddd";  //"rgba(0,0,0,0.1)";
+export const LOCK_RO_ICON_COLOR = red[500];
+
+
+

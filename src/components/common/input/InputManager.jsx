@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {createRef, useState} from "react";
 import PropTypes from "prop-types";
 // import Button from "@material-ui/core/Button";
 import { Dialog, Button } from "@material-ui/core";
@@ -9,24 +9,39 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 
+const initialValues = (params) => {
+    let val = {};
+
+    Object.keys(params).map(
+        key => val[key] = ""
+    );
+    return val;
+};
+
 const InputManager = props => {
     const { dev_id, title, params, doCommand } = props;
     const [open, setOpen] = useState(false);
-    const [values, setValues] = useState(params);
-    const [focusIndex, setFocusIndex] = useState(0);
-
-    // console.log("Values", values, "indx=", focusIndex)
+    const [values, setValues] = useState(initialValues(params));
+    let htmlElRefs = [];
 
     const handleChange = name => event => setValues({...values, [name]:event.target.value});
 
-    const incrementFocusIndex = (index) => {
-        let indx = index + 1;
-        if ( indx === params.length ) indx = 0;
-        setFocusIndex(indx);
+    const setElementFocus = index => htmlElRefs[index].current.focus();
+
+    const findEmptyElement = () => {
+        const keys = Object.keys(values);
+        return keys.findIndex((key) => values[key] === "");
+    };
+
+    const handleEnter = () => {
+        const emptyElIndex = findEmptyElement();
+        if ( emptyElIndex !== -1 ) setElementFocus(emptyElIndex);
+        else doInputCommand();
     };
 
     const doInputCommand = () => {
         doCommand(dev_id, "input", {params: values});
+        setOpen(false);
     };
 
     return (
@@ -38,7 +53,6 @@ const InputManager = props => {
                     Input verification code
                 </Button>
             </div>
-
 
             <Dialog
                 open = { open }
@@ -54,21 +68,27 @@ const InputManager = props => {
                     <DialogContentText>
                         { title }
                     </DialogContentText>
-                    { Object.keys(values).map( (key, index, ) => (
-                        <TextField
-                            key = { key }
-                            required
-                            autoFocus = { index === focusIndex }
-                            margin = "normal"
-                            label = { key }
-                            type = "text"
-                            fullWidth
-                            value = { values[key] }
-                            onChange = { handleChange(key) }
-                            onKeyPress = { (e) => { if (e.key === "Enter") incrementFocusIndex(index); } }
-                        />
-                    ))}
-
+                    { Object.keys(params).map( (key, index ) => {
+                        const elRef = createRef();
+                        htmlElRefs.push(elRef);
+                        return (
+                            <TextField
+                                key = { key }
+                                id = { "input-" + key }
+                                required
+                                fullWidth
+                                autoFocus = { index === 0 }
+                                margin = "normal"
+                                label = { key }
+                                type = "text"
+                                inputRef = { elRef }
+                                value = { values[key] }
+                                onChange = { handleChange(key) }
+                                onKeyPress = { (e) => {
+                                    if (e.key === "Enter") handleEnter(index);
+                                } }
+                            />);
+                    })}
                 </DialogContent>
 
                 <DialogActions>
@@ -80,8 +100,6 @@ const InputManager = props => {
                     </Button>
                 </DialogActions>
             </Dialog>
-
-
         </>
     );
 };

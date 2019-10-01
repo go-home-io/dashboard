@@ -6,16 +6,21 @@ import {
     LIGHT_HEADER_ICON_COLOR_OFF,
     MIN_GROUP_HEADER_ICON_COLOR_ON,
     MIN_GROUP_HEADER_ICON_COLOR_OFF,
+    LOCK_HEADER_ICON_COLOR_ON,
+    LOCK_HEADER_ICON_COLOR_OFF
 } from "../../../settings/colors";
 import PropTypes from "prop-types";
 import WbIncandescentIcon from "@material-ui/icons/WbIncandescent";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import DevicesOtherIcon from "@material-ui/icons/DevicesOther";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 
 const icons = {
     "light": WbIncandescentIcon,
     "switch": PowerSettingsNewIcon,
     "minGroup": DevicesOtherIcon,
+    "lock": "door-closed"
 };
 
 const colors = {
@@ -30,6 +35,10 @@ const colors = {
     "minGroup": {
         "true" : MIN_GROUP_HEADER_ICON_COLOR_ON,
         "false" : MIN_GROUP_HEADER_ICON_COLOR_OFF
+    },
+    "lock": {
+        "true" : LOCK_HEADER_ICON_COLOR_ON,
+        "false" : LOCK_HEADER_ICON_COLOR_OFF
     }
 };
 
@@ -40,10 +49,22 @@ class IconHeader extends React.Component {
         const iconColor = colors[variant][component_on.toString()];
 
         return (
-            <SelectedIcon
-                className = { cssClass }
-                style = { {color:iconColor} }
-            />
+            variant === "lock" ?
+                <FontAwesomeIcon icon = { component_on? "door-open" : "door-closed" }
+                    style = { {
+                        color:iconColor,
+                        position: "relative",
+                        left:-23,
+                        top:-7,
+                        padding:3,
+                        fontSize: 22,
+                    } }
+                />
+                :
+                <SelectedIcon
+                    className = { cssClass }
+                    style = { {color:iconColor} }
+                />
         );
     }
 }
