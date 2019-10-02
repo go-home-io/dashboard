@@ -6,7 +6,7 @@ import TemperatureSymbol from "../../common/elements/TemperatureSymbol";
 import Grid from "@material-ui/core/Grid/Grid";
 import truncateCaption from "../../../utils/truncate";
 import Tooltip from "@material-ui/core/Tooltip/Tooltip";
-import { PartlyCloudyDay, AtmosphericPressure,  WindSock } from "./Icon8JPG";
+import { PartlyCloudyDay, AtmosphericPressure,  WindSock } from "../header/Icon8JPG";
 import RemoveRedEye from "@material-ui/icons/RemoveRedEye";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { unitsOfMeasure } from "../../../settings/uom";

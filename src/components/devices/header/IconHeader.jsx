@@ -13,15 +13,8 @@ import PropTypes from "prop-types";
 import WbIncandescentIcon from "@material-ui/icons/WbIncandescent";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import DevicesOtherIcon from "@material-ui/icons/DevicesOther";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-
-const icons = {
-    "light": WbIncandescentIcon,
-    "switch": PowerSettingsNewIcon,
-    "minGroup": DevicesOtherIcon,
-    "lock": "door-closed"
-};
+import PhonelinkLock from "@material-ui/icons/PhonelinkLock";
+import ScreenLock from "@material-ui/icons/ScreenLockPortraitOutlined";
 
 const colors = {
     "light": {
@@ -42,32 +35,27 @@ const colors = {
     }
 };
 
-class IconHeader extends React.Component {
-    render () {
-        const { component_on, cssClass, variant } = this.props;
-        const SelectedIcon = icons[variant];
-        const iconColor = colors[variant][component_on.toString()];
+const IconHeader = (props) => {
 
-        return (
-            variant === "lock" ?
-                <FontAwesomeIcon icon = { component_on? "door-open" : "door-closed" }
-                    style = { {
-                        color:iconColor,
-                        position: "relative",
-                        left:-23,
-                        top:-7,
-                        padding:3,
-                        fontSize: 22,
-                    } }
-                />
-                :
-                <SelectedIcon
-                    className = { cssClass }
-                    style = { {color:iconColor} }
-                />
-        );
-    }
-}
+    const { component_on, cssClass, variant } = props;
+
+    const icons = {
+        "light": WbIncandescentIcon,
+        "switch": PowerSettingsNewIcon,
+        "minGroup": DevicesOtherIcon,
+        "lock": component_on? PhonelinkLock : ScreenLock
+    };
+
+    const SelectedIcon = icons[variant];
+    const iconColor = colors[variant][component_on.toString()];
+
+    return (
+        <SelectedIcon
+            className = { cssClass }
+            style = { { color: iconColor } }
+        />
+    );
+};
 
 IconHeader.propTypes = {
     component_on: PropTypes.bool.isRequired,

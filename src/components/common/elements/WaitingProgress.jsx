@@ -10,8 +10,9 @@ const INTERVALS = 100 / PROGRESS_INCREMENT;
 class WaitingProgress extends React.Component {
     static contextType = EventEmitter;
     state = { completed: 0};
+
     componentDidMount() {
-        this.setState({ completed: 0 });
+        // this.setState({ completed: 0 });
         this.timer = setInterval(this.progress, CONNECTION_TIMEOUT/INTERVALS);
         const { subscribe } = this.context;
 
@@ -76,7 +77,7 @@ class WaitingProgress extends React.Component {
                 raiseEvent("status", {id: dev_id, status: "error"});
                 switch (status) {
                 case "rejected":
-                    message = "Socket reject the command due to connection problems";
+                    message = "Socket rejected the command due to connection problems";
                     messStatus = "error";
                     break;
                 case "timeout":

@@ -6,7 +6,6 @@ import CardContent from "@material-ui/core/CardContent";
 import WaitingProgress from "../../common/elements/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import truncateCaption from "../../../utils/truncate";
-import { VACUUM_HEADER_BKG_COLOR } from "../../../settings/colors";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
 import Battery from "../../common/elements/Battery";
@@ -76,7 +75,6 @@ const VacuumManager = props =>{
                 doCommand = { doCommand }
                 variant = "vacuum"
                 vac_status = { vac_status }
-                ordinaryBkgColor = { VACUUM_HEADER_BKG_COLOR }
             />
 
             <ComponentUpperInfo

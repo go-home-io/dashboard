@@ -4,7 +4,6 @@ import truncateCaption from "../../../utils/truncate";
 import TemperatureSensor from "./TemperatureSensor";
 import ButtonSensor from "./ButtonSensor";
 import DefaultSensor from "./DefaultSensor";
-import { SENSOR_HEADER_BKG_COLOR } from "../../../settings/colors";
 import ComponentHeader from "../header/ComponentHeader";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
 
@@ -20,7 +19,6 @@ const SensorManager = props => {
                 dev_id = { id }
                 name = { name }
                 status = { status }
-                ordinaryBkgColor = { SENSOR_HEADER_BKG_COLOR }
                 variant = 'sensor'
                 sensor_type = { type }
             />

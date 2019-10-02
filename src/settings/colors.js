@@ -58,7 +58,7 @@ export const SWITCH_RO_ICON_COLOR = "#f39090";
 
 // Lock
 export const LOCK_HEADER_ICON_COLOR_ON = "#ffffffe6";
-export const LOCK_HEADER_ICON_COLOR_OFF = "#dddddd";  //"rgba(0,0,0,0.1)";
+export const LOCK_HEADER_ICON_COLOR_OFF = "rgba(0,0,0,0.4)";
 export const LOCK_RO_ICON_COLOR = red[500];
 
 

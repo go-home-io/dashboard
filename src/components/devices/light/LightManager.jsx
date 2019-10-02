@@ -7,10 +7,10 @@ import Grid from "@material-ui/core/Grid/Grid";
 import WaitingProgress from "../../common/elements/WaitingProgress";
 import Zoom from "@material-ui/core/Zoom/Zoom";
 import truncateCaption from "../../../utils/truncate";
-import {LIGHT_HEADER_BKG_COLOR, LIGHT_HEADER_ICON_COLOR_ON, LIGHT_HEADER_ICON_COLOR_OFF, LIGHT_RO_ICON_COLOR} from "../../../settings/colors";
 import RenderCommandHandlers from "../../common/comand/RenderCommandHandlers";
 import {EventEmitter} from "../../../context/EventEmitter";
 import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
+import InputManager from "../../common/input/InputManager";
 
 const styles = () => ({
     progress: {
@@ -29,9 +29,14 @@ const LightManager = props => {
 
     const [loading, setLoading] = useState(false);
     const { subscribe, unsubscribe } = useContext(EventEmitter);
-    const { classes, id, device_info, device_state, doCommand }  = props;
+    const { classes, id, device_info, device_state, doCommand, input }  = props;
     const { name, read_only, commands } = device_info;
     const caption = truncateCaption(name, maxSymbolsInNamePerLine );
+    let title, params;
+    if ( input ) {
+        title = input.title;
+        params = input.params;
+    }
 
     useEffect( () => {
         subscribe("loading", onLoadingUpdate);
@@ -49,10 +54,6 @@ const LightManager = props => {
                 on = { device_state.on }
                 doCommand = { doCommand }
                 read_only = { read_only }
-                ordinaryBkgColor = { LIGHT_HEADER_BKG_COLOR }
-                iconColorOn = { LIGHT_HEADER_ICON_COLOR_ON }
-                iconColorOff = { LIGHT_HEADER_ICON_COLOR_OFF }
-                iconROColor = { LIGHT_RO_ICON_COLOR }
             />
             <CardContent>
                 {loading ?
@@ -64,13 +65,23 @@ const LightManager = props => {
                     :
                     <Zoom in = { !loading }>
                         <Grid container justify = 'flex-start' direction = "column">
-                            <RenderCommandHandlers
-                                commands = { commands }
-                                dev_id = { id }
-                                doCommand = { doCommand }
-                                read_only = { read_only }
-                                device_state = { device_state }
-                            />
+                            {input ?
+                                params &&
+                                <InputManager
+                                    dev_id = { id }
+                                    params = { params }
+                                    title = { title }
+                                    doCommand = { doCommand }
+                                />
+                                :
+                                <RenderCommandHandlers
+                                    commands = { commands }
+                                    dev_id = { id }
+                                    doCommand = { doCommand }
+                                    read_only = { read_only }
+                                    device_state = { device_state }
+                                />
+                            }
                         </Grid>
                     </Zoom>
                 }
