@@ -13,43 +13,42 @@ const knownCommandHandlers = {
     "set-scene": Scenes,
 };
 
-class RenderCommandHandlers extends React.Component{
-    render () {
-        const { commands, dev_id, doCommand, read_only, device_state } = this.props;
-        const { brightness , color: initColor, scenes, on } = device_state;
-        const color = ( on ) ? initColor : {r:100,g:100,b:100};
-        const knownCommands = Object.keys(knownCommandHandlers);
-        const commandsSorted = commands.sort();
+const RenderCommandHandlers = props =>{
+    const { commands, dev_id, doCommand, read_only, device_state } = props;
+    const { brightness , color: initColor, scenes, on } = device_state;
+    const color = ( on ) ? initColor : {r:100,g:100,b:100};
+    const knownCommands = Object.keys(knownCommandHandlers);
+    const commandsSorted = commands.sort();
 
-        return (
-            commandsSorted.map( command => {
-                const KnownCommandHandler = knownCommandHandlers[command];
-                return (
-                    trivialCommands.includes(command) ?
-                        null
+    return (
+        commandsSorted.map( command => {
+            const KnownCommandHandler = knownCommandHandlers[command];
+            return (
+                trivialCommands.includes(command) ?
+                    null
+                    :
+                    knownCommands.includes(command) ?
+                        <KnownCommandHandler
+                            key = { command }
+                            dev_id = { dev_id }
+                            doCommand = { doCommand }
+                            read_only = { read_only }
+                            level = { brightness }
+                            color = { color }
+                            scenes = { scenes }
+                        />
                         :
-                        knownCommands.includes(command) ?
-                            <KnownCommandHandler
-                                key = { command }
-                                dev_id = { dev_id }
-                                doCommand = { doCommand }
-                                read_only = { read_only }
-                                level = { brightness }
-                                color = { color }
-                                scenes = { scenes }
-                            />
-                            :
-                            <UnknownCommandHandler
-                                key = { command }
-                                dev_id = { dev_id }
-                                doCommand = { doCommand }
-                                command = { command }
-                            />
-                );
-            })
-        );
-    }
-}
+                        <UnknownCommandHandler
+                            key = { command }
+                            dev_id = { dev_id }
+                            doCommand = { doCommand }
+                            command = { command }
+                            read_only = { read_only }
+                        />
+            );
+        })
+    );
+};
 
 RenderCommandHandlers.propTypes = {
     commands: PropTypes.array.isRequired,

@@ -1,18 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
-import ComponentHeader from "../header/ComponentHeader";
+import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
-import WaitingProgress from "../../common/elements/WaitingProgress";
-import Zoom from "@material-ui/core/Zoom/Zoom";
-import truncateCaption from "../../../utils/truncate";
 import FanSpeedControl from "./FanSpeedControl";
 import CommandPanel from "./CommandPanel";
 import Battery from "../../common/elements/Battery";
 import ComponentUpperInfo from "../../common/elements/ComponentUpperInfo";
 import VacuumAreaDuration from "./VacuumAreaDuration";
-import {maxSymbolsInNamePerLine} from "../../../settings/maxSymbolsInNamePerLine";
-import {EventEmitter} from "../../../context/EventEmitter";
 
 const styles = () => ({
     progress: {
@@ -46,36 +40,13 @@ const styles = () => ({
 
 const VacuumManager = props =>{
 
-    const onLoadingUpdate = data => {
-        if ( data.id !== id ) return;
-        setLoading(data.loading);
-    };
-
-    const [loading, setLoading] = useState(false);
-    const { subscribe, unsubscribe } = useContext(EventEmitter);
-    const { classes, id, device_info, device_state, doCommand }  = props;
-    const { name: fullName, commands } = device_info;
+    const {  id, device_info, device_state, doCommand }  = props;
+    const { commands } = device_info;
     const { battery_level, vac_status, area:raw_area, duration, fan_speed} = device_state;
     const area = Math.round(raw_area);
-    const name = truncateCaption(fullName, maxSymbolsInNamePerLine );
-
-    useEffect( () => {
-        subscribe("loading", onLoadingUpdate);
-        return () => unsubscribe("loading", onLoadingUpdate);
-    },
-    // eslint-disable-next-line
-        []);
-
 
     return (
         <>
-            <ComponentHeader
-                dev_id = { id }
-                name = { name }
-                doCommand = { doCommand }
-                variant = "vacuum"
-                vac_status = { vac_status }
-            />
 
             <ComponentUpperInfo
                 leftField = {
@@ -90,37 +61,26 @@ const VacuumManager = props =>{
             />
 
             <CardContent>
-                {loading ?
-                    <Zoom in = { loading }>
-                        <div className = { classes.progress }>
-                            <WaitingProgress dev_id = { id }/>
-                        </div>
-                    </Zoom>
-                    :
-                    <Zoom in = { !loading }>
-                        <div>
-                            <FanSpeedControl
-                                dev_id = { id }
-                                level = { fan_speed }
-                                commands = { commands }
-                                doCommand = { doCommand }
-                            />
-                            <CommandPanel
-                                dev_id = { id }
-                                vac_status = { vac_status }
-                                commands = { commands }
-                                doCommand = { doCommand }
-                            />
-                        </div>
-                    </Zoom>
-                }
+                <div>
+                    <FanSpeedControl
+                        dev_id = { id }
+                        level = { fan_speed }
+                        commands = { commands }
+                        doCommand = { doCommand }
+                    />
+                    <CommandPanel
+                        dev_id = { id }
+                        vac_status = { vac_status }
+                        commands = { commands }
+                        doCommand = { doCommand }
+                    />
+                </div>
             </CardContent>
         </>
     );
 };
 
 VacuumManager.propTypes = {
-    classes: PropTypes.object.isRequired,
     device_info: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
 };

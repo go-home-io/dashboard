@@ -45,6 +45,7 @@ const statusMisc = {
 
 const VacuumStatusIcon = props => {
     const { vac_status, cssClass } = props;
+    // alert(vac_status)
     const IconSelected = statusMisc.icon[vac_status];
     const tip = statusMisc.tip[vac_status];
     const color = statusMisc.color[vac_status];
@@ -52,7 +53,7 @@ const VacuumStatusIcon = props => {
         <Tooltip title = { tip } placement = "top">
             <IconSelected
                 className = { cssClass }
-                style = { {color: color} }
+                style = { { color: color } }
             />
 
         </Tooltip>

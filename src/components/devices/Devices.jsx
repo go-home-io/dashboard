@@ -43,10 +43,10 @@ const Devices = props => {
         raiseEvent("loading", { id:id, loading: true }); // Update loading status in Component Manager
     };
 
-    // Custom events listener
+    // Websocket listener
     const onMessage = (mess) => {
-        const { state } = mess;
-        if (mess.id !== id) return;
+        const { state, id: recipientID } = mess;
+        if (recipientID !== id) return;
         if ( state !== "oneWayResponse" )  setDevState(mess.state);
         raiseEvent("status", {id: id, status: "success" }); // Update Component Header status
         raiseEvent("loading", { id:id, loading: false }); // Update loading status in Component Manager
@@ -54,7 +54,7 @@ const Devices = props => {
 
     const {classes, deviceType, id, visible, device_info, ...other } = props;
     const [devState, setDevState] = useState(device_info.state);
-    const { subscribe, raiseEvent } = useContext(EventEmitter);
+    const { subscribe, raiseEvent, unsubscribe } = useContext(EventEmitter);
 
     const Manager = deviceManagers[deviceType];
     const display = visible ? "block" : "none";
@@ -62,12 +62,13 @@ const Devices = props => {
 
     useEffect( () => {
         subscribe("message", onMessage );
+        return () => unsubscribe("message", onMessage );
     },
     // eslint-disable-next-line
     []);
 
     return (
-        deviceType === "camera"?
+        deviceType === "camera" ?
             <CameraManager
                 id = { id }
                 device_state = { devState }

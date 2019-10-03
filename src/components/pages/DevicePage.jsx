@@ -2,10 +2,10 @@ import React, {useContext} from "react";
 import PropTypes from "prop-types";
 import Layout from "./Layout";
 import Grid from "@material-ui/core/Grid";
-import Devices from "../devices/Devices";
 import {Collapse, Slide} from "@material-ui/core";
 import ExpandedGroupHeader from "../group/ExpandedGroupHeader";
 import {AppContext} from "../../context/AppContextProvider";
+import DevicesNew from "../devices/DevicesNew";
 
 const groupMemberDevices = (group_id, groups) => {
     const this_group = groups.find( grp => {
@@ -67,7 +67,7 @@ const DevicePage = props =>{
                         const visible = isComponentVisible(device.id);
 
                         return(
-                            <Devices
+                            <DevicesNew
                                 key = { device.id }
                                 deviceType = { deviceType }
                                 visible = { visible }
