@@ -4,7 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/Grid";
 import RenderCommandHandlers from "../../common/comand/RenderCommandHandlers";
 
-const LightManager = props => {
+const LightControl = props => {
     const {  id, device_info, device_state, doCommand }  = props;
     const { read_only, commands } = device_info;
 
@@ -25,11 +25,11 @@ const LightManager = props => {
     );
 };
 
-LightManager.propTypes = {
+LightControl.propTypes = {
     device_info: PropTypes.object.isRequired ,
     id: PropTypes.string.isRequired,
     device_state: PropTypes.object.isRequired,
     doCommand: PropTypes.func.isRequired,
 };
 
-export default LightManager;
+export default LightControl;

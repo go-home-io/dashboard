@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import {Collapse, Slide} from "@material-ui/core";
 import ExpandedGroupHeader from "../group/ExpandedGroupHeader";
 import {AppContext} from "../../context/AppContextProvider";
-import DevicesNew from "../devices/DevicesNew";
+import Devices from "../devices/Devices";
 
 const groupMemberDevices = (group_id, groups) => {
     const this_group = groups.find( grp => {
@@ -67,7 +67,7 @@ const DevicePage = props =>{
                         const visible = isComponentVisible(device.id);
 
                         return(
-                            <DevicesNew
+                            <Devices
                                 key = { device.id }
                                 deviceType = { deviceType }
                                 visible = { visible }

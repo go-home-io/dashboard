@@ -7,7 +7,7 @@ import Battery from "../../common/elements/Battery";
 import Button from "@material-ui/core/Button";
 
 
-const LockManager = props => {
+const LockControl = props => {
 
     const { id, device_state, doCommand }  = props;
     const { battery_level } = device_state;
@@ -38,11 +38,11 @@ const LockManager = props => {
     );
 };
 
-LockManager.propTypes = {
+LockControl.propTypes = {
     id: PropTypes.string.isRequired,
     device_info: PropTypes.object.isRequired,
     device_state: PropTypes.object.isRequired,
     doCommand: PropTypes.func.isRequired
 };
 
-export default (LockManager);
+export default (LockControl);

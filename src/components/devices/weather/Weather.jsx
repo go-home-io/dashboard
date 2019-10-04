@@ -15,12 +15,9 @@ import classNames from "classnames";
 import {formatNumericProp} from "../../../settings/formatNumericProp";
 import {AppContext} from "../../../context/AppContextProvider";
 
-
 const styles = () => ({
     root: {
-        // width:172,
-        // height:165,
-        // margin: 5,
+        height: "100%",
         backgroundColor: "#1795df",
         color: "#ffffff",
     },
@@ -133,7 +130,6 @@ const Weather = props =>{
             <Typography variant = "body2" className = { classes.humidity }>
                 {description}
             </Typography>
-
 
             <Grid container className = { classes.container }>
                 <Grid item xs = { 6 } className = { classes.grid_item }>
