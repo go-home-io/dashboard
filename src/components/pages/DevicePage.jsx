@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Layout from "./Layout";
 import Grid from "@material-ui/core/Grid";
 import {Collapse, Slide} from "@material-ui/core";
-import ExpandedGroupHeader from "../group/ExpandedGroupHeader";
+import ExpandedGroupHeader from "../devices/group/ExpandedGroupHeader";
 import {AppContext} from "../../context/AppContextProvider";
 import Devices from "../devices/Devices";
 

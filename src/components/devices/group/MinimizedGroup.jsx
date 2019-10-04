@@ -3,8 +3,8 @@ import  PropTypes from "prop-types";
 import CardContent from "@material-ui/core/CardContent/CardContent";
 import ExpandButton from "./ExpandButton";
 import Grid from "@material-ui/core/Grid/Grid";
-import RenderCommandHandlers from "../common/comand/RenderCommandHandlers";
-import {AppContext} from "../../context/AppContextProvider";
+import RenderCommandHandlers from "../../common/comand/RenderCommandHandlers";
+import {AppContext} from "../../../context/AppContextProvider";
 
 const MinimizedGroup = props => {
 

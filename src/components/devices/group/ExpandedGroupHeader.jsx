@@ -5,18 +5,19 @@ import Tooltip from "@material-ui/core/Tooltip";
 import IconExpandLess from "@material-ui/icons/ExpandLess";
 import blue from "@material-ui/core/colors/blue";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../settings/colors";
+import { GROUP_HEADER_ICON_COLOR_ON, GROUP_HEADER_ICON_COLOR_OFF } from "../../../settings/colors";
 import {IconButton, Paper, Typography} from "@material-ui/core";
-import {AppContext} from "../../context/AppContextProvider";
-import {oneWayCommands} from "../../settings/oneWayCommands";
-import {EventEmitter} from "../../context/EventEmitter";
+import {AppContext} from "../../../context/AppContextProvider";
+import {oneWayCommands} from "../../../settings/oneWayCommands";
+import {EventEmitter} from "../../../context/EventEmitter";
 
 const styles = () => ({
     root: {
         marginLeft: "15%",
         width: "70%",
         height: 51,
-        marginBottom: 20
+        marginBottom: 20,
+        // border: `1px solid ${blue[300]}`
     },
     text: {
         flexGrow: 1,
@@ -28,6 +29,7 @@ const styles = () => ({
         color: "rgba(0,0,0,0.56)",
         fontSize: 33,
         flexGrow: 1,
+        marginLeft: 10
     },
     iconButton: {
         color: "rgba(0,0,0,0.56)",
@@ -75,19 +77,20 @@ const ExpandedGroupHeader = props => {
     const [on, setOn] = useState(groupOn);
 
     const { setGroup } = useContext(AppContext);
-    const { raiseEvent, subscribe } = useContext(EventEmitter);
+    const { raiseEvent, subscribe, unsubscribe } = useContext(EventEmitter);
 
     const iconColor = on ? GROUP_HEADER_ICON_COLOR_ON : GROUP_HEADER_ICON_COLOR_OFF;
     const cursor = readOnly ? "default" : "pointer";
 
     useEffect( () => {
         subscribe("message", onMessage );
+        return () => unsubscribe("message", onMessage );
     },
     // eslint-disable-next-line
         []);
 
     return (
-        <Paper elevation = { 4 } className = { classes.root }>
+        <Paper elevation = { 2 } className = { classes.root }>
 
             <div style = { {display: "flex"} }>
                 <Icon className = { classes.icon } style = { {color: iconColor} }>
