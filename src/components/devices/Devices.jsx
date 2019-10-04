@@ -94,7 +94,10 @@ const Devices = props => {
     useEffect( () => {
         subscribe("message", onMessage );
         subscribe("loading", onLoading);
-        return () => unsubscribe("message", onMessage );
+        return () => {
+            unsubscribe("message", onMessage );
+            unsubscribe("loading", onLoading);
+        };
     },
     // eslint-disable-next-line
         []);
