@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import storage from "../services/storage";
 
 export const AppContext = React.createContext({
-    active_location: "TestPage",
+    active_location: "Default",
     active_group: null,
     active_page: "devices",
     active_group_on: false,
@@ -36,7 +36,7 @@ const initialUnseenCount = () => {
 
 const AppContextProvider = props => {
     const { children, ...other } = props;
-    const [activeLocation, setActiveLocation ] = useState("Defualt");
+    const [activeLocation, setActiveLocation ] = useState("Default");
     const [activePage, setActivePage ] = useState("devices");
     const [activeGroup, setActiveGroup ] = useState(null);
     const [activeGroupOn, setActiveGroupOn] = useState(false);
@@ -75,13 +75,10 @@ const AppContextProvider = props => {
     };
 
     return(
-        <AppContext.Provider value = { appContext } >
-            <div { ...other }>
-                { children }
-            </div>
+        <AppContext.Provider value = { appContext } { ...other }>
+            { children }
         </AppContext.Provider>
     );
-
 };
 
 export default AppContextProvider;

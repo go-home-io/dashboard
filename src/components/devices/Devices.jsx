@@ -56,7 +56,7 @@ const Devices = props => {
         setIsLoading(true);
     };
 
-    // Websocket listener
+    // Listeners
     const onMessage = (mess) => {
         const { state, id: recipientID } = mess;
         if (recipientID !== id) return;
@@ -81,7 +81,6 @@ const Devices = props => {
         title = input.title;
         params = input.params;
     }
-
 
     const { subscribe, raiseEvent, unsubscribe } = useContext(EventEmitter);
     const [isLoading, setIsLoading] = useState(false);

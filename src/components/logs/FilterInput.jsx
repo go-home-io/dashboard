@@ -11,11 +11,6 @@ import DateTimePicker from "./DateTimePicker";
 import LogLevel from "./LogLevel";
 import { Transition } from "../../utils/Transition";
 
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//     return <Slide direction = "down" ref = { ref } { ...props } />;
-// });
-
-
 const FilterInput = props => {
     const { variant, initialValue, setFilterValue, cancelInput, open, filterKey } = props;
     const [value, setValue] = useState(initialValue);
