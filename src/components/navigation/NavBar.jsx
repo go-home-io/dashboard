@@ -1,18 +1,17 @@
 import React, {useContext, useState} from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import {
+    Divider,
+    List, ListItem, ListItemIcon, ListItemText, ListSubheader,
+    Typography
+} from "@material-ui/core";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import DevicesIcon from "@material-ui/icons/Devices";
 import CreateIcon from "@material-ui/icons/Create";
 import NavBarDropdown from "./NavBarDropdown";
-import ListSubheader from "@material-ui/core/ListSubheader/ListSubheader";
-import Typography from "@material-ui/core/Typography/Typography";
-import Divider from "@material-ui/core/Divider/Divider";
 import {blue} from "@material-ui/core/colors";
+
 import storage from "../../services/storage";
 import {AppContext} from "../../context/AppContextProvider";
 import Filters from "../logs/Filters";

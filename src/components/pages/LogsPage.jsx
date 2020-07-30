@@ -40,20 +40,20 @@ const LogsPage = () => {
             });
     };
 
-    const onApply = (filters) => getLogs(filters);
+    const onApply = (filters) => {
+        getLogs(filters);
+    };
 
     useEffect( () => {
         subscribe("apply", onApply);
-        setLoading(true);
         getLogs(filter);
-
         return () => unsubscribe("apply", onApply);
-    },
-    // eslint-disable-next-line
-        [] );
+    }, [] );
 
-    if (loading ) return <ErrorPage loading = { true }/>;
-    else return <LogsManager logs = { logs } appliedFilters = { appliedFilters }/>;
+    if (loading )
+        return <ErrorPage loading = { true }/>;
+    else
+        return <LogsManager logs = { logs } appliedFilters = { appliedFilters }/>;
 
 };
 

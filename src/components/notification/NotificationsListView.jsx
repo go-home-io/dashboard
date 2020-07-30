@@ -15,6 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction = "down" ref = { ref } { ...props } />;
 });
 
+// eslint-disable-next-line react/no-multi-comp
 const NotificationsListView = props => {
 
     const { open, onClose } = props;
@@ -32,6 +33,7 @@ const NotificationsListView = props => {
 
     const markSeen  = () => {
         let newList = storage.get("notificationsList");
+        if ( ! newList ) return ;
         for (let i=0; i < newList.length; i++) {
             newList[i].seen = true;
         }
